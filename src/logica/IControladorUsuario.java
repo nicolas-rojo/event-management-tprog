@@ -3,6 +3,7 @@ package logica;
 import java.time.LocalDate;
 import excepciones.UsuarioNoExisteException;
 import excepciones.UsuarioRepetidoException;
+import logica.datatypes.DataUsuario;
 
 public interface IControladorUsuario {
     

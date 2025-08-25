@@ -4,8 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 
 import excepciones.UsuarioNoExisteException;
-import logica.DataUsuario;
 import logica.IControladorUsuario;
+import logica.datatypes.DataUsuario;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;

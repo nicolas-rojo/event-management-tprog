@@ -24,9 +24,9 @@ import javax.swing.SwingConstants;
 
 import excepciones.UsuarioNoExisteException;
 import logica.Asistente;
-import logica.DataUsuario;
 import logica.IControladorUsuario;
 import logica.Organizador;
+import logica.datatypes.DataUsuario;
 
 @SuppressWarnings("serial")
 public class ModificarUsuario extends JInternalFrame {
