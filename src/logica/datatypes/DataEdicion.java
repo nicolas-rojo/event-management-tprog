@@ -1,0 +1,71 @@
+package logica.datatypes;
+
+import java.time.LocalDate;
+import java.util.Set;
+
+import logica.Evento;
+import logica.Organizador;
+
+
+public class DataEdicion {
+		private String nombre;
+		private String sigla;
+		private LocalDate fechaIni;
+		private LocalDate fechaFin;
+		private LocalDate fechaAlta;
+		private Organizador organizador;
+		private String ciudad;
+		private String pais;
+		private Evento evento;
+		
+		public DataEdicion(String nombre, String sigla, LocalDate fechaIni, LocalDate fechaFin, LocalDate fechaAlta, Organizador organizador, 
+				String ciudad, String pais, Evento evento) {
+			this.nombre = nombre;
+			this.sigla = sigla;
+			this.fechaIni = fechaIni;
+			this.fechaFin = fechaFin;
+			this.fechaAlta = fechaAlta;
+			this.organizador = organizador;
+			this.ciudad = ciudad;
+			this.pais = pais;
+			this.evento = evento;
+		}
+		
+		public String getNombre() {
+			return this.nombre;
+		}
+		
+		public String getSigla() {
+			return this.sigla;
+		}
+		
+		public LocalDate getFechaIni() {
+			return this.fechaIni;
+		}
+		
+		public LocalDate getFechaFin() {
+			return this.fechaFin;
+		}
+		
+		public LocalDate getFechaAlta() {
+			return this.fechaAlta;
+		
+		}
+		
+		public Organizador getOrganizador() {
+			return this.organizador;
+		}
+		
+		public Evento getEvento(){
+			return this.evento;
+		}
+		
+		
+		public String getCiudad() {
+			return this.ciudad;
+		}
+		
+		public String getPais() {
+			return this.pais;
+		}
+}
