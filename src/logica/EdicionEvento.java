@@ -1,33 +1,35 @@
 package logica;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 import logica.datatypes.DataEdicion;
 
 public class EdicionEvento {
 	private String nombre;
 	private String sigla;
 	private LocalDate fechaIni;
-	private LocalDate FechaFin;
-	private LocalDate FechaAlta;
-	private Organizador organizador;
-	/*private Set<TipoRegistro> tipoRegistros;
-	private Set<Patrocinio> patrocinios; va a tener estos atributos, pero no implemento todavia*/
-	private String ciudad;
-	private String pais;
-	private String evento;
+	private LocalDate fechaFin;
+	private LocalDate fechaAlta;
 	
-	public EdicionEvento(DataEdicion dataEvento) {
-		this.nombre = dataEvento.getNombre();
-		this.sigla = dataEvento.getSigla();
-		this.FechaAlta = dataEvento.getFechaAlta();
-		this.fechaIni = dataEvento.getFechaIni();
-		this.FechaFin = dataEvento.getFechaFin();
-		this.organizador = organizador;
-		this.ciudad = dataEvento.getCiudad();
-		this.pais = dataEvento.getPais();
-		this.evento = dataEvento.getEvento();
+	private Organizador organizador;
+	private Set<TipoRegistro> tipoRegistros;
+	private Set<Patrocinio> patrocinios;
+	private List<Registro> registros;
+	
+	public EdicionEvento(DataEdicion dataEd) {
+		this.nombre = dataEd.getNombre();
+		this.sigla = dataEd.getSigla();
+		this.fechaIni = dataEd.getFechaIni();
+		this.fechaFin = dataEd.getFechaFin();
+		this.fechaAlta = dataEd.getFechaAlta();
 		
+		this.tipoRegistros = new HashSet<>();
+		this.patrocinios = new HashSet<>();
+		this.registros = new ArrayList<>();
 	}
 	
 	public String getNombre() {
@@ -43,29 +45,16 @@ public class EdicionEvento {
 	}
 	
 	public LocalDate getFechaFin() {
-		return this.FechaFin;
+		return this.fechaFin;
 	}
 	
 	public LocalDate getFechaAlta() {
-		return this.FechaAlta;
+		return this.fechaAlta;
 	
 	}
 	
 	public Organizador getOrganizador() {
 		return this.organizador;
-	}
-	
-	public String getEvento(){
-		return this.evento;
-	}
-	
-	
-	public String getCiudad() {
-		return this.ciudad;
-	}
-	
-	public String getPais() {
-		return this.pais;
 	}
 	
 	public void setNombre(String nombre) {
@@ -81,14 +70,18 @@ public class EdicionEvento {
 	}
 	
 	public void setFechaAlta(LocalDate fecha) {
-		this.FechaAlta = fecha;
+		this.fechaAlta = fecha;
 	}
 	
 	public void setFechaFin(LocalDate fecha) {
-		this.FechaFin = fecha;
+		this.fechaFin = fecha;
 	}
 	
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
+	public List<String> getTRegistro() {
+		List<String> res = new ArrayList<>();
+		for (TipoRegistro e : this.tipoRegistros) {
+			res.add(e.getNombre());
+		}
+		return res;
 	}
 }

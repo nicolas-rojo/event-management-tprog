@@ -21,7 +21,7 @@ public class ControladorEventos implements IEventos {
 	}
 	
 	
-	public void nuevoEvento(DataEvento dataEvento ) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion {
+	public void nuevoEvento(DataEvento dataEvento, String cat) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion {
 		ManejadorEvento me = ManejadorEvento.getInstance();
 		Evento e = me.getEvento(dataEvento.getNombre());
 		if (e != null) {
@@ -53,4 +53,30 @@ public class ControladorEventos implements IEventos {
 			e.agregarEdicion(ee);
 		}
 	}
+	
+	public List<String> listarEdiciones(String eventoSeleccionado) {
+		ManejadorEvento me = ManejadorEvento.getInstance();
+		Evento e = me.getEvento(eventoSeleccionado);
+		return e.getEdiciones();
+	}
+	
+	public List<String> listarTRegistros(String eventoSeleccionado, String edicionSeleccionada) {
+		ManejadorEvento me = ManejadorEvento.getInstance();
+		Evento e = me.getEvento(eventoSeleccionado);
+		return e.getTRegistroEdicion(edicionSeleccionada);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
