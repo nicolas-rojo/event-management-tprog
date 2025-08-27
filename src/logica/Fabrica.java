@@ -1,5 +1,8 @@
 package logica;
 
+import logica.ctrlmanejador.ControladorUsuario;
+import logica.interfaces.IUsuario;
+
 /**
  * Fábrica para la construcción de un controlador de usuarios (uno distinto para cada invocación).
  * Se implementa en base al patrón Singleton.
@@ -20,7 +23,7 @@ public class Fabrica {
         return instancia;
     }
 
-    public IControladorUsuario getIControladorUsuario() {
+    public IUsuario getIControladorUsuario() {
         return new ControladorUsuario();
     }
 

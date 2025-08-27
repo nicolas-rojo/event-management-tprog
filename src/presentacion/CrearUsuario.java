@@ -2,7 +2,7 @@ package presentacion;
 
 import javax.swing.JInternalFrame;
 import excepciones.UsuarioRepetidoException;
-import logica.IControladorUsuario;
+import logica.interfaces.IUsuario;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,7 +24,7 @@ import java.time.LocalDate;
 @SuppressWarnings("serial")
 public class CrearUsuario extends JInternalFrame {
 
-    private IControladorUsuario controlUsr;
+    private IUsuario controlUsr;
     
     private JTextField textFieldNombre;
     private JTextField textFieldNickname;
@@ -48,7 +48,7 @@ public class CrearUsuario extends JInternalFrame {
     private JTextField textFieldUrl;
     private JPanel panelOrganizador;
 
-    public CrearUsuario(IControladorUsuario icu) {
+    public CrearUsuario(IUsuario icu) {
         controlUsr = icu;
 
         setResizable(true);

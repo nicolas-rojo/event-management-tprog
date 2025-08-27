@@ -4,8 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 
 import excepciones.UsuarioNoExisteException;
-import logica.IControladorUsuario;
 import logica.datatypes.DataUsuario;
+import logica.interfaces.IUsuario;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -32,10 +32,10 @@ import java.awt.Dimension;
  *
  */
 @SuppressWarnings("serial")
-public class ListaUsuarios extends JInternalFrame {
+public class ConsultaUsuario extends JInternalFrame {
 
     // Controlador de usuarios que se utilizará para las acciones del JFrame
-    private IControladorUsuario controlUsr;
+    private IUsuario controlUsr;
     
     // Los componentes gráficos se agregan como atributos de la clase
     private JList<DataUsuario> listUsuarios;
@@ -50,7 +50,7 @@ public class ListaUsuarios extends JInternalFrame {
     /**
      * Create the frame.
      */
-    public ListaUsuarios(IControladorUsuario icu) {
+    public ConsultaUsuario(IUsuario icu) {
         // Se inicializa con el controlador de usuarios
         controlUsr = icu;
         

@@ -1,11 +1,20 @@
-package logica;
+package logica.ctrlmanejador;
 
-import java.time.LocalDate;
-import excepciones.UsuarioNoExisteException;
+import logica.interfaces.IUsuario;
+
 import excepciones.UsuarioRepetidoException;
-import logica.datatypes.DataUsuario;
+import excepciones.UsuarioNoExisteException;
 
-public class ControladorUsuario implements IControladorUsuario {
+import logica.datatypes.DataUsuario;
+import java.time.LocalDate;
+
+import logica.Asistente;
+import logica.Organizador;
+import logica.Usuario;
+
+
+
+public class ControladorUsuario implements IUsuario {
 
     public ControladorUsuario() {
     }

@@ -24,9 +24,9 @@ import javax.swing.SwingConstants;
 
 import excepciones.UsuarioNoExisteException;
 import logica.Asistente;
-import logica.IControladorUsuario;
 import logica.Organizador;
 import logica.datatypes.DataUsuario;
+import logica.interfaces.IUsuario;
 
 @SuppressWarnings("serial")
 public class ModificarUsuario extends JInternalFrame {
@@ -62,12 +62,12 @@ public class ModificarUsuario extends JInternalFrame {
     private JPanel panelEdicion;
     private JPanel panelContenedor;
     
-    private IControladorUsuario controlUsr;
+    private IUsuario controlUsr;
     private boolean modoSeleccion = true;
     private DataUsuario usuarioOriginal;
     private String tipoUsuario;
 
-    public ModificarUsuario(IControladorUsuario icu) {
+    public ModificarUsuario(IUsuario icu) {
         // Se inicializa con el controlador de usuarios
         controlUsr = icu;
         
@@ -459,7 +459,7 @@ public class ModificarUsuario extends JInternalFrame {
     }
 
     private void cargarDatosAsistente(String email) {
-        Asistente a = controlUsr.getAsistente(email);
+        Asistente a = controlUsr.getAsistente(email); // <- tendria que ser datatype (capa presentacion)
         String apellido = a.getApellido();
         textFieldApellido.setText(apellido);
     }

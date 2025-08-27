@@ -1,7 +1,10 @@
-package logica;
+package logica.ctrlmanejador;
 
 import java.util.HashMap;
 import java.util.List;
+
+import logica.Evento;
+
 import java.util.ArrayList;
 
 public class ManejadorEvento {

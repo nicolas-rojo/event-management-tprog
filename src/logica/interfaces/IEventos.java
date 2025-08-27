@@ -1,4 +1,4 @@
-package logica;
+package logica.interfaces;
 
 import java.util.List;
 

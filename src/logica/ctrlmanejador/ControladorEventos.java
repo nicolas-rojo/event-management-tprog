@@ -1,13 +1,19 @@
-package logica;
+package logica.ctrlmanejador;
+
+import logica.interfaces.IEventos;
+
+import excepciones.EventoRepetidoExcepcion;
+import excepciones.EventoSinCategoriaExcepcion;
+import excepciones.EdicionRepetidaExcepcion;
 
 import logica.datatypes.DataEvento;
 import logica.datatypes.DataEdicion;
 import java.util.List;
 
-import excepciones.EventoNoExisteExcepcion;
-import excepciones.EventoRepetidoExcepcion;
-import excepciones.EventoSinCategoriaExcepcion;
-import excepciones.EdicionRepetidaExcepcion;
+import logica.Evento;
+import logica.EdicionEvento;
+
+
 public class ControladorEventos implements IEventos {
 	
 	public ControladorEventos() {

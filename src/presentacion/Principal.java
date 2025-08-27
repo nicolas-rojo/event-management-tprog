@@ -7,7 +7,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import logica.Fabrica;
-import logica.IControladorUsuario;
+import logica.interfaces.IUsuario;
 
 import javax.swing.JMenu;
 import java.awt.event.ActionEvent;
@@ -16,10 +16,9 @@ import java.awt.event.ActionListener;
 public class Principal {
 
     private JFrame frmGestionDeUsuarios;
-    private IControladorUsuario ICU;
+    private IUsuario ICU;
     private CrearUsuario creUsrInternalFrame;
-    private ConsultarUsuario conUsrInternalFrame;
-    private ListaUsuarios lisUsrInternalFrame;
+    private ConsultaUsuario lisUsrInternalFrame;
     private ModificarUsuario modUsrInternalFrame;
     private CrearEvento creEventoInternalFrame;
 
@@ -48,11 +47,7 @@ public class Principal {
         creUsrInternalFrame = new CrearUsuario(ICU);
         creUsrInternalFrame.setVisible(false);
 
-        conUsrInternalFrame = new ConsultarUsuario(ICU);
-        conUsrInternalFrame.setLocation(40, 40);
-        conUsrInternalFrame.setVisible(false);
-
-        lisUsrInternalFrame = new ListaUsuarios(ICU);
+        lisUsrInternalFrame = new ConsultaUsuario(ICU);
         lisUsrInternalFrame.setVisible(false);
         
         modUsrInternalFrame = new ModificarUsuario(ICU);
@@ -66,7 +61,6 @@ public class Principal {
         
         frmGestionDeUsuarios.getContentPane().setLayout(null);
 
-        frmGestionDeUsuarios.getContentPane().add(conUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(creUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(lisUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(modUsrInternalFrame);
@@ -108,16 +102,7 @@ public class Principal {
         });
         menuUsuarios.add(menuItemRegistrar);
 
-        JMenuItem menuItemVerInfo = new JMenuItem("Consulta de Usuario");
-        menuItemVerInfo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Muestro el InternalFrame para ver información de un usuario
-                conUsrInternalFrame.setVisible(true);
-            }
-        });
-        menuUsuarios.add(menuItemVerInfo);
-
-        JMenuItem mntmListaUsuarios = new JMenuItem("ListarUsuarios");
+        JMenuItem mntmListaUsuarios = new JMenuItem("Consultar Usuario");
         mntmListaUsuarios.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Muestro el InternalFrame para ver la lista de todos los usuarios,
