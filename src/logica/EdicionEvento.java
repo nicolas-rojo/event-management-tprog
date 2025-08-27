@@ -15,7 +15,7 @@ public class EdicionEvento {
 	private Set<Patrocinio> patrocinios; va a tener estos atributos, pero no implemento todavia*/
 	private String ciudad;
 	private String pais;
-	private Evento evento;
+	private String evento;
 	
 	public EdicionEvento(DataEdicion dataEvento) {
 		this.nombre = dataEvento.getNombre();
@@ -55,7 +55,7 @@ public class EdicionEvento {
 		return this.organizador;
 	}
 	
-	public Evento getEvento(){
+	public String getEvento(){
 		return this.evento;
 	}
 	

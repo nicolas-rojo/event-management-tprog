@@ -12,7 +12,7 @@ public class ManejadorEvento {
 		eventos = new HashMap<String, Evento>();
 	}
 	
-	private ManejadorEvento getInstance() {
+	public static ManejadorEvento getInstance() {
 		if(instancia == null) {
 			instancia = new ManejadorEvento();
 		}
@@ -27,6 +27,8 @@ public class ManejadorEvento {
 	public Evento getEvento(String nombre) {
 		return (eventos.get(nombre));
 	}
+	
+
 	
 	public List<String> getEventos(){
 		List<String> eventos = new ArrayList<>();

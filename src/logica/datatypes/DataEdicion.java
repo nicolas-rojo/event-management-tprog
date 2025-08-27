@@ -16,10 +16,10 @@ public class DataEdicion {
 		private Organizador organizador;
 		private String ciudad;
 		private String pais;
-		private Evento evento;
+		private String evento;
 		
 		public DataEdicion(String nombre, String sigla, LocalDate fechaIni, LocalDate fechaFin, LocalDate fechaAlta, Organizador organizador, 
-				String ciudad, String pais, Evento evento) {
+				String ciudad, String pais, String evento) {
 			this.nombre = nombre;
 			this.sigla = sigla;
 			this.fechaIni = fechaIni;
@@ -56,7 +56,7 @@ public class DataEdicion {
 			return this.organizador;
 		}
 		
-		public Evento getEvento(){
+		public String getEvento(){
 			return this.evento;
 		}
 		

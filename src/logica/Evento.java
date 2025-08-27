@@ -6,6 +6,7 @@ import logica.datatypes.DataEvento;
 import java.util.HashMap;
 import java.util.HashSet;
 
+
 public class Evento {
 	private String nombre;
 	private String descripcion;
@@ -44,6 +45,11 @@ public class Evento {
 		return this.ediciones;
 	}
 	
+	public EdicionEvento getEdicion(String nombre) {
+		return (this.ediciones.get(nombre));
+		
+	}
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -58,6 +64,10 @@ public class Evento {
 	
 	public void setSigla(String sigla) {
 		this.sigla = sigla;
+	}
+	
+	public void agregarEdicion(EdicionEvento edicion) {
+		this.ediciones.put(edicion.getNombre(), edicion);
 	}
 	
 	
