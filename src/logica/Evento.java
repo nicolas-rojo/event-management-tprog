@@ -3,6 +3,7 @@ package logica;
 import java.time.LocalDate;
 import java.util.Set;
 import logica.datatypes.DataEvento;
+import logica.datatypes.DTOEvento;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -70,6 +71,16 @@ public class Evento {
 		this.ediciones.put(edicion.getNombre(), edicion);
 	}
 	
-	
+	public DTOEvento getDTOEvento() {
+	    //categorías y ediciones a Sets de Strings
+	    Set<String> catStrings = new HashSet<>();
+	    for (Categoria c : categorias) {
+	        catStrings.add(c.getNombre());
+	    }
+	    Set<String> edStrings = new HashSet<>(ediciones.keySet()); //denuevo lo hice con una copia pero como prefieran
+
+	    return new DTOEvento(nombre, sigla, fechaAlta, descripcion, catStrings, edStrings);
+	}
+
 }
 

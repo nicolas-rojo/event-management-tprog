@@ -7,6 +7,7 @@ import excepciones.EventoSinCategoriaExcepcion;
 import excepciones.EdicionRepetidaExcepcion;
 
 import logica.datatypes.DataEvento;
+import logica.datatypes.DTOEvento;
 import logica.datatypes.DataEdicion;
 import java.util.List;
 
@@ -52,5 +53,18 @@ public class ControladorEventos implements IEventos {
 			ee = new EdicionEvento(dataEdicion);
 			e.agregarEdicion(ee);
 		}
+	}
+	
+	public void listarInfoEvento(String nombre) {
+		ManejadorEvento me = ManejadorEvento.getInstance();
+		Evento e = me.getEvento(nombre);
+		DataEvento data = e.getDataEvento();
+		
+	}
+	
+	public DTOEvento listarInfoEvento(String nombre){
+		ManejadorEvento me = ManejadorEvento.getInstance();
+		Evento e = me.getEvento(nombre);
+		return e.getDTOEvento();
 	}
 }
