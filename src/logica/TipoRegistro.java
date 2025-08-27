@@ -16,12 +16,11 @@ public class TipoRegistro {
 	
 	public boolean tieneCupo() {
 		boolean cupo = false;
-		if(this.cupo > 0) {
+		if(this.cupo> 0) {
 			cupo = true;
 		}
 		return cupo;
 	}
-	
 	public DataTRegistro getDataTRegistro() {
 		return new DataTRegistro(this.nombre, this.descripcion, this.costo, this.cupo);
 	}
