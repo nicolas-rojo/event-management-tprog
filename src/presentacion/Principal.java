@@ -8,32 +8,35 @@ import javax.swing.JMenuItem;
 
 import logica.Fabrica;
 import logica.interfaces.IUsuario;
+import logica.interfaces.IEventos;
 
 import javax.swing.JMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class Principal {
 
     private JFrame frmGestionDeUsuarios;
     private IUsuario ICU;
+    private IEventos ICE;
     private CrearUsuario creUsrInternalFrame;
     private ConsultaUsuario lisUsrInternalFrame;
     private ModificarUsuario modUsrInternalFrame;
     private CrearEvento creEventoInternalFrame;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Principal window = new Principal();
-                    window.frmGestionDeUsuarios.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+	    public static void main(String[] args) {
+	        EventQueue.invokeLater(new Runnable() {
+	            public void run() {
+	                try {
+	                	
+	                    Principal window = new Principal();	                  	                    	                    	                 	                                        window.frmGestionDeUsuarios.setVisible(true);
+	                } catch (Exception e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        });
+	    }
 
     public Principal() {
         initialize();
@@ -41,7 +44,7 @@ public class Principal {
         // Inicialización
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getIControladorUsuario();
-        
+        ICE = fabrica.getIEventos();
         // Se crean los InternalFrame y se incluyen al Frame principal ocultos.
         // De esta forma, no es necesario crear y destruir objetos lo que enlentece la ejecución.
         creUsrInternalFrame = new CrearUsuario(ICU);
@@ -53,7 +56,7 @@ public class Principal {
         modUsrInternalFrame = new ModificarUsuario(ICU);
         modUsrInternalFrame.setVisible(false);
         
-        creEventoInternalFrame = new CrearEvento();
+        creEventoInternalFrame = new CrearEvento(ICE);
         creEventoInternalFrame.setVisible(false);
         
        
@@ -130,6 +133,7 @@ public class Principal {
         menuItemAltaEvento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Muestro el InternalFrame para alta de evento
+            	creEventoInternalFrame.cargarCategorias();
                 creEventoInternalFrame.setVisible(true);
             }
         });

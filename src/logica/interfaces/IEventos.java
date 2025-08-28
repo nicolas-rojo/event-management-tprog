@@ -10,10 +10,10 @@ import logica.datatypes.DataEvento;
 
 public interface IEventos {
 
-		public abstract void nuevoEvento(DataEvento dataEvento, String cat) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion;
-		
-		public abstract List<String> listarEventos();
-		
-		public abstract void nuevaEdicion(DataEdicion dataEdicion) throws EdicionRepetidaExcepcion;
-		
+	public abstract void nuevoEvento(DataEvento dataEvento, String cat) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion;
+	
+	public abstract List<String> listarEventos();
+	
+	public abstract void nuevaEdicion(DataEdicion dataEdicion, String evento) throws EdicionRepetidaExcepcion;
+	
 }

@@ -81,5 +81,9 @@ public class Evento {
 		EdicionEvento ed = this.getEdicion(edSeleccionada);
 		return ed.getTRegistro();
 	}
+	
+	public void agregarCategoria(Categoria c) {
+		this.categorias.add(c);
+	}
 }
 
