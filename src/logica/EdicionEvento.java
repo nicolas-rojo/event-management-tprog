@@ -88,4 +88,8 @@ public class EdicionEvento {
 		}
 		return res;
 	}
+	
+	public void agregarTRegistro(TipoRegistro tipoRegistro) {
+		this.tipoRegistros.add(tipoRegistro);
+	}
 }

@@ -7,11 +7,11 @@ public class TipoRegistro {
 	private float costo;
 	private int cupo;
 	
-	public TipoRegistro(String nombre, String descripcion, float costo, int cupo) {
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.costo = costo;
-		this.cupo = cupo;
+	public TipoRegistro(DataTRegistro dataTRegistro) {
+		this.nombre = dataTRegistro.getNombre();
+		this.descripcion = dataTRegistro.getDescr();
+		this.costo = dataTRegistro.getCosto();
+		this.cupo = dataTRegistro.getCupo();
 	}
 	
 	public String getNombre() {
