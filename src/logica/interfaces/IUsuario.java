@@ -19,5 +19,5 @@ public interface IUsuario {
     
     public abstract void modificarOrganizador(String email, String nuevoNombre, String descripcion, String url) throws UsuarioNoExisteException;
     
-    public abstract String obtenerTipoUsuario(String email) throws UsuarioNoExisteException;
+    public abstract String getTipoUsuario(String email) throws UsuarioNoExisteException;
 }

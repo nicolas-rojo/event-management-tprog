@@ -35,4 +35,6 @@ public abstract class Usuario {
     public void setCedulaIdentidad(String email) {
         this.email = email;
     }
+    
+    public abstract boolean esAsistente();
 }

@@ -152,7 +152,7 @@ public class ConsultaUsuario extends JInternalFrame {
                         JLabel label = new JLabel();
                         if (value != null) {
                             try {
-                                String tipo = controlUsr.obtenerTipoUsuario(value.getEmail());
+                                String tipo = controlUsr.getTipoUsuario(value.getEmail());
                                 label.setText(value.getNombre() + " (" + value.getNickname() + ") - " + tipo);
                             } catch (UsuarioNoExisteException e) {
                                 label.setText(value.getNombre() + " (" + value.getNickname() + ")");
@@ -187,7 +187,7 @@ public class ConsultaUsuario extends JInternalFrame {
         }
         
         try {
-            String tipo = controlUsr.obtenerTipoUsuario(usuarioSeleccionado.getEmail());
+            String tipo = controlUsr.getTipoUsuario(usuarioSeleccionado.getEmail());
             StringBuilder detalles = new StringBuilder();
             
             detalles.append("INFORMACIÓN DEL USUARIO:\n\n");

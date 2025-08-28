@@ -4,20 +4,26 @@ import logica.interfaces.IEventos;
 
 import excepciones.EventoRepetidoExcepcion;
 import excepciones.EventoSinCategoriaExcepcion;
+import excepciones.NoHayCupoEdicionTRegistro;
+import excepciones.AsistenteYaRegistrado;
 import excepciones.EdicionRepetidaExcepcion;
 
 import logica.datatypes.DataEvento;
 import logica.datatypes.DataEdicion;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import logica.Evento;
+import logica.Registro;
+import logica.TipoRegistro;
+import logica.Asistente;
 import logica.EdicionEvento;
 
 
 public class ControladorEventos implements IEventos {
 	
 	public ControladorEventos() {
-		
 	}
 	
 	
@@ -64,6 +70,25 @@ public class ControladorEventos implements IEventos {
 		ManejadorEvento me = ManejadorEvento.getInstance();
 		Evento e = me.getEvento(eventoSeleccionado);
 		return e.getTRegistroEdicion(edicionSeleccionada);
+	}
+	
+	public void nuevoRegistro(Asistente asist, String evento, String edicion, String tipoReg) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro {
+		boolean c1 = asist.estaRegistrado(edicion);
+		ManejadorEvento me = ManejadorEvento.getInstance();
+		Evento e = me.getEvento(evento);
+		boolean c2 = e.cupoEdTRegistro(edicion, tipoReg);
+		if (c1) {
+			throw new AsistenteYaRegistrado("el asistente ya está registrado a la edicion seleccionada");
+		} else if (!c2) {
+			throw new NoHayCupoEdicionTRegistro("no hay cupos para el tipo de registro y edicion seleccionados");
+		} else { //!c1 && c2
+			Registro reg = new Registro(LocalDate.now());
+			asist.agregarRegistro(reg);
+			EdicionEvento ed = e.getEdicion(edicion);
+			TipoRegistro tReg = ed.getTRegistro(tipoReg);
+			reg.asociarEdicion(ed);
+			reg.asociarTRegistro(tReg);
+		}
 	}
 }
 
