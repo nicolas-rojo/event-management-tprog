@@ -5,6 +5,7 @@ import logica.interfaces.IEventos;
 import excepciones.EventoRepetidoExcepcion;
 import excepciones.EventoSinCategoriaExcepcion;
 import excepciones.EdicionRepetidaExcepcion;
+import excepciones.EventoNoExisteExcepcion;
 
 import logica.datatypes.DataEvento;
 import logica.datatypes.DTOEvento;
@@ -62,9 +63,22 @@ public class ControladorEventos implements IEventos {
 		
 	}
 	
-	public DTOEvento listarInfoEvento(String nombre){
+	public DTOEvento[] listarInfoEvento() throws EventoNoExisteExcepcion{
 		ManejadorEvento me = ManejadorEvento.getInstance();
-		Evento e = me.getEvento(nombre);
-		return e.getDTOEvento();
+		Evento[] eventos = me.getEventos();
+		
+		if(eventos != null) {
+			while(eventos != null) {
+				DTOEvento[] dtoEvento = new DTOEvento[eventos.length];
+				Evento evento;
+				
+				for(int i = 0; i < eventos.length; i++) {
+					evento = eventos[i];
+					dtoEvento[i] = evento.getDTOEvento();
+				}
+			}
+		} else
+			throw new EventoNoExisteExcepcion("No existen eventos registrados");
+		return null;
 	}
 }

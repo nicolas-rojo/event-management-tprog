@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import logica.Evento;
+import logica.Usuario;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class ManejadorEvento {
 	private static ManejadorEvento instancia = null;
@@ -29,6 +31,20 @@ public class ManejadorEvento {
 	
 	public Evento getEvento(String nombre) {
 		return (eventos.get(nombre));
+	}
+	
+	public Evento[] getEventos() {
+		if (eventos.isEmpty())
+            return null;
+        else {
+            Collection<Evento> eventos = eventos.values();
+            Object[] o = eventos.toArray();
+            Evento[] eventosArray = new Evento[o.length];
+            for (int i = 0; i < o.length; i++) {
+                eventosArray[i] = (Evento) o[i];
+            }
+            return eventosArray;
+        }
 	}
 	
 

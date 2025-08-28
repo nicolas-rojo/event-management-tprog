@@ -21,6 +21,7 @@ public class Principal {
     private ConsultaUsuario lisUsrInternalFrame;
     private ModificarUsuario modUsrInternalFrame;
     private CrearEvento creEventoInternalFrame;
+    private ConsultaEvento consEventoInternalFrame;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -56,6 +57,9 @@ public class Principal {
         creEventoInternalFrame = new CrearEvento();
         creEventoInternalFrame.setVisible(false);
         
+        consEventoInternalFrame = new ConsultaEvento();
+        consEventoInternalFrame.setVisible(false);
+        
        
         
         
@@ -65,6 +69,7 @@ public class Principal {
         frmGestionDeUsuarios.getContentPane().add(lisUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(modUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(creEventoInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(consEventoInternalFrame);
     }
 
     private void initialize() {
@@ -134,5 +139,14 @@ public class Principal {
             }
         });
         menuEventos.add(menuItemAltaEvento);
+        
+        JMenuItem menuItemConsultaEvento = new JMenuItem("ConsultaEvento");
+        menuItemConsultaEvento.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para alta de evento
+                consEventoInternalFrame.setVisible(true);
+            }
+        });
+        menuEventos.add(menuItemConsultaEvento);
     }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import excepciones.EdicionRepetidaExcepcion;
 import excepciones.EventoRepetidoExcepcion;
 import excepciones.EventoSinCategoriaExcepcion;
+import logica.datatypes.DTOEvento;
 import logica.datatypes.DataEdicion;
 import logica.datatypes.DataEvento;
 
@@ -16,4 +17,5 @@ public interface IEventos {
 		
 		public abstract void nuevaEdicion(DataEdicion dataEdicion) throws EdicionRepetidaExcepcion;
 		
+		public abstract DTOEvento listarInfoEvento(String nombre);
 }
