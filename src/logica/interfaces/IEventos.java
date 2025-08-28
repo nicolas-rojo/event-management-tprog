@@ -14,6 +14,8 @@ public interface IEventos {
 		
 		public abstract List<String> listarEventos();
 		
+		public abstract List<String> listarEdiciones(String eventoSeleccionado);
+		
 		public abstract void nuevaEdicion(DataEdicion dataEdicion) throws EdicionRepetidaExcepcion;
 		
 }

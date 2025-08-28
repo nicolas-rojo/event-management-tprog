@@ -1,6 +1,8 @@
 package logica.interfaces;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import excepciones.UsuarioNoExisteException;
 import excepciones.UsuarioRepetidoException;
 import logica.datatypes.DataUsuario;
@@ -20,4 +22,6 @@ public interface IUsuario {
     public abstract void modificarOrganizador(String email, String nuevoNombre, String descripcion, String url) throws UsuarioNoExisteException;
     
     public abstract String getTipoUsuario(String email) throws UsuarioNoExisteException;
+    
+    public abstract List<String> listarAsistentes();
 }
