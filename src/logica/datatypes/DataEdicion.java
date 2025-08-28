@@ -13,13 +13,17 @@ public class DataEdicion {
 	private LocalDate fechaIni;
 	private LocalDate fechaFin;
 	private LocalDate fechaAlta;
+	private String ciudad;
+	private String pais;
 		
-	public DataEdicion(String nombre, String sigla, LocalDate fechaIni, LocalDate fechaFin, LocalDate fechaAlta) {
+	public DataEdicion(String nombre, String sigla, LocalDate fechaIni, LocalDate fechaFin, LocalDate fechaAlta, String ciudad, String pais) {
 		this.nombre = nombre;
 		this.sigla = sigla;
 		this.fechaIni = fechaIni;
 		this.fechaFin = fechaFin;
 		this.fechaAlta = fechaAlta;
+		this.ciudad = ciudad;
+		this.pais = pais;
 	}
 		
 	public String getNombre() {
@@ -40,5 +44,13 @@ public class DataEdicion {
 		
 	public LocalDate getFechaAlta() {
 		return this.fechaAlta;
+	}
+	
+	public String getCiudad() {
+		return this.ciudad;
+	}
+	
+	public String getPais() {
+		return this.pais;
 	}
 }

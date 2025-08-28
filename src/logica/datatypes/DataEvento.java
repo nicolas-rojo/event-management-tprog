@@ -4,20 +4,14 @@ import java.time.LocalDate;
 public class DataEvento {
 	private String nombre;
 	private String sigla;
-	private LocalDate fechaIni;
-	private LocalDate fechaFin;
 	private LocalDate fechaAlta;
-	private String ciudad;
-	private String pais;
+	private String descripcion;
 
-	public DataEvento(String nombre, String sigla, LocalDate fechaIni, LocalDate fechaFin, LocalDate fechaAlta, String ciudad, String pais) {
+	public DataEvento(String nombre, String sigla, LocalDate fechaAlta, String descripcion) {
 		this.nombre = nombre;
 		this.sigla = sigla;
-		this.fechaIni = fechaIni;
-		this.fechaFin = fechaFin;
 		this.fechaAlta = fechaAlta;
-		this.ciudad = ciudad;
-		this.ciudad = pais;
+		this.descripcion = descripcion;
 	}
 
 	public String getNombre() {
@@ -27,25 +21,13 @@ public class DataEvento {
 	public String getSigla() {
 		return sigla;
 	}
-
-	public LocalDate getFechaIni() {
-		return fechaIni;
-	}
-	
-	public LocalDate getFechaFin() {
-		return fechaFin;
-	}
 	
 	public LocalDate getFechaAlta() {
 		return fechaAlta;
 	}
 	    
-	public String getCiudad() {
-		return ciudad;
-	}
-	
-	public String getPais() {
-		return pais;
+	public String getDesc() {
+		return descripcion;
 	}
 
 	@Override

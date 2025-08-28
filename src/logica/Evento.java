@@ -13,11 +13,8 @@ import java.util.List;
 public class Evento {
 	private String nombre;
 	private String sigla;
-	private LocalDate fechaIni;
-	private LocalDate fechaFin;
 	private LocalDate fechaAlta;
-	private String ciudad;
-	private String pais;
+	private String descripcion;
 	
 	private HashMap<String, EdicionEvento> ediciones;
 	private Set<Categoria> categorias;
@@ -25,11 +22,8 @@ public class Evento {
 	public Evento(DataEvento dataevento) {
 		this.nombre = dataevento.getNombre();
 		this.sigla = dataevento.getSigla();
-		this.fechaIni = dataevento.getFechaIni();
-		this.fechaFin = dataevento.getFechaFin();
 		this.fechaAlta = dataevento.getFechaAlta();
-		this.ciudad = dataevento.getCiudad();
-		this.ciudad = dataevento.getPais();
+		this.descripcion = dataevento.getDesc();
 		
 		this.ediciones = new HashMap<>();
 		this.categorias = new HashSet<>();
@@ -43,24 +37,12 @@ public class Evento {
 		return this.sigla;
 	}
 	
-	public LocalDate getFechaIni() {
-		return this.fechaIni;
-	}
-	
-	public LocalDate getFechaFin() {
-		return this.fechaFin;
-	}
-	
 	public LocalDate getFechaAlta() {
 		return this.fechaAlta;
 	}
 	
-	public String getCiudad() {
-		return this.ciudad;
-	}
-	
-	public String getPais() {
-		return this.pais;
+	public String getDesc() {
+		return this.descripcion;
 	}
 	
 	public void setNombre(String nombre) {
@@ -71,24 +53,12 @@ public class Evento {
 		this.sigla = sigla;
 	}
 	
-	public void setFechaIni(LocalDate f) {
-		this.fechaIni = f;
-	}
-	
-	public void setFechaFin(LocalDate f) {
-		this.fechaFin = f;
-	}
-	
 	public void setFechaAlta(LocalDate f) {
 		this.fechaAlta = f;
 	}
 	
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
-	}
-	
-	public void setPais(String pais) {
-		this.pais = pais;
+	public void setDesc(String desc) {
+		this.descripcion = desc;
 	}
 	
 	public List<String> getEdiciones(){

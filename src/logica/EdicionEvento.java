@@ -14,6 +14,8 @@ public class EdicionEvento {
 	private LocalDate fechaIni;
 	private LocalDate fechaFin;
 	private LocalDate fechaAlta;
+	private String ciudad;
+	private String pais;
 	
 	private Organizador organizador;
 	private Set<TipoRegistro> tipoRegistros;
@@ -26,6 +28,8 @@ public class EdicionEvento {
 		this.fechaIni = dataEd.getFechaIni();
 		this.fechaFin = dataEd.getFechaFin();
 		this.fechaAlta = dataEd.getFechaAlta();
+		this.ciudad = dataEd.getCiudad();
+		this.pais = dataEd.getPais();
 		
 		this.tipoRegistros = new HashSet<>();
 		this.patrocinios = new HashSet<>();
