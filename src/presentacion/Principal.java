@@ -7,26 +7,33 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import logica.Fabrica;
+import logica.datatypes.DataEdicion;
+import logica.datatypes.DataEvento;
+import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
 
 import javax.swing.JMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 public class Principal {
 
     private JFrame frmGestionDeUsuarios;
     private IUsuario ICU;
+    private IEventos IEV;
     private CrearUsuario creUsrInternalFrame;
     private ConsultaUsuario lisUsrInternalFrame;
     private ModificarUsuario modUsrInternalFrame;
     private CrearEvento creEventoInternalFrame;
+    private CrearTipoRegistro creTRegistroInternalFrame;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
                     Principal window = new Principal();
+                   /**crear instancias para testing**/
                     window.frmGestionDeUsuarios.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -41,6 +48,7 @@ public class Principal {
         // Inicialización
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getIControladorUsuario();
+        IEV = fabrica.getIControladorEventos();
         
         // Se crean los InternalFrame y se incluyen al Frame principal ocultos.
         // De esta forma, no es necesario crear y destruir objetos lo que enlentece la ejecución.
@@ -56,6 +64,9 @@ public class Principal {
         creEventoInternalFrame = new CrearEvento();
         creEventoInternalFrame.setVisible(false);
         
+        creTRegistroInternalFrame = new CrearTipoRegistro(IEV);
+        creTRegistroInternalFrame.setVisible(false);
+        
        
         
         
@@ -65,6 +76,7 @@ public class Principal {
         frmGestionDeUsuarios.getContentPane().add(lisUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(modUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(creEventoInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(creTRegistroInternalFrame);
     }
 
     private void initialize() {
@@ -134,5 +146,16 @@ public class Principal {
             }
         });
         menuEventos.add(menuItemAltaEvento);
+        
+        JMenuItem menuItemAltaTRegistro = new JMenuItem("Alta Tipo de Registro");
+        menuItemAltaTRegistro.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para alta de evento
+            	creTRegistroInternalFrame.cargarEventos();
+            	creTRegistroInternalFrame.setVisible(true);
+            	
+            }
+        });
+        menuEventos.add(menuItemAltaTRegistro);
     }
 }

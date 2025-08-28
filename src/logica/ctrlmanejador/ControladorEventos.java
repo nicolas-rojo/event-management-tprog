@@ -1,16 +1,18 @@
 package logica.ctrlmanejador;
 
 import logica.interfaces.IEventos;
-
+import excepciones.TipoDeRegistroRepetidoException;
 import excepciones.EventoRepetidoExcepcion;
 import excepciones.EventoSinCategoriaExcepcion;
 import excepciones.EdicionRepetidaExcepcion;
 
 import logica.datatypes.DataEvento;
+import logica.datatypes.DataTRegistro;
 import logica.datatypes.DataEdicion;
 import java.util.List;
 
 import logica.Evento;
+import logica.TipoRegistro;
 import logica.EdicionEvento;
 
 
@@ -18,6 +20,17 @@ public class ControladorEventos implements IEventos {
 	
 	public ControladorEventos() {
 		
+	}
+	
+	public void nuevoTipoRegistro(DataTRegistro dataTRegistro, String evento, String edicion) throws TipoDeRegistroRepetidoException {
+		ManejadorEvento me = ManejadorEvento.getInstance();
+		Evento eventoTRegistro = me.getEvento(evento);
+		EdicionEvento edicionTRegistro = eventoTRegistro.getEdicion(edicion);
+		if(edicionTRegistro.getTRegistro().contains(dataTRegistro.getNombre())) {
+			throw new TipoDeRegistroRepetidoException("El Tipo de Registro ingresado ya existe en el sistema");
+		}else {
+			edicionTRegistro.agregarTRegistro(new TipoRegistro(dataTRegistro));
+		}
 	}
 	
 	
