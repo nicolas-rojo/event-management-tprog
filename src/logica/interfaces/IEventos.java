@@ -23,4 +23,6 @@ public interface IEventos {
 		public abstract List<String> listarTRegistros(String eventoSeleccionado, String edicionSeleccionada);
 		
 		public abstract void nuevoTipoRegistro(DataTRegistro dataTRegistro, String evento, String edicion) throws TipoDeRegistroRepetidoException;
+		
+		public abstract DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro);
 }

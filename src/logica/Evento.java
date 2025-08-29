@@ -63,8 +63,12 @@ public class Evento {
 	
 	public List<String> getEdiciones(){
 		List<String> res = new ArrayList<>();
-		for(EdicionEvento e : this.ediciones.values()) {
-			res.add(e.getNombre());
+		if(this.ediciones.isEmpty()) {
+			return res;
+		}else {
+			for(EdicionEvento e : this.ediciones.values()) {
+				res.add(e.getNombre());
+			}
 		}
 		return res;
 	}
