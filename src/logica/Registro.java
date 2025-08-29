@@ -20,6 +20,10 @@ public class Registro {
 		this.fechaReg = f;
 	}
 	
+	public String getNombreEdicion() {
+		return this.ed.getNombre();
+	}
+	
 	public boolean esEdicion(String edicion) {
 		return (ed.getNombre().equals(edicion));
 	}

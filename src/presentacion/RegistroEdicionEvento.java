@@ -219,12 +219,12 @@ public class RegistroEdicionEvento extends JInternalFrame {
 					comboBoxAsistentes.addItem(a);
 				}
 			} else {
-				comboBoxEdiciones.addItem("No hay ediciones");
+				comboBoxAsistentes.addItem("No hay asistentes");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			comboBoxEdiciones.removeAllItems();
-			comboBoxEdiciones.addItem("No hay ediciones");
+			comboBoxAsistentes.removeAllItems();
+			comboBoxAsistentes.addItem("No hay asistentes");
 		}
 	}
 	

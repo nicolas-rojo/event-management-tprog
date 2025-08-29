@@ -5,6 +5,7 @@ import logica.interfaces.IUsuario;
 import excepciones.UsuarioRepetidoException;
 import excepciones.AsistenteYaRegistrado;
 import excepciones.NoHayCupoEdicionTRegistro;
+import excepciones.NoHayRegistrosAsistente;
 import excepciones.UsuarioNoExisteException;
 import java.time.LocalDate;
 
@@ -134,6 +135,12 @@ public class ControladorUsuario implements IUsuario {
 		Asistente asistente = (Asistente) u;
 		ControladorEventos ce = new ControladorEventos();
 		ce.nuevoRegistro(asistente, evento, edicion, tipoReg, fecha);
+	}
+	
+	public List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado) {
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		Asistente a = (Asistente) mu.getUsuarioNickname(asistenteSeleccionado);
+		return a.getEdicionesRegistros();
 	}
 }
 

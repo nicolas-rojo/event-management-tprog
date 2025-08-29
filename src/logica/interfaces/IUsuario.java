@@ -5,6 +5,7 @@ import java.util.List;
 
 import excepciones.AsistenteYaRegistrado;
 import excepciones.NoHayCupoEdicionTRegistro;
+import excepciones.NoHayRegistrosAsistente;
 import excepciones.UsuarioNoExisteException;
 import excepciones.UsuarioRepetidoException;
 import logica.datatypes.*;
@@ -30,4 +31,6 @@ public interface IUsuario {
     public abstract List<String> listarAsistentes();
     
     public abstract void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro;
+    
+    public abstract List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado);
 }
