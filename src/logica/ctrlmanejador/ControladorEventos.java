@@ -12,6 +12,7 @@ import logica.datatypes.DataEvento;
 import logica.datatypes.DataEdicion;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import logica.Evento;
@@ -63,7 +64,10 @@ public class ControladorEventos implements IEventos {
 	public List<String> listarEdiciones(String eventoSeleccionado) {
 		ManejadorEvento me = ManejadorEvento.getInstance();
 		Evento e = me.getEvento(eventoSeleccionado);
-		return e.getEdiciones();
+//		if (e != null) {
+			return e.getEdiciones();			
+//		}
+//		return (new ArrayList<>());
 	}
 	
 	public List<String> listarTRegistros(String eventoSeleccionado, String edicionSeleccionada) {

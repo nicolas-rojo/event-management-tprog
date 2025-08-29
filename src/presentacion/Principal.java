@@ -43,22 +43,22 @@ public class Principal {
                 	 */
                 	Principal window = new Principal();
                 	
-                	Asistente a1 = new Asistente("Luca", "luk", "scaboni.luca@gmail.com", "Scaboni", LocalDate.now());
-                	
-                    Evento e1 = new Evento(new DataEvento("evento1", "e1", LocalDate.now(), "desc1"));
-                    Evento e2 = new Evento(new DataEvento("evento2", "e2", LocalDate.now(), "desc2"));
-                    
-                    EdicionEvento ed11 = new EdicionEvento(new DataEdicion("evento1 ed1", "e1ed1", LocalDate.now(), LocalDate.now(), LocalDate.now(), "ciudad", "pais"));
-                    
-                    ManejadorEvento me = ManejadorEvento.getInstance();
-                    me.addEvento(e1);
-                    me.addEvento(e2);
-                    
-                    ManejadorUsuario mu = ManejadorUsuario.getInstance();
-                    mu.addUsuario(a1);
-                    
-                    e2.agregarEdicion(ed11);
-                    System.out.println(me.getEventos());
+//                	Asistente a1 = new Asistente("Luca", "luk", "scaboni.luca@gmail.com", "Scaboni", LocalDate.now());
+//                	
+//                    Evento e1 = new Evento(new DataEvento("evento1", "e1", LocalDate.now(), "desc1"));
+//                    Evento e2 = new Evento(new DataEvento("evento2", "e2", LocalDate.now(), "desc2"));
+//                    
+//                    EdicionEvento ed11 = new EdicionEvento(new DataEdicion("evento1 ed1", "e1ed1", LocalDate.now(), LocalDate.now(), LocalDate.now(), "ciudad", "pais"));
+//                    
+//                    ManejadorEvento me = ManejadorEvento.getInstance();
+//                    me.addEvento(e1);
+//                    me.addEvento(e2);
+//                    
+//                    ManejadorUsuario mu = ManejadorUsuario.getInstance();
+//                    mu.addUsuario(a1);
+//                    
+//                    e2.agregarEdicion(ed11);
+//                    System.out.println(me.getEventos());
                     window.frmGestionDeUsuarios.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

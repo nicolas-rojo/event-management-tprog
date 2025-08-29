@@ -45,15 +45,17 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		comboBoxEventos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String eventoSeleccionado = (String) comboBoxEventos.getSelectedItem();
-				if (eventoSeleccionado != null) {
-					comboBoxEdiciones.setEnabled(true);
-					cargarEdicionesEvento(ctrlEventos.listarEdiciones(eventoSeleccionado));
+				if (eventoSeleccionado == null || eventoSeleccionado.equals("No hay eventos")) {
+					comboBoxEdiciones.setEnabled(false);
+					return;
 				}
+				comboBoxEdiciones.setEnabled(true);
+				cargarEdicionesEvento(ctrlEventos.listarEdiciones(eventoSeleccionado));
 			}
 		});
 		
 		
-		comboBoxEdiciones = new JComboBox();
+		comboBoxEdiciones = new JComboBox<String>();
 		comboBoxEdiciones.setBounds(201, 46, 188, 20);
 		getContentPane().add(comboBoxEdiciones);
 		
@@ -76,7 +78,7 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		lblNewLabel_3.setBounds(10, 120, 181, 12);
 		getContentPane().add(lblNewLabel_3);
 		
-		comboBoxAsistentes = new JComboBox();
+		comboBoxAsistentes = new JComboBox<String>();
 		comboBoxAsistentes.setBounds(201, 116, 188, 20);
 		getContentPane().add(comboBoxAsistentes);
 		
@@ -87,9 +89,6 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(305, 150, 84, 20);
 		getContentPane().add(btnCancelar);
-
-		
-		
 	}
 	
 	
@@ -103,13 +102,11 @@ public class RegistroEdicionEvento extends JInternalFrame {
 					comboBoxEventos.addItem(e);
 			} else {
 				comboBoxEventos.addItem("No hay eventos");
+				comboBoxEdiciones.setEnabled(false);
 			}
-			comboBoxEventos.setSelectedItem(null);
-			comboBoxEdiciones.setEnabled(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 			comboBoxEventos.removeAllItems();
-			comboBoxEventos.addItem("No hay eventos");
 		}
 	}
 	
