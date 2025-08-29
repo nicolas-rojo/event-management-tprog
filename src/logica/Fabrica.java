@@ -1,9 +1,10 @@
 package logica;
 
-import logica.ctrlmanejador.ControladorUsuario;
 import logica.ctrlmanejador.ControladorEventos;
+import logica.ctrlmanejador.ControladorUsuario;
 
-import logica.interfaces.*;
+import logica.interfaces.IEventos;
+import logica.interfaces.IUsuario;
 
 /**
  * Fábrica para la construcción de un controlador de usuarios (uno distinto para cada invocación).

@@ -3,14 +3,17 @@ package logica.ctrlmanejador;
 import logica.interfaces.IUsuario;
 
 import excepciones.UsuarioRepetidoException;
+import excepciones.AsistenteYaRegistrado;
+import excepciones.NoHayCupoEdicionTRegistro;
 import excepciones.UsuarioNoExisteException;
-
-import logica.datatypes.DataUsuario;
 import java.time.LocalDate;
+
+import java.util.List;
 
 import logica.Asistente;
 import logica.Organizador;
 import logica.Usuario;
+import logica.datatypes.*;
 
 
 
@@ -20,11 +23,11 @@ public class ControladorUsuario implements IUsuario {
     }
 
     public void registrarAsistente(String nombre, String nickname, String email, String apellido, LocalDate fechaNac) throws UsuarioRepetidoException {
-        ManejadorUsuario mu = ManejadorUsuario.getinstance();
-        Usuario u = mu.obtenerUsuarioNickname(nickname);
+        ManejadorUsuario mu = ManejadorUsuario.getInstance();
+        Usuario u = mu.getUsuarioNickname(nickname);
         if (u != null)
             throw new UsuarioRepetidoException("Nickname ya en uso");
-        u = mu.obtenerUsuarioEmail(email);
+        u = mu.getUsuarioEmail(email);
         if (u != null)
             throw new UsuarioRepetidoException("Email ya en uso");
         Asistente a = new Asistente(nombre, nickname, email, apellido, fechaNac);
@@ -32,41 +35,37 @@ public class ControladorUsuario implements IUsuario {
     }
     
     public void registrarOrganizador(String nombre, String nickname, String email, String descripcion, String url) throws UsuarioRepetidoException {
-    	ManejadorUsuario mu = ManejadorUsuario.getinstance();
-        Usuario u = mu.obtenerUsuarioNickname(nickname);
+    	ManejadorUsuario mu = ManejadorUsuario.getInstance();
+        Usuario u = mu.getUsuarioNickname(nickname);
         if (u != null)
             throw new UsuarioRepetidoException("Nickname ya en uso");
-        u = mu.obtenerUsuarioEmail(email);
+        u = mu.getUsuarioEmail(email);
         if (u != null)
             throw new UsuarioRepetidoException("Email ya en uso");
         Organizador o = new Organizador(nombre, nickname, email, descripcion, url);
         mu.addUsuario(o);
     }
 
-    public DataUsuario verInfoUsuario(String nickname) throws UsuarioNoExisteException {
-        ManejadorUsuario mu = ManejadorUsuario.getinstance();
-        Usuario u = mu.obtenerUsuarioNickname(nickname);
-        if (u != null)
-            return new DataUsuario(u.getNombre(), u.getNickname(), u.getEmail());
-        else
-            throw new UsuarioNoExisteException("El usuario " + nickname + " no existe");
-
-    }
-
-    public Asistente getAsistente(String email){
-    	ManejadorUsuario mu = ManejadorUsuario.getinstance();
-    	Asistente a = (Asistente) mu.obtenerUsuarioEmail(email);
-    	return a;
+    public DataAsistente getAsistente(String email) throws UsuarioNoExisteException{
+    	ManejadorUsuario mu = ManejadorUsuario.getInstance();
+    	Asistente a = (Asistente) mu.getUsuarioEmail(email);
+    	if (a != null)
+    		return new DataAsistente(a.getNombre(), a.getNickname(), a.getEmail(), a.getApellido(), a.getFechaNac());
+    	else
+    		throw new UsuarioNoExisteException("No existe usuario con dicho email");
     }
     
-    public Organizador getOrganizador(String email){
-    	ManejadorUsuario mu = ManejadorUsuario.getinstance();
-    	Organizador o = (Organizador) mu.obtenerUsuarioEmail(email);
-    	return o;
+    public DataOrganizador getOrganizador(String email) throws UsuarioNoExisteException{
+    	ManejadorUsuario mu = ManejadorUsuario.getInstance();
+    	Organizador o = (Organizador) mu.getUsuarioEmail(email);
+    	if (o != null)
+    		return new DataOrganizador(o.getNombre(), o.getNickname(), o.getEmail(), o.getDescripcion(), o.getUrl());
+    	else 
+    		throw new UsuarioNoExisteException("No existe usuario con dicho email");    		
     }
     
     public DataUsuario[] getUsuarios() throws UsuarioNoExisteException {
-        ManejadorUsuario mu = ManejadorUsuario.getinstance();
+        ManejadorUsuario mu = ManejadorUsuario.getInstance();
         Usuario[] usrs = mu.getUsuarios();
 
         if (usrs != null) {
@@ -85,8 +84,8 @@ public class ControladorUsuario implements IUsuario {
     }
 
 	public void modificarAsistente(String email, String nuevoNombre, String nuevoApellido) throws UsuarioNoExisteException {
-	    ManejadorUsuario mu = ManejadorUsuario.getinstance();
-	    Usuario u = mu.obtenerUsuarioEmail(email);
+	    ManejadorUsuario mu = ManejadorUsuario.getInstance();
+	    Usuario u = mu.getUsuarioEmail(email);
 	    if (u == null) {
 	        throw new UsuarioNoExisteException("Error, no hay usuario con el email ingresdo");
 	    }
@@ -96,8 +95,8 @@ public class ControladorUsuario implements IUsuario {
 	}
 	
 	public void modificarOrganizador(String email, String nuevoNombre, String descripcion, String url) throws UsuarioNoExisteException {
-	    ManejadorUsuario mu = ManejadorUsuario.getinstance();
-	    Usuario u = mu.obtenerUsuarioEmail(email);
+	    ManejadorUsuario mu = ManejadorUsuario.getInstance();
+	    Usuario u = mu.getUsuarioEmail(email);
 	    if (u == null) {
 	        throw new UsuarioNoExisteException("Error, no hay usuario con el email ingresdo");
 	    }
@@ -107,9 +106,9 @@ public class ControladorUsuario implements IUsuario {
 	    o.setUrl(url);
 	}
 	
-	public String obtenerTipoUsuario(String email) throws UsuarioNoExisteException {
-        ManejadorUsuario mu = ManejadorUsuario.getinstance();
-        Usuario u = mu.obtenerUsuarioEmail(email);
+	public String getTipoUsuario(String email) throws UsuarioNoExisteException {
+        ManejadorUsuario mu = ManejadorUsuario.getInstance();
+        Usuario u = mu.getUsuarioEmail(email);
         
         if (u == null) {
             throw new UsuarioNoExisteException("No existe usuario con email: " + email);
@@ -123,4 +122,26 @@ public class ControladorUsuario implements IUsuario {
             throw new UsuarioNoExisteException("Tipo de usuario desconocido para email: " + email);
         }
     }
+	
+	public List<String> listarAsistentes() {
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		return mu.getNombreAsist();
+	}
+	
+	public void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro {
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		Usuario u = mu.getUsuarioNickname(asistenteSeleccionado);
+		Asistente asistente = (Asistente) u;
+		ControladorEventos ce = new ControladorEventos();
+		ce.nuevoRegistro(asistente, evento, edicion, tipoReg, fecha);
+	}
 }
+
+
+
+
+
+
+
+
+

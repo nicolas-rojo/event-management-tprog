@@ -1,7 +1,9 @@
 package logica.ctrlmanejador;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import logica.Usuario;
@@ -16,7 +18,7 @@ public class ManejadorUsuario {
         usuariosEmail = new HashMap<String, Usuario>();
     }
 
-    public static ManejadorUsuario getinstance() {
+    public static ManejadorUsuario getInstance() {
         if (instancia == null)
             instancia = new ManejadorUsuario();
         return instancia;
@@ -30,11 +32,11 @@ public class ManejadorUsuario {
         usuariosEmail.put(email, usu);
     }
 
-    public Usuario obtenerUsuarioNickname(String nick) {
+    public Usuario getUsuarioNickname(String nick) {
         return ((Usuario) usuariosNickname.get(nick));
     }
     
-    public Usuario obtenerUsuarioEmail(String email) {
+    public Usuario getUsuarioEmail(String email) {
         return ((Usuario) usuariosEmail.get(email));
     }
 
@@ -50,6 +52,15 @@ public class ManejadorUsuario {
             }
             return usuarios;
         }
+    }
+    
+    public List<String> getNombreAsist() {
+    	List<String> res = new ArrayList<>();
+    	for (Usuario e: this.usuariosNickname.values()) {
+    		if (e.esAsistente())
+    			res.add(e.getNickname());
+    	}
+    	return res;
     }
 
 }

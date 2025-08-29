@@ -4,51 +4,46 @@ import java.time.LocalDate;
 import java.util.Set;
 import logica.datatypes.DataEvento;
 import logica.datatypes.DTOEvento;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 
 public class Evento {
 	private String nombre;
-	private String descripcion;
-	private LocalDate fechaAlta;
 	private String sigla;
+	private LocalDate fechaAlta;
+	private String descripcion;
+	
 	private HashMap<String, EdicionEvento> ediciones;
 	private Set<Categoria> categorias;
 	
 	public Evento(DataEvento dataevento) {
 		this.nombre = dataevento.getNombre();
-		this.descripcion = dataevento.getDescripcion();
-		this.fechaAlta = dataevento.getFechaAlta();
 		this.sigla = dataevento.getSigla();
+		this.fechaAlta = dataevento.getFechaAlta();
+		this.descripcion = dataevento.getDesc();
+		
 		this.ediciones = new HashMap<>();
 		this.categorias = new HashSet<>();
-		
 	}
 	
 	public String getNombreEvento() {
 		return this.nombre;
 	}
 	
-	public String getDescripcionEvento() {
-		return this.descripcion;
+	public String getSigla() {
+		return this.sigla;
 	}
 	
 	public LocalDate getFechaAlta() {
 		return this.fechaAlta;
 	}
 	
-	public String getSigla() {
-		return this.sigla;
-	}
-	
-	public HashMap<String,EdicionEvento> getEdiciones(){
-		return this.ediciones;
-	}
-	
-	public EdicionEvento getEdicion(String nombre) {
-		return (this.ediciones.get(nombre));
-		
+	public String getDesc() {
+		return this.descripcion;
 	}
 	
 	public void agregarCategoria(Categoria c) {
@@ -60,16 +55,32 @@ public class Evento {
 		this.nombre = nombre;
 	}
 	
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-	
-	public void setFechaAlta(LocalDate fecha) {
-		this.fechaAlta = fecha;
-	}
-	
 	public void setSigla(String sigla) {
 		this.sigla = sigla;
+	}
+	
+	public void setFechaAlta(LocalDate f) {
+		this.fechaAlta = f;
+	}
+	
+	public void setDesc(String desc) {
+		this.descripcion = desc;
+	}
+	
+	public List<String> getEdiciones(){
+		List<String> res = new ArrayList<>();
+		if(this.ediciones.isEmpty()) {
+			return res;
+		}else {
+			for(EdicionEvento e : this.ediciones.values()) {
+				res.add(e.getNombre());
+			}
+		}
+		return res;
+	}
+	
+	public EdicionEvento getEdicion(String nombre) {
+		return (this.ediciones.get(nombre));
 	}
 	
 	public void agregarEdicion(EdicionEvento edicion) {
@@ -77,14 +88,21 @@ public class Evento {
 	}
 	
 	public DTOEvento getDTOEvento() {
-	    //categorías y ediciones a Sets de Strings
 	    Set<String> catStrings = new HashSet<>();
 	    for (Categoria c : categorias) {
 	        catStrings.add(c.getNombre());
 	    }
-	    Set<String> edStrings = new HashSet<>(ediciones.keySet()); //denuevo lo hice con una copia pero como prefieran
-
+	    Set<String> edStrings = new HashSet<>(ediciones.keySet());
 	    return new DTOEvento(nombre, sigla, fechaAlta, descripcion, catStrings, edStrings);
 	}
-
+	
+	public List<String> getTRegistroEdicion(String edSeleccionada) {
+	    EdicionEvento ed = this.getEdicion(edSeleccionada);
+	    return ed.getTRegistro();
+	}
+	
+	public boolean cupoEdTRegistro(String edicion, String tReg) {
+	    EdicionEvento ed = this.ediciones.get(edicion);
+	    return ed.cupoTRegistro(tReg);
+	}
 }

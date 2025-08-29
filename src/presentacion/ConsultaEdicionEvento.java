@@ -23,13 +23,14 @@ public class ConsultaEdicionEvento extends JInternalFrame {
         textDetalles.setEditable(false);
         textDetalles.setLineWrap(true);
         textDetalles.setWrapStyleWord(true);
-        textDetalles.setText(formatearDetalles(edicion));
+        //textDetalles.setText(formatearDetalles(edicion));
         add(new JScrollPane(textDetalles), BorderLayout.NORTH);
 
         // Panel central con listas (tipos de registros y patrocinios)
         JPanel panelCentral = new JPanel(new GridLayout(1, 2, 10, 0));
 
         // Lista de tipos de registros
+        /* ---------------------------------------------------------------------------------------
         listTiposRegistros = new JList<>(edicion.getTiposRegistro().toArray(new String[0]));
         listTiposRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listTiposRegistros.addListSelectionListener(new ListSelectionListener() {
@@ -62,27 +63,26 @@ public class ConsultaEdicionEvento extends JInternalFrame {
         panelCentral.add(new JScrollPane(listPatrocinios));
 
         add(panelCentral, BorderLayout.CENTER);
+    -------------------------------------------------------------------------------------------*/
     }
-
-    private String formatearDetalles(DataEdicion edicion) {
+    /*private String formatearDetalles(DataEdicion edicion) {
         StringBuilder sb = new StringBuilder();
         sb.append("Nombre: ").append(edicion.getNombre()).append("\n");
         sb.append("Fecha Inicio: ").append(edicion.getFechaInicio()).append("\n");
         sb.append("Fecha Fin: ").append(edicion.getFechaFin()).append("\n");
         sb.append("Organizador: ").append(edicion.getOrganizador()).append("\n");
-        // podés agregar más campos acá
         return sb.toString();
     }
-
+    
     private void abrirConsultaTipoRegistro(String tipo) {
         ConsultaTipoRegistro ventanaTipo = new ConsultaTipoRegistro(tipo);
         getParent().add(ventanaTipo);
         ventanaTipo.setVisible(true);
     }
-
+    
     private void abrirConsultaPatrocinio(String patrocinio) {
         ConsultaPatrocinio ventanaPatrocinio = new ConsultaPatrocinio(patrocinio);
         getParent().add(ventanaPatrocinio);
         ventanaPatrocinio.setVisible(true);
-    }
+    }*/
 }

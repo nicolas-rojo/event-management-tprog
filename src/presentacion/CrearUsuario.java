@@ -20,6 +20,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.time.LocalDate;
+import com.toedter.calendar.JDateChooser;
+import java.util.Date;
+import java.time.ZoneId;
 
 @SuppressWarnings("serial")
 public class CrearUsuario extends JInternalFrame {
@@ -38,9 +41,7 @@ public class CrearUsuario extends JInternalFrame {
     
     // Campos específicos para Asistente
     private JTextField textFieldApellido;
-    private JComboBox<Integer> cmbDiaNac;
-    private JComboBox<String> cmbMesNac;
-    private JComboBox<Integer> cmbAnioNac;
+    private JDateChooser dateChooser;
     private JPanel panelAsistente;
     
     // Campos específicos para Organizador
@@ -169,6 +170,7 @@ public class CrearUsuario extends JInternalFrame {
         lblApellido.setHorizontalAlignment(SwingConstants.RIGHT);
         lblApellido.setHorizontalAlignment(SwingConstants.RIGHT);
         GridBagConstraints gbc_lblApellido = new GridBagConstraints();
+        gbc_lblApellido.anchor = GridBagConstraints.EAST;
         gbc_lblApellido.insets = new Insets(0, 0, 5, 5);
         gbc_lblApellido.gridx = 0;
         gbc_lblApellido.gridy = 0;
@@ -188,72 +190,26 @@ public class CrearUsuario extends JInternalFrame {
         lblFechaNac.setHorizontalAlignment(SwingConstants.RIGHT);
         lblFechaNac.setHorizontalAlignment(SwingConstants.RIGHT);
         GridBagConstraints gbc_lblFechaNac = new GridBagConstraints();
+        gbc_lblFechaNac.anchor = GridBagConstraints.EAST;
         gbc_lblFechaNac.insets = new Insets(0, 0, 0, 5);
         gbc_lblFechaNac.gridx = 0;
         gbc_lblFechaNac.gridy = 1;
         panelAsistente.add(lblFechaNac, gbc_lblFechaNac);
         
-        JPanel panelFecha = new JPanel();
-        GridBagConstraints gbc_panelFecha = new GridBagConstraints();
-        gbc_panelFecha.gridwidth = 2;
-        gbc_panelFecha.fill = GridBagConstraints.BOTH;
-        gbc_panelFecha.gridx = 1;
-        gbc_panelFecha.gridy = 1;
-        panelAsistente.add(panelFecha, gbc_panelFecha);
-        panelFecha.setLayout(new GridBagLayout());
+        // Usar JDateChooser en lugar de los combobox separados
+        dateChooser = new JDateChooser();
+        dateChooser.setDateFormatString("dd/MM/yyyy");
+        // Establecer fecha por defecto: 20 años atrás
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        cal.add(java.util.Calendar.YEAR, -20);
+        dateChooser.setDate(cal.getTime());
         
-        // ComboBox para el día (1-31)
-        cmbDiaNac = new JComboBox<Integer>();
-        for (int i = 1; i <= 31; i++) {
-            cmbDiaNac.addItem(i);
-        }
-        GridBagConstraints gbc_cmbDiaNac = new GridBagConstraints();
-        gbc_cmbDiaNac.insets = new Insets(0, 0, 0, 5);
-        gbc_cmbDiaNac.fill = GridBagConstraints.BOTH;
-        gbc_cmbDiaNac.gridx = 0;
-        gbc_cmbDiaNac.gridy = 0;
-        panelFecha.add(cmbDiaNac, gbc_cmbDiaNac);
-        
-        JLabel lblSeparador1 = new JLabel("/");
-        lblSeparador1.setHorizontalAlignment(SwingConstants.RIGHT);
-        GridBagConstraints gbc_lblSeparador1 = new GridBagConstraints();
-        gbc_lblSeparador1.insets = new Insets(0, 0, 0, 5);
-        gbc_lblSeparador1.gridx = 1;
-        gbc_lblSeparador1.gridy = 0;
-        panelFecha.add(lblSeparador1, gbc_lblSeparador1);
-        
-        // ComboBox para el mes
-        cmbMesNac = new JComboBox<String>(new String[]{
-            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-        });
-        GridBagConstraints gbc_cmbMesNac = new GridBagConstraints();
-        gbc_cmbMesNac.insets = new Insets(0, 0, 0, 5);
-        gbc_cmbMesNac.fill = GridBagConstraints.BOTH;
-        gbc_cmbMesNac.gridx = 2;
-        gbc_cmbMesNac.gridy = 0;
-        panelFecha.add(cmbMesNac, gbc_cmbMesNac);
-        
-        JLabel lblSeparador2 = new JLabel("/");
-        lblSeparador2.setHorizontalAlignment(SwingConstants.RIGHT);
-        GridBagConstraints gbc_lblSeparador2 = new GridBagConstraints();
-        gbc_lblSeparador2.insets = new Insets(0, 0, 0, 5);
-        gbc_lblSeparador2.gridx = 3;
-        gbc_lblSeparador2.gridy = 0;
-        panelFecha.add(lblSeparador2, gbc_lblSeparador2);
-        
-        // ComboBox para el año
-        cmbAnioNac = new JComboBox<Integer>();
-        int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
-        for (int i = currentYear - 100; i <= currentYear; i++) {
-            cmbAnioNac.addItem(i);
-        }
-        cmbAnioNac.setSelectedItem(currentYear - 20); // Valor por defecto: 20 años atrás
-        GridBagConstraints gbc_cmbAnioNac = new GridBagConstraints();
-        gbc_cmbAnioNac.fill = GridBagConstraints.BOTH;
-        gbc_cmbAnioNac.gridx = 4;
-        gbc_cmbAnioNac.gridy = 0;
-        panelFecha.add(cmbAnioNac, gbc_cmbAnioNac);
+        GridBagConstraints gbc_dateChooser = new GridBagConstraints();
+        gbc_dateChooser.gridwidth = 2;
+        gbc_dateChooser.fill = GridBagConstraints.BOTH;
+        gbc_dateChooser.gridx = 1;
+        gbc_dateChooser.gridy = 1;
+        panelAsistente.add(dateChooser, gbc_dateChooser);
         
         GridBagConstraints gbc_panelAsistente = new GridBagConstraints();
         gbc_panelAsistente.gridwidth = 3;
@@ -277,6 +233,7 @@ public class CrearUsuario extends JInternalFrame {
         lblDescripcion.setHorizontalAlignment(SwingConstants.RIGHT);
         lblDescripcion.setHorizontalAlignment(SwingConstants.RIGHT);
         GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
+        gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
         gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
         gbc_lblDescripcion.gridx = 0;
         gbc_lblDescripcion.gridy = 0;
@@ -296,6 +253,7 @@ public class CrearUsuario extends JInternalFrame {
         lblUrl.setHorizontalAlignment(SwingConstants.RIGHT);
         lblUrl.setHorizontalAlignment(SwingConstants.RIGHT);
         GridBagConstraints gbc_lblUrl = new GridBagConstraints();
+        gbc_lblUrl.anchor = GridBagConstraints.EAST;
         gbc_lblUrl.insets = new Insets(0, 0, 0, 5);
         gbc_lblUrl.gridx = 0;
         gbc_lblUrl.gridy = 1;
@@ -373,10 +331,10 @@ public class CrearUsuario extends JInternalFrame {
             try {
                 if ("Asistente".equals(tipoUsuario)) {
                     String apellidoU = this.textFieldApellido.getText();
-                    int dia = (Integer) cmbDiaNac.getSelectedItem();
-                    int mes = cmbMesNac.getSelectedIndex() + 1; // Los meses van de 0 a 11
-                    int anio = (Integer) cmbAnioNac.getSelectedItem();
-                    LocalDate fechaNac = LocalDate.of(anio, mes, dia);
+                    
+                    // Obtener la fecha del JDateChooser y convertirla a LocalDate
+                    Date fechaNacDate = dateChooser.getDate();
+                    LocalDate fechaNac = fechaNacDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     
                     controlUsr.registrarAsistente(nombreU, nicknameU, emailU, apellidoU, fechaNac);
                 } else if ("Organizador".equals(tipoUsuario)) {
@@ -421,16 +379,9 @@ public class CrearUsuario extends JInternalFrame {
                 return false;
             }
             
-            // Validación adicional de fecha
-            try {
-                int dia = (Integer) cmbDiaNac.getSelectedItem();
-                int mes = cmbMesNac.getSelectedIndex() + 1;
-                int anio = (Integer) cmbAnioNac.getSelectedItem();
-                
-                // Verificar que la fecha sea válida usando LocalDate
-                LocalDate.of(anio, mes, dia);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "La fecha ingresada no es válida", "Registrar Usuario",
+            // Validación de fecha
+            if (dateChooser.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha de nacimiento válida", "Registrar Usuario",
                         JOptionPane.ERROR_MESSAGE);
                 return false;
             }
@@ -454,10 +405,12 @@ public class CrearUsuario extends JInternalFrame {
         textFieldNickname.setText("");
         textFieldEmail.setText("");
         textFieldApellido.setText("");
-        cmbDiaNac.setSelectedIndex(0);
-        cmbMesNac.setSelectedIndex(0);
-        int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
-        cmbAnioNac.setSelectedItem(currentYear - 20);
+        
+        // Restablecer la fecha a 20 años atrás
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        cal.add(java.util.Calendar.YEAR, -20);
+        dateChooser.setDate(cal.getTime());
+        
         textFieldDescripcion.setText("");
         textFieldUrl.setText("");
         comboBoxTipoUsuario.setSelectedIndex(0);

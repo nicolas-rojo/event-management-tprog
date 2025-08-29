@@ -1,29 +1,20 @@
-package logica;
+package logica.datatypes;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.time.LocalDate;
 
-import logica.datatypes.DataPatrocinio;
-import logica.datatypes.Nivel;
-
-public class Patrocinio {
+public class DataPatrocinio {
 	private LocalDate fecha;
 	private float monto;
 	private Nivel nivel;
 	private int cod;
 	private int ctdCupo;
 	
-	private Set<TipoRegistro> tipoRegistros;
-	
-	public Patrocinio(DataPatrocinio datos) {
-		this.fecha = datos.getFecha();
-		this.monto = datos.getMonto();
-		this.nivel = datos.getNivel();
-		this.cod = datos.getCod();
-		this.ctdCupo = datos.getCtdCupo();
-		
-		this.tipoRegistros = new HashSet<>();
+	public DataPatrocinio(LocalDate fecha, float monto, Nivel nivel, int cod, int ctdCupo) {
+		this.fecha = fecha;
+		this.monto = monto;
+		this.nivel = nivel;
+		this.cod = cod;
+		this.ctdCupo = ctdCupo;
 	}
 	
 	public LocalDate getFecha() {

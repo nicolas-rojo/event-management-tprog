@@ -4,33 +4,30 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 
 import excepciones.UsuarioNoExisteException;
-import logica.datatypes.DataUsuario;
+import logica.datatypes.*;
 import logica.interfaces.IUsuario;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.GridLayout;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JList;
 
-/**
- * JInternalFrame que permite listar todos los usuarios del sistema.
- * @author TProg2017
- *
- */
 @SuppressWarnings("serial")
 public class ConsultaUsuario extends JInternalFrame {
 
@@ -43,13 +40,29 @@ public class ConsultaUsuario extends JInternalFrame {
     private JLabel lblListaTitulo;
     private JLabel lblDetallesTitulo;
     private JButton btnCerrar;
-    private JTextArea textAreaDetalles;
     private JScrollPane scrollPaneLista;
     private JScrollPane scrollPaneDetalles;
+    
+    // Campos para mostrar detalles (no editables)
+    private JTextField textFieldNombre;
+    private JTextField textFieldNickname;
+    private JTextField textFieldEmail;
+    private JTextField textFieldTipo;
+    private JTextField textFieldApellido;
+    private JTextField textFieldFechaNac;
+    private JTextField textFieldDescripcion;
+    private JTextField textFieldUrl;
+    
+    // Etiquetas para los campos
+    private JLabel lblNombre;
+    private JLabel lblNickname;
+    private JLabel lblEmail;
+    private JLabel lblTipo;
+    private JLabel lblApellido;
+    private JLabel lblFechaNac;
+    private JLabel lblDescripcion;
+    private JLabel lblUrl;
 
-    /**
-     * Create the frame.
-     */
     public ConsultaUsuario(IUsuario icu) {
         // Se inicializa con el controlador de usuarios
         controlUsr = icu;
@@ -61,10 +74,11 @@ public class ConsultaUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Lista de Usuarios");
-        setBounds(30, 30, 600, 400);
+        setBounds(30, 30, 800, 500);
         
         // Título principal centrado
         lblUsuarios = new JLabel("Usuarios Registrados");
+        lblUsuarios.setFont(new Font("Tahoma", Font.PLAIN, 14));
         lblUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
         getContentPane().add(lblUsuarios, BorderLayout.NORTH);
 
@@ -78,6 +92,7 @@ public class ConsultaUsuario extends JInternalFrame {
         
         // Título para la lista de usuarios
         lblListaTitulo = new JLabel("Seleccione un usuario:");
+        lblListaTitulo.setFont(new Font("Tahoma", Font.PLAIN, 14));
         lblListaTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         panelLista.add(lblListaTitulo, BorderLayout.NORTH);
         
@@ -103,22 +118,26 @@ public class ConsultaUsuario extends JInternalFrame {
         JPanel panelDetalles = new JPanel(new BorderLayout());
         
         // Título para los detalles
-        lblDetallesTitulo = new JLabel("Detalles del Evento:");
+        lblDetallesTitulo = new JLabel("Detalles del Usuario:");
+        lblDetallesTitulo.setFont(new Font("Tahoma", Font.PLAIN, 14));
         lblDetallesTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         panelDetalles.add(lblDetallesTitulo, BorderLayout.NORTH);
         
-        // Área de texto para mostrar detalles (no editable)
-        textAreaDetalles = new JTextArea();
-        textAreaDetalles.setEditable(false);
-        textAreaDetalles.setLineWrap(true);
-        textAreaDetalles.setWrapStyleWord(true);
-        scrollPaneDetalles = new JScrollPane(textAreaDetalles);
+        // Panel de contenido con scroll para los campos de detalles
+        JPanel panelContenido = new JPanel(new GridBagLayout());
+        scrollPaneDetalles = new JScrollPane(panelContenido);
+        scrollPaneDetalles.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPaneDetalles.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         panelDetalles.add(scrollPaneDetalles, BorderLayout.CENTER);
+        
+        // Inicializar componentes de detalles
+        inicializarComponentesDetalles(panelContenido);
         
         panelPrincipal.add(panelDetalles);
 
         // Botón para cerrar
         btnCerrar = new JButton("Cerrar");
+        btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnCerrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 limpiarYCerrar();
@@ -127,19 +146,55 @@ public class ConsultaUsuario extends JInternalFrame {
         getContentPane().add(btnCerrar, BorderLayout.SOUTH);
     }
 
+    private void inicializarComponentesDetalles(JPanel panelContenido) {
+        // Inicializar etiquetas
+        lblNombre = new JLabel("Nombre:");
+        lblNickname = new JLabel("Nickname:");
+        lblEmail = new JLabel("Email:");
+        lblTipo = new JLabel("Tipo:");
+        lblApellido = new JLabel("Apellido:");
+        lblFechaNac = new JLabel("Fecha de Nacimiento:");
+        lblDescripcion = new JLabel("Descripción:");
+        lblUrl = new JLabel("URL:");
+        
+        // Inicializar campos de texto (no editables)
+        textFieldNombre = crearCampoNoEditable();
+        textFieldNickname = crearCampoNoEditable();
+        textFieldEmail = crearCampoNoEditable();
+        textFieldTipo = crearCampoNoEditable();
+        textFieldApellido = crearCampoNoEditable();
+        textFieldFechaNac = crearCampoNoEditable();
+        textFieldDescripcion = crearCampoNoEditable();
+        textFieldUrl = crearCampoNoEditable();
+        
+        // Ocultar campos específicos inicialmente
+        lblApellido.setVisible(false);
+        textFieldApellido.setVisible(false);
+        lblFechaNac.setVisible(false);
+        textFieldFechaNac.setVisible(false);
+        lblDescripcion.setVisible(false);
+        textFieldDescripcion.setVisible(false);
+        lblUrl.setVisible(false);
+        textFieldUrl.setVisible(false);
+    }
+    
+    private JTextField crearCampoNoEditable() {
+        JTextField campo = new JTextField(20);
+        campo.setEditable(false);
+        campo.setBackground(getBackground());
+        return campo;
+    }
+
     // Método para cargar usuarios en la lista
     public void cargarUsuarios() {
         try {
             DataUsuario[] usuarios = controlUsr.getUsuarios();
             if (usuarios != null && usuarios.length > 0) {
-                // Crear un modelo de lista personalizado que muestre nombre, nickname y tipo
                 javax.swing.DefaultListModel<DataUsuario> model = new javax.swing.DefaultListModel<>();
                 for (DataUsuario usuario : usuarios) {
                     model.addElement(usuario);
                 }
                 listUsuarios.setModel(model);
-                
-                // Configurar renderizador personalizado para mostrar información adicional
                 listUsuarios.setCellRenderer(new javax.swing.ListCellRenderer<DataUsuario>() {
                     @Override
                     public java.awt.Component getListCellRendererComponent(
@@ -152,7 +207,7 @@ public class ConsultaUsuario extends JInternalFrame {
                         JLabel label = new JLabel();
                         if (value != null) {
                             try {
-                                String tipo = controlUsr.obtenerTipoUsuario(value.getEmail());
+                                String tipo = controlUsr.getTipoUsuario(value.getEmail());
                                 label.setText(value.getNombre() + " (" + value.getNickname() + ") - " + tipo);
                             } catch (UsuarioNoExisteException e) {
                                 label.setText(value.getNombre() + " (" + value.getNickname() + ")");
@@ -173,53 +228,180 @@ public class ConsultaUsuario extends JInternalFrame {
             }
         } catch (UsuarioNoExisteException e) {
             // No hay usuarios registrados
-            textAreaDetalles.setText("No hay usuarios registrados en el sistema.");
+            JOptionPane.showMessageDialog(this, 
+                "No hay usuarios registrados en el sistema.", 
+                "Información", 
+                JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
-    // Método para mostrar detalles del usuario seleccionado
     private void mostrarDetallesUsuario() {
         DataUsuario usuarioSeleccionado = listUsuarios.getSelectedValue();
         
         if (usuarioSeleccionado == null) {
-            textAreaDetalles.setText("Seleccione un usuario para ver sus detalles.");
+            limpiarCamposDetalles();
             return;
         }
         
         try {
-            String tipo = controlUsr.obtenerTipoUsuario(usuarioSeleccionado.getEmail());
-            StringBuilder detalles = new StringBuilder();
+            String tipo = controlUsr.getTipoUsuario(usuarioSeleccionado.getEmail());
             
-            detalles.append("INFORMACIÓN DEL USUARIO:\n\n");
-            detalles.append("Nombre: ").append(usuarioSeleccionado.getNombre()).append("\n");
-            detalles.append("Nickname: ").append(usuarioSeleccionado.getNickname()).append("\n");
-            detalles.append("Email: ").append(usuarioSeleccionado.getEmail()).append("\n");
-            detalles.append("Tipo: ").append(tipo).append("\n\n");
+            // Limpiar y recrear el panel de contenido
+            JPanel panelContenido = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.insets = new Insets(5, 10, 5, 10);
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.weightx = 1.0;
             
-            // Mostrar información específica según el tipo de usuario
+            int row = 0;
+            
+            // Campos comunes para todos los usuarios
+            // Nombre
+            gbc.gridx = 0;
+            gbc.gridy = row;
+            panelContenido.add(lblNombre, gbc);
+            
+            textFieldNombre.setText(usuarioSeleccionado.getNombre());
+            gbc.gridx = 1;
+            gbc.gridy = row++;
+            panelContenido.add(textFieldNombre, gbc);
+            
+            // Nickname
+            gbc.gridx = 0;
+            gbc.gridy = row;
+            panelContenido.add(lblNickname, gbc);
+            
+            textFieldNickname.setText(usuarioSeleccionado.getNickname());
+            gbc.gridx = 1;
+            gbc.gridy = row++;
+            panelContenido.add(textFieldNickname, gbc);
+            
+            // Email
+            gbc.gridx = 0;
+            gbc.gridy = row;
+            panelContenido.add(lblEmail, gbc);
+            
+            textFieldEmail.setText(usuarioSeleccionado.getEmail());
+            gbc.gridx = 1;
+            gbc.gridy = row++;
+            panelContenido.add(textFieldEmail, gbc);
+            
+            // Tipo
+            gbc.gridx = 0;
+            gbc.gridy = row;
+            panelContenido.add(lblTipo, gbc);
+            
+            textFieldTipo.setText(tipo);
+            gbc.gridx = 1;
+            gbc.gridy = row++;
+            panelContenido.add(textFieldTipo, gbc);
+            
+            // Campos específicos según el tipo de usuario
             if ("Asistente".equals(tipo)) {
-                logica.Asistente asistente = controlUsr.getAsistente(usuarioSeleccionado.getEmail());
-                detalles.append("INFORMACIÓN ESPECÍFICA:\n");
-                detalles.append("Apellido: ").append(asistente.getApellido()).append("\n");
-                detalles.append("Fecha de Nacimiento: ").append(asistente.getFechaNac()).append("\n");
+                DataAsistente asistente = controlUsr.getAsistente(usuarioSeleccionado.getEmail());
+                
+                // Apellido
+                lblApellido.setVisible(true);
+                textFieldApellido.setVisible(true);
+                gbc.gridx = 0;
+                gbc.gridy = row;
+                panelContenido.add(lblApellido, gbc);
+                
+                textFieldApellido.setText(asistente.getApellido());
+                gbc.gridx = 1;
+                gbc.gridy = row++;
+                panelContenido.add(textFieldApellido, gbc);
+                
+                // Fecha de Nacimiento
+                lblFechaNac.setVisible(true);
+                textFieldFechaNac.setVisible(true);
+                gbc.gridx = 0;
+                gbc.gridy = row;
+                panelContenido.add(lblFechaNac, gbc);
+                
+                textFieldFechaNac.setText(asistente.getFechaNac().toString());
+                gbc.gridx = 1;
+                gbc.gridy = row++;
+                panelContenido.add(textFieldFechaNac, gbc);
+                
+                // Ocultar campos de Organizador
+                lblDescripcion.setVisible(false);
+                textFieldDescripcion.setVisible(false);
+                lblUrl.setVisible(false);
+                textFieldUrl.setVisible(false);
+                
             } else if ("Organizador".equals(tipo)) {
-                logica.Organizador organizador = controlUsr.getOrganizador(usuarioSeleccionado.getEmail());
-                detalles.append("INFORMACIÓN ESPECÍFICA:\n");
-                detalles.append("Descripción: ").append(organizador.getDescripcion()).append("\n");
-                detalles.append("URL: ").append(organizador.getUrl()).append("\n");
+                DataOrganizador organizador = controlUsr.getOrganizador(usuarioSeleccionado.getEmail());
+                
+                // Descripción
+                lblDescripcion.setVisible(true);
+                textFieldDescripcion.setVisible(true);
+                gbc.gridx = 0;
+                gbc.gridy = row;
+                panelContenido.add(lblDescripcion, gbc);
+                
+                textFieldDescripcion.setText(organizador.getDescripcion());
+                gbc.gridx = 1;
+                gbc.gridy = row++;
+                panelContenido.add(textFieldDescripcion, gbc);
+                
+                // URL
+                lblUrl.setVisible(true);
+                textFieldUrl.setVisible(true);
+                gbc.gridx = 0;
+                gbc.gridy = row;
+                panelContenido.add(lblUrl, gbc);
+                
+                textFieldUrl.setText(organizador.getUrl());
+                gbc.gridx = 1;
+                gbc.gridy = row++;
+                panelContenido.add(textFieldUrl, gbc);
+                
+                // Ocultar campos de Asistente
+                lblApellido.setVisible(false);
+                textFieldApellido.setVisible(false);
+                lblFechaNac.setVisible(false);
+                textFieldFechaNac.setVisible(false);
             }
             
-            textAreaDetalles.setText(detalles.toString());
+            // Reemplazar el contenido del scroll pane
+            scrollPaneDetalles.setViewportView(panelContenido);
             
         } catch (UsuarioNoExisteException e) {
-            textAreaDetalles.setText("Error: No se pudo obtener la información del usuario.\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, 
+                "Error: No se pudo obtener la información del usuario.\n" + e.getMessage(),
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            limpiarCamposDetalles();
         }
+    }
+    
+    private void limpiarCamposDetalles() {
+        textFieldNombre.setText("");
+        textFieldNickname.setText("");
+        textFieldEmail.setText("");
+        textFieldTipo.setText("");
+        textFieldApellido.setText("");
+        textFieldFechaNac.setText("");
+        textFieldDescripcion.setText("");
+        textFieldUrl.setText("");
+        
+        // Ocultar todos los campos específicos
+        lblApellido.setVisible(false);
+        textFieldApellido.setVisible(false);
+        lblFechaNac.setVisible(false);
+        textFieldFechaNac.setVisible(false);
+        lblDescripcion.setVisible(false);
+        textFieldDescripcion.setVisible(false);
+        lblUrl.setVisible(false);
+        textFieldUrl.setVisible(false);
     }
 
     // Método para limpiar y cerrar la ventana
     private void limpiarYCerrar() {
         listUsuarios.clearSelection();
-        textAreaDetalles.setText("");
+        limpiarCamposDetalles();
         setVisible(false);
     }
 }
