@@ -3,7 +3,7 @@ package logica.interfaces;
 import java.time.LocalDate;
 import excepciones.UsuarioNoExisteException;
 import excepciones.UsuarioRepetidoException;
-import logica.datatypes.DataUsuario;
+import logica.datatypes.*;
 
 public interface IUsuario {
     
@@ -11,9 +11,11 @@ public interface IUsuario {
 	
 	public abstract void registrarOrganizador(String nombre, String nickname, String email, String descripcion, String url) throws UsuarioRepetidoException;
 
-    public abstract DataUsuario verInfoUsuario(String ci) throws UsuarioNoExisteException;
-
     public abstract DataUsuario[] getUsuarios() throws UsuarioNoExisteException;
+    
+    public abstract DataAsistente getAsistente(String email) throws UsuarioNoExisteException;
+    
+    public abstract DataOrganizador getOrganizador(String email) throws UsuarioNoExisteException;
     
     public abstract void modificarAsistente(String email, String nuevoNombre, String nuevoApellido) throws UsuarioNoExisteException;
     

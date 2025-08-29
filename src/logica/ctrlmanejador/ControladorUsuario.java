@@ -4,13 +4,11 @@ import logica.interfaces.IUsuario;
 
 import excepciones.UsuarioRepetidoException;
 import excepciones.UsuarioNoExisteException;
-
-import logica.datatypes.DataUsuario;
 import java.time.LocalDate;
-
 import logica.Asistente;
 import logica.Organizador;
 import logica.Usuario;
+import logica.datatypes.*;
 
 
 
@@ -43,26 +41,22 @@ public class ControladorUsuario implements IUsuario {
         mu.addUsuario(o);
     }
 
-    public DataUsuario verInfoUsuario(String nickname) throws UsuarioNoExisteException {
-        ManejadorUsuario mu = ManejadorUsuario.getinstance();
-        Usuario u = mu.obtenerUsuarioNickname(nickname);
-        if (u != null)
-            return new DataUsuario(u.getNombre(), u.getNickname(), u.getEmail());
-        else
-            throw new UsuarioNoExisteException("El usuario " + nickname + " no existe");
-
-    }
-
-    public Asistente getAsistente(String email){
+    public DataAsistente getAsistente(String email) throws UsuarioNoExisteException{
     	ManejadorUsuario mu = ManejadorUsuario.getinstance();
     	Asistente a = (Asistente) mu.obtenerUsuarioEmail(email);
-    	return a;
+    	if (a != null)
+    		return new DataAsistente(a.getNombre(), a.getNickname(), a.getEmail(), a.getApellido(), a.getFechaNac());
+    	else
+    		throw new UsuarioNoExisteException("No existe usuario con dicho email");
     }
     
-    public Organizador getOrganizador(String email){
+    public DataOrganizador getOrganizador(String email) throws UsuarioNoExisteException{
     	ManejadorUsuario mu = ManejadorUsuario.getinstance();
     	Organizador o = (Organizador) mu.obtenerUsuarioEmail(email);
-    	return o;
+    	if (o != null)
+    		return new DataOrganizador(o.getNombre(), o.getNickname(), o.getEmail(), o.getDescripcion(), o.getUrl());
+    	else 
+    		throw new UsuarioNoExisteException("No existe usuario con dicho email");    		
     }
     
     public DataUsuario[] getUsuarios() throws UsuarioNoExisteException {
