@@ -5,17 +5,18 @@ import java.util.List;
 import excepciones.EdicionRepetidaExcepcion;
 import excepciones.EventoRepetidoExcepcion;
 import excepciones.EventoSinCategoriaExcepcion;
+import excepciones.EventoNoExisteExcepcion;
 import logica.datatypes.DTOEvento;
 import logica.datatypes.DataEdicion;
 import logica.datatypes.DataEvento;
 
 public interface IEventos {
 
-		public abstract void nuevoEvento(DataEvento dataEvento) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion;
-		
+		public abstract void nuevoEvento(DataEvento dataEvento, String cat) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion;
+	
 		public abstract List<String> listarEventos();
 		
 		public abstract void nuevaEdicion(DataEdicion dataEdicion) throws EdicionRepetidaExcepcion;
 		
-		public abstract DTOEvento listarInfoEvento(String nombre);
+		public abstract DTOEvento[] listarInfoEvento() throws EventoNoExisteExcepcion;
 }

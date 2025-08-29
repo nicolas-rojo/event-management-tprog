@@ -14,29 +14,38 @@ import java.util.List;
 
 import logica.Evento;
 import logica.EdicionEvento;
-
+import logica.Categoria;
 
 public class ControladorEventos implements IEventos {
 	
 	public ControladorEventos() {
-		
 	}
 	
 	
-	public void nuevoEvento(DataEvento dataEvento ) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion {
+	public void nuevoEvento(DataEvento dataEvento, String cat) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion {
 		ManejadorEvento me = ManejadorEvento.getInstance();
 		Evento e = me.getEvento(dataEvento.getNombre());
 		if (e != null) {
 			throw new EventoRepetidoExcepcion("nombre de evento en uso");
 		}
-		else if(dataEvento.getCategoria() == null)
+		else if(cat.equals(""))
 			throw new EventoSinCategoriaExcepcion("falto ingresar una categoria");
 		else {
+			if (cat == null || cat.isEmpty()) {
+	            throw new EventoSinCategoriaExcepcion("Faltó ingresar una categoría");
+	        }
 			e = new Evento(dataEvento);
+			Categoria c = me.getCategoria(cat);
+			if (c == null) {
+	            throw new EventoSinCategoriaExcepcion(
+	                "La categoría seleccionada no existe en el sistema: " + cat);
+	        }
+			e.agregarCategoria(c);
 			me.addEvento(e);
 		}
 		
 	}
+
 	
 	public List<String> listarEventos(){
 		ManejadorEvento me = ManejadorEvento.getInstance();
@@ -63,22 +72,19 @@ public class ControladorEventos implements IEventos {
 		
 	}
 	
-	public DTOEvento[] listarInfoEvento() throws EventoNoExisteExcepcion{
-		ManejadorEvento me = ManejadorEvento.getInstance();
-		Evento[] eventos = me.getEventos();
-		
-		if(eventos != null) {
-			while(eventos != null) {
-				DTOEvento[] dtoEvento = new DTOEvento[eventos.length];
-				Evento evento;
-				
-				for(int i = 0; i < eventos.length; i++) {
-					evento = eventos[i];
-					dtoEvento[i] = evento.getDTOEvento();
-				}
-			}
-		} else
-			throw new EventoNoExisteExcepcion("No existen eventos registrados");
-		return null;
+	public DTOEvento[] listarInfoEvento() throws EventoNoExisteExcepcion {
+	    ManejadorEvento me = ManejadorEvento.getInstance();
+	    Evento[] eventos = me.getEventos();
+
+	    if (eventos != null && eventos.length > 0) {
+	        DTOEvento[] dtoEventos = new DTOEvento[eventos.length];
+	        for (int i = 0; i < eventos.length; i++) {
+	            dtoEventos[i] = eventos[i].getDTOEvento();
+	        }
+	        return dtoEventos; // devolvemos el arreglo
+	    } else {
+	        throw new EventoNoExisteExcepcion("No existen eventos registrados");
+	    }
 	}
+
 }

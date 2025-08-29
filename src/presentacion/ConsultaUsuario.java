@@ -99,11 +99,11 @@ public class ConsultaUsuario extends JInternalFrame {
         
         panelPrincipal.add(panelLista);
 
-        // Panel para los detalles del usuario
+        // Panel para los detalles del Evento
         JPanel panelDetalles = new JPanel(new BorderLayout());
         
         // Título para los detalles
-        lblDetallesTitulo = new JLabel("Detalles del Usuario:");
+        lblDetallesTitulo = new JLabel("Detalles del Evento:");
         lblDetallesTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         panelDetalles.add(lblDetallesTitulo, BorderLayout.NORTH);
         

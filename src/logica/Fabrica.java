@@ -1,7 +1,9 @@
 package logica;
 
 import logica.ctrlmanejador.ControladorUsuario;
-import logica.interfaces.IUsuario;
+import logica.ctrlmanejador.ControladorEventos;
+
+import logica.interfaces.*;
 
 /**
  * Fábrica para la construcción de un controlador de usuarios (uno distinto para cada invocación).
@@ -26,5 +28,8 @@ public class Fabrica {
     public IUsuario getIControladorUsuario() {
         return new ControladorUsuario();
     }
-
+    
+    public IEventos getIControladorEventos() {
+    	return new ControladorEventos();
+    }
 }

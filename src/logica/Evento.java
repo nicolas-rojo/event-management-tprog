@@ -51,6 +51,11 @@ public class Evento {
 		
 	}
 	
+	public void agregarCategoria(Categoria c) {
+		this.categorias.add(c);
+	}
+
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -83,4 +88,3 @@ public class Evento {
 	}
 
 }
-
