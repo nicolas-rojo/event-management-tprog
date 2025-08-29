@@ -201,7 +201,7 @@ public class ConsultaTipoRegistro extends JInternalFrame {
 		comboBoxEventos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String eventoSeleccionado = (String) comboBoxEventos.getSelectedItem();
-				if(eventoSeleccionado != null) {
+				if(eventoSeleccionado != null && !comboBoxEventos.getSelectedItem().equals("No hay eventos")) {
 					cargarEdicionesEvento(ctrlEventos.listarEdiciones(eventoSeleccionado));
 					comboBoxEdiciones.setEnabled(true);
 				}
@@ -227,7 +227,7 @@ public class ConsultaTipoRegistro extends JInternalFrame {
 					String TipoRegistroSeleccionado = (String) comboBoxTR.getSelectedItem();
 					String eventoSeleccionado = (String) comboBoxEventos.getSelectedItem();
 			        String edicionSeleccionada = (String) comboBoxEdiciones.getSelectedItem();
-					if(TipoRegistroSeleccionado != null && eventoSeleccionado!= null && edicionSeleccionada != null) {
+					if(TipoRegistroSeleccionado != null && eventoSeleccionado!= null && edicionSeleccionada != null && !comboBoxEdiciones.getSelectedItem().equals("No hay ediciones")) {
 						if(comboBoxEdiciones.isEnabled()) {
 							cargarDatosTR(eventoSeleccionado, edicionSeleccionada, TipoRegistroSeleccionado);
 						}
@@ -238,33 +238,7 @@ public class ConsultaTipoRegistro extends JInternalFrame {
 		
 		
 	}
-	
-//	public void cargarEventos() {
-//		
-//		comboBoxEventos.removeAllItems();
-//		
-//	    try {
-//	        List<String> eventos = ctrlEventos.listarEventos(); // <-- esta es la lista que discutíamos
-//	        
-//	        if (eventos != null && !eventos.isEmpty()) {
-//
-//	            for (String evento : eventos) {
-//	                comboBoxEventos.addItem(evento);
-//	            }
-//	            comboBoxEventos.setSelectedIndex(-1);
-//	            
-//	        } 	
-//	        comboBoxEdiciones.setEnabled(false);				//Si no se selecciona un evento se bloquea el combo de ediciones
-//	        comboBoxTR.setEnabled(false);	
-//	        
-//	        
-//	        
-//	    } catch (Exception e) {
-//	    	e.printStackTrace();
-//	        comboBoxEventos.removeAllItems();
-//	        comboBoxEventos.addItem("No hay eventos");
-//	    }
-//	}
+
 	
 	public void cargarEventos() {
         try {
@@ -287,24 +261,6 @@ public class ConsultaTipoRegistro extends JInternalFrame {
         }
     }
 	
-	
-	
-//	public void cargarEdicionesEvento(List<String> edicionesEvento) {
-//		comboBoxEdiciones.removeAllItems();
-//		if (edicionesEvento != null && !edicionesEvento.isEmpty()) {
-//            
-//            for (String edicion : edicionesEvento) {
-//                comboBoxEdiciones.addItem(edicion);
-//            }
-//            comboBoxEdiciones.setSelectedIndex(-1);
-//        }
-//        comboBoxTR.setEnabled(false);	
-//      	
-// 
-//	
-//
-//	}
-	
 	public void cargarEdicionesEvento(List<String> edicionesEvento) {
         try {
         	cargandoEdiciones = true;
@@ -325,16 +281,6 @@ public class ConsultaTipoRegistro extends JInternalFrame {
         }
     }
 	
-//	public void cargarTiposRegistros(String evento, String edicion) {
-//		comboBoxTR.removeAllItems();
-//		List<String> TiposRegistros = ctrlEventos.listarTRegistros(evento, edicion);
-//		if(TiposRegistros != null) {
-//			for(String tr : TiposRegistros) {
-//				comboBoxTR.addItem(tr);
-//			}
-//		}
-//		comboBoxTR.setSelectedIndex(-1);
-//	}
 	
 	public void cargarTiposRegistros(String evento, String edicion) {
 		 try {
@@ -345,7 +291,7 @@ public class ConsultaTipoRegistro extends JInternalFrame {
 	                for (String tr : TiposRegistros)
 	                    comboBoxTR.addItem(tr);
 	            } else {
-	                comboBoxEdiciones.addItem("No hay tipos de registro");
+	                comboBoxTR.addItem("No hay tipos de registro");
 	            }
 	            comboBoxTR.setSelectedIndex(-1);
 	            cargandoTR = false;

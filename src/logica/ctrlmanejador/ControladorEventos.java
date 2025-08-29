@@ -76,12 +76,18 @@ public class ControladorEventos implements IEventos {
 	public List<String> listarEdiciones(String eventoSeleccionado) {
 		ManejadorEvento me = ManejadorEvento.getInstance();
 		Evento e = me.getEvento(eventoSeleccionado);
+		if(e==null) {
+			return new ArrayList<>();
+		}
 		return e.getEdiciones();			
 	}
 	
 	public List<String> listarTRegistros(String eventoSeleccionado, String edicionSeleccionada) {
 		ManejadorEvento me = ManejadorEvento.getInstance();
 		Evento e = me.getEvento(eventoSeleccionado);
+		if(e ==null) {
+			return new ArrayList<>();
+		}
 		return e.getTRegistroEdicion(edicionSeleccionada);
 	}
 	
@@ -104,7 +110,7 @@ public class ControladorEventos implements IEventos {
 			reg.asociarTRegistro(tReg);
 		}
 	}
-}
+
 
 	
 	public DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro) {
