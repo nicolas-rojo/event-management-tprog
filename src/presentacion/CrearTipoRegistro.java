@@ -10,13 +10,8 @@ import excepciones.TipoDeRegistroRepetidoException;
 import logica.datatypes.DataEdicion;
 import logica.datatypes.DataEvento;
 import logica.datatypes.DataTRegistro;
-
-//--------------------------------------------------//Eliminar despues de las pruebas
 import logica.interfaces.IEventos;
-import logica.EdicionEvento;
-import logica.Evento;
-import logica.ctrlmanejador.ManejadorEvento;
-//--------------------------------------------------
+
 import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -337,10 +332,9 @@ public class CrearTipoRegistro extends JInternalFrame {
 	            }
 	            
 	        } else {
-	            comboBoxEventos.addItem("No hay eventos");;
+	        	comboBoxEventos.setSelectedItem(0);	
+	        	comboBoxEdiciones.setEnabled(false);				//Si no se selecciona un evento se bloquea el combo de ediciones
 	        }
-	        comboBoxEventos.setSelectedItem(null);	
-	        comboBoxEdiciones.setEnabled(false);				//Si no se selecciona un evento se bloquea el combo de ediciones
 	        
 	        
 	    } catch (Exception e) {
@@ -349,6 +343,8 @@ public class CrearTipoRegistro extends JInternalFrame {
 	        comboBoxEventos.addItem("No hay eventos");
 	    }
 	}
+	
+	//Se cargan las ediciones del evento correspondiente
 	
 	
 	public void cargarEdicionesEvento(List<String> edicionesEvento) {

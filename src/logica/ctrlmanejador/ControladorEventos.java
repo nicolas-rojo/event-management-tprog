@@ -105,3 +105,14 @@ public class ControladorEventos implements IEventos {
 		}
 	}
 }
+
+	
+	public DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro) {
+		ManejadorEvento me = ManejadorEvento.getInstance();
+		Evento e = me.getEvento(evento);
+		EdicionEvento ed = e.getEdicion(edicion);
+		TipoRegistro tr =  ed.getTRegistro(tipoRegistro);
+		return new DataTRegistro(tr.getNombre(), tr.getDescripcion(), tr.getCosto(), tr.getCupo());
+	}
+}
+

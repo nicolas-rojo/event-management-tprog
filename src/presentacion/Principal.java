@@ -6,9 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import logica.Asistente;
+import logica.EdicionEvento;
+import logica.Evento;
 import logica.Fabrica;
 
 import logica.datatypes.*;
+
 import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
 
@@ -28,6 +32,7 @@ public class Principal {
     private CrearEvento creEventoInternalFrame;
     private CrearTipoRegistro creTRegistroInternalFrame;
     private RegistroEdicionEvento regEdEvInternalFrame;
+    private ConsultaTipoRegistro consuTRegistroInternalFrame;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -69,7 +74,12 @@ public class Principal {
 
         regEdEvInternalFrame = new RegistroEdicionEvento(ICU, IEV);
         regEdEvInternalFrame.setVisible(false);
-
+        
+        consuTRegistroInternalFrame = new ConsultaTipoRegistro(IEV);
+        consuTRegistroInternalFrame.setVisible(false);
+        
+       
+        
         frmGestionDeUsuarios.getContentPane().setLayout(null);
 
         frmGestionDeUsuarios.getContentPane().add(creUsrInternalFrame);
@@ -78,6 +88,8 @@ public class Principal {
         frmGestionDeUsuarios.getContentPane().add(creEventoInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(creTRegistroInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(regEdEvInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(consuTRegistroInternalFrame);
+
     }
 
     private void initialize() {
@@ -170,5 +182,16 @@ public class Principal {
             }
         });
         menuEventos.add(menuItemAltaTRegistro);
+        
+        JMenuItem menuItemConsultaTRegistro = new JMenuItem("Consulta Tipo Registro");
+        menuItemConsultaTRegistro.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para alta de evento
+            	consuTRegistroInternalFrame.limpiarFormulario();
+            	consuTRegistroInternalFrame.cargarEventos();
+            	consuTRegistroInternalFrame.setVisible(true);
+            }
+        });
+        menuEventos.add(menuItemConsultaTRegistro);
     }
 }

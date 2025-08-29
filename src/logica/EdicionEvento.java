@@ -92,7 +92,7 @@ public class EdicionEvento {
 	public void agregarTRegistro(TipoRegistro tipoRegistro) {
 		this.tipoRegistros.add(tipoRegistro);
 	}
-
+	
 	public TipoRegistro getTRegistro(String tReg) {
 		for (TipoRegistro tr : this.tipoRegistros) {
 			if (tr.getNombre().equals(tReg)) {
@@ -111,4 +111,5 @@ public class EdicionEvento {
 		}
 		return false;
 	}
+
 }
