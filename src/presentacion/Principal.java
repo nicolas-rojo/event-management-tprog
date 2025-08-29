@@ -7,8 +7,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import logica.Fabrica;
-import logica.datatypes.DataEdicion;
-import logica.datatypes.DataEvento;
+
+import logica.datatypes.*;
 import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
 
@@ -27,13 +27,13 @@ public class Principal {
     private ModificarUsuario modUsrInternalFrame;
     private CrearEvento creEventoInternalFrame;
     private CrearTipoRegistro creTRegistroInternalFrame;
+    private RegistroEdicionEvento regEdEvInternalFrame;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
                     Principal window = new Principal();
-                   /**crear instancias para testing**/
                     window.frmGestionDeUsuarios.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -66,10 +66,10 @@ public class Principal {
         
         creTRegistroInternalFrame = new CrearTipoRegistro(IEV);
         creTRegistroInternalFrame.setVisible(false);
-        
-       
-        
-        
+
+        regEdEvInternalFrame = new RegistroEdicionEvento(ICU, IEV);
+        regEdEvInternalFrame.setVisible(false);
+
         frmGestionDeUsuarios.getContentPane().setLayout(null);
 
         frmGestionDeUsuarios.getContentPane().add(creUsrInternalFrame);
@@ -77,6 +77,7 @@ public class Principal {
         frmGestionDeUsuarios.getContentPane().add(modUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(creEventoInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(creTRegistroInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(regEdEvInternalFrame);
     }
 
     private void initialize() {
@@ -134,6 +135,18 @@ public class Principal {
             }
         });
         menuUsuarios.add(menuModificarUsuario);
+        
+        JMenuItem menuRegistroEdicionEvento = new JMenuItem("Registrar a Edicion de Evento");
+        menuRegistroEdicionEvento.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para registrar un asistente a una edicion de evento
+                regEdEvInternalFrame.limpiarFormularios();
+            	regEdEvInternalFrame.cargarEventos();
+                regEdEvInternalFrame.cargarAsistentes();
+            	regEdEvInternalFrame.setVisible(true);
+            }
+        });
+        menuUsuarios.add(menuRegistroEdicionEvento);
         
         JMenu menuEventos = new JMenu("Eventos y Ediciones");
         menuBar.add(menuEventos);

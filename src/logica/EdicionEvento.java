@@ -92,4 +92,23 @@ public class EdicionEvento {
 	public void agregarTRegistro(TipoRegistro tipoRegistro) {
 		this.tipoRegistros.add(tipoRegistro);
 	}
+
+	public TipoRegistro getTRegistro(String tReg) {
+		for (TipoRegistro tr : this.tipoRegistros) {
+			if (tr.getNombre().equals(tReg)) {
+				return tr;
+			}
+		}
+		return null;
+	}
+	
+	public boolean cupoTRegistro(String tReg) {
+		for (TipoRegistro tr : tipoRegistros) {
+			if (tr.getNombre().equals(tReg)) {
+				int cupo = tr.getCupo();
+				return (cupo > 0);
+			}
+		}
+		return false;
+	}
 }

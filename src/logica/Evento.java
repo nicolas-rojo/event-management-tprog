@@ -81,5 +81,10 @@ public class Evento {
 		EdicionEvento ed = this.getEdicion(edSeleccionada);
 		return ed.getTRegistro();
 	}
+	
+	public boolean cupoEdTRegistro(String edicion, String tReg) {
+		EdicionEvento ed = this.ediciones.get(edicion);
+		return ed.cupoTRegistro(tReg);
+	}
 }
 

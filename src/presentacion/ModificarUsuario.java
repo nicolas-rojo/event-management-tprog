@@ -244,7 +244,7 @@ public class ModificarUsuario extends JInternalFrame {
                         JLabel label = new JLabel();
                         if (value != null) {
                             try {
-                                String tipo = controlUsr.obtenerTipoUsuario(value.getEmail());
+                                String tipo = controlUsr.getTipoUsuario(value.getEmail());
                                 label.setText(value.getNombre() + " (" + value.getNickname() + ") - " + tipo);
                             } catch (UsuarioNoExisteException e) {
                                 label.setText(value.getNombre() + " (" + value.getNickname() + ")");
@@ -291,7 +291,7 @@ public class ModificarUsuario extends JInternalFrame {
         }
         
         try {
-            tipoUsuario = controlUsr.obtenerTipoUsuario(usuarioSeleccionado.getEmail());
+            tipoUsuario = controlUsr.getTipoUsuario(usuarioSeleccionado.getEmail());
             
             // Recrear el panel de contenido con los campos apropiados
             JPanel panelContenido = new JPanel(new GridBagLayout());
@@ -440,7 +440,6 @@ public class ModificarUsuario extends JInternalFrame {
             btnGuardar.setEnabled(true);
             btnCancelar.setEnabled(true);
             editandoUsuario = true;
-            
         } catch (UsuarioNoExisteException e) {
             JOptionPane.showMessageDialog(this, 
                 "Error: No se pudo obtener la información del usuario.\n" + e.getMessage(),

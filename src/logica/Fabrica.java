@@ -2,6 +2,7 @@ package logica;
 
 import logica.ctrlmanejador.ControladorEventos;
 import logica.ctrlmanejador.ControladorUsuario;
+
 import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
 
@@ -32,5 +33,4 @@ public class Fabrica {
     public IEventos getIControladorEventos() {
         return new ControladorEventos();
     }
-
 }

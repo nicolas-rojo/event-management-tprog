@@ -1,6 +1,10 @@
 package logica.interfaces;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import excepciones.AsistenteYaRegistrado;
+import excepciones.NoHayCupoEdicionTRegistro;
 import excepciones.UsuarioNoExisteException;
 import excepciones.UsuarioRepetidoException;
 import logica.datatypes.*;
@@ -21,5 +25,9 @@ public interface IUsuario {
     
     public abstract void modificarOrganizador(String email, String nuevoNombre, String descripcion, String url) throws UsuarioNoExisteException;
     
-    public abstract String obtenerTipoUsuario(String email) throws UsuarioNoExisteException;
+    public abstract String getTipoUsuario(String email) throws UsuarioNoExisteException;
+    
+    public abstract List<String> listarAsistentes();
+    
+    public abstract void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro;
 }
