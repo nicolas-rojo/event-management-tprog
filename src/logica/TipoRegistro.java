@@ -53,5 +53,9 @@ public class TipoRegistro {
 	public DataTRegistro getDataTRegistro() {
 		return new DataTRegistro(this.nombre, this.descripcion, this.costo, this.cupo);
 	}
+	
+	public void bajarCupo() {
+		this.cupo -= 1;
+	}
 		
 }

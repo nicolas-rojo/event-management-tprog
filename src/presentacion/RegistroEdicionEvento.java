@@ -1,15 +1,17 @@
 package presentacion;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 
+import excepciones.AsistenteYaRegistrado;
+import excepciones.NoHayCupoEdicionTRegistro;
 import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
 
@@ -21,6 +23,9 @@ public class RegistroEdicionEvento extends JInternalFrame {
 	private JComboBox<String> comboBoxEventos;
 	private JComboBox<String> comboBoxEdiciones;
 	private JComboBox<String> comboBoxAsistentes;
+	private JComboBox<String> comboBoxTRegistros;
+	private JButton btnCancelar;
+	private JButton btnAceptar;
 	
 	public RegistroEdicionEvento(IUsuario iCU, IEventos iEV) {
 		ctrlEventos = iEV;
@@ -58,6 +63,18 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		comboBoxEdiciones = new JComboBox<String>();
 		comboBoxEdiciones.setBounds(201, 46, 188, 20);
 		getContentPane().add(comboBoxEdiciones);
+		comboBoxEdiciones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String edicionSeleccionada = (String) comboBoxEdiciones.getSelectedItem();
+				String eventoSeleccionado = (String) comboBoxEventos.getSelectedItem();
+				if (edicionSeleccionada == null || edicionSeleccionada.equals("No hay ediciones")) {
+					comboBoxTRegistros.setEnabled(false);
+					return;
+				}
+				comboBoxTRegistros.setEnabled(true);
+				cargarTRegistros(ctrlEventos.listarTRegistros(eventoSeleccionado, edicionSeleccionada));
+			}
+		});
 		
 		JLabel lblNewLabel_1 = new JLabel("Seleccionar Edición:");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -69,9 +86,19 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		lblNewLabel_2.setBounds(10, 85, 181, 12);
 		getContentPane().add(lblNewLabel_2);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(201, 81, 188, 20);
-		getContentPane().add(comboBox_2);
+		comboBoxTRegistros = new JComboBox<String>();
+		comboBoxTRegistros.setBounds(201, 81, 188, 20);
+		getContentPane().add(comboBoxTRegistros);
+		comboBoxTRegistros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String tRegSeleccionado = (String) comboBoxTRegistros.getSelectedItem();
+				if (tRegSeleccionado == null || tRegSeleccionado.equals("No hay tipos de registro")) {
+					btnAceptar.setEnabled(false);
+					return;
+				}
+				btnAceptar.setEnabled(true);
+			}
+		});
 		
 		JLabel lblNewLabel_3 = new JLabel("Seleccionar Asistente:");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -82,13 +109,32 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		comboBoxAsistentes.setBounds(201, 116, 188, 20);
 		getContentPane().add(comboBoxAsistentes);
 		
-		JButton btnNewButton = new JButton("Aceptar");
-		btnNewButton.setBounds(201, 150, 84, 20);
-		getContentPane().add(btnNewButton);
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(201, 150, 84, 20);
+		getContentPane().add(btnAceptar);
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					ctrlUsuarios.nuevoRegistro((String) comboBoxAsistentes.getSelectedItem(), (String) comboBoxEventos.getSelectedItem(), (String) comboBoxEdiciones.getSelectedItem(), (String) comboBoxTRegistros.getSelectedItem());					
+				} catch (AsistenteYaRegistrado ex) {
+					JOptionPane.showMessageDialog(RegistroEdicionEvento.this, ex.getMessage(), "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
+				} catch (NoHayCupoEdicionTRegistro ex) {
+					JOptionPane.showMessageDialog(RegistroEdicionEvento.this, ex.getMessage(), "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(RegistroEdicionEvento.this, "Error", "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(305, 150, 84, 20);
 		getContentPane().add(btnCancelar);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpiarFormularios();
+				setVisible(false);
+			}
+		});
 	}
 	
 	
@@ -96,13 +142,14 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		try {
 			comboBoxEventos.removeAllItems();
 			List<String> eventos = ctrlEventos.listarEventos();
-			System.out.println(eventos);
 			if (eventos != null && !eventos.isEmpty()) {
 				for (String e : eventos)
 					comboBoxEventos.addItem(e);
 			} else {
 				comboBoxEventos.addItem("No hay eventos");
+				btnAceptar.setEnabled(false);
 				comboBoxEdiciones.setEnabled(false);
+				comboBoxTRegistros.setEnabled(false);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,11 +165,30 @@ public class RegistroEdicionEvento extends JInternalFrame {
 					comboBoxEdiciones.addItem(e);
 			} else {
 				comboBoxEdiciones.addItem("No hay ediciones");
+				btnAceptar.setEnabled(false);
+				comboBoxTRegistros.setEnabled(false);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			comboBoxEdiciones.removeAllItems();
 			comboBoxEdiciones.addItem("No hay ediciones");
+		}
+	}
+	
+	public void cargarTRegistros(List<String> tRegEdicion) {
+		try {
+			comboBoxTRegistros.removeAllItems();
+			if (tRegEdicion != null && !tRegEdicion.isEmpty()) {
+				for (String e : tRegEdicion)
+					comboBoxTRegistros.addItem(e);
+			} else {
+				comboBoxTRegistros.addItem("No hay tipos de registro");
+				btnAceptar.setEnabled(false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			comboBoxTRegistros.removeAllItems();
+			comboBoxTRegistros.addItem("No hay tipos de registro");
 		}
 	}
 	
@@ -142,5 +208,12 @@ public class RegistroEdicionEvento extends JInternalFrame {
 			comboBoxEdiciones.removeAllItems();
 			comboBoxEdiciones.addItem("No hay ediciones");
 		}
+	}
+	
+	public void limpiarFormularios() {
+		comboBoxEventos.removeAllItems();
+		comboBoxEdiciones.removeAllItems();
+		comboBoxTRegistros.removeAllItems();
+		comboBoxAsistentes.removeAllItems();
 	}
 }

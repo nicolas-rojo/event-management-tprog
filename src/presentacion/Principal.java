@@ -161,7 +161,8 @@ public class Principal {
         menuRegistroEdicionEvento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Muestro el InternalFrame para registrar un asistente a una edicion de evento
-                regEdEvInternalFrame.cargarEventos();
+                regEdEvInternalFrame.limpiarFormularios();
+            	regEdEvInternalFrame.cargarEventos();
                 regEdEvInternalFrame.cargarAsistentes();
             	regEdEvInternalFrame.setVisible(true);
             }
