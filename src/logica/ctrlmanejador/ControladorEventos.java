@@ -73,7 +73,7 @@ public class ControladorEventos implements IEventos {
 		return e.getTRegistroEdicion(edicionSeleccionada);
 	}
 	
-	public void nuevoRegistro(Asistente asist, String evento, String edicion, String tipoReg) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro {
+	public void nuevoRegistro(Asistente asist, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro {
 		boolean c1 = asist.estaRegistrado(edicion);
 		ManejadorEvento me = ManejadorEvento.getInstance();
 		Evento e = me.getEvento(evento);
@@ -83,7 +83,7 @@ public class ControladorEventos implements IEventos {
 		} else if (!c2) {
 			throw new NoHayCupoEdicionTRegistro("no hay cupos para el tipo de registro y edicion seleccionados");
 		} else { //!c1 && c2
-			Registro reg = new Registro(LocalDate.now());
+			Registro reg = new Registro(fecha);
 			asist.agregarRegistro(reg);
 			EdicionEvento ed = e.getEdicion(edicion);
 			TipoRegistro tReg = ed.getTRegistro(tipoReg);
@@ -93,17 +93,3 @@ public class ControladorEventos implements IEventos {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

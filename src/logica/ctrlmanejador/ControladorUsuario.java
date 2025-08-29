@@ -132,12 +132,12 @@ public class ControladorUsuario implements IUsuario {
 		return mu.getNombreAsist();
 	}
 	
-	public void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro {
+	public void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro {
 		ManejadorUsuario mu = ManejadorUsuario.getInstance();
 		Usuario u = mu.getUsuarioNickname(asistenteSeleccionado);
 		Asistente asistente = (Asistente) u;
 		ControladorEventos ce = new ControladorEventos();
-		ce.nuevoRegistro(asistente, evento, edicion, tipoReg);
+		ce.nuevoRegistro(asistente, evento, edicion, tipoReg, fecha);
 	}
 }
 

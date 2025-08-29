@@ -27,5 +27,5 @@ public interface IUsuario {
     
     public abstract List<String> listarAsistentes();
     
-    public abstract void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro;
+    public abstract void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro;
 }

@@ -6,22 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import logica.ctrlmanejador.ManejadorEvento;
-import logica.ctrlmanejador.ManejadorUsuario;
-import logica.Asistente;
-import logica.EdicionEvento;
-import logica.Evento;
-
 import logica.Fabrica;
-import logica.datatypes.DataEdicion;
-import logica.datatypes.DataEvento;
+import logica.datatypes.*;
 import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
 
 import javax.swing.JMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 
 public class Principal {
 
@@ -41,24 +33,7 @@ public class Principal {
                 	/**
                 	 *  CREO INSTANCIAS DE PRUEBA
                 	 */
-                	Principal window = new Principal();
-                	
-//                	Asistente a1 = new Asistente("Luca", "luk", "scaboni.luca@gmail.com", "Scaboni", LocalDate.now());
-//                	
-//                    Evento e1 = new Evento(new DataEvento("evento1", "e1", LocalDate.now(), "desc1"));
-//                    Evento e2 = new Evento(new DataEvento("evento2", "e2", LocalDate.now(), "desc2"));
-//                    
-//                    EdicionEvento ed11 = new EdicionEvento(new DataEdicion("evento1 ed1", "e1ed1", LocalDate.now(), LocalDate.now(), LocalDate.now(), "ciudad", "pais"));
-//                    
-//                    ManejadorEvento me = ManejadorEvento.getInstance();
-//                    me.addEvento(e1);
-//                    me.addEvento(e2);
-//                    
-//                    ManejadorUsuario mu = ManejadorUsuario.getInstance();
-//                    mu.addUsuario(a1);
-//                    
-//                    e2.agregarEdicion(ed11);
-//                    System.out.println(me.getEventos());
+                	Principal window = new Principal();    	
                     window.frmGestionDeUsuarios.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
