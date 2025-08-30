@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import logica.datatypes.DataEdicion;
+import logica.Registro;
 
 public class EdicionEvento {
 	private String nombre;
@@ -110,13 +111,17 @@ public class EdicionEvento {
 		return false;
 	}
 	
-	/*public List<String> getRegistros(){
-		List<String> res = new ArrayList<>();
-		for(Registro r : this.registros) {
-			res.add(r);
-		}
-		return res;
-	}*/
+	public List<String> getRegistrosInfo() {
+	    List<String> info = new ArrayList<>();
+	    for (Registro r : this.registros) {
+	        String tipo = (r.getTipoRegistro() != null) ? r.getTipoRegistro().getNombre() : "Sin tipo";
+	        String fecha = (r.getFecha() != null) ? r.getFecha().toString() : "Sin fecha";
+	        info.add("Fecha: " + fecha + ", Tipo: " + tipo);
+	    }
+	    return info;
+	}
+
+
 	
 	public List<Patrocinio> getPatrocinios(){
 		List<Patrocinio> lista = new ArrayList<>(this.patrocinios);

@@ -131,9 +131,10 @@ public class ConsultaEdicionEvento extends JInternalFrame {
         panelCentral.add(new JScrollPane(listPatrocinios));
 
         //Lista de Registros:
-        //Falta aún implementar los registros a la hora que estoy haciendo esto
-        //Por lo que no se aún como generar la lista, dependerá de como se implemente
-        //Pero habría que mostrarlos y listo
+        listRegistros = new JList<>(edicion.getRegistrosInfo().toArray(new String[0]));
+        listRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        panelCentral.add(new JScrollPane(listRegistros));
+
         
         btnCerrar = new JButton("Cerrar");
         btnCerrar.addActionListener(e -> limpiarYCerrar());
