@@ -155,7 +155,7 @@ public class ConsultaEvento extends JInternalFrame {
                     if (ed != null && eventoSeleccionado != null) {
                         try {
                             EdicionEvento edicion = controlEvento.obtenerEdicionEvento(eventoSeleccionado.getNombre(), ed);
-                            abrirConsultaEdicion(edicion, controlEvento);
+                            abrirConsultaEdicion(eventoSeleccionado.getNombre(), ed, controlEvento);
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(null,
                                 "No se pudo cargar la edición: " + ex.getMessage(),
@@ -203,8 +203,8 @@ public class ConsultaEvento extends JInternalFrame {
         }
     }
 
-    private void abrirConsultaEdicion(EdicionEvento edicionEvento, IEventos ICE) {
-    	ConsultaEdicionEvento ventanaTipo = new ConsultaEdicionEvento(edicionEvento, ICE);
+    private void abrirConsultaEdicion(String evento, String ed, IEventos ICE) {
+    	ConsultaEdicionEvento ventanaTipo = new ConsultaEdicionEvento(evento, ed, ICE);
         getParent().add(ventanaTipo);
         ventanaTipo.setVisible(true);
     }

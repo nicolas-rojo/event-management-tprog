@@ -25,8 +25,10 @@ public class ConsultaEdicionEvento extends JInternalFrame {
     private JList<String> listPatrocinios;
     private JButton btnCerrar;
 
-    public ConsultaEdicionEvento(EdicionEvento edicion, IEventos ICE) {
+    public ConsultaEdicionEvento(String evento, String ed, IEventos ICE) {
+    	
     	ctrlEventos = ICE;
+    	EdicionEvento edicion = ctrlEventos.obtenerEdicionEvento(evento, ed);
         setClosable(true);
         setTitle("Edición: " + edicion.getNombre());
         setSize(600, 400);
