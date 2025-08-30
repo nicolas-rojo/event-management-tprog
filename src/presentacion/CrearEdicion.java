@@ -279,6 +279,7 @@ public class CrearEdicion extends JInternalFrame {
     }
 		   	       	
 	public void cargarOrganizadores() {
+		System.out.println("HOLA");
 	    ManejadorUsuario mu = ManejadorUsuario.getinstance();
 	    List<String> organizadores = mu.getOrganizadores();
 	    if (organizadores != null) {
