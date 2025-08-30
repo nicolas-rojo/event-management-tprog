@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import logica.datatypes.ParEdicionRegistro;
+import logica.datatypes.DataDetalleRegistro;
+
 public class Asistente extends Usuario{
 	private String apellido;
 	private LocalDate fechaNac;
@@ -49,5 +52,22 @@ public class Asistente extends Usuario{
     
     public void agregarRegistro(Registro reg) {
     	this.regs.add(reg);
+    }
+    
+    public List<ParEdicionRegistro> getEdicionesRegistros() {
+    	List<ParEdicionRegistro> res = new ArrayList<ParEdicionRegistro>();
+    	for (Registro r : regs) {
+    		res.add(new ParEdicionRegistro(r.getNombreEdicion(), r.getFecha()));
+    	}
+    	return res;
+    }
+    
+    public DataDetalleRegistro getDetallesRegistro(ParEdicionRegistro regEdicion) {
+    	for (Registro r : regs) {
+    		if (r.getNombreEdicion().equals(regEdicion.getNombreEdicion()) && r.getFecha().equals(regEdicion.getFechaRegistro())) {
+    			return (new DataDetalleRegistro(regEdicion.getNombreEdicion(), r.getNombreTR(), r.getCostoTR(), regEdicion.getFechaRegistro()));
+    		}
+    	}
+    	return null;
     }
 }

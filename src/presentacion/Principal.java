@@ -33,6 +33,7 @@ public class Principal {
     private CrearTipoRegistro creTRegistroInternalFrame;
     private RegistroEdicionEvento regEdEvInternalFrame;
     private ConsultaTipoRegistro consuTRegistroInternalFrame;
+    private ConsultaRegistro consuRegistroInternalFrame;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -78,8 +79,9 @@ public class Principal {
         consuTRegistroInternalFrame = new ConsultaTipoRegistro(IEV);
         consuTRegistroInternalFrame.setVisible(false);
         
-       
-        
+        consuRegistroInternalFrame = new ConsultaRegistro(ICU);
+        consuRegistroInternalFrame.setVisible(false);
+         
         frmGestionDeUsuarios.getContentPane().setLayout(null);
 
         frmGestionDeUsuarios.getContentPane().add(creUsrInternalFrame);
@@ -89,6 +91,7 @@ public class Principal {
         frmGestionDeUsuarios.getContentPane().add(creTRegistroInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(regEdEvInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(consuTRegistroInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(consuRegistroInternalFrame);
 
     }
 
@@ -159,6 +162,16 @@ public class Principal {
             }
         });
         menuUsuarios.add(menuRegistroEdicionEvento);
+        
+        JMenuItem menuItemConsultaRegistro = new JMenuItem("Consulta de Registro");
+        menuItemConsultaRegistro.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para consulta de registro
+            	consuRegistroInternalFrame.cargarAsistentes();
+            	consuRegistroInternalFrame.setVisible(true);
+            }
+        });
+        menuUsuarios.add(menuItemConsultaRegistro);
         
         JMenu menuEventos = new JMenu("Eventos y Ediciones");
         menuBar.add(menuEventos);

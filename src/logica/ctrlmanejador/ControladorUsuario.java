@@ -4,7 +4,9 @@ import logica.interfaces.IUsuario;
 
 import excepciones.UsuarioRepetidoException;
 import excepciones.AsistenteYaRegistrado;
+import excepciones.ErrorDetallesRegistroException;
 import excepciones.NoHayCupoEdicionTRegistro;
+import excepciones.NoHayRegistrosAsistente;
 import excepciones.UsuarioNoExisteException;
 import java.time.LocalDate;
 
@@ -134,6 +136,22 @@ public class ControladorUsuario implements IUsuario {
 		Asistente asistente = (Asistente) u;
 		ControladorEventos ce = new ControladorEventos();
 		ce.nuevoRegistro(asistente, evento, edicion, tipoReg, fecha);
+	}
+	
+	public List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado) {
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		Asistente a = (Asistente) mu.getUsuarioNickname(asistenteSeleccionado);
+		return a.getEdicionesRegistros();
+	}
+	
+	public DataDetalleRegistro getDetallesRegistro(String asistenteSeleccionado, ParEdicionRegistro regEdicion) throws ErrorDetallesRegistroException {
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		Asistente a = (Asistente) mu.getUsuarioNickname(asistenteSeleccionado);
+		DataDetalleRegistro res = a.getDetallesRegistro(regEdicion);
+		if (res == null) {
+			throw new ErrorDetallesRegistroException("Hubo un error al recuperar los datos del registro seleccionado");
+		}
+		return res;
 	}
 }
 
