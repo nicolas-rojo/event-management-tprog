@@ -143,18 +143,11 @@ public class ConsultaEdicionEvento extends JInternalFrame {
         getContentPane().add(btnCerrar, BorderLayout.SOUTH);
     }
     private void limpiarYCerrar() {
-    	//Falta implementar
+        setVisible(false);
     }
     private void abrirConsultaTipoRegistro(/*String tipo, */IEventos ICE) {
         ConsultaTipoRegistro ventanaTipo = new ConsultaTipoRegistro(ICE);
         getParent().add(ventanaTipo);
         ventanaTipo.setVisible(true);
     }
-    
-    /*
-    private void abrirConsultaPatrocinio(String patrocinio) {
-        ConsultaPatrocinio ventanaPatrocinio = new ConsultaPatrocinio(patrocinio);
-        getParent().add(ventanaPatrocinio);
-        ventanaPatrocinio.setVisible(true);
-    }*/
 }
