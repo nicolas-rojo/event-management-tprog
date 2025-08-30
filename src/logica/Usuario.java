@@ -37,4 +37,7 @@ public abstract class Usuario {
     }
     
     public abstract boolean esAsistente();
+    
+    public abstract boolean esOrganizador();
 }
+	

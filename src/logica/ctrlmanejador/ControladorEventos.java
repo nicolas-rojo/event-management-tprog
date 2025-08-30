@@ -22,7 +22,6 @@ import logica.TipoRegistro;
 import logica.Asistente;
 import logica.EdicionEvento;
 
-
 public class ControladorEventos implements IEventos {
 	
 	public ControladorEventos() {
@@ -40,16 +39,17 @@ public class ControladorEventos implements IEventos {
 	}
 	
 	
-	public void nuevoEvento(DataEvento dataEvento, String cat) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion {
+	public void nuevoEvento(DataEvento dataEvento, List<String> cats) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion {
 		ManejadorEvento me = ManejadorEvento.getInstance();
 		Evento e = me.getEvento(dataEvento.getNombre());
 		if (e != null) {
 			throw new EventoRepetidoExcepcion("nombre de evento en uso");
-		}
-		else if(dataEvento.getCategoria() == null)
-			throw new EventoSinCategoriaExcepcion("falto ingresar una categoria");
+		}		
 		else {
 			e = new Evento(dataEvento);
+			for(String c : cats) {
+				e.agregarCategoria(me.getCategoria(c));
+			}
 			me.addEvento(e);
 		}
 		
@@ -60,9 +60,14 @@ public class ControladorEventos implements IEventos {
 		return me.getEventos();
 	}
 	
-	public void nuevaEdicion(DataEdicion dataEdicion) throws EdicionRepetidaExcepcion {
+	public List<String> listarCategorias(){
 		ManejadorEvento me = ManejadorEvento.getInstance();
-		Evento e = me.getEvento(dataEdicion.getEvento());
+		return me.getCategorias();
+	}
+	
+	public void nuevaEdicion(DataEdicion dataEdicion, String evento) throws EdicionRepetidaExcepcion {
+		ManejadorEvento me = ManejadorEvento.getInstance();
+		Evento e = me.getEvento(evento);
 		EdicionEvento ee = e.getEdicion(dataEdicion.getNombre()); 
 		if (ee != null) {
 			throw new EdicionRepetidaExcepcion("nombre de edicion en uso");
@@ -100,7 +105,7 @@ public class ControladorEventos implements IEventos {
 			throw new AsistenteYaRegistrado("el asistente ya está registrado a la edicion seleccionada");
 		} else if (!c2) {
 			throw new NoHayCupoEdicionTRegistro("no hay cupos para el tipo de registro y edicion seleccionados");
-		} else { //!c1 && c2
+		} else { 
 			Registro reg = new Registro(fecha);
 			asist.agregarRegistro(reg);
 			EdicionEvento ed = e.getEdicion(edicion);
@@ -110,8 +115,6 @@ public class ControladorEventos implements IEventos {
 			reg.asociarTRegistro(tReg);
 		}
 	}
-
-
 	
 	public DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro) {
 		ManejadorEvento me = ManejadorEvento.getInstance();

@@ -130,6 +130,11 @@ public class ControladorUsuario implements IUsuario {
 		return mu.getNombreAsist();
 	}
 	
+	public List<String> listarOrganizadores() {
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		return mu.getOrganizadores();
+	}
+	
 	public void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro {
 		ManejadorUsuario mu = ManejadorUsuario.getInstance();
 		Usuario u = mu.getUsuarioNickname(asistenteSeleccionado);

@@ -63,12 +63,8 @@ public class Evento {
 	
 	public List<String> getEdiciones(){
 		List<String> res = new ArrayList<>();
-		if(this.ediciones.isEmpty()) {
-			return res;
-		}else {
-			for(EdicionEvento e : this.ediciones.values()) {
-				res.add(e.getNombre());
-			}
+		for(EdicionEvento e : this.ediciones.values()) {
+			res.add(e.getNombre());
 		}
 		return res;
 	}
@@ -89,6 +85,10 @@ public class Evento {
 	public boolean cupoEdTRegistro(String edicion, String tReg) {
 		EdicionEvento ed = this.ediciones.get(edicion);
 		return ed.cupoTRegistro(tReg);
+	}
+	
+	public void agregarCategoria(Categoria c) {
+		this.categorias.add(c);
 	}
 }
 
