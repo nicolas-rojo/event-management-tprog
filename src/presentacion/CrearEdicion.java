@@ -22,9 +22,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
@@ -66,9 +63,7 @@ public class CrearEdicion extends JInternalFrame {
     private JButton btnCancelar;
      
 	public CrearEdicion(IEventos ice) {
-	
-		
-        
+			        
         this.controlEvt = ice;
         setResizable(true);
         setIconifiable(true);
@@ -77,13 +72,8 @@ public class CrearEdicion extends JInternalFrame {
         setClosable(true);
         setTitle("Alta Edicion de Evento");
         setBounds(0, 10, 546, 366);
-
-        cargarEventos();
-        getContentPane().setLayout(null);
-        
-
-        
-        
+       
+        getContentPane().setLayout(null);                     
         lblIngresarEvento = new JLabel("Evento :");
         lblIngresarEvento.setBounds(30, 30, 80, 15);
         getContentPane().add(lblIngresarEvento);
@@ -190,35 +180,22 @@ public class CrearEdicion extends JInternalFrame {
         
         cargarEventos();
         cargarOrganizadores();
-         
+                        
+        panelFecha = new JPanel(new GridBagLayout());
+        panelFecha.setBounds(0, 0, 0, 0);
+        getContentPane().add(panelFecha);
                  
-                 panelFecha = new JPanel(new GridBagLayout());
-                 panelFecha.setBounds(0, 0, 0, 0);
-                 getContentPane().add(panelFecha);
-                 
-                         btnAceptar = new JButton(Aceptar);
-                         btnAceptar.setBounds(251, 299, 95, 23);
-                         getContentPane().add(btnAceptar);
-                         
-                                  
-                                  btnAceptar.addActionListener(new ActionListener() {
-                                  	public void actionPerformed(ActionEvent e) {
-                                     
-                                         	}
-                                         });
-                                  
-                                  btnAceptar.setText("Aceptar");
-                                  
-                                          btnCancelar = new JButton(Cancelar);
-                                          btnCancelar.setBounds(381, 299, 90, 23);
-                                          getContentPane().add(btnCancelar);
-                                          btnCancelar.setText("Cancelar");
-                 
-                 
-               
+        btnAceptar = new JButton(Aceptar);
+        btnAceptar.setBounds(251, 299, 95, 23);
+        getContentPane().add(btnAceptar);                                                       
+        btnAceptar.setText("Aceptar");
+        
+        btnCancelar = new JButton(Cancelar);
+        btnCancelar.setBounds(381, 299, 90, 23);
+        getContentPane().add(btnCancelar);
+        btnCancelar.setText("Cancelar");                                                 
 }          
-     
-            
+	
 		private class aceptarEdicion extends AbstractAction {
         public aceptarEdicion() {
             putValue(NAME, "aceptarEdicion");
@@ -239,11 +216,7 @@ public class CrearEdicion extends JInternalFrame {
         public void actionPerformed(ActionEvent e) {
           
             limpiarFormulario();
-            setVisible(false);
-            
-            
-            
-             
+            setVisible(false);                                                 
         }
     }
 	
@@ -301,16 +274,10 @@ public class CrearEdicion extends JInternalFrame {
 	    	 JOptionPane.showMessageDialog(this, "Fecha Invalida","Alta de Edicion", JOptionPane.ERROR_MESSAGE);
 	    	 return false;
 	     }
-	    	 	
-        
-        
+	    	 	                
         return true;
     }
-	
-	
-   	
-        
-	
+		   	       	
 	public void cargarOrganizadores() {
 	    ManejadorUsuario mu = ManejadorUsuario.getinstance();
 	    List<String> organizadores = mu.getOrganizadores();
@@ -332,8 +299,7 @@ public class CrearEdicion extends JInternalFrame {
 			}
         }
 	}
-	
-	
+		
 	public void limpiarFormulario() {
 		textFieldNombre.setText("");
 		textFieldSigla.setText("");
@@ -341,12 +307,11 @@ public class CrearEdicion extends JInternalFrame {
 		textFieldPais.setText("");
 		comboBoxEventos.removeAllItems();
 		comboBoxOrgs.removeAllItems();
-		
-
-       
-       
-        
-        
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+	    cal.add(java.util.Calendar.YEAR, -20);
+	    dateChooser.setDate(cal.getTime());
+	    dateChooser1.setDate(cal.getTime());
+	    dateChooser2.setDate(cal.getTime());		
     }
 }
 

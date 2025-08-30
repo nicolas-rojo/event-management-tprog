@@ -33,7 +33,7 @@ public class Principal {
 	        EventQueue.invokeLater(new Runnable() {
 	            public void run() {
 	                try {	                	
-	                    Principal window = new Principal();	                 	                    	                    	                    			                   	                    
+	                    Principal window = new Principal();		                   
 	                    window.frmGestionDeUsuarios.setVisible(true);
 	                } 	catch (Exception e) {
 	                    	e.printStackTrace();
@@ -153,18 +153,5 @@ public class Principal {
         });
         menuEventos.add(menuItemAltaEdicion);
     }     
-      
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
+                
+ }

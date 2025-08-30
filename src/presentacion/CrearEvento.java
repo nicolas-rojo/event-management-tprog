@@ -4,6 +4,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -14,19 +16,14 @@ import excepciones.EventoSinCategoriaExcepcion;
 import logica.ctrlmanejador.ManejadorEvento;
 import logica.interfaces.IEventos;
 import logica.datatypes.DataEvento;
+import logica.datatypes.comboBoxMultiple;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
-
-import com.toedter.calendar.JDateChooser; 
-
+ 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import java.awt.GridBagLayout;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -38,23 +35,21 @@ public class CrearEvento extends JInternalFrame {
 	
 	private IEventos controlEvt;
 	private JTextField textFieldNombre;
-    private JTextField textFieldDesc;
+	private JTextArea textAreaDescripcion; 
     private JTextField textFieldSigla;
+    
     private JLabel lblIngresarNombre;
     private JLabel lblIngresarDesc;
     private JLabel lblIngresarSigla;
     private JLabel lblCategoria;
-    private JComboBox<String> comboBoxCat;
-    private JButton btnAceptar;
-    private JButton btnCancelar;
     private JLabel lblFechaAlta;
     
+    private comboBoxMultiple comboBoxCat;
+    private JButton btnAceptar;
+    private JButton btnCancelar;
+    
     private JDateChooser dateChooser;
-    
-
-  
-    
-    
+             
     public CrearEvento(IEventos ice) {
     	
     	ManejadorEvento me = ManejadorEvento.getInstance();
@@ -64,58 +59,62 @@ public class CrearEvento extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Alta de Evento");
-        setBounds(10, 40, 500, 252);
+        setBounds(30, 30, 500, 322);
 		controlEvt = ice;
 		getContentPane().setLayout(null);
 		
 		lblIngresarNombre = new JLabel("Nombre:");
-		lblIngresarNombre.setBounds(30, 30, 80, 15);
+		lblIngresarNombre.setBounds(30, 44, 80, 15);
         lblIngresarNombre.setHorizontalAlignment(SwingConstants.CENTER);
         lblIngresarNombre.setHorizontalAlignment(SwingConstants.RIGHT);
         getContentPane().add(lblIngresarNombre);
 		
         textFieldNombre = new JTextField();
-        textFieldNombre.setBounds(120, 26, 327, 22);
+        textFieldNombre.setBounds(120, 40, 327, 22);
         getContentPane().add(textFieldNombre);
         textFieldNombre.setColumns(10);
         
         lblIngresarDesc = new JLabel("Descripcion :");
         lblIngresarDesc.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblIngresarDesc.setBounds(30, 90, 80, 15);
+        lblIngresarDesc.setBounds(30, 104, 80, 15);
         getContentPane().add(lblIngresarDesc);
+
+        // Lo metemos en un JScrollPane
+        JScrollPane scrollDescripcion = new JScrollPane();
+        scrollDescripcion.setBounds(120, 104, 327, 59); // más alto que 22 px
+        getContentPane().add(scrollDescripcion);
         
-        textFieldDesc = new JTextField();
-        textFieldDesc.setBounds(120, 87, 327, 20);
-        getContentPane().add(textFieldDesc);
-        textFieldDesc.setColumns(10);
+        textAreaDescripcion = new JTextArea();
+        scrollDescripcion.setViewportView(textAreaDescripcion);
+        textAreaDescripcion.setColumns(10);
+        textAreaDescripcion.setLineWrap(true);
+        textAreaDescripcion.setWrapStyleWord(true);
+
         
         lblIngresarSigla = new JLabel("Sigla :");
         lblIngresarSigla.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblIngresarSigla.setBounds(30, 60, 80, 15);
+        lblIngresarSigla.setBounds(30, 76, 80, 15);
         getContentPane().add(lblIngresarSigla);
         
         textFieldSigla = new JTextField();
-        textFieldSigla.setBounds(120, 59, 327, 20);
+        textFieldSigla.setBounds(120, 73, 327, 20);
         getContentPane().add(textFieldSigla);
         textFieldSigla.setColumns(10);
         
         lblCategoria = new JLabel("Categoria :");
         lblCategoria.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblCategoria.setBounds(30, 120, 80, 15);
+        lblCategoria.setBounds(30, 178, 80, 15);
         getContentPane().add(lblCategoria);
-        
-        
-      
-        comboBoxCat = new JComboBox<String>();
-        comboBoxCat.setBounds(120, 118, 327, 22);
+               
+        String[] categorias1 = {};
         List<String> categorias = me.getCategorias();
         if (categorias != null) {
-        	for (String cat : categorias)
-        		comboBoxCat.addItem(cat);
-        }
-        getContentPane().add(comboBoxCat)
+        	categorias1 = categorias.toArray(new String[0]);
+        	}
+        comboBoxCat = new comboBoxMultiple(categorias1);
+        comboBoxCat.setBounds(120, 174, 327, 22);
+        getContentPane().add(comboBoxCat);
         
-        ;
 
         JPanel panelFecha = new JPanel();
         panelFecha.setBounds(0, 0, 0, 0);
@@ -123,7 +122,7 @@ public class CrearEvento extends JInternalFrame {
         
         java.util.Calendar cal = java.util.Calendar.getInstance();
         
-        cal.add(java.util.Calendar.YEAR, -20);
+        cal.add(java.util.Calendar.YEAR, 0);
         getContentPane().add(panelFecha);
         
         Action Aceptar = new aceptarEvento();
@@ -131,25 +130,25 @@ public class CrearEvento extends JInternalFrame {
         
         lblFechaAlta = new JLabel("Fecha de Alta:");
         lblFechaAlta.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblFechaAlta.setBounds(30, 156, 80, 15);
+        lblFechaAlta.setBounds(30, 212, 80, 15);
         getContentPane().add(lblFechaAlta);
         
         dateChooser = new JDateChooser();
-        dateChooser.setBounds(120, 151, 327, 20);
+        dateChooser.setBounds(120, 207, 327, 20);
         dateChooser.setDateFormatString("dd/MM/yyyy");
         dateChooser.setDate(cal.getTime());
         getContentPane().add(dateChooser);
         btnAceptar = new JButton(Aceptar);
-        btnAceptar.setBounds(253, 182, 94, 23);
+        btnAceptar.setBounds(249, 249, 94, 23);
         getContentPane().add(btnAceptar);
         
          btnAceptar.setText("Aceptar");
          btnCancelar = new JButton(Cancelar);
-         btnCancelar.setBounds(353, 182, 94, 23);
+         btnCancelar.setBounds(353, 249, 94, 23);
          getContentPane().add(btnCancelar);
          
          btnCancelar.setText("Cancelar");
-          
+                            
     }
     private class aceptarEvento extends AbstractAction {
         public aceptarEvento() {
@@ -170,9 +169,7 @@ public class CrearEvento extends JInternalFrame {
     	public void actionPerformed(ActionEvent e) {
     		
     		limpiarFormulario();
-    		setVisible(false);
-    		
-    		
+    		setVisible(false);    		    		
     		dispose();  
     	}
     }
@@ -186,10 +183,9 @@ public class CrearEvento extends JInternalFrame {
                    .toLocalDate();
     }
 	
-
     protected void altaDeEvento(ActionEvent aceptar) {
         String nombreEvento = textFieldNombre.getText();
-        String descripcionEvento = textFieldDesc.getText();
+        String descripcionEvento = textAreaDescripcion.getText();
         String siglaEvento = textFieldSigla.getText();
         String categoriaEvento = (String) comboBoxCat.getSelectedItem();
         LocalDate fechaEvento = toLocalDate(dateChooser.getDate());
@@ -215,7 +211,7 @@ public class CrearEvento extends JInternalFrame {
     
     private boolean checkFormulario() {
         String nombreEvento = textFieldNombre.getText();
-        String descripcionEvento = textFieldDesc.getText();
+        String descripcionEvento = textAreaDescripcion.getText();
         String siglaEvento = textFieldSigla.getText();
         String categoria = (String) comboBoxCat.getSelectedItem();
 
@@ -225,19 +221,17 @@ public class CrearEvento extends JInternalFrame {
                     "Alta de Evento", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        
-        
-         
-            
-       
+                                            
         return true;
     }
     
     private void limpiarFormulario() {
         textFieldNombre.setText("");
-        textFieldNombre.setText("");
         textFieldSigla.setText("");
-        textFieldDesc.setText("");
+        textAreaDescripcion.setText("");
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        cal.add(java.util.Calendar.YEAR,0);
+        dateChooser.setDate(cal.getTime());
         ;
     }
     
@@ -251,9 +245,5 @@ public class CrearEvento extends JInternalFrame {
             }
         }
     }
-        
-    }
-		
-
- 
-    
+ }
+		    
