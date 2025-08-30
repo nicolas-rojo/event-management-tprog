@@ -24,6 +24,14 @@ public class Registro {
 		return this.ed.getNombre();
 	}
 	
+	public String getNombreTR() {
+		return this.tr.getNombre();
+	}
+	
+	public float getCostoTR() {
+		return this.tr.getCosto();
+	}
+	
 	public boolean esEdicion(String edicion) {
 		return (ed.getNombre().equals(edicion));
 	}

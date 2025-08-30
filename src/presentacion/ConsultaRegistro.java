@@ -3,8 +3,11 @@ package presentacion;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+import excepciones.ErrorDetallesRegistroException;
+import logica.datatypes.DataDetalleRegistro;
 import logica.datatypes.ParEdicionRegistro;
 import logica.interfaces.IUsuario;
 
@@ -13,6 +16,7 @@ import javax.swing.JTextField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -21,11 +25,11 @@ public class ConsultaRegistro extends JInternalFrame {
 	private IUsuario ctrlUsuarios;
 	
 	private JComboBox<String> comboBoxAsistentes;
-	private JComboBox<String> comboBoxRegistros;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JComboBox<ParEdicionRegistro> comboBoxRegistros;
+	private JTextField textFieldEdicion;
+	private JTextField textFieldTR;
+	private JTextField textFieldCosto;
+	private JTextField textFieldFecha;
 	public ConsultaRegistro(IUsuario iCU) {
 		
 		ctrlUsuarios = iCU;
@@ -35,7 +39,7 @@ public class ConsultaRegistro extends JInternalFrame {
 		setClosable(true);
 		getContentPane().setLayout(null);
 		setTitle("Consultar Registro");
-		setBounds(100, 100, 415, 255);
+		setBounds(100, 100, 356, 323);
 		
 		JLabel lblNewLabel = new JLabel("Seleccionar Usuario:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -65,6 +69,20 @@ public class ConsultaRegistro extends JInternalFrame {
 		comboBoxRegistros = new JComboBox();
 		comboBoxRegistros.setBounds(156, 56, 167, 20);
 		getContentPane().add(comboBoxRegistros);
+		comboBoxRegistros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ParEdicionRegistro regSeleccionado = (ParEdicionRegistro) comboBoxRegistros.getSelectedItem();
+				if (regSeleccionado != null) {
+					try {
+						cargarDetalles(ctrlUsuarios.getDetallesRegistro((String) comboBoxAsistentes.getSelectedItem(), regSeleccionado));						
+					} catch (ErrorDetallesRegistroException er) {
+						JOptionPane.showMessageDialog(ConsultaRegistro.this, er.getMessage(), "Consulta Registro", JOptionPane.ERROR_MESSAGE);
+					} catch (Exception er) {
+						JOptionPane.showMessageDialog(ConsultaRegistro.this, er.getMessage(), "Consulta Registro", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		});
 		
 		JLabel lblSeleccionarRegistro_1 = new JLabel("Seleccionar Registro:");
 		lblSeleccionarRegistro_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -76,11 +94,11 @@ public class ConsultaRegistro extends JInternalFrame {
 		lblSeleccionarRegistro_1_1.setBounds(25, 120, 115, 12);
 		getContentPane().add(lblSeleccionarRegistro_1_1);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(156, 117, 167, 18);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		textFieldEdicion = new JTextField();
+		textFieldEdicion.setEditable(false);
+		textFieldEdicion.setBounds(156, 117, 167, 18);
+		getContentPane().add(textFieldEdicion);
+		textFieldEdicion.setColumns(10);
 		
 		JLabel lblSeleccionarRegistro_1_1_1 = new JLabel("Tipo de Registro:");
 		lblSeleccionarRegistro_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -92,32 +110,37 @@ public class ConsultaRegistro extends JInternalFrame {
 		lblSeleccionarRegistro_1_1_2.setBounds(25, 190, 115, 12);
 		getContentPane().add(lblSeleccionarRegistro_1_1_2);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
-		textField_1.setBounds(156, 152, 167, 18);
-		getContentPane().add(textField_1);
+		textFieldTR = new JTextField();
+		textFieldTR.setEditable(false);
+		textFieldTR.setColumns(10);
+		textFieldTR.setBounds(156, 152, 167, 18);
+		getContentPane().add(textFieldTR);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		textField_2.setBounds(156, 187, 167, 18);
-		getContentPane().add(textField_2);
+		textFieldCosto = new JTextField();
+		textFieldCosto.setEditable(false);
+		textFieldCosto.setColumns(10);
+		textFieldCosto.setBounds(156, 187, 167, 18);
+		getContentPane().add(textFieldCosto);
 		
 		JLabel lblSeleccionarRegistro_1_1_2_1 = new JLabel("Fecha de Registro:");
 		lblSeleccionarRegistro_1_1_2_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSeleccionarRegistro_1_1_2_1.setBounds(25, 225, 115, 12);
 		getContentPane().add(lblSeleccionarRegistro_1_1_2_1);
 		
-		textField_3 = new JTextField();
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
-		textField_3.setBounds(156, 222, 167, 18);
-		getContentPane().add(textField_3);
+		textFieldFecha = new JTextField();
+		textFieldFecha.setEditable(false);
+		textFieldFecha.setColumns(10);
+		textFieldFecha.setBounds(156, 222, 167, 18);
+		getContentPane().add(textFieldFecha);
 		
 		JButton btnNewButton = new JButton("Confirmar");
-		btnNewButton.setBounds(239, 260, 84, 20);
+		btnNewButton.setBounds(230, 260, 93, 20);
 		getContentPane().add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        limpiarYCerrar();
+		    }
+		});
 	}
 	
 	public void cargarAsistentes() {
@@ -144,15 +167,36 @@ public class ConsultaRegistro extends JInternalFrame {
 			comboBoxRegistros.removeAllItems();
 			if (regs != null && !regs.isEmpty()) {
 				for(ParEdicionRegistro p : regs) {
-					comboBoxRegistros.addItem(p.toString());					
+					comboBoxRegistros.addItem(p);					
 				}
 			} else {
-				comboBoxRegistros.addItem("No hay registros");
+				comboBoxRegistros.addItem(null);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			comboBoxRegistros.removeAllItems();
-			comboBoxRegistros.addItem("No hay asistentes");
+			comboBoxRegistros.addItem(null);
 		}
+	}
+	
+	public void cargarDetalles(DataDetalleRegistro datos) {
+		textFieldEdicion.setText(datos.getNombreEdicion());
+	    textFieldTR.setText(datos.getNombreTR());
+	    textFieldCosto.setText(String.valueOf(datos.getCosto()));
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    textFieldFecha.setText(datos.getFecha().format(formatter)); 
+	}
+	
+	public void limpiarYCerrar() {
+		textFieldEdicion.setText("");
+		textFieldTR.setText("");
+	    textFieldCosto.setText("");
+	    textFieldFecha.setText("");
+	    
+	    comboBoxAsistentes.removeAllItems();
+	    comboBoxRegistros.removeAllItems();
+	    comboBoxRegistros.setEnabled(false);
+	    
+	    setVisible(false);
 	}
 }

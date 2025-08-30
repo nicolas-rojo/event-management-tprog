@@ -245,6 +245,5 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		comboBoxEdiciones.removeAllItems();
 		comboBoxTRegistros.removeAllItems();
 		comboBoxAsistentes.removeAllItems();
-		
 	}
 }

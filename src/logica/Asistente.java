@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logica.datatypes.ParEdicionRegistro;
+import logica.datatypes.DataDetalleRegistro;
 
 public class Asistente extends Usuario{
 	private String apellido;
@@ -59,5 +60,14 @@ public class Asistente extends Usuario{
     		res.add(new ParEdicionRegistro(r.getNombreEdicion(), r.getFecha()));
     	}
     	return res;
+    }
+    
+    public DataDetalleRegistro getDetallesRegistro(ParEdicionRegistro regEdicion) {
+    	for (Registro r : regs) {
+    		if (r.getNombreEdicion().equals(regEdicion.getNombreEdicion()) && r.getFecha().equals(regEdicion.getFechaRegistro())) {
+    			return (new DataDetalleRegistro(regEdicion.getNombreEdicion(), r.getNombreTR(), r.getCostoTR(), regEdicion.getFechaRegistro()));
+    		}
+    	}
+    	return null;
     }
 }

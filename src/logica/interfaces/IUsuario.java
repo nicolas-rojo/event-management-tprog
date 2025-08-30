@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import excepciones.AsistenteYaRegistrado;
+import excepciones.ErrorDetallesRegistroException;
 import excepciones.NoHayCupoEdicionTRegistro;
 import excepciones.NoHayRegistrosAsistente;
 import excepciones.UsuarioNoExisteException;
@@ -33,4 +34,6 @@ public interface IUsuario {
     public abstract void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro;
     
     public abstract List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado);
+    
+    public abstract DataDetalleRegistro getDetallesRegistro(String asistenteSeleccionado, ParEdicionRegistro regEdicion)  throws ErrorDetallesRegistroException;
 }
