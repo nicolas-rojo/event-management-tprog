@@ -25,4 +25,10 @@ public class Organizador extends Usuario{
     public void setUrl(String url) {
         this.url = url;
     }
+    
+    @Override
+    public boolean esOrganizador() {
+    	return true;
+    }
+
 }

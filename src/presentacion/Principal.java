@@ -10,6 +10,8 @@ import logica.Fabrica;
 import logica.interfaces.IUsuario;
 import logica.interfaces.IEventos;
 
+import java.time.LocalDate;
+
 import javax.swing.JMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,15 +26,17 @@ public class Principal {
     private ConsultaUsuario lisUsrInternalFrame;
     private ModificarUsuario modUsrInternalFrame;
     private CrearEvento creEventoInternalFrame;
+    private CrearEdicion crearEdicionInternalFrame;
+    
 
 	    public static void main(String[] args) {
 	        EventQueue.invokeLater(new Runnable() {
 	            public void run() {
-	                try {
-	                	
-	                    Principal window = new Principal();	                  	                    	                    	                 	                                        window.frmGestionDeUsuarios.setVisible(true);
-	                } catch (Exception e) {
-	                    e.printStackTrace();
+	                try {	                	
+	                    Principal window = new Principal();	                 	                    	                    	                    			                   	                    
+	                    window.frmGestionDeUsuarios.setVisible(true);
+	                } 	catch (Exception e) {
+	                    	e.printStackTrace();
 	                }
 	            }
 	        });
@@ -59,11 +63,10 @@ public class Principal {
         creEventoInternalFrame = new CrearEvento(ICE);
         creEventoInternalFrame.setVisible(false);
         
-       
-        
-        
+        crearEdicionInternalFrame = new CrearEdicion(ICE);
+        crearEdicionInternalFrame.setVisible(false);               
         frmGestionDeUsuarios.getContentPane().setLayout(null);
-
+        frmGestionDeUsuarios.getContentPane().add(crearEdicionInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(creUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(lisUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(modUsrInternalFrame);
@@ -138,5 +141,30 @@ public class Principal {
             }
         });
         menuEventos.add(menuItemAltaEvento);
+        
+        JMenuItem menuItemAltaEdicion = new JMenuItem("Alta de Edicion");
+        menuItemAltaEdicion.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e) {
+        		crearEdicionInternalFrame.limpiarFormulario();
+        		crearEdicionInternalFrame.cargarEventos();
+        		crearEdicionInternalFrame.cargarOrganizadores();        		
+        		crearEdicionInternalFrame.setVisible(true);
+        	}
+        });
+        menuEventos.add(menuItemAltaEdicion);
+    }     
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
-}

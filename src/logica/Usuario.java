@@ -35,4 +35,11 @@ public abstract class Usuario {
     public void setCedulaIdentidad(String email) {
         this.email = email;
     }
+    
+    
+    public boolean esOrganizador() {
+        return true;
+    }
 }
+    
+
