@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import logica.datatypes.DTOEvento;
+import logica.EdicionEvento;
 import logica.interfaces.IEventos;
 import excepciones.EventoNoExisteExcepcion;
 
@@ -150,8 +151,16 @@ public class ConsultaEvento extends JInternalFrame {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     String ed = listEdiciones.getSelectedValue();
-                    if (ed != null) {
-                        abrirConsultaEdicion(ed);
+                    DTOEvento eventoSeleccionado = listEventos.getSelectedValue();
+                    if (ed != null && eventoSeleccionado != null) {
+                        try {
+                            EdicionEvento edicion = controlEvento.obtenerEdicionEvento(eventoSeleccionado.getNombre(), ed);
+                            abrirConsultaEdicion(edicion, controlEvento);
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null,
+                                "No se pudo cargar la edición: " + ex.getMessage(),
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
             }
@@ -194,17 +203,15 @@ public class ConsultaEvento extends JInternalFrame {
         }
     }
 
-    private void abrirConsultaEdicion(String nombreEdicion) {
-        // placeholder: reemplazá por la apertura real si querés otra JInternalFrame
-        JOptionPane.showMessageDialog(this,
-                "Edición seleccionada: " + nombreEdicion,
-                "Edición",
-                JOptionPane.INFORMATION_MESSAGE);
+    private void abrirConsultaEdicion(EdicionEvento edicionEvento, IEventos ICE) {
+    	ConsultaEdicionEvento ventanaTipo = new ConsultaEdicionEvento(edicionEvento, ICE);
+        getParent().add(ventanaTipo);
+        ventanaTipo.setVisible(true);
     }
 
     public void limpiarYCerrar() {
         listEventos.clearSelection();
-        modelEventos.clear(); // <-- ojo: modelEventos está declarado; si no lo usas, eliminá esta línea
+        modelEventos.clear(); // 
         actualizarDetalles(null);
         setVisible(false);
     }

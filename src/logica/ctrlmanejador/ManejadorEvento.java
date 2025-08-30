@@ -61,7 +61,7 @@ public class ManejadorEvento {
 	}
 
 	
-	public Evento[] getEventos() {
+	public Evento[] getEventosTipoEvento() {
 		if (eventos.isEmpty())
             return null;
         else {
@@ -77,12 +77,12 @@ public class ManejadorEvento {
 	
 
 	
-	public List<String> getEventosNombre(){
+	public List<String> getEventos(){
 		List<String> eventos = new ArrayList<>();
 		for (Evento e : this.eventos.values()) {
 			eventos.add(e.getNombreEvento());
 		}
 		return eventos;
-		
 	}
+
 }

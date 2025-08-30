@@ -16,7 +16,6 @@ public class EdicionEvento {
 	private LocalDate fechaAlta;
 	private String ciudad;
 	private String pais;
-	
 	private Organizador organizador;
 	private Set<TipoRegistro> tipoRegistros;
 	private Set<Patrocinio> patrocinios;
@@ -30,7 +29,6 @@ public class EdicionEvento {
 		this.fechaAlta = dataEd.getFechaAlta();
 		this.ciudad = dataEd.getCiudad();
 		this.pais = dataEd.getPais();
-		
 		this.tipoRegistros = new HashSet<>();
 		this.patrocinios = new HashSet<>();
 		this.registros = new ArrayList<>();
@@ -111,5 +109,17 @@ public class EdicionEvento {
 		}
 		return false;
 	}
-
+	
+	/*public List<String> getRegistros(){
+		List<String> res = new ArrayList<>();
+		for(Registro r : this.registros) {
+			res.add(r);
+		}
+		return res;
+	}*/
+	
+	public List<Patrocinio> getPatrocinios(){
+		List<Patrocinio> lista = new ArrayList<>(this.patrocinios);
+		return lista;
+	}
 }

@@ -10,11 +10,8 @@ import excepciones.EdicionRepetidaExcepcion;
 import excepciones.EventoNoExisteExcepcion;
 
 import logica.datatypes.DataEvento;
-<<<<<<< HEAD
 import logica.datatypes.DTOEvento;
-=======
 import logica.datatypes.DataTRegistro;
->>>>>>> origin/develop
 import logica.datatypes.DataEdicion;
 
 import java.time.LocalDate;
@@ -31,8 +28,6 @@ import logica.Categoria;
 public class ControladorEventos implements IEventos {
 	
 	public ControladorEventos() {
-<<<<<<< HEAD
-=======
 	}
 	
 	public void nuevoTipoRegistro(DataTRegistro dataTRegistro, String evento, String edicion) throws TipoDeRegistroRepetidoException {
@@ -44,7 +39,6 @@ public class ControladorEventos implements IEventos {
 		}else {
 			edicionTRegistro.agregarTRegistro(new TipoRegistro(dataTRegistro));
 		}
->>>>>>> origin/develop
 	}
 	
 	
@@ -80,7 +74,7 @@ public class ControladorEventos implements IEventos {
 	
 	public void nuevaEdicion(DataEdicion dataEdicion) throws EdicionRepetidaExcepcion {
 		ManejadorEvento me = ManejadorEvento.getInstance();
-		Evento e = me.getEvento(dataEdicion.getEvento());
+		Evento e = me.getEvento(dataEdicion.getNombre());
 		EdicionEvento ee = e.getEdicion(dataEdicion.getNombre()); 
 		if (ee != null) {
 			throw new EdicionRepetidaExcepcion("nombre de edicion en uso");
@@ -90,18 +84,16 @@ public class ControladorEventos implements IEventos {
 			e.agregarEdicion(ee);
 		}
 	}
-	
-<<<<<<< HEAD
-	public void listarInfoEvento(String nombre) {
+	/*public void listarInfoEvento(String nombre) {
 		ManejadorEvento me = ManejadorEvento.getInstance();
 		Evento e = me.getEvento(nombre);
 		DataEvento data = e.getDataEvento();
 		
-	}
+	}*/
 	
 	public DTOEvento[] listarInfoEvento() throws EventoNoExisteExcepcion {
 	    ManejadorEvento me = ManejadorEvento.getInstance();
-	    Evento[] eventos = me.getEventos();
+	    Evento[] eventos = me.getEventosTipoEvento();
 
 	    if (eventos != null && eventos.length > 0) {
 	        DTOEvento[] dtoEventos = new DTOEvento[eventos.length];
@@ -113,8 +105,6 @@ public class ControladorEventos implements IEventos {
 	        throw new EventoNoExisteExcepcion("No existen eventos registrados");
 	    }
 	}
-
-=======
 	public List<String> listarEdiciones(String eventoSeleccionado) {
 		ManejadorEvento me = ManejadorEvento.getInstance();
 		Evento e = me.getEvento(eventoSeleccionado);
@@ -152,8 +142,6 @@ public class ControladorEventos implements IEventos {
 			reg.asociarTRegistro(tReg);
 		}
 	}
-
-
 	
 	public DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro) {
 		ManejadorEvento me = ManejadorEvento.getInstance();
@@ -162,6 +150,11 @@ public class ControladorEventos implements IEventos {
 		TipoRegistro tr =  ed.getTRegistro(tipoRegistro);
 		return new DataTRegistro(tr.getNombre(), tr.getDescripcion(), tr.getCosto(), tr.getCupo());
 	}
->>>>>>> origin/develop
+	
+	public EdicionEvento obtenerEdicionEvento(String nombreEvento, String nombreEdicionEvento) {
+		ManejadorEvento me = ManejadorEvento.getInstance();
+		Evento e = me.getEvento(nombreEvento);
+		return e.getEdicion(nombreEdicionEvento);
+	}
 }
 
