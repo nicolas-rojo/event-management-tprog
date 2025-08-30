@@ -15,6 +15,7 @@ import logica.datatypes.*;
 
 import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
+import logica.interfaces.IInstituciones;
 
 import javax.swing.JMenu;
 import java.awt.event.ActionEvent;
@@ -26,6 +27,7 @@ public class Principal {
     private JFrame frmGestionDeUsuarios;
     private IUsuario ICU;
     private IEventos IEV;
+    private IInstituciones IIN;
     private CrearUsuario creUsrInternalFrame;
     private ConsultaUsuario lisUsrInternalFrame;
     private ModificarUsuario modUsrInternalFrame;
@@ -33,6 +35,9 @@ public class Principal {
     private CrearTipoRegistro creTRegistroInternalFrame;
     private RegistroEdicionEvento regEdEvInternalFrame;
     private ConsultaTipoRegistro consuTRegistroInternalFrame;
+    private CrearInstitucion creInstitucionInternalFrame;
+    private ConsultaInstitucion consultaInstitucionInternalFrame;
+    private CrearPatrocinio crePatrocinioInternalFrame; // Nuevo InternalFrame para patrocinios
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -54,6 +59,7 @@ public class Principal {
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getIControladorUsuario();
         IEV = fabrica.getIControladorEventos();
+        IIN = fabrica.getIControladorInstituciones();
         
         // Se crean los InternalFrame y se incluyen al Frame principal ocultos.
         // De esta forma, no es necesario crear y destruir objetos lo que enlentece la ejecución.
@@ -78,7 +84,15 @@ public class Principal {
         consuTRegistroInternalFrame = new ConsultaTipoRegistro(IEV);
         consuTRegistroInternalFrame.setVisible(false);
         
-       
+        creInstitucionInternalFrame = new CrearInstitucion(IIN);
+        creInstitucionInternalFrame.setVisible(false);
+        
+        consultaInstitucionInternalFrame = new ConsultaInstitucion(IIN);
+        consultaInstitucionInternalFrame.setVisible(false);
+        
+        // Nuevo InternalFrame para patrocinios
+        crePatrocinioInternalFrame = new CrearPatrocinio(IEV, IIN);
+        crePatrocinioInternalFrame.setVisible(false);
         
         frmGestionDeUsuarios.getContentPane().setLayout(null);
 
@@ -89,6 +103,9 @@ public class Principal {
         frmGestionDeUsuarios.getContentPane().add(creTRegistroInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(regEdEvInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(consuTRegistroInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(creInstitucionInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(consultaInstitucionInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(crePatrocinioInternalFrame); // Agregar el nuevo InternalFrame
 
     }
 
@@ -175,7 +192,7 @@ public class Principal {
         JMenuItem menuItemAltaTRegistro = new JMenuItem("Alta Tipo de Registro");
         menuItemAltaTRegistro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Muestro el InternalFrame para alta de evento
+                // Muestro el InternalFrame para alta de tipo de registro
             	creTRegistroInternalFrame.cargarEventos();
             	creTRegistroInternalFrame.setVisible(true);
             	
@@ -186,12 +203,48 @@ public class Principal {
         JMenuItem menuItemConsultaTRegistro = new JMenuItem("Consulta Tipo Registro");
         menuItemConsultaTRegistro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Muestro el InternalFrame para alta de evento
+                // Muestro el InternalFrame para consulta de tipo de registro
             	consuTRegistroInternalFrame.limpiarFormulario();
             	consuTRegistroInternalFrame.cargarEventos();
             	consuTRegistroInternalFrame.setVisible(true);
             }
         });
         menuEventos.add(menuItemConsultaTRegistro);
+        
+        // NUEVO MENÚ DE INSTITUCIONES
+        JMenu menuInstituciones = new JMenu("Instituciones");
+        menuBar.add(menuInstituciones);
+        
+        JMenuItem menuItemAltaInstitucion = new JMenuItem("Alta de Institución");
+        menuItemAltaInstitucion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para alta de institución
+                creInstitucionInternalFrame.limpiarFormulario();
+                creInstitucionInternalFrame.setVisible(true);
+            }
+        });
+        menuInstituciones.add(menuItemAltaInstitucion);
+        
+        JMenuItem menuItemConsultaInstitucion = new JMenuItem("Consultar Institución");
+        menuItemConsultaInstitucion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para consulta de instituciones
+                consultaInstitucionInternalFrame.cargarInstituciones();
+                consultaInstitucionInternalFrame.setVisible(true);
+            }
+        });
+        menuInstituciones.add(menuItemConsultaInstitucion);
+        
+        // NUEVO ITEM PARA ALTA DE PATROCINIO
+        JMenuItem menuItemAltaPatrocinio = new JMenuItem("Alta de Patrocinio");
+        menuItemAltaPatrocinio.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para alta de patrocinio
+                crePatrocinioInternalFrame.limpiarFormulario();
+                crePatrocinioInternalFrame.cargarDatos();
+                crePatrocinioInternalFrame.setVisible(true);
+            }
+        });
+        menuInstituciones.add(menuItemAltaPatrocinio);
     }
 }

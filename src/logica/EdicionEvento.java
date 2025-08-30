@@ -30,7 +30,7 @@ public class EdicionEvento {
 		this.fechaAlta = dataEd.getFechaAlta();
 		this.ciudad = dataEd.getCiudad();
 		this.pais = dataEd.getPais();
-		
+		this.organizador = null;
 		this.tipoRegistros = new HashSet<>();
 		this.patrocinios = new HashSet<>();
 		this.registros = new ArrayList<>();
@@ -57,8 +57,20 @@ public class EdicionEvento {
 	
 	}
 	
+	public String getCuidad() {
+		return this.ciudad;
+	}
+	
+	public String getPais() {
+		return this.pais;
+	}
+	
 	public Organizador getOrganizador() {
 		return this.organizador;
+	}
+	
+	public Set<Patrocinio> getPatrocinios(){
+		return this.patrocinios;
 	}
 	
 	public void setNombre(String nombre) {
@@ -79,6 +91,10 @@ public class EdicionEvento {
 	
 	public void setFechaFin(LocalDate fecha) {
 		this.fechaFin = fecha;
+	}
+	
+	public void setOrganizador(Organizador o) {
+		this.organizador = o;
 	}
 	
 	public List<String> getTRegistro() {
@@ -111,5 +127,8 @@ public class EdicionEvento {
 		}
 		return false;
 	}
-
+	
+	public void agregarPatrocinio(Patrocinio p) {
+		this.patrocinios.add(p);
+	}
 }

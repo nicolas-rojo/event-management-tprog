@@ -1,11 +1,8 @@
 package logica;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.time.LocalDate;
 
-import logica.datatypes.DataPatrocinio;
-import logica.datatypes.Nivel;
+import logica.datatypes.*;
 
 public class Patrocinio {
 	private LocalDate fecha;
@@ -14,16 +11,19 @@ public class Patrocinio {
 	private int cod;
 	private int ctdCupo;
 	
-	private Set<TipoRegistro> tipoRegistros;
+	private TipoRegistro tipoRegistro;
+	private Institucion institucion;
+	private EdicionEvento edicion;
 	
 	public Patrocinio(DataPatrocinio datos) {
 		this.fecha = datos.getFecha();
 		this.monto = datos.getMonto();
 		this.nivel = datos.getNivel();
 		this.cod = datos.getCod();
-		this.ctdCupo = datos.getCtdCupo();
-		
-		this.tipoRegistros = new HashSet<>();
+		this.ctdCupo = datos.getCtdCupo();	
+		this.tipoRegistro = null;
+		this.institucion = null;
+		this.edicion = null;
 	}
 	
 	public LocalDate getFecha() {
@@ -46,6 +46,18 @@ public class Patrocinio {
 		return ctdCupo;
 	}
 	
+	public TipoRegistro getTipoRegistro() {
+		return this.tipoRegistro;
+	}
+	
+	public Institucion getInstitucion() {
+		return this.institucion;
+	}
+	
+	public EdicionEvento getEdicionEvento() {
+		return this.edicion;
+	}
+	
 	public void setFecha(LocalDate f) {
 		this.fecha = f;
 	}
@@ -64,5 +76,17 @@ public class Patrocinio {
 	
 	public void setCupo(int cupo) {
 		this.ctdCupo = cupo;
+	}
+	
+	public void setTipoRegistro(TipoRegistro t) {
+		this.tipoRegistro = t;
+	}
+	
+	public void setInstitucion(Institucion i) {
+		this.institucion = i;
+	}
+	
+	public void setEdicionEvento(EdicionEvento ee) {
+		this.edicion = ee;
 	}
 }
