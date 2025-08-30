@@ -25,6 +25,8 @@ public class DataEdicion {
 		this.ciudad = ciudad;
 		this.pais = pais;
 	}
+	
+	
 		
 	public String getNombre() {
 		return this.nombre;

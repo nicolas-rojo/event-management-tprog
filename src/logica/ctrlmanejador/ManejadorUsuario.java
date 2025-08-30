@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import logica.Usuario;
 
 public class ManejadorUsuario {
@@ -39,6 +40,8 @@ public class ManejadorUsuario {
     public Usuario getUsuarioEmail(String email) {
         return ((Usuario) usuariosEmail.get(email));
     }
+    
+    
 
     public Usuario[] getUsuarios() {
         if (usuariosNickname.isEmpty())
@@ -61,6 +64,17 @@ public class ManejadorUsuario {
     			res.add(e.getNickname());
     	}
     	return res;
+	}
+    
+    public List<String> getOrganizadores() {
+        List<String> organizadores = new ArrayList<>();       
+        for (Usuario e : this.usuariosNickname.values()) {           
+            if (e.esOrganizador()) {
+                organizadores.add(e.getNickname());
+            }
+        }
+        
+        return organizadores;
     }
 
 }

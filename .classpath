@@ -6,6 +6,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="jcalendar-1.4.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/nacho/proyectoTProg/jcalendar-1.4.jar"/>
+>>>>>>> casosAltaEvEd
 	<classpathentry kind="output" path="bin"/>
 </classpath>
