@@ -21,7 +21,6 @@ import logica.Registro;
 import logica.TipoRegistro;
 import logica.Asistente;
 import logica.EdicionEvento;
-import logica.Categoria;
 
 
 public class ControladorEventos implements IEventos {
@@ -47,12 +46,10 @@ public class ControladorEventos implements IEventos {
 		if (e != null) {
 			throw new EventoRepetidoExcepcion("nombre de evento en uso");
 		}
-		else if(cat.equals(""))
+		else if(dataEvento.getCategoria() == null)
 			throw new EventoSinCategoriaExcepcion("falto ingresar una categoria");
 		else {
 			e = new Evento(dataEvento);
-			Categoria c = me.getCategoria(cat);
-			e.agregarCategoria(c);
 			me.addEvento(e);
 		}
 		
@@ -63,10 +60,9 @@ public class ControladorEventos implements IEventos {
 		return me.getEventos();
 	}
 	
-	public void nuevaEdicion(DataEdicion dataEdicion, String evento) throws EdicionRepetidaExcepcion {
+	public void nuevaEdicion(DataEdicion dataEdicion) throws EdicionRepetidaExcepcion {
 		ManejadorEvento me = ManejadorEvento.getInstance();
-		
-		Evento e = me.getEvento(evento);
+		Evento e = me.getEvento(dataEdicion.getEvento());
 		EdicionEvento ee = e.getEdicion(dataEdicion.getNombre()); 
 		if (ee != null) {
 			throw new EdicionRepetidaExcepcion("nombre de edicion en uso");

@@ -30,9 +30,4 @@ public class Organizador extends Usuario{
     public boolean esAsistente() {
     	return false;
     }
-
-	@Override
-    public boolean esOrganizador() {
-    	return true;
-    }
 }

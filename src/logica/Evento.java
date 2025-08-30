@@ -90,9 +90,5 @@ public class Evento {
 		EdicionEvento ed = this.ediciones.get(edicion);
 		return ed.cupoTRegistro(tReg);
 	}
-
-	public void agregarCategoria(Categoria c) {
-		this.categorias.add(c);
-	}
 }
 
