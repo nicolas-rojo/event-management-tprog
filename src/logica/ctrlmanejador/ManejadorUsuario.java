@@ -62,5 +62,14 @@ public class ManejadorUsuario {
     	}
     	return res;
     }
+    
+    public List<String> getOrganizadores() {
+    	List<String> res = new ArrayList<>();
+    	for (Usuario e: this.usuariosNickname.values()) {
+    		if (e.esOrganizador())
+    			res.add(e.getNickname());
+    	}
+    	return res;
+    }
 
 }

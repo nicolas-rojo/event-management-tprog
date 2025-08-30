@@ -15,6 +15,9 @@ import logica.datatypes.*;
 
 import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
+import logica.Categoria;
+import logica.ctrlmanejador.ControladorEventos;
+import logica.ctrlmanejador.ManejadorEvento;
 
 import javax.swing.JMenu;
 import java.awt.event.ActionEvent;
@@ -30,6 +33,7 @@ public class Principal {
     private ConsultaUsuario lisUsrInternalFrame;
     private ModificarUsuario modUsrInternalFrame;
     private CrearEvento creEventoInternalFrame;
+    private CrearEdicion crearEdicionInternalFrame;
     private CrearTipoRegistro creTRegistroInternalFrame;
     private RegistroEdicionEvento regEdEvInternalFrame;
     private ConsultaTipoRegistro consuTRegistroInternalFrame;
@@ -40,6 +44,15 @@ public class Principal {
             public void run() {
                 try {
                     Principal window = new Principal();
+                    ControladorEventos control = new ControladorEventos();
+                    Categoria c1 = new Categoria("nacho1");
+                    Categoria c2 = new Categoria("nacho2");
+                    Categoria c3 = new Categoria("nach3");
+                    ManejadorEvento e = ManejadorEvento.getInstance();
+                    e.agregarCategoria("nacho1", c1);
+                    e.agregarCategoria("nacho2", c2);
+                    e.agregarCategoria("nach3", c3);
+                    
                     window.frmGestionDeUsuarios.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -67,7 +80,7 @@ public class Principal {
         modUsrInternalFrame = new ModificarUsuario(ICU);
         modUsrInternalFrame.setVisible(false);
         
-        creEventoInternalFrame = new CrearEvento();
+        creEventoInternalFrame = new CrearEvento(IEV);
         creEventoInternalFrame.setVisible(false);
         
         creTRegistroInternalFrame = new CrearTipoRegistro(IEV);
@@ -81,6 +94,9 @@ public class Principal {
         
         consuRegistroInternalFrame = new ConsultaRegistro(ICU);
         consuRegistroInternalFrame.setVisible(false);
+        
+        crearEdicionInternalFrame = new CrearEdicion(IEV, ICU);
+        crearEdicionInternalFrame.setVisible(false);
          
         frmGestionDeUsuarios.getContentPane().setLayout(null);
 
@@ -92,6 +108,7 @@ public class Principal {
         frmGestionDeUsuarios.getContentPane().add(regEdEvInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(consuTRegistroInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(consuRegistroInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(crearEdicionInternalFrame);
 
     }
 
@@ -167,6 +184,7 @@ public class Principal {
         menuItemConsultaRegistro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Muestro el InternalFrame para consulta de registro
+            	consuRegistroInternalFrame.limpiarYCerrar();
             	consuRegistroInternalFrame.cargarAsistentes();
             	consuRegistroInternalFrame.setVisible(true);
             }
@@ -180,6 +198,7 @@ public class Principal {
         menuItemAltaEvento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Muestro el InternalFrame para alta de evento
+            	creEventoInternalFrame.cargarCategorias();
                 creEventoInternalFrame.setVisible(true);
             }
         });
@@ -206,5 +225,16 @@ public class Principal {
             }
         });
         menuEventos.add(menuItemConsultaTRegistro);
+        
+        JMenuItem menuItemAltaEdicion = new JMenuItem("Alta de Edicion");
+        menuItemAltaEdicion.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e) {
+        		crearEdicionInternalFrame.limpiarFormulario();
+        		crearEdicionInternalFrame.cargarEventos();
+        		crearEdicionInternalFrame.cargarOrganizadores();        		
+        		crearEdicionInternalFrame.setVisible(true);
+        	}
+        });
+        menuEventos.add(menuItemAltaEdicion);
     }
 }

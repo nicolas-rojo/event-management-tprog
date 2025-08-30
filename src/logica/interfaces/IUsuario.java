@@ -31,6 +31,8 @@ public interface IUsuario {
     
     public abstract List<String> listarAsistentes();
     
+    public abstract List<String> listarOrganizadores();
+    
     public abstract void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro;
     
     public abstract List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado);

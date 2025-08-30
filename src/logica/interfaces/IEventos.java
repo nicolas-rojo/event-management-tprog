@@ -12,15 +12,17 @@ import logica.datatypes.DataTRegistro;
 
 public interface IEventos {
 
-		public abstract void nuevoEvento(DataEvento dataEvento, String cat) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion;
+		public abstract void nuevoEvento(DataEvento dataEvento, List<String> cats) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion;
 		
 		public abstract List<String> listarEventos();
+		
+		public abstract List<String> listarCategorias();
 		
 		public abstract List<String> listarEdiciones(String eventoSeleccionado);
 		
 		public abstract List<String> listarTRegistros(String eventoSeleccionado, String edicionSeleccionada);
 		
-		public abstract void nuevaEdicion(DataEdicion dataEdicion) throws EdicionRepetidaExcepcion;
+		public abstract void nuevaEdicion(DataEdicion dataEdicion, String evento) throws EdicionRepetidaExcepcion;
 		
 		public abstract void nuevoTipoRegistro(DataTRegistro dataTRegistro, String evento, String edicion) throws TipoDeRegistroRepetidoException;
 		

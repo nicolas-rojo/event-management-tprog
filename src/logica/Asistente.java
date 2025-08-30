@@ -42,6 +42,13 @@ public class Asistente extends Usuario{
     	return true;
     }
     
+    @Override
+    public boolean esOrganizador() {
+    	return false;
+    }
+    
+    
+    
     public boolean estaRegistrado(String edicion) {
     	for (Registro r : regs) {
     		if (r.esEdicion(edicion))

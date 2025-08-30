@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.JInternalFrame;
@@ -124,6 +123,9 @@ public class RegistroEdicionEvento extends JInternalFrame {
 					if (verificarFecha(fechaSeleccionada)) {
 						ctrlUsuarios.nuevoRegistro((String) comboBoxAsistentes.getSelectedItem(), (String) comboBoxEventos.getSelectedItem(), (String) comboBoxEdiciones.getSelectedItem(), (String) comboBoxTRegistros.getSelectedItem(), fechaSeleccionada);											
 					}
+					JOptionPane.showMessageDialog(RegistroEdicionEvento.this, "Edicion registrada correctamente", "Alta de Ediciion", JOptionPane.INFORMATION_MESSAGE);
+	                limpiarFormularios();
+	                setVisible(false);
 				} catch (AsistenteYaRegistrado ex) {
 					JOptionPane.showMessageDialog(RegistroEdicionEvento.this, ex.getMessage(), "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
 				} catch (NoHayCupoEdicionTRegistro ex) {
@@ -233,17 +235,14 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		if (fechaSeleccionada == null) {
 			JOptionPane.showMessageDialog(this, "Seleccione una fecha", "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
 			return false;
-		} else if (fechaSeleccionada.isAfter(LocalDate.now())) {
-			JOptionPane.showMessageDialog(this, "Seleccione una fecha válida", "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
-			return false;
-		}
+		} 
 		return true;
 	}
 	
 	public void limpiarFormularios() {
-		comboBoxEventos.removeAllItems();
-		comboBoxEdiciones.removeAllItems();
 		comboBoxTRegistros.removeAllItems();
+		comboBoxEdiciones.removeAllItems();
+		comboBoxEventos.removeAllItems();
 		comboBoxAsistentes.removeAllItems();
 	}
 }
