@@ -6,10 +6,10 @@ public class DataPatrocinio {
 	private LocalDate fecha;
 	private float monto;
 	private Nivel nivel;
-	private int cod;
+	private String cod;
 	private int ctdCupo;
 	
-	public DataPatrocinio(LocalDate fecha, float monto, Nivel nivel, int cod, int ctdCupo) {
+	public DataPatrocinio(LocalDate fecha, float monto, Nivel nivel, String cod, int ctdCupo) {
 		this.fecha = fecha;
 		this.monto = monto;
 		this.nivel = nivel;
@@ -29,7 +29,7 @@ public class DataPatrocinio {
 		return nivel;
 	}
 	
-	public int getCod() {
+	public String getCod() {
 		return cod;
 	}
 	
@@ -49,7 +49,7 @@ public class DataPatrocinio {
 		this.nivel = n;
 	}
 	
-	public void setCod(int cod) {
+	public void setCod(String cod) {
 		this.cod = cod;
 	}
 	

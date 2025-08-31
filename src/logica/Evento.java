@@ -3,6 +3,7 @@ package logica;
 import java.time.LocalDate;
 import java.util.Set;
 import logica.datatypes.DataEvento;
+import logica.datatypes.DTOEvento;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,18 +78,26 @@ public class Evento {
 		this.ediciones.put(edicion.getNombre(), edicion);
 	}
 	
+	public DTOEvento getDTOEvento() {
+	    Set<String> catStrings = new HashSet<>();
+	    for (Categoria c : categorias) {
+	        catStrings.add(c.getNombre());
+	    }
+	    Set<String> edStrings = new HashSet<>(ediciones.keySet());
+	    return new DTOEvento(nombre, sigla, fechaAlta, descripcion, catStrings, edStrings);
+	}
+	
 	public List<String> getTRegistroEdicion(String edSeleccionada) {
-		EdicionEvento ed = this.getEdicion(edSeleccionada);
-		return ed.getTRegistro();
+	    EdicionEvento ed = this.getEdicion(edSeleccionada);
+	    return ed.getTRegistro();
 	}
 	
 	public boolean cupoEdTRegistro(String edicion, String tReg) {
-		EdicionEvento ed = this.ediciones.get(edicion);
-		return ed.cupoTRegistro(tReg);
+	    EdicionEvento ed = this.ediciones.get(edicion);
+	    return ed.cupoTRegistro(tReg);
 	}
 	
 	public void agregarCategoria(Categoria c) {
 		this.categorias.add(c);
 	}
 }
-

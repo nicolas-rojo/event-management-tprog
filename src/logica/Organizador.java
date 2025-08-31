@@ -38,6 +38,22 @@ public class Organizador extends Usuario{
     public void setUrl(String url) {
         this.url = url;
     }
+     
+    public EdicionEvento[] getEdiciones() {
+        if (ediciones == null) {
+            return null;
+        }
+        
+        EdicionEvento[] arrayEdiciones = new EdicionEvento[ediciones.size()];
+        int i = 0;
+        
+        for (EdicionEvento edicion : ediciones.values()) {
+            arrayEdiciones[i] = edicion;
+            i++;
+        }
+        
+        return arrayEdiciones;
+    }
     
     @Override
     public boolean esAsistente() {

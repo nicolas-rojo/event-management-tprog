@@ -6,7 +6,6 @@ import java.util.List;
 import excepciones.AsistenteYaRegistrado;
 import excepciones.ErrorDetallesRegistroException;
 import excepciones.NoHayCupoEdicionTRegistro;
-import excepciones.NoHayRegistrosAsistente;
 import excepciones.UsuarioNoExisteException;
 import excepciones.UsuarioRepetidoException;
 import logica.datatypes.*;

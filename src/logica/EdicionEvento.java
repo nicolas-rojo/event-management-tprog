@@ -16,7 +16,6 @@ public class EdicionEvento {
 	private LocalDate fechaAlta;
 	private String ciudad;
 	private String pais;
-	
 	private Organizador organizador;
 	private Set<TipoRegistro> tipoRegistros;
 	private Set<Patrocinio> patrocinios;
@@ -30,7 +29,7 @@ public class EdicionEvento {
 		this.fechaAlta = dataEd.getFechaAlta();
 		this.ciudad = dataEd.getCiudad();
 		this.pais = dataEd.getPais();
-		
+		this.organizador = null;
 		this.tipoRegistros = new HashSet<>();
 		this.patrocinios = new HashSet<>();
 		this.registros = new ArrayList<>();
@@ -57,8 +56,20 @@ public class EdicionEvento {
 	
 	}
 	
+	public String getCuidad() {
+		return this.ciudad;
+	}
+	
+	public String getPais() {
+		return this.pais;
+	}
+	
 	public Organizador getOrganizador() {
 		return this.organizador;
+	}
+	
+	public Set<Patrocinio> getPatrocinios(){
+		return this.patrocinios;
 	}
 	
 	public void setNombre(String nombre) {
@@ -79,6 +90,10 @@ public class EdicionEvento {
 	
 	public void setFechaFin(LocalDate fecha) {
 		this.fechaFin = fecha;
+	}
+	
+	public void setOrganizador(Organizador o) {
+		this.organizador = o;
 	}
 	
 	public List<String> getTRegistro() {
@@ -113,7 +128,26 @@ public class EdicionEvento {
 		return false;
 	}
 	
+	public List<String> getRegistrosInfo() {
+	    List<String> info = new ArrayList<>();
+	    for (Registro r : this.registros) {
+	        String tipo = (r.getTipoRegistro() != null) ? r.getTipoRegistro().getNombre() : "Sin tipo";
+	        String fecha = (r.getFecha() != null) ? r.getFecha().toString() : "Sin fecha";
+	        info.add("Fecha: " + fecha + ", Tipo: " + tipo);
+	    }
+	    return info;
+	}
+
+	public List<Patrocinio> getPatrociniosLista() {
+	    List<Patrocinio> lista = new ArrayList<>(this.patrocinios);
+	    return lista;
+	}
+
+	public void agregarPatrocinio(Patrocinio p) {
+	    this.patrocinios.add(p);
+	}
+
 	public void agregarOrganizador(Organizador org) {
-		this.organizador = org;
+	    this.organizador = org;
 	}
 }

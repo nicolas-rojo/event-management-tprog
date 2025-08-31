@@ -20,6 +20,7 @@ import logica.interfaces.IUsuario;
 
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class RegistroEdicionEvento extends JInternalFrame {
 	private IEventos ctrlEventos;
 	private IUsuario ctrlUsuarios;

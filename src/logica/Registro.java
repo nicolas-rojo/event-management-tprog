@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class Registro {
 	private LocalDate fechaReg;
-	
 	private EdicionEvento ed;
 	private TipoRegistro tr;
 	
@@ -14,6 +13,10 @@ public class Registro {
 	
 	public LocalDate getFecha() {
 		return this.fechaReg;
+	}
+	
+	public TipoRegistro getTipoRegistro() {
+		return this.tr;
 	}
 	
 	public void setFecha(LocalDate f) {

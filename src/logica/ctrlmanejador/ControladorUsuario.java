@@ -6,12 +6,9 @@ import excepciones.UsuarioRepetidoException;
 import excepciones.AsistenteYaRegistrado;
 import excepciones.ErrorDetallesRegistroException;
 import excepciones.NoHayCupoEdicionTRegistro;
-import excepciones.NoHayRegistrosAsistente;
 import excepciones.UsuarioNoExisteException;
 import java.time.LocalDate;
-
 import java.util.List;
-
 import logica.Asistente;
 import logica.Organizador;
 import logica.Usuario;

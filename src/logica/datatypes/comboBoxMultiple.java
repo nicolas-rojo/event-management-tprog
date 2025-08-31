@@ -48,8 +48,7 @@ public class comboBoxMultiple extends JComboBox<String> {
     }
     
     public void removeAllItems() {
-        super.removeAllItems();   // limpia el combo real
-        selectedItems.clear();    // limpia las selecciones internas
-//        updateDisplay();
+        super.removeAllItems();
+        selectedItems.clear();
     }
 }
