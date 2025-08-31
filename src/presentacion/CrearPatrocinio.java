@@ -404,13 +404,9 @@ public class CrearPatrocinio extends JInternalFrame {
                 
                 float monto = Float.parseFloat(textFieldMonto.getText().trim());
                 int cantidadCupos = Integer.parseInt(textFieldCantidadCupos.getText().trim());
-                int codigo = Integer.parseInt(textFieldCodigo.getText().trim());
+                String codigo = (textFieldCodigo.getText().trim());
                 
-                // Obtener el objeto TipoRegistro completo
-                // Necesitamos obtener el objeto TipoRegistro real, no solo DataTRegistro
-                // Esto depende de cómo esté implementado tu controlador
-                // Asumiendo que tienes un método para obtener el TipoRegistro
-                TipoRegistro tipoRegistro = obtenerTipoRegistroCompleto(evento, edicion, tipoRegistroNombre);
+                //String tipoRegistro = obtenerTipoRegistroCompleto(evento, edicion, tipoRegistroNombre);
                 
                 // Crear el objeto DataPatrocinio
                 DataPatrocinio patrocinio = new DataPatrocinio(
@@ -423,7 +419,7 @@ public class CrearPatrocinio extends JInternalFrame {
                 
                 // Crear el patrocinio usando el controlador
                 // Ahora pasamos TipoRegistro en lugar de DataTRegistro
-                controlInst.nuevoPatrocinio(patrocinio, institucionNombre, evento, edicion, tipoRegistro);
+                controlInst.nuevoPatrocinio(patrocinio, institucionNombre, evento, edicion, tipoRegistroNombre);
                 
                 JOptionPane.showMessageDialog(this, 
                     "El patrocinio se ha registrado exitosamente",
@@ -446,14 +442,9 @@ public class CrearPatrocinio extends JInternalFrame {
 
     // Método auxiliar para obtener el TipoRegistro completo
     private TipoRegistro obtenerTipoRegistroCompleto(String evento, String edicion, String tipoRegistroNombre) {
-        // Necesitas implementar este método según tu estructura
-        // Esto es solo un ejemplo - debes adaptarlo a tu código real
         try {
             // Obtener DataTRegistro primero
             DataTRegistro dataTRegistro = controlEventos.getDataTRegistro(evento, edicion, tipoRegistroNombre);
-            
-            // Crear un TipoRegistro a partir del DataTRegistro
-            // Asumiendo que TipoRegistro tiene un constructor que acepta DataTRegistro
             return new TipoRegistro(dataTRegistro);
         } catch (Exception e) {
             throw new RuntimeException("Error al obtener el tipo de registro: " + e.getMessage(), e);
@@ -504,7 +495,7 @@ public class CrearPatrocinio extends JInternalFrame {
         try {
             float montoVal = Float.parseFloat(monto);
             int cuposVal = Integer.parseInt(cantidadCupos);
-            int codigoVal = Integer.parseInt(codigo);
+            String codigoVal = codigo;
             
             if (montoVal < 0) {
                 JOptionPane.showMessageDialog(this, "El monto debe ser un valor positivo",
@@ -518,7 +509,7 @@ public class CrearPatrocinio extends JInternalFrame {
                 return false;
             }
             
-            if (codigoVal < 0) {
+            if (codigoVal.equals("")) {
                 JOptionPane.showMessageDialog(this, "El código debe ser un valor positivo",
                     "Validación", JOptionPane.ERROR_MESSAGE);
                 return false;

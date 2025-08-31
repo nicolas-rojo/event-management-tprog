@@ -56,13 +56,12 @@ public class ControladorInstituciones implements IInstituciones{
 		EdicionEvento ee = e.getEdicion(edicion);
 		p.setEdicionEvento(ee);
 		Set<Patrocinio> patrocinios = ee.getPatrocinios();
-		for(Patrocinio pat : patrocinios)
+		for(Patrocinio pat : patrocinios) {
 			if(pat.getInstitucion().getNombre().equals(institucion)) {
 				throw new PatrocinioRepetidoException("Ya existe este patrocinio en esta edicion");
 			}
-		
+		}
 		TipoRegistro tr = ee.getTRegistro(t);
-		
 		p.setTipoRegistro(tr);
 		i.añadirPatrocinio(p);
 		ee.agregarPatrocinio(p);

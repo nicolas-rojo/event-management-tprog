@@ -16,6 +16,7 @@ import excepciones.InstitucionRepetidaException;
 import excepciones.NoHayCupoEdicionTRegistro;
 import excepciones.TipoDeRegistroRepetidoException;
 import excepciones.UsuarioRepetidoException;
+import excepciones.PatrocinioRepetidoException;
 import logica.Fabrica;
 
 import logica.datatypes.*;
@@ -424,7 +425,7 @@ public class Principal {
 			ICU.nuevoRegistro("SofiM", "Montevideo Comics", "Montevideo Comics 2024", "General", LocalDate.of(2024, 7, 16));
 			
 			
-    	}catch(TipoDeRegistroRepetidoException | NoHayCupoEdicionTRegistro |  AsistenteYaRegistrado e){
+    	}catch(TipoDeRegistroRepetidoException | NoHayCupoEdicionTRegistro |  AsistenteYaRegistrado | PatrocinioRepetidoException e){
     		e.printStackTrace();
     	}		
     }
