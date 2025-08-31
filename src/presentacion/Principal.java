@@ -77,7 +77,8 @@ public class Principal {
         creUsrInternalFrame = new CrearUsuario(ICU);
         creUsrInternalFrame.setVisible(false);
 
-        lisUsrInternalFrame = new ConsultaUsuario(ICU);
+        // CORRECCIÓN: Pasar ambos parámetros al constructor
+        lisUsrInternalFrame = new ConsultaUsuario(ICU, ICE);
         lisUsrInternalFrame.setVisible(false);
         
         modUsrInternalFrame = new ModificarUsuario(ICU);

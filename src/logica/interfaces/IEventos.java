@@ -11,6 +11,7 @@ import excepciones.TipoDeRegistroRepetidoException;
 import logica.datatypes.DTOEvento;
 import logica.datatypes.DataEdicion;
 import logica.datatypes.DataEvento;
+import logica.datatypes.DataEdicionEvento;
 import logica.datatypes.DataTRegistro;
 import logica.EdicionEvento;
 
@@ -33,4 +34,6 @@ public interface IEventos {
 		public abstract DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro);
 		
 		public abstract EdicionEvento obtenerEdicionEvento(String nombreEvento, String nombreEdicionEvento);
+		
+		public abstract DataEdicionEvento[] getEdicionesEventoOrganizador(String nickname);
 }

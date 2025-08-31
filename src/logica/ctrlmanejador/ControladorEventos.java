@@ -13,12 +13,14 @@ import logica.datatypes.DataEvento;
 import logica.datatypes.DTOEvento;
 import logica.datatypes.DataTRegistro;
 import logica.datatypes.DataEdicion;
+import logica.datatypes.DataEdicionEvento;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import logica.Evento;
+import logica.Organizador;
 import logica.Registro;
 import logica.TipoRegistro;
 import logica.Asistente;
@@ -156,5 +158,16 @@ public class ControladorEventos implements IEventos {
 		Evento e = me.getEvento(nombreEvento);
 		return e.getEdicion(nombreEdicionEvento);
 	}
+	
+	public DataEdicionEvento[] getEdicionesEventoOrganizador(String nickname) {
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		Organizador o = (Organizador) mu.getUsuarioNickname(nickname);
+		EdicionEvento[] ee = o.getEdiciones();
+		DataEdicionEvento[] res = new DataEdicionEvento[ee.length];
+		for (int i = 0; i < ee.length; i++) {
+			res[i] = new DataEdicionEvento(ee[i].getNombre(), ee[i].getSigla(), ee[i].getFechaIni(), ee[i].getFechaFin(), 
+					ee[i].getFechaAlta(), ee[i].getCuidad(), ee[i].getPais());
+		}
+		return res;
+	}
 }
-
