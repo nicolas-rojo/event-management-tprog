@@ -2,6 +2,7 @@ package logica.interfaces;
 
 import java.util.List;
 
+import excepciones.CategoriaRepetidaException;
 import excepciones.EdicionRepetidaExcepcion;
 import excepciones.EventoRepetidoExcepcion;
 import excepciones.EventoSinCategoriaExcepcion;
@@ -17,15 +18,19 @@ import logica.EdicionEvento;
 
 public interface IEventos {
 
-		public abstract void nuevoEvento(DataEvento dataEvento, String cat) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion;
+		public abstract void nuevoEvento(DataEvento dataEvento, List<String> cats) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion;
+		
+		public abstract void nuevaCategoria(String cat) throws CategoriaRepetidaException;
 		
 		public abstract List<String> listarEventos();
+		
+		public abstract List<String> listarCategorias();
 		
 		public abstract List<String> listarEdiciones(String eventoSeleccionado);
 		
 		public abstract List<String> listarTRegistros(String eventoSeleccionado, String edicionSeleccionada);
 		
-		public abstract void nuevaEdicion(DataEdicion dataEdicion) throws EdicionRepetidaExcepcion;
+		public abstract void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion;
 		
 		public abstract DTOEvento[] listarInfoEvento() throws EventoNoExisteExcepcion;
 		

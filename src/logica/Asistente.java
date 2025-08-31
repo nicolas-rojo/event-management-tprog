@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logica.datatypes.ParEdicionRegistro;
+import logica.datatypes.DataAsistente;
 import logica.datatypes.DataDetalleRegistro;
 
 public class Asistente extends Usuario{
@@ -17,6 +18,14 @@ public class Asistente extends Usuario{
 		super(nombre, nickname, email);
         this.apellido = apellido;
         this.fechaNac = fechaNac;
+        
+        this.regs = new ArrayList<>();
+    }
+	
+	public Asistente(DataAsistente dataAsistente){
+		super(dataAsistente.getNombre(), dataAsistente.getNickname(), dataAsistente.getEmail());
+        this.apellido = dataAsistente.getApellido();
+        this.fechaNac = dataAsistente.getFechaNac();
         
         this.regs = new ArrayList<>();
     }
@@ -41,6 +50,13 @@ public class Asistente extends Usuario{
     public boolean esAsistente() {
     	return true;
     }
+    
+    @Override
+    public boolean esOrganizador() {
+    	return false;
+    }
+    
+    
     
     public boolean estaRegistrado(String edicion) {
     	for (Registro r : regs) {
