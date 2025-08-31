@@ -36,6 +36,18 @@ public class ControladorUsuario implements IUsuario {
         mu.addUsuario(a);
     }
     
+    public void registrarAsistente(DataAsistente datos) throws UsuarioRepetidoException {
+        ManejadorUsuario mu = ManejadorUsuario.getInstance();
+        Usuario u = mu.getUsuarioNickname(datos.getNickname());
+        if (u != null)
+            throw new UsuarioRepetidoException("Nickname ya en uso");
+        u = mu.getUsuarioEmail(datos.getEmail());
+        if (u != null)
+            throw new UsuarioRepetidoException("Email ya en uso");
+        Asistente a = new Asistente(datos.getNombre(), datos.getNickname(), datos.getEmail(), datos.getApellido(), datos.getFechaNac());
+        mu.addUsuario(a);
+    }
+    
     public void registrarOrganizador(String nombre, String nickname, String email, String descripcion, String url) throws UsuarioRepetidoException {
     	ManejadorUsuario mu = ManejadorUsuario.getInstance();
         Usuario u = mu.getUsuarioNickname(nickname);
@@ -45,6 +57,18 @@ public class ControladorUsuario implements IUsuario {
         if (u != null)
             throw new UsuarioRepetidoException("Email ya en uso");
         Organizador o = new Organizador(nombre, nickname, email, descripcion, url);
+        mu.addUsuario(o);
+    }
+    
+    public void registrarOrganizador(DataOrganizador datos) throws UsuarioRepetidoException {
+    	ManejadorUsuario mu = ManejadorUsuario.getInstance();
+        Usuario u = mu.getUsuarioNickname(datos.getNickname());
+        if (u != null)
+            throw new UsuarioRepetidoException("Nickname ya en uso");
+        u = mu.getUsuarioEmail(datos.getEmail());
+        if (u != null)
+            throw new UsuarioRepetidoException("Email ya en uso");
+        Organizador o = new Organizador(datos.getNombre(), datos.getNickname(), datos.getEmail(), datos.getDescripcion(), datos.getUrl());
         mu.addUsuario(o);
     }
 

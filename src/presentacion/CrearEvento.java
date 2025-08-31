@@ -101,7 +101,7 @@ public class CrearEvento extends JInternalFrame {
         getContentPane().add(textFieldSigla);
         textFieldSigla.setColumns(10);
         
-        lblCategoria = new JLabel("Categoria :");
+        lblCategoria = new JLabel("Categorias :");
         lblCategoria.setHorizontalAlignment(SwingConstants.RIGHT);
         lblCategoria.setBounds(30, 178, 80, 15);
         getContentPane().add(lblCategoria);
@@ -211,7 +211,7 @@ public class CrearEvento extends JInternalFrame {
         String siglaEvento = textFieldSigla.getText();
         List<String> categoria = comboBoxCat.getSelectedItems();
 
-        if (nombreEvento.isEmpty() || descripcionEvento.isEmpty() || siglaEvento.isEmpty() || categoria == null || categoria.isEmpty() || dateChooser.getDate() == null)  {
+        if (nombreEvento.isEmpty() || descripcionEvento.isEmpty() || siglaEvento.isEmpty() || categoria == null || comboBoxCat.getSelectedItem().equals("No hay categorias") || dateChooser.getDate() == null)  {
             JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Alta de Evento", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -226,7 +226,7 @@ public class CrearEvento extends JInternalFrame {
         java.util.Calendar cal = java.util.Calendar.getInstance();
         cal.add(java.util.Calendar.YEAR,0);
         dateChooser.setDate(cal.getTime());
-        ;
+        comboBoxCat.removeAllItems();
     }
           
     public void cargarCategorias() {

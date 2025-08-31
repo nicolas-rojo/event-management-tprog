@@ -109,7 +109,11 @@ public class EdicionEvento {
 				return (cupo > 0);
 			}
 		}
+		System.out.println("NO ENCONTRE");
 		return false;
 	}
-
+	
+	public void agregarOrganizador(Organizador org) {
+		this.organizador = org;
+	}
 }

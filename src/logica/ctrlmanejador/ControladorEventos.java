@@ -6,6 +6,7 @@ import excepciones.EventoRepetidoExcepcion;
 import excepciones.EventoSinCategoriaExcepcion;
 import excepciones.NoHayCupoEdicionTRegistro;
 import excepciones.AsistenteYaRegistrado;
+import excepciones.CategoriaRepetidaException;
 import excepciones.EdicionRepetidaExcepcion;
 
 import logica.datatypes.DataEvento;
@@ -17,9 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logica.Evento;
+import logica.Organizador;
 import logica.Registro;
 import logica.TipoRegistro;
 import logica.Asistente;
+import logica.Categoria;
 import logica.EdicionEvento;
 
 public class ControladorEventos implements IEventos {
@@ -65,8 +68,10 @@ public class ControladorEventos implements IEventos {
 		return me.getCategorias();
 	}
 	
-	public void nuevaEdicion(DataEdicion dataEdicion, String evento) throws EdicionRepetidaExcepcion {
+	public void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion {
 		ManejadorEvento me = ManejadorEvento.getInstance();
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		Organizador o = (Organizador) mu.getUsuarioNickname(org);
 		Evento e = me.getEvento(evento);
 		EdicionEvento ee = e.getEdicion(dataEdicion.getNombre()); 
 		if (ee != null) {
@@ -75,6 +80,8 @@ public class ControladorEventos implements IEventos {
 		else {
 			ee = new EdicionEvento(dataEdicion);
 			e.agregarEdicion(ee);
+			o.agregarEdicion(ee);
+			ee.agregarOrganizador(o);
 		}
 	}
 	
@@ -122,6 +129,18 @@ public class ControladorEventos implements IEventos {
 		EdicionEvento ed = e.getEdicion(edicion);
 		TipoRegistro tr =  ed.getTRegistro(tipoRegistro);
 		return new DataTRegistro(tr.getNombre(), tr.getDescripcion(), tr.getCosto(), tr.getCupo());
+	}
+	
+	public void nuevaCategoria(String cat) throws CategoriaRepetidaException {
+		ManejadorEvento me = ManejadorEvento.getInstance();
+		Categoria c = me.getCategoria(cat);
+		if(c != null) {
+			throw new CategoriaRepetidaException("Ya existe esta categoria");
+		}else {
+			Categoria categoria = new Categoria(cat);
+			me.agregarCategoria(cat, categoria);
+		}
+		
 	}
 }
 

@@ -236,12 +236,13 @@ public class CrearEdicion extends JInternalFrame {
         LocalDate fechaFin = toLocalDate(dateChooser1.getDate());
         LocalDate fechaAlta = toLocalDate(dateChooser2.getDate());
         String eventoEdicion = (String) comboBoxEventos.getSelectedItem();	
+        String nombreOrg = (String) comboBoxOrgs.getSelectedItem();
                              
         if (checkFormulario()) {
             try {
                 
                 DataEdicion d = new DataEdicion(nombreEdicion, siglaEdicion, fechaIni, fechaFin, fechaAlta, paisEdicion, ciudadEdicion);
-                controlEvt.nuevaEdicion(d, eventoEdicion);
+                controlEvt.nuevaEdicion(d, eventoEdicion, nombreOrg);
                 JOptionPane.showMessageDialog(this, "Edicion registrada correctamente", "Alta de Ediciion", JOptionPane.INFORMATION_MESSAGE);
                 limpiarFormulario();
                 setVisible(false);
@@ -261,7 +262,7 @@ public class CrearEdicion extends JInternalFrame {
 	     LocalDate fechaAlta = toLocalDate(dateChooser2.getDate());	     
 	     if (nombreEdicion.isEmpty() || siglaEdicion.isEmpty() || ciudadEdicion.isEmpty() || ciudadEdicion.isEmpty() 
               || paisEdicion.isEmpty() ||dateChooser.getDate() == null || dateChooser1.getDate() == null || dateChooser2.getDate() == null
-              || comboBoxOrgs.getSelectedItem() == null || comboBoxEventos.getSelectedItem() == null)  {
+              || comboBoxOrgs.getSelectedItem().equals("No hay organizadores") || comboBoxEventos.getSelectedItem().equals("No hay eventos"))  {
 	    	 	JOptionPane.showMessageDialog(this, "No puede haber campos vacíos","Alta de Edicion", JOptionPane.ERROR_MESSAGE);
 	    	 	return false;
 	     }
