@@ -37,7 +37,7 @@ public class Principal {
     private IUsuario ICU;
     private IEventos ICE;
     private IInstituciones IIN;
-	
+    
     private JFrame frmGestionDeUsuarios;
     private CrearUsuario creUsrInternalFrame;
     private ConsultaUsuario lisUsrInternalFrame;
@@ -48,6 +48,12 @@ public class Principal {
     private RegistroEdicionEvento regEdEvInternalFrame;
     private ConsultaTipoRegistro consuTRegistroInternalFrame;
     private ConsultaRegistro consuRegistroInternalFrame;
+    
+    // Nuevos InternalFrames para Instituciones
+    private CrearInstitucion creInstitucionInternalFrame;
+    private ConsultaInstitucion consInstitucionInternalFrame;
+    private CrearPatrocinio crePatrocinioInternalFrame;
+    
     private boolean cond;
 
     public static void main(String[] args) {
@@ -108,6 +114,16 @@ public class Principal {
         
         crearEdicionInternalFrame = new CrearEdicion(ICE, ICU);
         crearEdicionInternalFrame.setVisible(false);
+        
+        // Nuevos InternalFrames para Instituciones
+        creInstitucionInternalFrame = new CrearInstitucion(IIN);
+        creInstitucionInternalFrame.setVisible(false);
+        
+        consInstitucionInternalFrame = new ConsultaInstitucion(IIN);
+        consInstitucionInternalFrame.setVisible(false);
+        
+        crePatrocinioInternalFrame = new CrearPatrocinio(ICE, IIN);
+        crePatrocinioInternalFrame.setVisible(false);
          
         frmGestionDeUsuarios.getContentPane().setLayout(null);
 
@@ -120,6 +136,11 @@ public class Principal {
         frmGestionDeUsuarios.getContentPane().add(consuTRegistroInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(consuRegistroInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(crearEdicionInternalFrame);
+        
+        // Agregar nuevos InternalFrames al contenido
+        frmGestionDeUsuarios.getContentPane().add(creInstitucionInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(consInstitucionInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(crePatrocinioInternalFrame);
 
     }
 
@@ -150,7 +171,7 @@ public class Principal {
         menuCargarDatos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
             	if(!cond) {
-            		cargarDatos(ICU, ICE);
+            		cargarDatos(ICU, ICE, IIN);
             		cond = true;
             	}else {
             		JOptionPane.showMessageDialog(frmGestionDeUsuarios, "Los datos ya fueron cargados", "Gestion de Usuarios", JOptionPane.ERROR_MESSAGE);
@@ -260,9 +281,44 @@ public class Principal {
         	}
         });
         menuEventos.add(menuItemAltaEdicion);
+        
+        // Nueva pestaña para Instituciones
+        JMenu menuInstituciones = new JMenu("Instituciones");
+        menuBar.add(menuInstituciones);
+        
+        JMenuItem menuItemAltaInstitucion = new JMenuItem("Alta de Institución");
+        menuItemAltaInstitucion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para alta de institución
+                creInstitucionInternalFrame.limpiarFormulario();
+                creInstitucionInternalFrame.setVisible(true);
+            }
+        });
+        menuInstituciones.add(menuItemAltaInstitucion);
+        
+        JMenuItem menuItemConsultaInstitucion = new JMenuItem("Consulta de Institución");
+        menuItemConsultaInstitucion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para consulta de instituciones
+                consInstitucionInternalFrame.cargarInstituciones();
+                consInstitucionInternalFrame.setVisible(true);
+            }
+        });
+        menuInstituciones.add(menuItemConsultaInstitucion);
+        
+        JMenuItem menuItemAltaPatrocinio = new JMenuItem("Alta de Patrocinio");
+        menuItemAltaPatrocinio.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para alta de patrocinio
+                crePatrocinioInternalFrame.limpiarFormulario();
+                crePatrocinioInternalFrame.cargarDatos();
+                crePatrocinioInternalFrame.setVisible(true);
+            }
+        });
+        menuInstituciones.add(menuItemAltaPatrocinio);
     }
     
-    public void cargarDatos(IUsuario ICU, IEventos IEV) {
+    public void cargarDatos(IUsuario ICU, IEventos IEV, IInstituciones II) {
     	try {
     		IEV.nuevaCategoria("Tecnologia");
     		IEV.nuevaCategoria("Innovacion");
@@ -276,7 +332,6 @@ public class Principal {
     		IEV.nuevaCategoria("Negocios");
     		IEV.nuevaCategoria("Moda");
     		IEV.nuevaCategoria("Investigacion");
-    		
         	
         	ICU.registrarAsistente(new DataAsistente("Ana ", "atorres", "atorres@gmail.com", "Torres", LocalDate.of(1990, 5, 12)));
         	ICU.registrarAsistente(new DataAsistente("Martin", "msilva", "martin.silva@fing.edu.uy", "Silva",  LocalDate.of(1987, 8, 21)));
@@ -295,7 +350,6 @@ public class Principal {
         	ICU.registrarOrganizador(new DataOrganizador("Intendencia de Montevideo", "imm", "contacto@imm.gub.uy", "Gobierno departamental de Montevideo.", "https://montevideo.gub.uy/"));
         	ICU.registrarOrganizador(new DataOrganizador("Universidad de la Rep´ublica", "udelar", "contacto@udelar.edu.uy", "Universidad p´ublica de Uruguay.", "https://udelar.edu.uy/"));
         	ICU.registrarOrganizador(new DataOrganizador("Ministerio de Educaci´on y Cultura", "mec", "mec@mec.gub.uy", "Instituci´on p´ublica promotora de cultura", "https://mec.gub.uy/"));
-        	
         	
         }catch(UsuarioRepetidoException | CategoriaRepetidaException e){
         	e.printStackTrace();
@@ -365,4 +419,5 @@ public class Principal {
     		e.printStackTrace();
     	}		
     }
+
 }
