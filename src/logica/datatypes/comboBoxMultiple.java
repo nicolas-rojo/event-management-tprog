@@ -46,4 +46,10 @@ public class comboBoxMultiple extends JComboBox<String> {
     public List<String> getSelectedItems() {
         return selectedItems;
     }
+    
+    public void removeAllItems() {
+        super.removeAllItems();   // limpia el combo real
+        selectedItems.clear();    // limpia las selecciones internas
+//        updateDisplay();
+    }
 }
