@@ -4,11 +4,10 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import logica.datatypes.DataEdicion;
 import logica.EdicionEvento;
-import logica.Registro;
 import logica.interfaces.IEventos;
 
+@SuppressWarnings("serial")
 public class ConsultaEdicionEvento extends JInternalFrame {
 	
 	private IEventos ctrlEventos;

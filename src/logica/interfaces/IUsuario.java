@@ -6,7 +6,6 @@ import java.util.List;
 import excepciones.AsistenteYaRegistrado;
 import excepciones.ErrorDetallesRegistroException;
 import excepciones.NoHayCupoEdicionTRegistro;
-import excepciones.NoHayRegistrosAsistente;
 import excepciones.UsuarioNoExisteException;
 import excepciones.UsuarioRepetidoException;
 import logica.datatypes.*;
@@ -15,7 +14,11 @@ public interface IUsuario {
     
 	public abstract void registrarAsistente(String nombre, String nickname, String email, String apellido, LocalDate fechaNac) throws UsuarioRepetidoException;
 	
+	public abstract void registrarAsistente(DataAsistente dataAsistente) throws UsuarioRepetidoException;
+	
 	public abstract void registrarOrganizador(String nombre, String nickname, String email, String descripcion, String url) throws UsuarioRepetidoException;
+	
+	public abstract void registrarOrganizador(DataOrganizador dataOrg) throws UsuarioRepetidoException;
 
     public abstract DataUsuario[] getUsuarios() throws UsuarioNoExisteException;
     
@@ -30,6 +33,8 @@ public interface IUsuario {
     public abstract String getTipoUsuario(String email) throws UsuarioNoExisteException;
     
     public abstract List<String> listarAsistentes();
+    
+    public abstract List<String> listarOrganizadores();
     
     public abstract void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro;
     

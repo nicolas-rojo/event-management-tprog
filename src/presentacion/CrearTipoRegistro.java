@@ -5,13 +5,9 @@ import java.awt.GridBagLayout;
 import javax.swing.JComboBox;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
-
 import excepciones.TipoDeRegistroRepetidoException;
-import logica.datatypes.DataEdicion;
-import logica.datatypes.DataEvento;
 import logica.datatypes.DataTRegistro;
 import logica.interfaces.IEventos;
-
 import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;

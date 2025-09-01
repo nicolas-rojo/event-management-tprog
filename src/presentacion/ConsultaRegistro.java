@@ -1,6 +1,5 @@
 package presentacion;
 
-import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,6 +20,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class ConsultaRegistro extends JInternalFrame {
 	private IUsuario ctrlUsuarios;
 	

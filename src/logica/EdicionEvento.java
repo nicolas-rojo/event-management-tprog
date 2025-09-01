@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import logica.datatypes.DataEdicion;
-import logica.Registro;
 
 public class EdicionEvento {
 	private String nombre;
@@ -125,6 +124,7 @@ public class EdicionEvento {
 				return (cupo > 0);
 			}
 		}
+		System.out.println("NO ENCONTRE");
 		return false;
 	}
 	
@@ -138,14 +138,16 @@ public class EdicionEvento {
 	    return info;
 	}
 
-
-	
-	public List<Patrocinio> getPatrociniosLista(){
-		List<Patrocinio> lista = new ArrayList<>(this.patrocinios);
-		return lista;
+	public List<Patrocinio> getPatrociniosLista() {
+	    List<Patrocinio> lista = new ArrayList<>(this.patrocinios);
+	    return lista;
 	}
-	
+
 	public void agregarPatrocinio(Patrocinio p) {
-		this.patrocinios.add(p);
+	    this.patrocinios.add(p);
+	}
+
+	public void agregarOrganizador(Organizador org) {
+	    this.organizador = org;
 	}
 }

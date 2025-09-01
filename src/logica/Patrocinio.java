@@ -8,7 +8,7 @@ public class Patrocinio {
 	private LocalDate fecha;
 	private float monto;
 	private Nivel nivel;
-	private int cod;
+	private String cod;
 	private int ctdCupo;
 	
 	private TipoRegistro tipoRegistro;
@@ -38,7 +38,7 @@ public class Patrocinio {
 		return nivel;
 	}
 	
-	public int getCod() {
+	public String getCod() {
 		return cod;
 	}
 	
@@ -70,7 +70,7 @@ public class Patrocinio {
 		this.nivel = n;
 	}
 	
-	public void setCod(int cod) {
+	public void setCod(String cod) {
 		this.cod = cod;
 	}
 	

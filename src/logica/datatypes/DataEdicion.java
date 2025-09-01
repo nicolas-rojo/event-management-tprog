@@ -1,11 +1,6 @@
 package logica.datatypes;
 
 import java.time.LocalDate;
-import java.util.Set;
-
-import logica.Evento;
-import logica.Organizador;
-
 
 public class DataEdicion {
 	private String nombre;
