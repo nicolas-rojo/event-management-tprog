@@ -40,17 +40,17 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		setMaximizable(true);
 		setIconifiable(true);
 		setTitle("Registrar a Edición de Evento");
-		setBounds(100, 100, 415, 255);
+		setBounds(100, 100, 457, 255);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Seleccionar Evento:");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblNewLabel.setBounds(10, 15, 181, 12);
+		lblNewLabel.setBounds(-6, 15, 181, 12);
 		getContentPane().add(lblNewLabel);
 		
 		comboBoxEventos = new JComboBox<String>();
-		comboBoxEventos.setBounds(201, 10, 188, 20);
+		comboBoxEventos.setBounds(185, 10, 229, 20);
 		getContentPane().add(comboBoxEventos);
 		comboBoxEventos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -66,7 +66,7 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		
 		
 		comboBoxEdiciones = new JComboBox<String>();
-		comboBoxEdiciones.setBounds(201, 46, 188, 20);
+		comboBoxEdiciones.setBounds(185, 46, 229, 20);
 		getContentPane().add(comboBoxEdiciones);
 		comboBoxEdiciones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,17 +82,17 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		});
 		
 		JLabel lblNewLabel_1 = new JLabel("Seleccionar Edición:");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(10, 50, 181, 12);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1.setBounds(-6, 50, 181, 12);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Seleccionar Tipo de Registro:");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(10, 85, 181, 12);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_2.setBounds(-6, 78, 181, 26);
 		getContentPane().add(lblNewLabel_2);
 		
 		comboBoxTRegistros = new JComboBox<String>();
-		comboBoxTRegistros.setBounds(201, 81, 188, 20);
+		comboBoxTRegistros.setBounds(185, 81, 229, 20);
 		getContentPane().add(comboBoxTRegistros);
 		comboBoxTRegistros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -106,39 +106,44 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		});
 		
 		JLabel lblNewLabel_3 = new JLabel("Seleccionar Asistente:");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setBounds(10, 120, 181, 12);
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_3.setBounds(-6, 120, 181, 12);
 		getContentPane().add(lblNewLabel_3);
 		
 		comboBoxAsistentes = new JComboBox<String>();
-		comboBoxAsistentes.setBounds(201, 116, 188, 20);
+		comboBoxAsistentes.setBounds(185, 116, 229, 20);
 		getContentPane().add(comboBoxAsistentes);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(201, 192, 84, 20);
+		btnAceptar.setBounds(208, 192, 84, 20);
 		getContentPane().add(btnAceptar);
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					LocalDate fechaSeleccionada = dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-					if (verificarFecha(fechaSeleccionada)) {
-						ctrlUsuarios.nuevoRegistro((String) comboBoxAsistentes.getSelectedItem(), (String) comboBoxEventos.getSelectedItem(), (String) comboBoxEdiciones.getSelectedItem(), (String) comboBoxTRegistros.getSelectedItem(), fechaSeleccionada);											
+					String evento = (String) comboBoxEventos.getSelectedItem();
+					String edicion = (String) comboBoxEdiciones.getSelectedItem();
+					if(evento != null && edicion != null) {
+						LocalDate fechaSeleccionada = dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+						if (verificarFecha(fechaSeleccionada, evento, edicion)) {
+							ctrlUsuarios.nuevoRegistro((String) comboBoxAsistentes.getSelectedItem(), (String) comboBoxEventos.getSelectedItem(), (String) comboBoxEdiciones.getSelectedItem(), (String) comboBoxTRegistros.getSelectedItem(), fechaSeleccionada);											
+							JOptionPane.showMessageDialog(RegistroEdicionEvento.this, "Edicion registrada correctamente", "Alta de Ediciion", JOptionPane.INFORMATION_MESSAGE);
+							limpiarFormularios();
+							setVisible(false);
+						}
 					}
-					JOptionPane.showMessageDialog(RegistroEdicionEvento.this, "Edicion registrada correctamente", "Alta de Ediciion", JOptionPane.INFORMATION_MESSAGE);
-	                limpiarFormularios();
-	                setVisible(false);
 				} catch (AsistenteYaRegistrado ex) {
 					JOptionPane.showMessageDialog(RegistroEdicionEvento.this, ex.getMessage(), "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
 				} catch (NoHayCupoEdicionTRegistro ex) {
 					JOptionPane.showMessageDialog(RegistroEdicionEvento.this, ex.getMessage(), "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
 				} catch (Exception ex) {
+					ex.printStackTrace();
 					JOptionPane.showMessageDialog(RegistroEdicionEvento.this, "Error", "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 		
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(305, 192, 84, 20);
+		btnCancelar.setBounds(306, 192, 84, 20);
 		getContentPane().add(btnCancelar);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,12 +153,12 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		});
 		
 		JLabel lblNewLabel_3_1 = new JLabel("Ingresar Fecha:");
-		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3_1.setBounds(10, 155, 181, 12);
+		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_3_1.setBounds(-6, 155, 181, 12);
 		getContentPane().add(lblNewLabel_3_1);
 		
 		dateChooser = new JDateChooser();
-		dateChooser.setBounds(201, 152, 188, 20);
+		dateChooser.setBounds(185, 147, 229, 20);
 		getContentPane().add(dateChooser);
 		dateChooser.setDateFormatString("dd/MM/yyyy");
 	}
@@ -231,12 +236,16 @@ public class RegistroEdicionEvento extends JInternalFrame {
 		}
 	}
 	
-	public boolean verificarFecha(LocalDate fechaSeleccionada) {
+	public boolean verificarFecha(LocalDate fechaSeleccionada, String evento, String edicion) {
 		
 		if (fechaSeleccionada == null) {
 			JOptionPane.showMessageDialog(this, "Seleccione una fecha", "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
 			return false;
 		} 
+		if(fechaSeleccionada.isAfter(ctrlEventos.getDataEdicion(evento, edicion).getFechaFin())) {
+			JOptionPane.showMessageDialog(this, "La fecha seleccionada es invalida", "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 		return true;
 	}
 	

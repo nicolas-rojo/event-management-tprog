@@ -27,6 +27,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class CrearEdicion extends JInternalFrame {
@@ -76,6 +77,7 @@ public class CrearEdicion extends JInternalFrame {
        
         getContentPane().setLayout(null);                     
         lblIngresarEvento = new JLabel("Evento :");
+        lblIngresarEvento.setHorizontalAlignment(SwingConstants.RIGHT);
         lblIngresarEvento.setBounds(30, 30, 80, 15);
         getContentPane().add(lblIngresarEvento);
 
@@ -85,6 +87,7 @@ public class CrearEdicion extends JInternalFrame {
 
         
         lblIngresarOrg = new JLabel("Organizador :");
+        lblIngresarOrg.setHorizontalAlignment(SwingConstants.RIGHT);
         lblIngresarOrg.setBounds(30, 60, 80, 15);
         getContentPane().add(lblIngresarOrg);
 
@@ -94,6 +97,7 @@ public class CrearEdicion extends JInternalFrame {
 
         
         lblIngresarNombre = new JLabel("Nombre :");
+        lblIngresarNombre.setHorizontalAlignment(SwingConstants.RIGHT);
         lblIngresarNombre.setBounds(30, 90, 80, 15);
         getContentPane().add(lblIngresarNombre);
 
@@ -104,6 +108,7 @@ public class CrearEdicion extends JInternalFrame {
 
         
         lblIngresarSigla = new JLabel("Sigla :");
+        lblIngresarSigla.setHorizontalAlignment(SwingConstants.RIGHT);
         lblIngresarSigla.setBounds(30, 120, 80, 15);
         getContentPane().add(lblIngresarSigla);
 
@@ -114,6 +119,7 @@ public class CrearEdicion extends JInternalFrame {
 
        
         lblIngresarCiudad = new JLabel("Ciudad :");
+        lblIngresarCiudad.setHorizontalAlignment(SwingConstants.RIGHT);
         lblIngresarCiudad.setBounds(30, 150, 80, 15);
         getContentPane().add(lblIngresarCiudad);
 
@@ -124,6 +130,7 @@ public class CrearEdicion extends JInternalFrame {
 
         
         lblIngresarPais = new JLabel("País :");
+        lblIngresarPais.setHorizontalAlignment(SwingConstants.RIGHT);
         lblIngresarPais.setBounds(30, 180, 80, 15);
         getContentPane().add(lblIngresarPais);
 
@@ -144,7 +151,8 @@ public class CrearEdicion extends JInternalFrame {
 
        
         lblIngresarFechaIni = new JLabel("Fecha de Inicio :");
-        lblIngresarFechaIni.setBounds(30, 210, 80, 15);
+        lblIngresarFechaIni.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblIngresarFechaIni.setBounds(10, 210, 100, 15);
         getContentPane().add(lblIngresarFechaIni);
 
         dateChooser = new JDateChooser();
@@ -155,7 +163,8 @@ public class CrearEdicion extends JInternalFrame {
 
         
         lblingresarFechaFin = new JLabel("Fecha de Fin :");
-        lblingresarFechaFin.setBounds(30, 240, 80, 15);
+        lblingresarFechaFin.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblingresarFechaFin.setBounds(10, 240, 100, 15);
         getContentPane().add(lblingresarFechaFin);
 
         dateChooser1 = new JDateChooser();
@@ -166,7 +175,8 @@ public class CrearEdicion extends JInternalFrame {
 
        
         lblingresarFechaAlta = new JLabel("Fecha de Alta :");
-        lblingresarFechaAlta.setBounds(30, 270, 80, 15);
+        lblingresarFechaAlta.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblingresarFechaAlta.setBounds(10, 270, 100, 15);
         getContentPane().add(lblingresarFechaAlta);
 
         dateChooser2 = new JDateChooser();
