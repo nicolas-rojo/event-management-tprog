@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 
@@ -48,159 +49,90 @@ public class CrearTipoRegistro extends JInternalFrame {
 		setIconifiable(true);
 		setMaximizable(true);
 		setClosable(true);
-        setBounds(10, 40, 493, 543);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		getContentPane().setLayout(gridBagLayout);
+        setBounds(10, 40, 493, 506);
+		getContentPane().setLayout(null);
 		
 		lblSeleccionarEvento = new JLabel("Seleccionar Evento:");
-		GridBagConstraints gbc_lblSeleccionarEvento = new GridBagConstraints();
-		gbc_lblSeleccionarEvento.gridheight = 2;
-		gbc_lblSeleccionarEvento.gridwidth = 4;
-		gbc_lblSeleccionarEvento.insets = new Insets(0, 0, 5, 5);
-		gbc_lblSeleccionarEvento.gridx = 0;
-		gbc_lblSeleccionarEvento.gridy = 0;
-		getContentPane().add(lblSeleccionarEvento, gbc_lblSeleccionarEvento);
+		lblSeleccionarEvento.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSeleccionarEvento.setBounds(10, 20, 128, 14);
+		getContentPane().add(lblSeleccionarEvento);
 		
 		comboBoxEventos = new JComboBox<String>();
-		GridBagConstraints gbc_comboBoxEventos_1 = new GridBagConstraints();
-		gbc_comboBoxEventos_1.gridheight = 2;
-		gbc_comboBoxEventos_1.gridwidth = 7;
-		gbc_comboBoxEventos_1.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxEventos_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxEventos_1.gridx = 4;
-		gbc_comboBoxEventos_1.gridy = 0;
-		getContentPane().add(comboBoxEventos, gbc_comboBoxEventos_1);
+		comboBoxEventos.setBounds(148, 16, 319, 22);
+		getContentPane().add(comboBoxEventos);
 		
 		lblSeleccionarEdicion = new JLabel("Seleccionar Edicion:");
-		GridBagConstraints gbc_lblSeleccionarEdicion = new GridBagConstraints();
-		gbc_lblSeleccionarEdicion.gridheight = 2;
-		gbc_lblSeleccionarEdicion.gridwidth = 4;
-		gbc_lblSeleccionarEdicion.insets = new Insets(0, 0, 5, 5);
-		gbc_lblSeleccionarEdicion.gridx = 0;
-		gbc_lblSeleccionarEdicion.gridy = 2;
-		getContentPane().add(lblSeleccionarEdicion, gbc_lblSeleccionarEdicion);
+		lblSeleccionarEdicion.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSeleccionarEdicion.setBounds(10, 80, 128, 14);
+		getContentPane().add(lblSeleccionarEdicion);
 		
 		comboBoxEdiciones = new JComboBox<String>();
-		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-		gbc_comboBox_1.gridwidth = 7;
-		gbc_comboBox_1.gridheight = 2;
-		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_1.gridx = 4;
-		gbc_comboBox_1.gridy = 2;
-		getContentPane().add(comboBoxEdiciones, gbc_comboBox_1);
+		comboBoxEdiciones.setBounds(148, 76, 319, 22);
+		getContentPane().add(comboBoxEdiciones);
 		
 		JLabel lblIngresarDato = new JLabel("Ingresar Datos");
-		GridBagConstraints gbc_lblIngresarDato = new GridBagConstraints();
-		gbc_lblIngresarDato.insets = new Insets(0, 0, 5, 5);
-		gbc_lblIngresarDato.gridx = 4;
-		gbc_lblIngresarDato.gridy = 4;
-		getContentPane().add(lblIngresarDato, gbc_lblIngresarDato);
+		lblIngresarDato.setBounds(225, 131, 85, 14);
+		getContentPane().add(lblIngresarDato);
 		
 		lblIngreseNombre = new JLabel("Ingresar Nombre:");
-		GridBagConstraints gbc_lblIngresarNombre = new GridBagConstraints();
-		gbc_lblIngresarNombre.anchor = GridBagConstraints.NORTH;
-		gbc_lblIngresarNombre.gridwidth = 3;
-		gbc_lblIngresarNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_lblIngresarNombre.gridx = 1;
-		gbc_lblIngresarNombre.gridy = 6;
-		getContentPane().add(lblIngreseNombre, gbc_lblIngresarNombre);
+		lblIngreseNombre.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblIngreseNombre.setBounds(10, 172, 128, 14);
+		getContentPane().add(lblIngreseNombre);
 		
 		textFieldNombre = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.gridwidth = 7;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 4;
-		gbc_textField.gridy = 6;
-		getContentPane().add(textFieldNombre, gbc_textField);
+		textFieldNombre.setBounds(148, 169, 319, 20);
+		getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
 		lblIngreseDescripcion = new JLabel("Descripcion:");
-		GridBagConstraints gbc_lblIngresarNombre_1 = new GridBagConstraints();
-		gbc_lblIngresarNombre_1.gridheight = 2;
-		gbc_lblIngresarNombre_1.gridwidth = 3;
-		gbc_lblIngresarNombre_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblIngresarNombre_1.gridx = 1;
-		gbc_lblIngresarNombre_1.gridy = 8;
-		getContentPane().add(lblIngreseDescripcion, gbc_lblIngresarNombre_1);
+		lblIngreseDescripcion.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblIngreseDescripcion.setBounds(25, 230, 113, 14);
+		getContentPane().add(lblIngreseDescripcion);
 		
 		textAreaDescripcion = new JTextArea(5, 20); 
 		textAreaDescripcion.setLineWrap(true);
 		textAreaDescripcion.setWrapStyleWord(true);
 
 		JScrollPane scrollPane = new JScrollPane(textAreaDescripcion);
+		scrollPane.setBounds(148, 224, 319, 99);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-		GridBagConstraints gbc_scroll = new GridBagConstraints();
-		gbc_scroll.gridheight = 3;
-		gbc_scroll.gridwidth = 7;
-		gbc_scroll.insets = new Insets(0, 0, 5, 5);
-		gbc_scroll.fill = GridBagConstraints.BOTH;
-		gbc_scroll.gridx = 4;
-		gbc_scroll.gridy = 8;
 		
-		getContentPane().add(scrollPane, gbc_scroll);
+		getContentPane().add(scrollPane);
 		
 		
 		lblIngreseCosto = new JLabel("Ingresar Costo:");
-		GridBagConstraints gbc_lblIngresarNombre_2 = new GridBagConstraints();
-		gbc_lblIngresarNombre_2.gridwidth = 3;
-		gbc_lblIngresarNombre_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblIngresarNombre_2.gridx = 1;
-		gbc_lblIngresarNombre_2.gridy = 12;
-		getContentPane().add(lblIngreseCosto, gbc_lblIngresarNombre_2);
+		lblIngreseCosto.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblIngreseCosto.setBounds(16, 361, 122, 14);
+		getContentPane().add(lblIngreseCosto);
 		
 		textFieldCosto = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.gridwidth = 7;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 4;
-		gbc_textField_1.gridy = 12;
-		getContentPane().add(textFieldCosto, gbc_textField_1);
+		textFieldCosto.setBounds(148, 358, 319, 20);
+		getContentPane().add(textFieldCosto);
 		textFieldCosto.setColumns(10);
 		
 		lblIngreseCupo = new JLabel("Ingresar Cupo:");
-		GridBagConstraints gbc_lblIngresarNombre_3 = new GridBagConstraints();
-		gbc_lblIngresarNombre_3.gridwidth = 3;
-		gbc_lblIngresarNombre_3.insets = new Insets(0, 0, 5, 5);
-		gbc_lblIngresarNombre_3.gridx = 1;
-		gbc_lblIngresarNombre_3.gridy = 14;
-		getContentPane().add(lblIngreseCupo, gbc_lblIngresarNombre_3);
+		lblIngreseCupo.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblIngreseCupo.setBounds(33, 416, 105, 14);
+		getContentPane().add(lblIngreseCupo);
 		
 		textFieldCupo = new JTextField();
+		textFieldCupo.setBounds(148, 413, 319, 20);
 		textFieldCupo.setColumns(10);
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.gridwidth = 7;
-		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 4;
-		gbc_textField_2.gridy = 14;
-		getContentPane().add(textFieldCupo, gbc_textField_2);
+		getContentPane().add(textFieldCupo);
 		
-		JPanel panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.anchor = GridBagConstraints.SOUTH;
-		gbc_panel.gridwidth = 6;
-		gbc_panel.insets = new Insets(0, 0, 5, 5);
-		gbc_panel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panel.gridx = 4;
-		gbc_panel.gridy = 15;
-		getContentPane().add(panel, gbc_panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(256, 444, 85, 23);
+		getContentPane().add(btnAceptar);
+		btnAceptar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent eventoBtnAceptar) {
+                cmdAltaRegistroActionPerformed(eventoBtnAceptar);
+            }
+        });
 		
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(351, 444, 88, 23);
+		getContentPane().add(btnCancelar);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limpiarFormulario();
@@ -209,34 +141,13 @@ public class CrearTipoRegistro extends JInternalFrame {
 			}
 		});
 		
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent eventoBtnAceptar) {
-                cmdAltaRegistroActionPerformed(eventoBtnAceptar);
-            }
-        });
-		
-		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
-		gbc_btnAceptar.gridheight = 3;
-		gbc_btnAceptar.gridwidth = 2;
-		gbc_btnAceptar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAceptar.gridx = 2;
-		gbc_btnAceptar.gridy = 0;
-		panel.add(btnAceptar, gbc_btnAceptar);
-		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.gridheight = 3;
-		gbc_btnCancelar.gridwidth = 2;
-		gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCancelar.gridx = 6;
-		gbc_btnCancelar.gridy = 0;
-		panel.add(btnCancelar, gbc_btnCancelar);
-		
 		
 		//RELLENO LOS COMBOBOX
 		comboBoxEventos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String eventoSeleccionado = (String) comboBoxEventos.getSelectedItem();
 				if(eventoSeleccionado != null) {
+					limpiarFormulario();
 					comboBoxEdiciones.setEnabled(true);
 					cargarEdicionesEvento(ctrlEventos.listarEdiciones(eventoSeleccionado));
 				}
@@ -278,12 +189,12 @@ public class CrearTipoRegistro extends JInternalFrame {
         String costoTR = this.textFieldCosto.getText().trim();
         String cupoTR = this.textFieldCupo.getText().trim();
 
-        if (nombreTR.isEmpty() || descripcionTR.isEmpty() || costoTR.isEmpty() || cupoTR.isEmpty()) {
+        if (nombreTR.isEmpty() || descripcionTR.isEmpty() || costoTR.isEmpty() || cupoTR.isEmpty() ) {
             JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Alta Tipo Registro",
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if(evento.isBlank() || edicion.isBlank()){
+        if(evento == null || edicion == null || edicion.equals("No hay ediciones")){
         	 JOptionPane.showMessageDialog(this, "Seleccione un Evento y una Edicion", "Alta Tipo Registro",
                      JOptionPane.ERROR_MESSAGE);
              return false;
@@ -305,6 +216,14 @@ public class CrearTipoRegistro extends JInternalFrame {
                     "Alta Tipo Registro", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        
+        if(!(Integer.parseInt(cupoTR) > 0) || !(Float.parseFloat(costoTR) >= 0)) {
+        	JOptionPane.showMessageDialog(this, "El cupo o el costo ingresado no son validos", 
+                    "Alta Tipo Registro", JOptionPane.ERROR_MESSAGE);
+        	return false;
+        }
+        	
+       
        
         return true;
     }
@@ -327,7 +246,7 @@ public class CrearTipoRegistro extends JInternalFrame {
 	            }
 	            
 	        } else {
-	        	comboBoxEventos.setSelectedItem(0);	
+	        	comboBoxEventos.setSelectedItem(-1);	
 	        	comboBoxEdiciones.setEnabled(false);				//Si no se selecciona un evento se bloquea el combo de ediciones
 	        }
 	        

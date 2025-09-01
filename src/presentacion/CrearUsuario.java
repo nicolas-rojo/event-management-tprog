@@ -58,27 +58,18 @@ public class CrearUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Registrar un Usuario");
-        setBounds(10, 40, 450, 400);
-
-        GridBagLayout gridBagLayout = new GridBagLayout();
-        gridBagLayout.columnWidths = new int[] { 120, 200, 100, 0 };
-        gridBagLayout.rowHeights = new int[] { 30, 30, 30, 30, 30, 30, 30, 30, 30, 0 };
-        gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
-        gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-        getContentPane().setLayout(gridBagLayout);
+        setBounds(10, 40, 450, 314);
+        getContentPane().setLayout(null);
 
         // Tipo de Usuario
         JLabel lblTipoUsuario = new JLabel("Tipo de Usuario:");
+        lblTipoUsuario.setBounds(0, 12, 115, 25);
         lblTipoUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
         lblTipoUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
-        GridBagConstraints gbc_lblTipoUsuario = new GridBagConstraints();
-        gbc_lblTipoUsuario.fill = GridBagConstraints.BOTH;
-        gbc_lblTipoUsuario.insets = new Insets(0, 0, 5, 5);
-        gbc_lblTipoUsuario.gridx = 0;
-        gbc_lblTipoUsuario.gridy = 0;
-        getContentPane().add(lblTipoUsuario, gbc_lblTipoUsuario);
+        getContentPane().add(lblTipoUsuario);
 
         comboBoxTipoUsuario = new JComboBox<String>();
+        comboBoxTipoUsuario.setBounds(120, 12, 300, 25);
         comboBoxTipoUsuario.addItem("Asistente");
         comboBoxTipoUsuario.addItem("Organizador");
         comboBoxTipoUsuario.addItemListener(new ItemListener() {
@@ -86,142 +77,68 @@ public class CrearUsuario extends JInternalFrame {
                 actualizarCamposEspecificos();
             }
         });
-        GridBagConstraints gbc_comboBoxTipoUsuario = new GridBagConstraints();
-        gbc_comboBoxTipoUsuario.gridwidth = 2;
-        gbc_comboBoxTipoUsuario.fill = GridBagConstraints.BOTH;
-        gbc_comboBoxTipoUsuario.insets = new Insets(0, 0, 5, 0);
-        gbc_comboBoxTipoUsuario.gridx = 1;
-        gbc_comboBoxTipoUsuario.gridy = 0;
-        getContentPane().add(comboBoxTipoUsuario, gbc_comboBoxTipoUsuario);
+        getContentPane().add(comboBoxTipoUsuario);
 
         // Nombre
         lblIngreseNombre = new JLabel("Nombre:");
+        lblIngreseNombre.setBounds(0, 48, 115, 25);
         lblIngreseNombre.setHorizontalAlignment(SwingConstants.RIGHT);
         lblIngreseNombre.setHorizontalAlignment(SwingConstants.RIGHT);
-        GridBagConstraints gbc_lblIngreseNombre = new GridBagConstraints();
-        gbc_lblIngreseNombre.fill = GridBagConstraints.BOTH;
-        gbc_lblIngreseNombre.insets = new Insets(0, 0, 5, 5);
-        gbc_lblIngreseNombre.gridx = 0;
-        gbc_lblIngreseNombre.gridy = 1;
-        getContentPane().add(lblIngreseNombre, gbc_lblIngreseNombre);
+        getContentPane().add(lblIngreseNombre);
 
         textFieldNombre = new JTextField();
-        GridBagConstraints gbc_textFieldNombre = new GridBagConstraints();
-        gbc_textFieldNombre.gridwidth = 2;
-        gbc_textFieldNombre.fill = GridBagConstraints.BOTH;
-        gbc_textFieldNombre.insets = new Insets(0, 0, 5, 0);
-        gbc_textFieldNombre.gridx = 1;
-        gbc_textFieldNombre.gridy = 1;
-        getContentPane().add(textFieldNombre, gbc_textFieldNombre);
+        textFieldNombre.setBounds(120, 48, 300, 25);
+        getContentPane().add(textFieldNombre);
         textFieldNombre.setColumns(10);
 
         // Nickname
         lblIngreseNickname = new JLabel("Nickname:");
+        lblIngreseNickname.setBounds(0, 84, 115, 25);
         lblIngreseNickname.setHorizontalAlignment(SwingConstants.RIGHT);
         lblIngreseNickname.setHorizontalAlignment(SwingConstants.RIGHT);
-        GridBagConstraints gbc_lblIngreseNickname = new GridBagConstraints();
-        gbc_lblIngreseNickname.fill = GridBagConstraints.BOTH;
-        gbc_lblIngreseNickname.insets = new Insets(0, 0, 5, 5);
-        gbc_lblIngreseNickname.gridx = 0;
-        gbc_lblIngreseNickname.gridy = 2;
-        getContentPane().add(lblIngreseNickname, gbc_lblIngreseNickname);
+        getContentPane().add(lblIngreseNickname);
 
         textFieldNickname = new JTextField();
-        GridBagConstraints gbc_textFieldNickname = new GridBagConstraints();
-        gbc_textFieldNickname.gridwidth = 2;
-        gbc_textFieldNickname.fill = GridBagConstraints.BOTH;
-        gbc_textFieldNickname.insets = new Insets(0, 0, 5, 0);
-        gbc_textFieldNickname.gridx = 1;
-        gbc_textFieldNickname.gridy = 2;
-        getContentPane().add(textFieldNickname, gbc_textFieldNickname);
+        textFieldNickname.setBounds(120, 84, 300, 25);
+        getContentPane().add(textFieldNickname);
         textFieldNickname.setColumns(10);
-
-        // Email
-        lblIngreseEmail = new JLabel("Email:");
-        lblIngreseEmail.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblIngreseEmail.setHorizontalAlignment(SwingConstants.RIGHT);
-        GridBagConstraints gbc_lblIngreseEmail = new GridBagConstraints();
-        gbc_lblIngreseEmail.fill = GridBagConstraints.BOTH;
-        gbc_lblIngreseEmail.insets = new Insets(0, 0, 5, 5);
-        gbc_lblIngreseEmail.gridx = 0;
-        gbc_lblIngreseEmail.gridy = 3;
-        getContentPane().add(lblIngreseEmail, gbc_lblIngreseEmail);
-
-        textFieldEmail = new JTextField();
-        GridBagConstraints gbc_textFieldEmail = new GridBagConstraints();
-        gbc_textFieldEmail.gridwidth = 2;
-        gbc_textFieldEmail.fill = GridBagConstraints.BOTH;
-        gbc_textFieldEmail.insets = new Insets(0, 0, 5, 0);
-        gbc_textFieldEmail.gridx = 1;
-        gbc_textFieldEmail.gridy = 3;
-        getContentPane().add(textFieldEmail, gbc_textFieldEmail);
-        textFieldEmail.setColumns(10);
 
         // Panel para campos de Asistente
         panelAsistente = new JPanel();
-        GridBagLayout gbl_panelAsistente = new GridBagLayout();
-        gbl_panelAsistente.columnWidths = new int[]{120, 200, 100, 0};
-        gbl_panelAsistente.rowHeights = new int[]{30, 30, 0};
-        gbl_panelAsistente.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-        gbl_panelAsistente.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-        panelAsistente.setLayout(gbl_panelAsistente);
+        panelAsistente.setBounds(0, 120, 420, 60);
+        panelAsistente.setLayout(null);
         
         JLabel lblApellido = new JLabel("Apellido:");
+        lblApellido.setBounds(22, 38, 88, 14);
         lblApellido.setHorizontalAlignment(SwingConstants.RIGHT);
         lblApellido.setHorizontalAlignment(SwingConstants.RIGHT);
-        GridBagConstraints gbc_lblApellido = new GridBagConstraints();
-        gbc_lblApellido.anchor = GridBagConstraints.EAST;
-        gbc_lblApellido.insets = new Insets(0, 0, 5, 5);
-        gbc_lblApellido.gridx = 0;
-        gbc_lblApellido.gridy = 0;
-        panelAsistente.add(lblApellido, gbc_lblApellido);
+        panelAsistente.add(lblApellido);
         
         textFieldApellido = new JTextField();
-        GridBagConstraints gbc_textFieldApellido = new GridBagConstraints();
-        gbc_textFieldApellido.gridwidth = 2;
-        gbc_textFieldApellido.insets = new Insets(0, 0, 5, 0);
-        gbc_textFieldApellido.fill = GridBagConstraints.BOTH;
-        gbc_textFieldApellido.gridx = 1;
-        gbc_textFieldApellido.gridy = 0;
-        panelAsistente.add(textFieldApellido, gbc_textFieldApellido);
+        textFieldApellido.setBounds(120, 33, 300, 25);
+        panelAsistente.add(textFieldApellido);
         textFieldApellido.setColumns(10);
-        
-        JLabel lblFechaNac = new JLabel("Fecha Nacimiento:");
-        lblFechaNac.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblFechaNac.setHorizontalAlignment(SwingConstants.RIGHT);
-        GridBagConstraints gbc_lblFechaNac = new GridBagConstraints();
-        gbc_lblFechaNac.anchor = GridBagConstraints.EAST;
-        gbc_lblFechaNac.insets = new Insets(0, 0, 0, 5);
-        gbc_lblFechaNac.gridx = 0;
-        gbc_lblFechaNac.gridy = 1;
-        panelAsistente.add(lblFechaNac, gbc_lblFechaNac);
-        
-        // Usar JDateChooser en lugar de los combobox separados
-        dateChooser = new JDateChooser();
-        dateChooser.setDateFormatString("dd/MM/yyyy");
         // Establecer fecha por defecto: 20 años atrás
         java.util.Calendar cal = java.util.Calendar.getInstance();
         cal.add(java.util.Calendar.YEAR, -20);
-        dateChooser.setDate(cal.getTime());
+        getContentPane().add(panelAsistente);
         
-        GridBagConstraints gbc_dateChooser = new GridBagConstraints();
-        gbc_dateChooser.gridwidth = 2;
-        gbc_dateChooser.fill = GridBagConstraints.BOTH;
-        gbc_dateChooser.gridx = 1;
-        gbc_dateChooser.gridy = 1;
-        panelAsistente.add(dateChooser, gbc_dateChooser);
-        
-        GridBagConstraints gbc_panelAsistente = new GridBagConstraints();
-        gbc_panelAsistente.gridwidth = 3;
-        gbc_panelAsistente.insets = new Insets(0, 0, 5, 0);
-        gbc_panelAsistente.fill = GridBagConstraints.BOTH;
-        gbc_panelAsistente.gridx = 0;
-        gbc_panelAsistente.gridy = 4;
-        getContentPane().add(panelAsistente, gbc_panelAsistente);
+                textFieldEmail = new JTextField();
+                textFieldEmail.setBounds(120, 0, 300, 25);
+                panelAsistente.add(textFieldEmail);
+                textFieldEmail.setColumns(10);
+                
+                        // Email
+                        lblIngreseEmail = new JLabel("Email:");
+                        lblIngreseEmail.setBounds(-5, 2, 115, 25);
+                        panelAsistente.add(lblIngreseEmail);
+                        lblIngreseEmail.setHorizontalAlignment(SwingConstants.RIGHT);
+                        lblIngreseEmail.setHorizontalAlignment(SwingConstants.RIGHT);
         panelAsistente.setVisible(true);
 
         // Panel para campos de Organizador
         panelOrganizador = new JPanel();
+        panelOrganizador.setBounds(0, 120, 420, 60);
         GridBagLayout gbl_panelOrganizador = new GridBagLayout();
         gbl_panelOrganizador.columnWidths = new int[]{120, 200, 100, 0};
         gbl_panelOrganizador.rowHeights = new int[]{30, 30, 0};
@@ -267,43 +184,41 @@ public class CrearUsuario extends JInternalFrame {
         gbc_textFieldUrl.gridy = 1;
         panelOrganizador.add(textFieldUrl, gbc_textFieldUrl);
         textFieldUrl.setColumns(10);
-        
-        GridBagConstraints gbc_panelOrganizador = new GridBagConstraints();
-        gbc_panelOrganizador.gridwidth = 3;
-        gbc_panelOrganizador.insets = new Insets(0, 0, 5, 0);
-        gbc_panelOrganizador.fill = GridBagConstraints.BOTH;
-        gbc_panelOrganizador.gridx = 0;
-        gbc_panelOrganizador.gridy = 4;
-        getContentPane().add(panelOrganizador, gbc_panelOrganizador);
+        getContentPane().add(panelOrganizador);
         panelOrganizador.setVisible(false);
 
         // Botones
         btnAceptar = new JButton("Aceptar");
+        btnAceptar.setBounds(209, 232, 100, 30);
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 cmdRegistroUsuarioActionPerformed(arg0);
             }
         });
-
-        GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
-        gbc_btnAceptar.fill = GridBagConstraints.BOTH;
-        gbc_btnAceptar.insets = new Insets(0, 0, 0, 5);
-        gbc_btnAceptar.gridx = 1;
-        gbc_btnAceptar.gridy = 8;
-        getContentPane().add(btnAceptar, gbc_btnAceptar);
+        getContentPane().add(btnAceptar);
 
         btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(320, 232, 100, 30);
         btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 limpiarFormulario();
                 setVisible(false);
             }
         });
-        GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-        gbc_btnCancelar.fill = GridBagConstraints.BOTH;
-        gbc_btnCancelar.gridx = 2;
-        gbc_btnCancelar.gridy = 8;
-        getContentPane().add(btnCancelar, gbc_btnCancelar);
+        getContentPane().add(btnCancelar);
+        
+        // Usar JDateChooser en lugar de los combobox separados
+        dateChooser = new JDateChooser();
+        dateChooser.setBounds(120, 191, 300, 30);
+        getContentPane().add(dateChooser);
+        dateChooser.setDateFormatString("dd/MM/yyyy");
+        dateChooser.setDate(cal.getTime());
+        
+        JLabel lblFechaNac = new JLabel("Fecha Nacimiento:");
+        lblFechaNac.setBounds(0, 200, 115, 14);
+        getContentPane().add(lblFechaNac);
+        lblFechaNac.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblFechaNac.setHorizontalAlignment(SwingConstants.RIGHT);
     }
 
     private void actualizarCamposEspecificos() {
@@ -352,9 +267,6 @@ public class CrearUsuario extends JInternalFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error: Fecha inválida. " + e.getMessage(), "Registrar Usuario", JOptionPane.ERROR_MESSAGE);
             }
-
-            limpiarFormulario();
-            setVisible(false);
         }
     }
 
