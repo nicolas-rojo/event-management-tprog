@@ -49,6 +49,7 @@ public class Principal {
     private RegistroEdicionEvento regEdEvInternalFrame;
     private ConsultaTipoRegistro consuTRegistroInternalFrame;
     private ConsultaRegistro consuRegistroInternalFrame;
+    private ConsultaEvento consEventoInternalFrame;
     
     // Nuevos InternalFrames para Instituciones
     private CrearInstitucion creInstitucionInternalFrame;
@@ -95,6 +96,9 @@ public class Principal {
         
         creEventoInternalFrame = new CrearEvento(ICE);
         creEventoInternalFrame.setVisible(false);
+
+        consEventoInternalFrame = new ConsultaEvento(ICE);
+        consEventoInternalFrame.setVisible(false);
         
         creTRegistroInternalFrame = new CrearTipoRegistro(ICE);
         creTRegistroInternalFrame.setVisible(false);
@@ -127,6 +131,7 @@ public class Principal {
         frmGestionDeUsuarios.getContentPane().add(lisUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(modUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(creEventoInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(consEventoInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(creTRegistroInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(regEdEvInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(consuTRegistroInternalFrame);
@@ -244,6 +249,16 @@ public class Principal {
             }
         });
         menuEventos.add(menuItemAltaEvento);
+        
+        JMenuItem menuItemConsultaEvento = new JMenuItem("ConsultaEvento");
+        menuItemConsultaEvento.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para alta de evento
+            	consEventoInternalFrame.cargarEventos();
+                consEventoInternalFrame.setVisible(true);
+            }
+        });
+        menuEventos.add(menuItemConsultaEvento);
         
         JMenuItem menuItemAltaTRegistro = new JMenuItem("Alta Tipo de Registro");
         menuItemAltaTRegistro.addActionListener(new ActionListener() {
