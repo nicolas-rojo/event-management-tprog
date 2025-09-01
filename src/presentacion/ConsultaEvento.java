@@ -204,9 +204,10 @@ public class ConsultaEvento extends JInternalFrame {
     }
 
     private void abrirConsultaEdicion(String evento, String ed, IEventos ICE) {
-    	ConsultaEdicionEvento ventanaTipo = new ConsultaEdicionEvento(evento, ed, ICE);
+        ConsultaEdicionEvento ventanaTipo = new ConsultaEdicionEvento(evento, ed, ICE);
         getParent().add(ventanaTipo);
         ventanaTipo.setVisible(true);
+        limpiarYCerrar();
     }
 
     public void limpiarYCerrar() {

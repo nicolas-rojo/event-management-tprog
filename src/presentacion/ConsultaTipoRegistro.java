@@ -261,6 +261,21 @@ public class ConsultaTipoRegistro extends JInternalFrame {
         }
     }
 	
+	public void mostrarDetallesTipoRegistro(String evento, String edicion, String tipoRegistro) {
+	    limpiarFormulario();
+	    cargarEventos();
+
+	    comboBoxEventos.setSelectedItem(evento);
+	    comboBoxEdiciones.setSelectedItem(edicion);
+	    comboBoxTR.setSelectedItem(tipoRegistro);
+
+	    // cargar directamente los datos sin esperar
+	    cargarDatosTR(evento, edicion, tipoRegistro);
+
+	    setTitle("Consulta Tipo Registro: " + tipoRegistro);
+	}
+
+	
 	public void cargarEdicionesEvento(List<String> edicionesEvento) {
         try {
         	cargandoEdiciones = true;
