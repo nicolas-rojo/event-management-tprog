@@ -191,4 +191,31 @@ public class ControladorEventos implements IEventos {
             me.agregarCategoria(cat, categoria);
         }        
     }
+    
+    public Evento getEvento(String nombre) {
+    	ManejadorEvento me = ManejadorEvento.getInstance();
+    	return me.getEvento(nombre);
+    }
+    
+    public boolean existeEdicion(String nombreEvento, String nombreEdicion) {
+        ManejadorEvento me = ManejadorEvento.getInstance();
+        Evento evento = me.getEvento(nombreEvento);
+        if (evento == null) {
+            return false;
+        }
+        return evento.getEdicion(nombreEdicion) != null;
+    }
+
+    public boolean existeTipoRegistro(String nombreEvento, String nombreEdicion, String nombreTipoRegistro) {
+        ManejadorEvento me = ManejadorEvento.getInstance();
+        Evento evento = me.getEvento(nombreEvento);
+        if (evento == null) {
+            return false;
+        }
+        EdicionEvento edicion = evento.getEdicion(nombreEdicion);
+        if (edicion == null) {
+            return false;
+        }
+        return edicion.getTRegistro(nombreTipoRegistro) != null;
+    }
 }

@@ -15,6 +15,8 @@ import logica.datatypes.DataEvento;
 import logica.datatypes.DataEdicionEvento;
 import logica.datatypes.DataTRegistro;
 import logica.EdicionEvento;
+import logica.Evento;
+import logica.ctrlmanejador.ManejadorEvento;
 
 public interface IEventos {
 
@@ -41,4 +43,11 @@ public interface IEventos {
 		public abstract EdicionEvento obtenerEdicionEvento(String nombreEvento, String nombreEdicionEvento);
 		
 		public abstract DataEdicionEvento[] getEdicionesEventoOrganizador(String nickname);
+		
+		public abstract Evento getEvento(String nombre);
+		
+		public abstract boolean existeEdicion(String nombreEvento, String nombreEdicion);
+		
+		public abstract boolean existeTipoRegistro(String nombreEvento, String nombreEdicion, String nombreTipoRegistro);
+	    	
 }

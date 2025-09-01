@@ -24,6 +24,10 @@ public class ManejadorEvento {
         return instancia;
     }
     
+    public static void resetInstance() {
+        instancia = null;
+    }
+    
     public void addEvento(Evento evento) {
         String nombre = evento.getNombreEvento();
         eventos.put(nombre, evento);
