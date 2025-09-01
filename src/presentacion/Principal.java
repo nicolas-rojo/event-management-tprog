@@ -253,9 +253,9 @@ public class Principal {
                 creEventoInternalFrame.setVisible(true);
             }
         });
-        menuEventos.add(menuItemAltaEvento);
         
-        JMenuItem menuItemConsultaEvento = new JMenuItem("ConsultaEvento");
+        
+        JMenuItem menuItemConsultaEvento = new JMenuItem("Consulta Evento");
         menuItemConsultaEvento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Muestro el InternalFrame para alta de evento
@@ -263,7 +263,7 @@ public class Principal {
                 consEventoInternalFrame.setVisible(true);
             }
         });
-        menuEventos.add(menuItemConsultaEvento);
+        
         
         JMenuItem menuItemConsultaEdicionEvento = new JMenuItem("ConsultaEdicionEvento");
         menuItemConsultaEdicionEvento.addActionListener(new ActionListener() {
@@ -284,7 +284,7 @@ public class Principal {
             	
             }
         });
-        menuEventos.add(menuItemAltaTRegistro);
+        
         
         JMenuItem menuItemConsultaTRegistro = new JMenuItem("Consulta Tipo Registro");
         menuItemConsultaTRegistro.addActionListener(new ActionListener() {
@@ -295,7 +295,7 @@ public class Principal {
             	consuTRegistroInternalFrame.setVisible(true);
             }
         });
-        menuEventos.add(menuItemConsultaTRegistro);
+        
         
         JMenuItem menuItemAltaEdicion = new JMenuItem("Alta de Edicion");
         menuItemAltaEdicion.addActionListener(new ActionListener(){
@@ -306,7 +306,13 @@ public class Principal {
         		crearEdicionInternalFrame.setVisible(true);
         	}
         });
+        menuEventos.add(menuItemAltaEvento);
         menuEventos.add(menuItemAltaEdicion);
+        menuEventos.add(menuItemAltaTRegistro);
+        menuEventos.add(menuItemConsultaEvento);
+        //Aca va el add de Consulta edicion
+        menuEventos.add(menuItemConsultaTRegistro);
+        
         
         // Nueva pestaña para Instituciones
         JMenu menuInstituciones = new JMenu("Instituciones");

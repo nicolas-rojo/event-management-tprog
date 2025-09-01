@@ -55,7 +55,9 @@ public class TipoRegistro {
 	}
 	
 	public void bajarCupo() {
-		this.cupo -= 1;
+		if(this.cupo > 0) {
+			this.cupo -= 1;
+		}
 	}
 		
 }

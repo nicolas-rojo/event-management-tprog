@@ -40,5 +40,7 @@ public interface IEventos {
 		
 		public abstract EdicionEvento obtenerEdicionEvento(String nombreEvento, String nombreEdicionEvento);
 		
+		public abstract DataEdicion getDataEdicion(String evento, String edicion);
+		
 		public abstract DataEdicionEvento[] getEdicionesEventoOrganizador(String nickname);
 }
