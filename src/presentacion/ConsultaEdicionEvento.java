@@ -142,7 +142,7 @@ public class ConsultaEdicionEvento extends JInternalFrame {
         gbc.gridx = 1; gbc.weightx = 1.0;
         panelDetalles.add(txtOrganizador, gbc);
 
-        panelPrincipal.add(panelDetalles, BorderLayout.CENTER);
+//        panelPrincipal.add(panelDetalles, BorderLayout.CENTER);
 
         // Panel central con listas
         JPanel panelCentral = new JPanel(new GridLayout(1, 3, 10, 0));
@@ -199,6 +199,10 @@ public class ConsultaEdicionEvento extends JInternalFrame {
         btnCerrar.addActionListener(e -> limpiarYCerrar());
         panelPrincipal.add(btnCerrar, BorderLayout.SOUTH);
 
+        JPanel panelCentro = new JPanel(new BorderLayout(10, 10));
+        panelCentro.add(panelDetalles, BorderLayout.NORTH);
+        panelCentro.add(panelCentral, BorderLayout.CENTER);
+        panelPrincipal.add(panelCentro, BorderLayout.CENTER);
         getContentPane().add(panelPrincipal);
         
         // Listeners para los combobox
@@ -358,6 +362,7 @@ public class ConsultaEdicionEvento extends JInternalFrame {
         ventanaTipo.mostrarDetallesTipoRegistro(evento, edicion, tipoRegistro);
         getParent().add(ventanaTipo);
         ventanaTipo.setVisible(true);
+        limpiarYCerrar();
     }
     
     private void limpiarYCerrar() {
