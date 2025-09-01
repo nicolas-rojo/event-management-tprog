@@ -50,6 +50,7 @@ public class Principal {
     private ConsultaTipoRegistro consuTRegistroInternalFrame;
     private ConsultaRegistro consuRegistroInternalFrame;
     private ConsultaEvento consEventoInternalFrame;
+    private ConsultaEdicionEvento consEdicionEventoInternalFrame;
     
     // Nuevos InternalFrames para Instituciones
     private CrearInstitucion creInstitucionInternalFrame;
@@ -100,6 +101,9 @@ public class Principal {
         consEventoInternalFrame = new ConsultaEvento(ICE);
         consEventoInternalFrame.setVisible(false);
         
+        consEdicionEventoInternalFrame = new ConsultaEdicionEvento(ICE);
+        consEdicionEventoInternalFrame.setVisible(false);
+        
         creTRegistroInternalFrame = new CrearTipoRegistro(ICE);
         creTRegistroInternalFrame.setVisible(false);
 
@@ -132,6 +136,7 @@ public class Principal {
         frmGestionDeUsuarios.getContentPane().add(modUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(creEventoInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(consEventoInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(consEdicionEventoInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(creTRegistroInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(regEdEvInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(consuTRegistroInternalFrame);
@@ -259,6 +264,16 @@ public class Principal {
             }
         });
         
+        
+        JMenuItem menuItemConsultaEdicionEvento = new JMenuItem("ConsultaEdicionEvento");
+        menuItemConsultaEdicionEvento.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestro el InternalFrame para alta de evento
+            	consEdicionEventoInternalFrame.cargarEventos();
+            	consEdicionEventoInternalFrame.setVisible(true);
+            }
+        });
+        menuEventos.add(menuItemConsultaEdicionEvento);
         
         JMenuItem menuItemAltaTRegistro = new JMenuItem("Alta Tipo de Registro");
         menuItemAltaTRegistro.addActionListener(new ActionListener() {
