@@ -23,6 +23,10 @@ public class ManejadorUsuario {
             instancia = new ManejadorUsuario();
         return instancia;
     }
+    
+    public static void resetInstance() {
+    	instancia = null;
+    }
 
     public void addUsuario(Usuario usu) {
         String nick = usu.getNickname();

@@ -24,6 +24,10 @@ public class ManejadorEvento {
         return instancia;
     }
     
+    public static void resetInstance() {
+    	instancia = null;
+    }
+    
     public void addEvento(Evento evento) {
         String nombre = evento.getNombreEvento();
         eventos.put(nombre, evento);
@@ -76,5 +80,13 @@ public class ManejadorEvento {
             eventos.add(e.getNombreEvento());
         }
         return eventos;
+    }
+    
+    public String eventoTieneEdicion(String edicion) {
+    	for (Evento e : this.eventos.values()) {
+    		if (e.getEdicion(edicion) != null)
+    			return e.getNombreEvento();
+    	}
+    	return "";
     }
 }

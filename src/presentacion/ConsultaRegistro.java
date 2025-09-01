@@ -189,6 +189,21 @@ public class ConsultaRegistro extends JInternalFrame {
 	    textFieldFecha.setText(datos.getFecha().format(formatter)); 
 	}
 	
+	public void mostrarRegistroUsr(ParEdicionRegistro registroSeleccionado, String usuarioSeleccionado) {
+//		limpiarDatos();
+		comboBoxAsistentes.addItem(usuarioSeleccionado);
+		comboBoxRegistros.addItem(registroSeleccionado);
+		comboBoxAsistentes.setSelectedItem(usuarioSeleccionado);
+		comboBoxRegistros.setSelectedItem(registroSeleccionado);
+		try {
+			cargarDetalles(ctrlUsuarios.getDetallesRegistro(usuarioSeleccionado, registroSeleccionado));						
+		} catch (ErrorDetallesRegistroException er) {
+			JOptionPane.showMessageDialog(ConsultaRegistro.this, er.getMessage(), "Consulta Registro", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception er) {
+			JOptionPane.showMessageDialog(ConsultaRegistro.this, er.getMessage(), "Consulta Registro", JOptionPane.ERROR_MESSAGE);
+		}	
+	}
+	
 	public void limpiarYCerrar() {
 		textFieldEdicion.setText("");
 		textFieldTR.setText("");

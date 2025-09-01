@@ -43,4 +43,12 @@ public interface IEventos {
 		public abstract DataEdicion getDataEdicion(String evento, String edicion);
 		
 		public abstract DataEdicionEvento[] getEdicionesEventoOrganizador(String nickname);
+		
+		public abstract boolean existeEvento(String eventoSeleccionado);
+		
+		public abstract boolean existeEdicion(String evento, String edicion);
+		
+		public abstract boolean existeTR(String evento, String edicion, String tr);
+		
+		public abstract String eventoTieneEdicion(String edicion);
 }

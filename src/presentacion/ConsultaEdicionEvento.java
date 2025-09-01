@@ -316,6 +316,23 @@ public class ConsultaEdicionEvento extends JInternalFrame {
         setTitle("Consulta Edición: " + edicion);
     }
     
+    public void mostrarDetallesEdicion(String edicion) {
+        limpiarDatos();
+//        cargarEventos();
+        
+        String evento = ctrlEventos.eventoTieneEdicion(edicion);
+        
+        comboBoxEventos.addItem(evento);
+        comboBoxEdiciones.addItem(edicion);
+        comboBoxEventos.setSelectedItem(evento);
+        comboBoxEdiciones.setSelectedItem(edicion);
+        
+        // Cargar directamente los datos
+        cargarDatosEdicion(evento, edicion);
+        
+        setTitle("Consulta Edición: " + edicion);
+    }
+    
     private void limpiarDatos() {
         txtNombre.setText("");
         txtSigla.setText("");

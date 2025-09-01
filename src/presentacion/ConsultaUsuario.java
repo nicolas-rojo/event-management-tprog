@@ -5,6 +5,7 @@ import javax.swing.JInternalFrame;
 
 import excepciones.UsuarioNoExisteException;
 import logica.datatypes.*;
+import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
 
 import java.awt.BorderLayout;
@@ -167,7 +168,7 @@ public class ConsultaUsuario extends JInternalFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                    mostrarDetallesEdicion();
+                    mostrarDetallesEdicion(controlEventos);
                 }
             }
         });
@@ -189,7 +190,7 @@ public class ConsultaUsuario extends JInternalFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                    mostrarDetallesRegistro();
+                    mostrarDetallesRegistro(controlUsr);
                 }
             }
         });
@@ -593,80 +594,31 @@ public class ConsultaUsuario extends JInternalFrame {
         }
     }
     
-    private void mostrarDetallesEdicion() {
+    private void mostrarDetallesEdicion(IEventos ICE) {
         DataEdicionEvento edicionSeleccionada = listEdiciones.getSelectedValue();
         
-        if (edicionSeleccionada == null || 
-            "No hay ediciones asociadas".equals(edicionSeleccionada.getNombre()) ||
-            "Error al cargar ediciones".equals(edicionSeleccionada.getNombre())) {
-            return;
+        if (edicionSeleccionada == null || edicionSeleccionada.getNombre().equals("No hay ediciones")) {
+            return; 
         }
         
-        try {
-            // Mostrar detalles completos de la edición
-            StringBuilder mensaje = new StringBuilder();
-            mensaje.append("=== DETALLES DE LA EDICIÓN ===\n\n");
-            mensaje.append("Nombre: ").append(edicionSeleccionada.getNombre()).append("\n");
-            mensaje.append("Sigla: ").append(edicionSeleccionada.getSigla()).append("\n");
-            if (edicionSeleccionada.getFechaIni() != null) {
-                mensaje.append("Fecha Inicio: ").append(edicionSeleccionada.getFechaIni()).append("\n");
-            }
-            if (edicionSeleccionada.getFechaFin() != null) {
-                mensaje.append("Fecha Fin: ").append(edicionSeleccionada.getFechaFin()).append("\n");
-            }
-            if (edicionSeleccionada.getFechaAlta() != null) {
-                mensaje.append("Fecha Alta: ").append(edicionSeleccionada.getFechaAlta()).append("\n");
-            }
-            mensaje.append("Ciudad: ").append(edicionSeleccionada.getCiudad()).append("\n");
-            mensaje.append("País: ").append(edicionSeleccionada.getPais()).append("\n");
-            
-            JOptionPane.showMessageDialog(this, 
-                mensaje.toString(),
-                "Detalles de Edición: " + edicionSeleccionada.getNombre(), 
-                JOptionPane.INFORMATION_MESSAGE);
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, 
-                "Error al obtener detalles de la edición: " + e.getMessage(),
-                "Error", 
-                JOptionPane.ERROR_MESSAGE);
-        }
+        ConsultaEdicionEvento ventanaEdicion = new ConsultaEdicionEvento(ICE);
+        ventanaEdicion.mostrarDetallesEdicion(edicionSeleccionada.getNombre());
+        
+        getParent().add(ventanaEdicion);
+        ventanaEdicion.setVisible(true);
+        limpiarYCerrar();
     }
+
     
-    private void mostrarDetallesRegistro() {
+    private void mostrarDetallesRegistro(IUsuario ICU) {
         ParEdicionRegistro registroSeleccionado = listRegistros.getSelectedValue();
-        
-        if (registroSeleccionado == null || 
-            "No hay registros".equals(registroSeleccionado.getNombreEdicion()) ||
-            "Error al cargar".equals(registroSeleccionado.getNombreEdicion())) {
-            return;
-        }
-        
-        try {
-            DataUsuario usuarioSeleccionado = listUsuarios.getSelectedValue();
-            DataDetalleRegistro detalles = controlUsr.getDetallesRegistro(
-                usuarioSeleccionado.getNickname(), registroSeleccionado);
-            
-            // Mostrar detalles completos del registro
-            StringBuilder mensaje = new StringBuilder();
-            mensaje.append("=== DETALLES DEL REGISTRO ===\n\n");
-            mensaje.append("Edición: ").append(registroSeleccionado.getNombreEdicion()).append("\n");
-            if (registroSeleccionado.getFechaRegistro() != null) {
-                mensaje.append("Fecha de Registro: ").append(registroSeleccionado.getFechaRegistro()).append("\n");
-            }
-            mensaje.append("Costo: $").append(String.format("%.2f", detalles.getCosto())).append("\n");
-            mensaje.append("Tipo de Registro: ").append(detalles.getTipoRegistro()).append("\n");
-            
-            JOptionPane.showMessageDialog(this, 
-                mensaje.toString(),
-                "Detalles de Registro", 
-                JOptionPane.INFORMATION_MESSAGE);
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, 
-                "Error al obtener detalles del registro: " + e.getMessage(),
-                "Error", 
-                JOptionPane.ERROR_MESSAGE);
+        DataUsuario usuarioSeleccionado = listUsuarios.getSelectedValue();
+        if (registroSeleccionado != null && !usuarioSeleccionado.equals("")) {
+        	ConsultaRegistro con = new ConsultaRegistro(ICU);
+        	con.mostrarRegistroUsr(registroSeleccionado, usuarioSeleccionado.getNickname());
+        	getParent().add(con);
+        	con.setVisible(true);
+        	limpiarYCerrar();
         }
     }
     

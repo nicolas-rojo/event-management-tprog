@@ -265,7 +265,7 @@ public class Principal {
         });
         
         
-        JMenuItem menuItemConsultaEdicionEvento = new JMenuItem("ConsultaEdicionEvento");
+        JMenuItem menuItemConsultaEdicionEvento = new JMenuItem("Consulta Edicion Evento");
         menuItemConsultaEdicionEvento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Muestro el InternalFrame para alta de evento
@@ -273,7 +273,6 @@ public class Principal {
             	consEdicionEventoInternalFrame.setVisible(true);
             }
         });
-        menuEventos.add(menuItemConsultaEdicionEvento);
         
         JMenuItem menuItemAltaTRegistro = new JMenuItem("Alta Tipo de Registro");
         menuItemAltaTRegistro.addActionListener(new ActionListener() {
@@ -310,7 +309,7 @@ public class Principal {
         menuEventos.add(menuItemAltaEdicion);
         menuEventos.add(menuItemAltaTRegistro);
         menuEventos.add(menuItemConsultaEvento);
-        //Aca va el add de Consulta edicion
+        menuEventos.add(menuItemConsultaEdicionEvento);
         menuEventos.add(menuItemConsultaTRegistro);
         
         

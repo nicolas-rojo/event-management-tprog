@@ -17,6 +17,10 @@ public class ManejadorInstituciones {
         return instancia;
     }
 	
+	public static void resetInstance() {
+    	instancia = null;
+    }
+	
 	public void addInstitucion(Institucion i) {
 		this.instituciones.put(i.getNombre(), i);
 	}
