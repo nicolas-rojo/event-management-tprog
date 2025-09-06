@@ -410,6 +410,20 @@ public class CrearPatrocinio extends JInternalFrame {
                     "Validación", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
+         // 🔹 Validación del 20%
+            String evento = (String) comboBoxEventos.getSelectedItem();
+            String edicion = (String) comboBoxEdiciones.getSelectedItem();
+            String tipoRegistroNombre = (String) comboBoxTipoRegistro.getSelectedItem();
+
+            DataTRegistro dataTRegistro = controlEventos.getDataTRegistro(evento, edicion, tipoRegistroNombre);
+            float costoTotalRegistros = cuposVal * dataTRegistro.getCosto();
+
+            if (costoTotalRegistros > (0.2f * montoVal)) {
+                JOptionPane.showMessageDialog(this,
+                    "El costo de los registros gratuitos supera el 20% del aporte económico",
+                    "Validación", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
             
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Los valores numéricos no son válidos",
