@@ -216,10 +216,14 @@ public class CrearTipoRegistro extends JInternalFrame {
                     "Alta Tipo Registro", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        
-        if(!(Integer.parseInt(cupoTR) > 0) || !(Float.parseFloat(costoTR) >= 0)) {
-        	JOptionPane.showMessageDialog(this, "El cupo o el costo ingresado no son validos", 
-                    "Alta Tipo Registro", JOptionPane.ERROR_MESSAGE);
+        if(!(Integer.parseInt(cupoTR) > 0) & !(Float.parseFloat(costoTR) >= 0)) {
+        	JOptionPane.showMessageDialog(this, "El cupo y el costo ingresados no son valido", "Alta Tipo Registro", JOptionPane.ERROR_MESSAGE);
+        	return false;
+        }else if(!(Integer.parseInt(cupoTR) > 0)) {
+        	JOptionPane.showMessageDialog(this, "El cupo ingresado no es valido", "Alta Tipo Registro", JOptionPane.ERROR_MESSAGE);
+        	return false;
+        } else if(!(Float.parseFloat(costoTR) >= 0)) {
+        	JOptionPane.showMessageDialog(this, "El costo ingresado no es valido", "Alta Tipo Registro", JOptionPane.ERROR_MESSAGE);
         	return false;
         }
         	
