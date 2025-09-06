@@ -174,7 +174,19 @@ public class ConsultaEdicionEvento extends JInternalFrame {
         DefaultListModel<String> modelPatrocinios = new DefaultListModel<>();
         listPatrocinios = new JList<>(modelPatrocinios);
         listPatrocinios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
+        listPatrocinios.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    String patrocinioSeleccionado = listPatrocinios.getSelectedValue();
+                    String eventoSeleccionado = (String) comboBoxEventos.getSelectedItem();
+                    String edicionSeleccionada = (String) comboBoxEdiciones.getSelectedItem();
+                    if (patrocinioSeleccionado != null && eventoSeleccionado != null && edicionSeleccionada != null) {
+                        abrirConsultaPatrocinio(eventoSeleccionado, edicionSeleccionada, patrocinioSeleccionado);
+                    }
+                }
+            }
+        });
         JScrollPane scrollPatrocinios = new JScrollPane(listPatrocinios);
         JPanel panelPatrocinios = new JPanel(new BorderLayout());
         panelPatrocinios.add(new JLabel("Patrocinios", SwingConstants.CENTER), BorderLayout.NORTH);
@@ -365,6 +377,13 @@ public class ConsultaEdicionEvento extends JInternalFrame {
         limpiarYCerrar();
     }
     
+    private void abrirConsultaPatrocinio(String evento, String edicion, String patrocinioInfo) {
+        ConsultaPatrocinio ventanaPatrocinio = new ConsultaPatrocinio(ctrlEventos);
+        ventanaPatrocinio.mostrarDetallesPatrocinio(evento, edicion, patrocinioInfo);
+        getParent().add(ventanaPatrocinio);
+        ventanaPatrocinio.setVisible(true);
+        limpiarYCerrar();
+    }
     private void limpiarYCerrar() {
         setVisible(false);
         dispose();

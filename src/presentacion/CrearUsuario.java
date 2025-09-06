@@ -193,6 +193,7 @@ public class CrearUsuario extends JInternalFrame {
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 cmdRegistroUsuarioActionPerformed(arg0);
+                limpiarFormulario();
             }
         });
         getContentPane().add(btnAceptar);
@@ -219,6 +220,15 @@ public class CrearUsuario extends JInternalFrame {
         getContentPane().add(lblFechaNac);
         lblFechaNac.setHorizontalAlignment(SwingConstants.RIGHT);
         lblFechaNac.setHorizontalAlignment(SwingConstants.RIGHT);
+        
+     // Esto es para que el boton cerrar borre el contenido
+        this.addInternalFrameListener(new javax.swing.event.InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent e) {
+                limpiarFormulario(); // limpia todos los campos
+            }
+        });
+
     }
 
     private void actualizarCamposEspecificos() {
@@ -231,9 +241,6 @@ public class CrearUsuario extends JInternalFrame {
             panelAsistente.setVisible(false);
             panelOrganizador.setVisible(true);
         }
-        
-        // Ajustar el tamaño del internal frame según los campos visibles
-        pack();
     }
 
     protected void cmdRegistroUsuarioActionPerformed(ActionEvent arg0) {
@@ -276,41 +283,54 @@ public class CrearUsuario extends JInternalFrame {
         String emailU = this.textFieldEmail.getText();
         String tipoUsuario = (String) comboBoxTipoUsuario.getSelectedItem();
 
+        // Datos comunes obligatorios
         if (nombreU.isEmpty() || nicknameU.isEmpty() || emailU.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Registrar Usuario",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, 
+                "Nombre, nickname y correo electrónico son obligatorios", 
+                "Registrar Usuario", 
+                JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
         if ("Asistente".equals(tipoUsuario)) {
             String apellidoU = this.textFieldApellido.getText();
-            
+
             if (apellidoU.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Registrar Usuario",
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, 
+                    "El apellido es obligatorio para asistentes", 
+                    "Registrar Usuario", 
+                    JOptionPane.ERROR_MESSAGE);
                 return false;
             }
-            
-            // Validación de fecha
+
             if (dateChooser.getDate() == null) {
-                JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha de nacimiento válida", "Registrar Usuario",
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar una fecha de nacimiento válida", 
+                    "Registrar Usuario", 
+                    JOptionPane.ERROR_MESSAGE);
                 return false;
             }
-            
+            // Falta implementar institución (Osea aun no agrege el combobox de seleccion de institución)
+
         } else if ("Organizador".equals(tipoUsuario)) {
             String descripcionU = this.textFieldDescripcion.getText();
             String urlU = this.textFieldUrl.getText();
-            
-            if (descripcionU.isEmpty() || urlU.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Registrar Usuario",
-                        JOptionPane.ERROR_MESSAGE);
+
+            if (descripcionU.isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "La descripción es obligatoria para organizadores", 
+                    "Registrar Usuario", 
+                    JOptionPane.ERROR_MESSAGE);
                 return false;
             }
+
+            // urlU puede ser vacío porque el caso de uso dice que es opcional
         }
 
         return true;
     }
+
+
 
     private void limpiarFormulario() {
         textFieldNombre.setText("");

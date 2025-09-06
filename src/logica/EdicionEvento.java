@@ -150,4 +150,10 @@ public class EdicionEvento {
 	public void agregarOrganizador(Organizador org) {
 	    this.organizador = org;
 	}
+	
+	public void agregarRegistro(Registro r) {
+		if(r != null) {
+			this.registros.add(r);
+		}
+	}
 }

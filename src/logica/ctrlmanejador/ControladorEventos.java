@@ -15,6 +15,7 @@ import logica.datatypes.DTOEvento;
 import logica.datatypes.DataTRegistro;
 import logica.datatypes.DataEdicion;
 import logica.datatypes.DataEdicionEvento;
+import logica.datatypes.DTOPatrocinioCompleto;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import logica.TipoRegistro;
 import logica.Asistente;
 import logica.Categoria;
 import logica.EdicionEvento;
+import logica.Patrocinio;
 
 public class ControladorEventos implements IEventos {
     
@@ -152,6 +154,7 @@ public class ControladorEventos implements IEventos {
             tReg.bajarCupo();
             reg.asociarEdicion(ed);
             reg.asociarTRegistro(tReg);
+            ed.agregarRegistro(reg);
         }
     }
     
@@ -240,5 +243,42 @@ public class ControladorEventos implements IEventos {
     public String eventoTieneEdicion(String edicion) {
     	ManejadorEvento me = ManejadorEvento.getInstance();
     	return me.eventoTieneEdicion(edicion);
+    }
+    
+    
+    //NUEVOS PARA CONSULTA PATROCINIO
+    @Override
+    public List<String> listarPatrocinios(String evento, String edicion) {
+        ManejadorEvento me = ManejadorEvento.getInstance();
+        Evento e = me.getEvento(evento);
+        if (e == null) return new ArrayList<>();
+        EdicionEvento ed = e.getEdicion(edicion);
+        if (ed == null) return new ArrayList<>();
+        List<Patrocinio> patrocinios = ed.getPatrociniosLista();
+        List<String> res = new ArrayList<>();
+        for (Patrocinio p : patrocinios) {
+            // Formatear como "código - nivel"
+            res.add(p.getCod() + " - " + p.getNivel());
+        }
+        return res;
+    }
+
+    @Override
+    public DTOPatrocinioCompleto obtenerDTOPatrocinioCompleto(String evento, String edicion, String codigo) {
+        ManejadorEvento me = ManejadorEvento.getInstance();
+        Evento e = me.getEvento(evento);
+        if (e == null) return null;
+        EdicionEvento ed = e.getEdicion(edicion);
+        if (ed == null) return null;
+        List<Patrocinio> patrocinios = ed.getPatrociniosLista();
+        for (Patrocinio p : patrocinios) {
+            if (p.getCod().equals(codigo)) {
+                String nombreInstitucion = p.getInstitucion().getNombre();
+                String nombreTipoRegistro = p.getTipoRegistro().getNombre();
+                return new DTOPatrocinioCompleto(p.getFecha(), p.getMonto(), p.getNivel(), 
+                                                p.getCod(), p.getCtdCupo(), nombreInstitucion, nombreTipoRegistro);
+            }
+        }
+        return null;
     }
 }
