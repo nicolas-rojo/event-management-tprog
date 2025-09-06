@@ -225,6 +225,7 @@ public class ConsultaTipoRegistro extends JInternalFrame {
                 for (String ed : edicionesEvento) {
                     comboBoxEdiciones.addItem(ed);
                 }
+                comboBoxEdiciones.setSelectedIndex(-1);
             } else {
                 comboBoxEdiciones.addItem("No hay ediciones");
                 comboBoxTR.addItem("No hay tipos de registro");
@@ -248,9 +249,10 @@ public class ConsultaTipoRegistro extends JInternalFrame {
 	                for (String tr : TiposRegistros) {
 	                    comboBoxTR.addItem(tr);
 	                }
+	                comboBoxTR.setSelectedIndex(-1);
 	                comboBoxTR.setEnabled(true);
 	            } else {
-	            	comboBoxTR.removeAllItems();	                
+	            	comboBoxTR.addItem("No hay tipos de registro");
 	                comboBoxTR.setEnabled(false);
 	                
 	            }

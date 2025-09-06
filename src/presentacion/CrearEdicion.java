@@ -277,8 +277,11 @@ public class CrearEdicion extends JInternalFrame {
 	    	 	return false;
 	     }
 	    
-	     else if(fechaIni.isAfter(fechaFin) || fechaAlta.isAfter(fechaIni)) {
-	    	 JOptionPane.showMessageDialog(this, "Fecha Invalida","Alta de Edicion", JOptionPane.ERROR_MESSAGE);
+	     else if(fechaIni.isAfter(fechaFin)) {
+	    	 JOptionPane.showMessageDialog(this, "La fecha de inicio no puede ser posterior a la fecha de fin","Alta de Edicion", JOptionPane.ERROR_MESSAGE);
+	    	 return false;
+	     }else if(fechaAlta.isAfter(fechaIni)) {
+	    	 JOptionPane.showMessageDialog(this, "La fecha de alta no puede ser posterior a la fecha de inicio","Alta de Edicion", JOptionPane.ERROR_MESSAGE);
 	    	 return false;
 	     }
 	    	 	                
