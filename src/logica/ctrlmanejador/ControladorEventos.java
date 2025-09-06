@@ -86,18 +86,27 @@ public class ControladorEventos implements IEventos {
         ManejadorEvento me = ManejadorEvento.getInstance();
         ManejadorUsuario mu = ManejadorUsuario.getInstance();
         Organizador o = (Organizador) mu.getUsuarioNickname(org);
+        List<String> eventos = me.getEventos();
+        
+        //Me fijo que no existe una edicion con ese nombre en TODOS los eventos
+        
+        for(String e : eventos) {
+        	Evento ev = me.getEvento(e);
+        	List<String> ediciones = ev.getEdiciones();
+        	for(String ed : ediciones) {
+        		if(ed.equals(dataEdicion.getNombre())) {
+        			throw new EdicionRepetidaExcepcion("Nombre de edicion en uso");
+        		}
+        	}
+        }
         Evento e = me.getEvento(evento);
         EdicionEvento ee = e.getEdicion(dataEdicion.getNombre()); 
-        if (ee != null) {
-            throw new EdicionRepetidaExcepcion("nombre de edicion en uso");
-        }
-        else {
-            ee = new EdicionEvento(dataEdicion);
-            e.agregarEdicion(ee);
-            o.agregarEdicion(ee);
-            ee.agregarOrganizador(o);
-        }
+        ee = new EdicionEvento(dataEdicion);
+        e.agregarEdicion(ee);
+        o.agregarEdicion(ee);
+        ee.agregarOrganizador(o);
     }
+ 
     /*public void listarInfoEvento(String nombre) {
         ManejadorEvento me = ManejadorEvento.getInstance();
         Evento e = me.getEvento(nombre);
