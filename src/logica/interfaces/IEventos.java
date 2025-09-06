@@ -14,6 +14,7 @@ import logica.datatypes.DataEdicion;
 import logica.datatypes.DataEvento;
 import logica.datatypes.DataEdicionEvento;
 import logica.datatypes.DataTRegistro;
+import logica.datatypes.DTOPatrocinioCompleto;
 import logica.EdicionEvento;
 
 public interface IEventos {
@@ -50,5 +51,11 @@ public interface IEventos {
 		
 		public abstract boolean existeTR(String evento, String edicion, String tr);
 		
-		public abstract String eventoTieneEdicion(String edicion);
+		public abstract String eventoTieneEdicion(String edicion); 
+		
+		
+		// NUEVOS PARA CONSULTA PATROCINIOS
+		public abstract List<String> listarPatrocinios(String evento, String edicion); 
+		
+		public abstract DTOPatrocinioCompleto obtenerDTOPatrocinioCompleto(String evento, String edicion, String codigo);
 }
