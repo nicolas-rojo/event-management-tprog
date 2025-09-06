@@ -152,6 +152,7 @@ public class ControladorEventos implements IEventos {
             tReg.bajarCupo();
             reg.asociarEdicion(ed);
             reg.asociarTRegistro(tReg);
+            ed.agregarRegistro(reg);
         }
     }
     
