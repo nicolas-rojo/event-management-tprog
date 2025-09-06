@@ -56,7 +56,7 @@ public class CrearPatrocinio extends JInternalFrame {
     
     // Datos cargados
     private List<String> eventos;
-    private DataInstitucion[] instituciones; // Cambiado a DataInstitucion[]
+    private DataInstitucion[] instituciones;
 
     public CrearPatrocinio(IEventos iev, IInstituciones iin) {
         controlEventos = iev;
@@ -274,7 +274,6 @@ public class CrearPatrocinio extends JInternalFrame {
 
     private void cargarInstituciones() {
         try {
-            // Cambiado para usar DataInstitucion[] en lugar de List<String>
             instituciones = controlInst.listarInstituciones();
             
             DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
@@ -309,8 +308,6 @@ public class CrearPatrocinio extends JInternalFrame {
                 int cantidadCupos = Integer.parseInt(textFieldCantidadCupos.getText().trim());
                 String codigo = (textFieldCodigo.getText().trim());
                 
-                //String tipoRegistro = obtenerTipoRegistroCompleto(evento, edicion, tipoRegistroNombre);
-                
                 // Crear el objeto DataPatrocinio
                 DataPatrocinio patrocinio = new DataPatrocinio(
                     LocalDate.now(), // Fecha actual
@@ -319,11 +316,7 @@ public class CrearPatrocinio extends JInternalFrame {
                     codigo,
                     cantidadCupos
                 );
-                
-                // Crear el patrocinio usando el controlador
-                // Ahora pasamos TipoRegistro en lugar de DataTRegistro
                 controlInst.nuevoPatrocinio(patrocinio, institucionNombre, evento, edicion, tipoRegistroNombre);
-                
                 JOptionPane.showMessageDialog(this, 
                     "El patrocinio se ha registrado exitosamente",
                     "Alta de Patrocinio", JOptionPane.INFORMATION_MESSAGE);
@@ -331,7 +324,7 @@ public class CrearPatrocinio extends JInternalFrame {
                 limpiarFormulario();
                 setVisible(false);
                 
-            } catch (NumberFormatException ex) {
+            } catch (NumberFormatException ex) { //No se si esta excepsión hay que agregarla o se supone que ya viene incluida ¿?
                 JOptionPane.showMessageDialog(this, 
                     "Error en los datos numéricos. Verifique el monto, cantidad de cupos y código.",
                     "Error de Validación", JOptionPane.ERROR_MESSAGE);

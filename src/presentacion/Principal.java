@@ -51,6 +51,8 @@ public class Principal {
     private ConsultaRegistro consuRegistroInternalFrame;
     private ConsultaEvento consEventoInternalFrame;
     private ConsultaEdicionEvento consEdicionEventoInternalFrame;
+    //Consulta Patrocinio
+    private ConsultaPatrocinio consPatrocinioInternalFrame;
     
     // Nuevos InternalFrames para Instituciones
     private CrearInstitucion creInstitucionInternalFrame;
@@ -128,6 +130,10 @@ public class Principal {
         
         crePatrocinioInternalFrame = new CrearPatrocinio(ICE, IIN);
         crePatrocinioInternalFrame.setVisible(false);
+        
+        //Consulta Patrocinio
+        consPatrocinioInternalFrame = new ConsultaPatrocinio(ICE);
+        consPatrocinioInternalFrame.setVisible(false);
          
         frmGestionDeUsuarios.getContentPane().setLayout(null);
 
@@ -147,7 +153,9 @@ public class Principal {
         frmGestionDeUsuarios.getContentPane().add(creInstitucionInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(consInstitucionInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(crePatrocinioInternalFrame);
-
+        
+        //Consulta Patrocinio
+        frmGestionDeUsuarios.getContentPane().add(consPatrocinioInternalFrame);
     }
 
     private void initialize() {
@@ -347,6 +355,16 @@ public class Principal {
             }
         });
         menuInstituciones.add(menuItemAltaPatrocinio);
+        
+        JMenuItem menuItemConsultaPatrocinio = new JMenuItem("Consulta de Patrocinio");
+        menuItemConsultaPatrocinio.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	// Muestro el InternalFrame para Consulta de Patrocinio
+                consPatrocinioInternalFrame.cargarEventos();
+                consPatrocinioInternalFrame.setVisible(true);
+            }
+        });
+        menuInstituciones.add(menuItemConsultaPatrocinio);
     }
     
     public void cargarDatos(IUsuario ICU, IEventos IEV, IInstituciones II) {
