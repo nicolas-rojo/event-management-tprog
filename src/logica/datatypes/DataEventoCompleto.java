@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DTOEvento {
+public class DataEventoCompleto {
 	 private final String nombre;
 	 private final String sigla;
 	 private final LocalDate fechaAlta;
@@ -11,7 +11,7 @@ public class DTOEvento {
 	 private final Set<String> categorias;
 	 private final Set<String> ediciones;
 	 
-	 public DTOEvento(String nombre, String sigla, LocalDate fechaAlta, String descripcion, Set<String> categorias, Set<String> ediciones ) {
+	 public DataEventoCompleto(String nombre, String sigla, LocalDate fechaAlta, String descripcion, Set<String> categorias, Set<String> ediciones ) {
 			this.nombre = nombre;
 		    this.sigla = sigla;
 		    this.fechaAlta = fechaAlta;

@@ -7,7 +7,7 @@ import java.awt.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
-import logica.datatypes.DTOEvento;
+import logica.datatypes.DataEventoCompleto;
 import logica.EdicionEvento;
 import logica.interfaces.IEventos;
 import excepciones.EventoNoExisteExcepcion;
@@ -18,8 +18,8 @@ public class ConsultaEvento extends JInternalFrame {
     // ---- Campos / Variables de instancia ----
     private IEventos controlEvento;
 
-    private JList<DTOEvento> listEventos;
-    private DefaultListModel<DTOEvento> modelEventos;
+    private JList<DataEventoCompleto> listEventos;
+    private DefaultListModel<DataEventoCompleto> modelEventos;
     private JScrollPane scrollPaneLista;
 
     // Detalles (derecha)
@@ -64,9 +64,9 @@ public class ConsultaEvento extends JInternalFrame {
         listEventos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         // Lista de eventos (izquierda)
-        listEventos.setCellRenderer(new ListCellRenderer<DTOEvento>() {
+        listEventos.setCellRenderer(new ListCellRenderer<DataEventoCompleto>() {
             @Override
-            public Component getListCellRendererComponent(JList<? extends DTOEvento> list, DTOEvento value, int index, boolean isSelected, boolean cellHasFocus) {
+            public Component getListCellRendererComponent(JList<? extends DataEventoCompleto> list, DataEventoCompleto value, int index, boolean isSelected, boolean cellHasFocus) {
                 JLabel label = new JLabel();
                 if (value != null) label.setText(value.getNombre()); // solo nombre
                 label.setOpaque(true);
@@ -84,7 +84,7 @@ public class ConsultaEvento extends JInternalFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                    DTOEvento eventoSeleccionado = listEventos.getSelectedValue();
+                    DataEventoCompleto eventoSeleccionado = listEventos.getSelectedValue();
                     if (eventoSeleccionado != null) {
                         actualizarDetalles(eventoSeleccionado);
                     } else {
@@ -151,16 +151,9 @@ public class ConsultaEvento extends JInternalFrame {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     String ed = listEdiciones.getSelectedValue();
-                    DTOEvento eventoSeleccionado = listEventos.getSelectedValue();
+                    DataEventoCompleto eventoSeleccionado = listEventos.getSelectedValue();
                     if (ed != null && eventoSeleccionado != null) {
-                        try {
-                            EdicionEvento edicion = controlEvento.obtenerEdicionEvento(eventoSeleccionado.getNombre(), ed);
-                            abrirConsultaEdicion(eventoSeleccionado.getNombre(), ed, controlEvento);
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(null,
-                                "No se pudo cargar la edición: " + ex.getMessage(),
-                                "Error", JOptionPane.ERROR_MESSAGE);
-                        }
+                        abrirConsultaEdicion(eventoSeleccionado.getNombre(), ed, controlEvento);
                     }
                 }
             }
@@ -181,7 +174,7 @@ public class ConsultaEvento extends JInternalFrame {
     }
 
     // ---- Métodos auxiliares ----
-    private void actualizarDetalles(DTOEvento dto) {
+    private void actualizarDetalles(DataEventoCompleto dto) {
         if (dto == null) {
             txtNombre.setText("");
             txtSigla.setText("");
@@ -221,14 +214,14 @@ public class ConsultaEvento extends JInternalFrame {
     public void cargarEventos() {
         try {
             // Obtengo los eventos desde el controlador
-            DTOEvento[] eventos = controlEvento.listarInfoEvento();
+            DataEventoCompleto[] eventos = controlEvento.listarInfoEvento();
 
             // Limpio el modelo antes de cargar nuevos elementos
             modelEventos.clear();
 
             // Si hay eventos, los agrego al modelo
             if (eventos != null && eventos.length > 0) {
-                for (DTOEvento dto : eventos) {
+                for (DataEventoCompleto dto : eventos) {
                     modelEventos.addElement(dto);
                 }
             }
