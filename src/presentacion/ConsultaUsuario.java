@@ -67,7 +67,7 @@ public class ConsultaUsuario extends JInternalFrame {
     private JLabel lblUrl;
 
     // Nuevos componentes para ediciones y registros
-    private JList<DataEdicionEvento> listEdiciones;
+    private JList<DataEdicion> listEdiciones;
     private JList<ParEdicionRegistro> listRegistros;
     private JLabel lblEdicionesTitulo;
     private JLabel lblRegistrosTitulo;
@@ -492,21 +492,21 @@ public class ConsultaUsuario extends JInternalFrame {
             String nickname = usuarioSeleccionado.getNickname();
             
             // Usar el método de la interfaz IEventos
-            DataEdicionEvento[] ediciones = controlEventos.getEdicionesEventoOrganizador(nickname);
+            DataEdicion[] ediciones = controlEventos.getEdicionesEventoOrganizador(nickname);
             
-            javax.swing.DefaultListModel<DataEdicionEvento> model = new javax.swing.DefaultListModel<>();
+            javax.swing.DefaultListModel<DataEdicion> model = new javax.swing.DefaultListModel<>();
             
             if (ediciones != null && ediciones.length > 0) {
-                for (DataEdicionEvento edicion : ediciones) {
+                for (DataEdicion edicion : ediciones) {
                     model.addElement(edicion);
                 }
                 
                 // Configurar renderer para mejor visualización
-                listEdiciones.setCellRenderer(new javax.swing.ListCellRenderer<DataEdicionEvento>() {
+                listEdiciones.setCellRenderer(new javax.swing.ListCellRenderer<DataEdicion>() {
                     @Override
                     public java.awt.Component getListCellRendererComponent(
-                            javax.swing.JList<? extends DataEdicionEvento> list, 
-                            DataEdicionEvento value, 
+                            javax.swing.JList<? extends DataEdicion> list, 
+                            DataEdicion value, 
                             int index, 
                             boolean isSelected, 
                             boolean cellHasFocus) {
@@ -529,11 +529,11 @@ public class ConsultaUsuario extends JInternalFrame {
                 });
             } else {
                 // Cuando no hay ediciones, configurar un renderer especial para mostrar mensaje
-                listEdiciones.setCellRenderer(new javax.swing.ListCellRenderer<DataEdicionEvento>() {
+                listEdiciones.setCellRenderer(new javax.swing.ListCellRenderer<DataEdicion>() {
                     @Override
                     public java.awt.Component getListCellRendererComponent(
-                            javax.swing.JList<? extends DataEdicionEvento> list, 
-                            DataEdicionEvento value, 
+                            javax.swing.JList<? extends DataEdicion> list, 
+                            DataEdicion value, 
                             int index, 
                             boolean isSelected, 
                             boolean cellHasFocus) {
@@ -562,15 +562,15 @@ public class ConsultaUsuario extends JInternalFrame {
                 "Error", 
                 JOptionPane.ERROR_MESSAGE);
             
-            javax.swing.DefaultListModel<DataEdicionEvento> model = new javax.swing.DefaultListModel<>();
+            javax.swing.DefaultListModel<DataEdicion> model = new javax.swing.DefaultListModel<>();
             listEdiciones.setModel(model);
             
             // Configurar renderer para mensaje de error
-            listEdiciones.setCellRenderer(new javax.swing.ListCellRenderer<DataEdicionEvento>() {
+            listEdiciones.setCellRenderer(new javax.swing.ListCellRenderer<DataEdicion>() {
                 @Override
                 public java.awt.Component getListCellRendererComponent(
-                        javax.swing.JList<? extends DataEdicionEvento> list, 
-                        DataEdicionEvento value, 
+                        javax.swing.JList<? extends DataEdicion> list, 
+                        DataEdicion value, 
                         int index, 
                         boolean isSelected, 
                         boolean cellHasFocus) {
@@ -712,7 +712,7 @@ public class ConsultaUsuario extends JInternalFrame {
 }
     
     private void mostrarDetallesEdicion(IEventos ICE) {
-        DataEdicionEvento edicionSeleccionada = listEdiciones.getSelectedValue();
+        DataEdicion edicionSeleccionada = listEdiciones.getSelectedValue();
         
         // Verificar si hay una edición válida seleccionada
         if (edicionSeleccionada == null) {
@@ -720,7 +720,7 @@ public class ConsultaUsuario extends JInternalFrame {
         }
         
         // Verificar si la lista está vacía (no hay ediciones reales)
-        javax.swing.ListModel<DataEdicionEvento> model = listEdiciones.getModel();
+        javax.swing.ListModel<DataEdicion> model = listEdiciones.getModel();
         if (model.getSize() == 0) {
             JOptionPane.showMessageDialog(this, 
                 "No hay ediciones disponibles para mostrar detalles.",
@@ -780,15 +780,15 @@ public class ConsultaUsuario extends JInternalFrame {
         textFieldUrl.setText("");
         
         // Limpiar y resetear listas con modelos vacíos
-        javax.swing.DefaultListModel<DataEdicionEvento> modelEdiciones = new javax.swing.DefaultListModel<>();
+        javax.swing.DefaultListModel<DataEdicion> modelEdiciones = new javax.swing.DefaultListModel<>();
         listEdiciones.setModel(modelEdiciones);
         
         // Configurar renderer para placeholder de ediciones
-        listEdiciones.setCellRenderer(new javax.swing.ListCellRenderer<DataEdicionEvento>() {
+        listEdiciones.setCellRenderer(new javax.swing.ListCellRenderer<DataEdicion>() {
             @Override
             public java.awt.Component getListCellRendererComponent(
-                    javax.swing.JList<? extends DataEdicionEvento> list, 
-                    DataEdicionEvento value, 
+                    javax.swing.JList<? extends DataEdicion> list, 
+                    DataEdicion value, 
                     int index, 
                     boolean isSelected, 
                     boolean cellHasFocus) {

@@ -9,12 +9,11 @@ import excepciones.EventoSinCategoriaExcepcion;
 import excepciones.EventoNoExisteExcepcion;
 import excepciones.TipoDeRegistroRepetidoException;
 
-import logica.datatypes.DTOEvento;
+import logica.datatypes.DataEventoCompleto;
 import logica.datatypes.DataEdicion;
 import logica.datatypes.DataEvento;
-import logica.datatypes.DataEdicionEvento;
 import logica.datatypes.DataTRegistro;
-import logica.datatypes.DTOPatrocinioCompleto;
+import logica.datatypes.DataPatrocinioCompleto;
 import logica.EdicionEvento;
 
 public interface IEventos {
@@ -33,17 +32,15 @@ public interface IEventos {
 		
 		public abstract void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion;
 		
-		public abstract DTOEvento[] listarInfoEvento() throws EventoNoExisteExcepcion;
+		public abstract DataEventoCompleto[] listarInfoEvento() throws EventoNoExisteExcepcion;
 		
 		public abstract void nuevoTipoRegistro(DataTRegistro dataTRegistro, String evento, String edicion) throws TipoDeRegistroRepetidoException;
 		
 		public abstract DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro);
 		
-		public abstract EdicionEvento obtenerEdicionEvento(String nombreEvento, String nombreEdicionEvento);
-		
 		public abstract DataEdicion getDataEdicion(String evento, String edicion);
 		
-		public abstract DataEdicionEvento[] getEdicionesEventoOrganizador(String nickname);
+		public abstract DataEdicion[] getEdicionesEventoOrganizador(String nickname);
 		
 		public abstract boolean existeEvento(String eventoSeleccionado);
 		
@@ -53,9 +50,18 @@ public interface IEventos {
 		
 		public abstract String eventoTieneEdicion(String edicion); 
 		
+		public abstract DataEdicion obtenerEdicionEvento(String nombreEvento, String nombreEdicionEvento);
+		
+		public abstract List<String> obtenerTipoRegistrosEdicion(String nombreEvento, String nombreEdicionEvento);
+		
+		public abstract List<DataPatrocinioCompleto> obtenerPatrociniosEdicion(String nombreEvento, String nombreEdicionEvento);
+		
+		public abstract List<String> obtenerRegistrosEdicion(String nombreEvento, String nombreEdicionEvento);
+		
+		public abstract String obtenerOrganizadorEdicion(String nombreEvento, String nombreEdicionEvento);
 		
 		// NUEVOS PARA CONSULTA PATROCINIOS
 		public abstract List<String> listarPatrocinios(String evento, String edicion); 
 		
-		public abstract DTOPatrocinioCompleto obtenerDTOPatrocinioCompleto(String evento, String edicion, String codigo);
+		public abstract DataPatrocinioCompleto obtenerDTOPatrocinioCompleto(String evento, String edicion, String codigo);
 }

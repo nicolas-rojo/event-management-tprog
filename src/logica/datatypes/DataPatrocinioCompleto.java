@@ -2,7 +2,7 @@ package logica.datatypes;
 
 import java.time.LocalDate;
 
-public class DTOPatrocinioCompleto {
+public class DataPatrocinioCompleto {
     private LocalDate fecha;
     private float monto;
     private Nivel nivel;
@@ -11,7 +11,7 @@ public class DTOPatrocinioCompleto {
     private String institucion;
     private String tipoRegistro;
 
-    public DTOPatrocinioCompleto(LocalDate fecha, float monto, Nivel nivel, String cod, 
+    public DataPatrocinioCompleto(LocalDate fecha, float monto, Nivel nivel, String cod, 
                                  int ctdCupo, String institucion, String tipoRegistro) {
         this.fecha = fecha;
         this.monto = monto;

@@ -190,7 +190,7 @@ public class TestTodoEnUno {
         
         // Verificar eventos - usando listarInfoEvento()
         try {
-        	DTOEvento[] evs = controladorEventos.listarInfoEvento();
+        	DataEventoCompleto[] evs = controladorEventos.listarInfoEvento();
         	assertEquals(7, evs.length);
         } catch (EventoNoExisteExcepcion e) {
             e.printStackTrace();
@@ -463,7 +463,7 @@ public class TestTodoEnUno {
         // Ejecutar carga completa
         testCargaCompletaDatos();
         
-        DataEdicionEvento[] eds = controladorEventos.getEdicionesEventoOrganizador("imm");
+        DataEdicion[] eds = controladorEventos.getEdicionesEventoOrganizador("imm");
         assertTrue(eds.length == 4);
     }
 }

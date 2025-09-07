@@ -11,6 +11,8 @@ import logica.EdicionEvento;
 import logica.interfaces.IEventos;
 import logica.TipoRegistro;
 import logica.Patrocinio;
+import logica.datatypes.DataPatrocinioCompleto;
+import logica.datatypes.DataEdicion;
 
 @SuppressWarnings("serial")
 public class ConsultaEdicionEvento extends JInternalFrame {
@@ -141,8 +143,6 @@ public class ConsultaEdicionEvento extends JInternalFrame {
         txtOrganizador.setEditable(false);
         gbc.gridx = 1; gbc.weightx = 1.0;
         panelDetalles.add(txtOrganizador, gbc);
-
-//        panelPrincipal.add(panelDetalles, BorderLayout.CENTER);
 
         // Panel central con listas
         JPanel panelCentral = new JPanel(new GridLayout(1, 3, 10, 0));
@@ -281,35 +281,42 @@ public class ConsultaEdicionEvento extends JInternalFrame {
     
     public void cargarDatosEdicion(String evento, String edicion) {
         try {
-            EdicionEvento ed = ctrlEventos.obtenerEdicionEvento(evento, edicion);
+            // Obtener información básica de la edición
+            DataEdicion ed = ctrlEventos.obtenerEdicionEvento(evento, edicion);
             if (ed != null) {
                 txtNombre.setText(ed.getNombre());
                 txtSigla.setText(ed.getSigla());
                 txtFechaIni.setText(ed.getFechaIni().format(DateTimeFormatter.ISO_LOCAL_DATE));
                 txtFechaFin.setText(ed.getFechaFin().format(DateTimeFormatter.ISO_LOCAL_DATE));
                 txtFechaAlta.setText(ed.getFechaAlta().format(DateTimeFormatter.ISO_LOCAL_DATE));
-                txtCiudad.setText(ed.getCuidad());
+                txtCiudad.setText(ed.getCiudad());
                 txtPais.setText(ed.getPais());
-                txtOrganizador.setText(ed.getOrganizador().getNickname());
+                
+                // Obtener organizador
+                String orgNickname = ctrlEventos.obtenerOrganizadorEdicion(evento, edicion);
+                txtOrganizador.setText(orgNickname);
                 
                 // Cargar tipos de registro
                 DefaultListModel<String> modelTiposRegistros = (DefaultListModel<String>) listTiposRegistros.getModel();
                 modelTiposRegistros.clear();
-                for (String tipo : ed.getTRegistro()) {
+                List<String> tipos = ctrlEventos.obtenerTipoRegistrosEdicion(evento, edicion);
+                for (String tipo : tipos) {
                     modelTiposRegistros.addElement(tipo);
                 }
                 
                 // Cargar patrocinios
                 DefaultListModel<String> modelPatrocinios = (DefaultListModel<String>) listPatrocinios.getModel();
                 modelPatrocinios.clear();
-                for (Patrocinio p : ed.getPatrociniosLista()) {
+                List<DataPatrocinioCompleto> patrocinios = ctrlEventos.obtenerPatrociniosEdicion(evento, edicion);
+                for (DataPatrocinioCompleto p : patrocinios) {
                     modelPatrocinios.addElement(p.getCod() + " - " + p.getNivel());
                 }
                 
                 // Cargar registros
                 DefaultListModel<String> modelRegistros = (DefaultListModel<String>) listRegistros.getModel();
                 modelRegistros.clear();
-                for (String registro : ed.getRegistrosInfo()) {
+                List<String> registros = ctrlEventos.obtenerRegistrosEdicion(evento, edicion);
+                for (String registro : registros) {
                     modelRegistros.addElement(registro);
                 }
             }
@@ -334,7 +341,6 @@ public class ConsultaEdicionEvento extends JInternalFrame {
     
     public void mostrarDetallesEdicion(String edicion) {
         limpiarDatos();
-//        cargarEventos();
         
         String evento = ctrlEventos.eventoTieneEdicion(edicion);
         
@@ -378,12 +384,30 @@ public class ConsultaEdicionEvento extends JInternalFrame {
     }
     
     private void abrirConsultaPatrocinio(String evento, String edicion, String patrocinioInfo) {
-        ConsultaPatrocinio ventanaPatrocinio = new ConsultaPatrocinio(ctrlEventos);
-        ventanaPatrocinio.mostrarDetallesPatrocinio(evento, edicion, patrocinioInfo);
-        getParent().add(ventanaPatrocinio);
-        ventanaPatrocinio.setVisible(true);
-        limpiarYCerrar();
+        try {
+            // Extraer el código del patrocinio de la cadena "código - nivel"
+            String codigoPatrocinio = patrocinioInfo.split(" - ")[0];
+            
+            // Obtener información completa del patrocinio
+            DataPatrocinioCompleto patrocinio = ctrlEventos.obtenerDTOPatrocinioCompleto(evento, edicion, codigoPatrocinio);
+            
+            if (patrocinio != null) {
+                ConsultaPatrocinio ventanaPatrocinio = new ConsultaPatrocinio(ctrlEventos);
+                ventanaPatrocinio.seleccionarPatrocinioEnLista(evento, edicion, codigoPatrocinio);
+                ventanaPatrocinio.mostrarDetallesPatrocinio(patrocinio);
+                getParent().add(ventanaPatrocinio);
+                ventanaPatrocinio.setVisible(true);
+                limpiarYCerrar();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró información del patrocinio", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al abrir consulta de patrocinio: " + ex.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
+    
     private void limpiarYCerrar() {
         setVisible(false);
         dispose();

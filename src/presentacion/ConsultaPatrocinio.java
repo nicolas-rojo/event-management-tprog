@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import logica.interfaces.IEventos;
-import logica.datatypes.DTOPatrocinioCompleto;
+import logica.datatypes.DataPatrocinioCompleto;
 import logica.datatypes.Nivel;
 
 @SuppressWarnings("serial")
@@ -202,13 +202,29 @@ public class ConsultaPatrocinio extends JInternalFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                    String patrocinioSeleccionado = listPatrocinios.getSelectedValue();
-                    String eventoSeleccionado = (String) comboBoxEventos.getSelectedItem();
-                    String edicionSeleccionada = (String) comboBoxEdiciones.getSelectedItem();
-                    if (patrocinioSeleccionado != null && eventoSeleccionado != null && edicionSeleccionada != null) {
-                        // Extraer el código del patrocinio (formato: "codigo - nivel")
-                        String codigo = patrocinioSeleccionado.split(" - ")[0];
-                        cargarDatosPatrocinio(eventoSeleccionado, edicionSeleccionada, codigo);
+                    try {
+                        String patrocinioSeleccionado = listPatrocinios.getSelectedValue();
+                        String eventoSeleccionado = (String) comboBoxEventos.getSelectedItem();
+                        String edicionSeleccionada = (String) comboBoxEdiciones.getSelectedItem();
+                        if (patrocinioSeleccionado != null && eventoSeleccionado != null && edicionSeleccionada != null) {
+                            // Extraer el código del patrocinio (formato: "codigo - nivel")
+                            String codigo = patrocinioSeleccionado.split(" - ")[0];
+                            DataPatrocinioCompleto patrocinio = ctrlEventos.obtenerDTOPatrocinioCompleto(
+                                eventoSeleccionado, edicionSeleccionada, codigo);
+                            if (patrocinio != null) {
+                                mostrarDetallesPatrocinio(patrocinio);
+                            } else {
+                                limpiarDatos();
+                                JOptionPane.showMessageDialog(ConsultaPatrocinio.this, 
+                                    "No se encontró información del patrocinio seleccionado", 
+                                    "Error", JOptionPane.WARNING_MESSAGE);
+                            }
+                        }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(ConsultaPatrocinio.this, 
+                            "Error al cargar detalles del patrocinio: " + ex.getMessage(), 
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                        limpiarDatos();
                     }
                 }
             }
@@ -275,7 +291,7 @@ public class ConsultaPatrocinio extends JInternalFrame {
     
     public void cargarDatosPatrocinio(String evento, String edicion, String codigo) {
         try {
-            DTOPatrocinioCompleto patrocinio = ctrlEventos.obtenerDTOPatrocinioCompleto(evento, edicion, codigo);
+            DataPatrocinioCompleto patrocinio = ctrlEventos.obtenerDTOPatrocinioCompleto(evento, edicion, codigo);
             if (patrocinio != null) {
                 txtCodigo.setText(patrocinio.getCod());
                 txtFecha.setText(patrocinio.getFecha().format(DateTimeFormatter.ISO_LOCAL_DATE));
@@ -291,25 +307,34 @@ public class ConsultaPatrocinio extends JInternalFrame {
         }
     }
     
-    public void mostrarDetallesPatrocinio(String evento, String edicion, String patrocinioInfo) {
-        limpiarDatos();
-        cargarEventos();
+    public void mostrarDetallesPatrocinio(DataPatrocinioCompleto patrocinio) {
+        // Llenar campos directamente con el DTO
+        txtCodigo.setText(patrocinio.getCod());
+        txtFecha.setText(patrocinio.getFecha().format(DateTimeFormatter.ISO_LOCAL_DATE));
+        txtMonto.setText(String.valueOf(patrocinio.getMonto()));
+        txtNivel.setText(patrocinio.getNivel().toString());
+        txtCupo.setText(String.valueOf(patrocinio.getCtdCupo()));
+        txtInstitucion.setText(patrocinio.getInstitucion());
+        txtTipoRegistro.setText(patrocinio.getTipoRegistro());
         
+        setTitle("Consulta Patrocinio: " + patrocinio.getCod());
+    }
+
+    // Método auxiliar para cargar y seleccionar patrocinio en la lista
+    public void seleccionarPatrocinioEnLista(String evento, String edicion, String codigoPatrocinio) {
+        cargarEventos();
         comboBoxEventos.setSelectedItem(evento);
         comboBoxEdiciones.setSelectedItem(edicion);
-        
-        // Cargar patrocinios y seleccionar el específico
         cargarPatrocinios(evento, edicion);
         
-        // Seleccionar el patrocinio específico en la lista
+        // Buscar y seleccionar el patrocinio en la lista
         for (int i = 0; i < modelPatrocinios.getSize(); i++) {
-            if (modelPatrocinios.getElementAt(i).equals(patrocinioInfo)) {
+            String item = modelPatrocinios.getElementAt(i);
+            if (item.startsWith(codigoPatrocinio + " - ")) {
                 listPatrocinios.setSelectedIndex(i);
                 break;
             }
         }
-        
-        setTitle("Consulta Patrocinio: " + patrocinioInfo);
     }
     
     private void limpiarDatos() {
