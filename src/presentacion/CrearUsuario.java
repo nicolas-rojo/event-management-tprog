@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -43,9 +45,10 @@ public class CrearUsuario extends JInternalFrame {
     private JTextField textFieldApellido;
     private JDateChooser dateChooser;
     private JPanel panelAsistente;
+    private JLabel lblFechaNac;
     
     // Campos específicos para Organizador
-    private JTextField textFieldDescripcion;
+    private JTextArea textAreaDescripcion;
     private JTextField textFieldUrl;
     private JPanel panelOrganizador;
 
@@ -58,7 +61,7 @@ public class CrearUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Registrar un Usuario");
-        setBounds(10, 40, 450, 314);
+        setBounds(10, 40, 460, 350);
         getContentPane().setLayout(null);
 
         // Tipo de Usuario
@@ -103,93 +106,83 @@ public class CrearUsuario extends JInternalFrame {
         getContentPane().add(textFieldNickname);
         textFieldNickname.setColumns(10);
 
+        // Email (campo común para ambos tipos de usuario)
+        lblIngreseEmail = new JLabel("Email:");
+        lblIngreseEmail.setBounds(0, 120, 115, 25);
+        lblIngreseEmail.setHorizontalAlignment(SwingConstants.RIGHT);
+        getContentPane().add(lblIngreseEmail);
+
+        textFieldEmail = new JTextField();
+        textFieldEmail.setBounds(120, 120, 300, 25);
+        textFieldEmail.setColumns(10);
+        getContentPane().add(textFieldEmail);
+
         // Panel para campos de Asistente
         panelAsistente = new JPanel();
-        panelAsistente.setBounds(0, 120, 420, 60);
+        panelAsistente.setBounds(0, 155, 420, 30);
         panelAsistente.setLayout(null);
         
         JLabel lblApellido = new JLabel("Apellido:");
-        lblApellido.setBounds(22, 38, 88, 14);
-        lblApellido.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblApellido.setBounds(0, 5, 115, 25);
         lblApellido.setHorizontalAlignment(SwingConstants.RIGHT);
         panelAsistente.add(lblApellido);
         
         textFieldApellido = new JTextField();
-        textFieldApellido.setBounds(120, 33, 300, 25);
+        textFieldApellido.setBounds(120, 5, 300, 25);
         panelAsistente.add(textFieldApellido);
         textFieldApellido.setColumns(10);
+        
+        getContentPane().add(panelAsistente);
+        panelAsistente.setVisible(true);
+
+        // Fecha de nacimiento (solo para Asistente)
+        lblFechaNac = new JLabel("Fecha Nacimiento:");
+        lblFechaNac.setBounds(0, 195, 115, 25);
+        lblFechaNac.setHorizontalAlignment(SwingConstants.RIGHT);
+        getContentPane().add(lblFechaNac);
+
+        dateChooser = new JDateChooser();
+        dateChooser.setBounds(120, 195, 300, 25);
+        dateChooser.setDateFormatString("dd/MM/yyyy");
         // Establecer fecha por defecto: 20 años atrás
         java.util.Calendar cal = java.util.Calendar.getInstance();
         cal.add(java.util.Calendar.YEAR, -20);
-        getContentPane().add(panelAsistente);
-        
-                textFieldEmail = new JTextField();
-                textFieldEmail.setBounds(120, 0, 300, 25);
-                panelAsistente.add(textFieldEmail);
-                textFieldEmail.setColumns(10);
-                
-                        // Email
-                        lblIngreseEmail = new JLabel("Email:");
-                        lblIngreseEmail.setBounds(-5, 2, 115, 25);
-                        panelAsistente.add(lblIngreseEmail);
-                        lblIngreseEmail.setHorizontalAlignment(SwingConstants.RIGHT);
-                        lblIngreseEmail.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelAsistente.setVisible(true);
+        dateChooser.setDate(cal.getTime());
+        getContentPane().add(dateChooser);
 
         // Panel para campos de Organizador
         panelOrganizador = new JPanel();
-        panelOrganizador.setBounds(0, 120, 420, 60);
-        GridBagLayout gbl_panelOrganizador = new GridBagLayout();
-        gbl_panelOrganizador.columnWidths = new int[]{120, 200, 100, 0};
-        gbl_panelOrganizador.rowHeights = new int[]{30, 30, 0};
-        gbl_panelOrganizador.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-        gbl_panelOrganizador.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-        panelOrganizador.setLayout(gbl_panelOrganizador);
+        panelOrganizador.setBounds(0, 155, 420, 90);
+        panelOrganizador.setLayout(null);
         
         JLabel lblDescripcion = new JLabel("Descripción:");
+        lblDescripcion.setBounds(0, 5, 115, 25);
         lblDescripcion.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblDescripcion.setHorizontalAlignment(SwingConstants.RIGHT);
-        GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
-        gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
-        gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
-        gbc_lblDescripcion.gridx = 0;
-        gbc_lblDescripcion.gridy = 0;
-        panelOrganizador.add(lblDescripcion, gbc_lblDescripcion);
+        panelOrganizador.add(lblDescripcion);
         
-        textFieldDescripcion = new JTextField();
-        GridBagConstraints gbc_textFieldDescripcion = new GridBagConstraints();
-        gbc_textFieldDescripcion.gridwidth = 2;
-        gbc_textFieldDescripcion.insets = new Insets(0, 0, 5, 0);
-        gbc_textFieldDescripcion.fill = GridBagConstraints.BOTH;
-        gbc_textFieldDescripcion.gridx = 1;
-        gbc_textFieldDescripcion.gridy = 0;
-        panelOrganizador.add(textFieldDescripcion, gbc_textFieldDescripcion);
-        textFieldDescripcion.setColumns(10);
+        textAreaDescripcion = new JTextArea();
+        textAreaDescripcion.setLineWrap(true);
+        textAreaDescripcion.setWrapStyleWord(true);
+        JScrollPane scrollPane = new JScrollPane(textAreaDescripcion);
+        scrollPane.setBounds(120, 5, 300, 50);
+        panelOrganizador.add(scrollPane);
         
         JLabel lblUrl = new JLabel("URL:");
+        lblUrl.setBounds(0, 60, 115, 25);
         lblUrl.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblUrl.setHorizontalAlignment(SwingConstants.RIGHT);
-        GridBagConstraints gbc_lblUrl = new GridBagConstraints();
-        gbc_lblUrl.anchor = GridBagConstraints.EAST;
-        gbc_lblUrl.insets = new Insets(0, 0, 0, 5);
-        gbc_lblUrl.gridx = 0;
-        gbc_lblUrl.gridy = 1;
-        panelOrganizador.add(lblUrl, gbc_lblUrl);
+        panelOrganizador.add(lblUrl);
         
         textFieldUrl = new JTextField();
-        GridBagConstraints gbc_textFieldUrl = new GridBagConstraints();
-        gbc_textFieldUrl.gridwidth = 2;
-        gbc_textFieldUrl.fill = GridBagConstraints.BOTH;
-        gbc_textFieldUrl.gridx = 1;
-        gbc_textFieldUrl.gridy = 1;
-        panelOrganizador.add(textFieldUrl, gbc_textFieldUrl);
+        textFieldUrl.setBounds(120, 60, 300, 25);
+        panelOrganizador.add(textFieldUrl);
         textFieldUrl.setColumns(10);
+        
         getContentPane().add(panelOrganizador);
         panelOrganizador.setVisible(false);
 
         // Botones
         btnAceptar = new JButton("Aceptar");
-        btnAceptar.setBounds(209, 232, 100, 30);
+        btnAceptar.setBounds(209, 250, 100, 30);
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 cmdRegistroUsuarioActionPerformed(arg0);
@@ -199,7 +192,7 @@ public class CrearUsuario extends JInternalFrame {
         getContentPane().add(btnAceptar);
 
         btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(320, 232, 100, 30);
+        btnCancelar.setBounds(320, 250, 100, 30);
         btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 limpiarFormulario();
@@ -208,20 +201,7 @@ public class CrearUsuario extends JInternalFrame {
         });
         getContentPane().add(btnCancelar);
         
-        // Usar JDateChooser en lugar de los combobox separados
-        dateChooser = new JDateChooser();
-        dateChooser.setBounds(120, 191, 300, 30);
-        getContentPane().add(dateChooser);
-        dateChooser.setDateFormatString("dd/MM/yyyy");
-        dateChooser.setDate(cal.getTime());
-        
-        JLabel lblFechaNac = new JLabel("Fecha Nacimiento:");
-        lblFechaNac.setBounds(0, 200, 115, 14);
-        getContentPane().add(lblFechaNac);
-        lblFechaNac.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblFechaNac.setHorizontalAlignment(SwingConstants.RIGHT);
-        
-     // Esto es para que el boton cerrar borre el contenido
+        // Esto es para que el boton cerrar borre el contenido
         this.addInternalFrameListener(new javax.swing.event.InternalFrameAdapter() {
             @Override
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent e) {
@@ -229,6 +209,8 @@ public class CrearUsuario extends JInternalFrame {
             }
         });
 
+        // Inicializar la visibilidad de los campos
+        actualizarCamposEspecificos();
     }
 
     private void actualizarCamposEspecificos() {
@@ -237,9 +219,13 @@ public class CrearUsuario extends JInternalFrame {
         if ("Asistente".equals(tipoUsuario)) {
             panelAsistente.setVisible(true);
             panelOrganizador.setVisible(false);
+            lblFechaNac.setVisible(true);
+            dateChooser.setVisible(true);
         } else if ("Organizador".equals(tipoUsuario)) {
             panelAsistente.setVisible(false);
             panelOrganizador.setVisible(true);
+            lblFechaNac.setVisible(false);
+            dateChooser.setVisible(false);
         }
     }
 
@@ -260,7 +246,7 @@ public class CrearUsuario extends JInternalFrame {
                     
                     controlUsr.registrarAsistente(nombreU, nicknameU, emailU, apellidoU, fechaNac);
                 } else if ("Organizador".equals(tipoUsuario)) {
-                    String descripcionU = this.textFieldDescripcion.getText();
+                    String descripcionU = this.textAreaDescripcion.getText();
                     String urlU = this.textFieldUrl.getText();
                     
                     controlUsr.registrarOrganizador(nombreU, nicknameU, emailU, descripcionU, urlU);
@@ -310,11 +296,9 @@ public class CrearUsuario extends JInternalFrame {
                     JOptionPane.ERROR_MESSAGE);
                 return false;
             }
-            // Falta implementar institución (Osea aun no agrege el combobox de seleccion de institución)
 
         } else if ("Organizador".equals(tipoUsuario)) {
-            String descripcionU = this.textFieldDescripcion.getText();
-            String urlU = this.textFieldUrl.getText();
+            String descripcionU = this.textAreaDescripcion.getText();
 
             if (descripcionU.isEmpty()) {
                 JOptionPane.showMessageDialog(this, 
@@ -330,8 +314,6 @@ public class CrearUsuario extends JInternalFrame {
         return true;
     }
 
-
-
     private void limpiarFormulario() {
         textFieldNombre.setText("");
         textFieldNickname.setText("");
@@ -343,7 +325,7 @@ public class CrearUsuario extends JInternalFrame {
         cal.add(java.util.Calendar.YEAR, -20);
         dateChooser.setDate(cal.getTime());
         
-        textFieldDescripcion.setText("");
+        textAreaDescripcion.setText("");
         textFieldUrl.setText("");
         comboBoxTipoUsuario.setSelectedIndex(0);
         actualizarCamposEspecificos();
