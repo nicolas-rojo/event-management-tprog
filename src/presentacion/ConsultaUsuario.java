@@ -330,15 +330,33 @@ public class ConsultaUsuario extends JInternalFrame {
     private JTextField crearCampoNoEditable() {
         JTextField campo = new JTextField(20);
         campo.setEditable(false);
+        campo.setFocusable(false); // Esto evita que el campo pueda recibir el click que nos jodia
         campo.setBackground(getBackground());
+        
+        campo.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 5, 2, 5));
+        
         return campo;
     }
 
-    // Método para cargar usuarios en la lista
+ // Método para cargar usuarios en la lista
     public void cargarUsuarios() {
         try {
             DataUsuario[] usuarios = controlUsr.getUsuarios();
             if (usuarios != null && usuarios.length > 0) {
+                // Ordenar usuarios alfabéticamente por nombre
+                java.util.Arrays.sort(usuarios, new java.util.Comparator<DataUsuario>() {
+                    @Override
+                    public int compare(DataUsuario u1, DataUsuario u2) {
+                        // Comparar primero por nombre
+                        int resultado = u1.getNombre().compareToIgnoreCase(u2.getNombre());
+                        // Si los nombres son iguales, comparar por nickname
+                        if (resultado == 0) {
+                            resultado = u1.getNickname().compareToIgnoreCase(u2.getNickname());
+                        }
+                        return resultado;
+                    }
+                });
+                
                 javax.swing.DefaultListModel<DataUsuario> model = new javax.swing.DefaultListModel<>();
                 for (DataUsuario usuario : usuarios) {
                     model.addElement(usuario);
@@ -476,12 +494,12 @@ public class ConsultaUsuario extends JInternalFrame {
             // Usar el método de la interfaz IEventos
             DataEdicionEvento[] ediciones = controlEventos.getEdicionesEventoOrganizador(nickname);
             
+            javax.swing.DefaultListModel<DataEdicionEvento> model = new javax.swing.DefaultListModel<>();
+            
             if (ediciones != null && ediciones.length > 0) {
-                javax.swing.DefaultListModel<DataEdicionEvento> model = new javax.swing.DefaultListModel<>();
                 for (DataEdicionEvento edicion : ediciones) {
                     model.addElement(edicion);
                 }
-                listEdiciones.setModel(model);
                 
                 // Configurar renderer para mejor visualización
                 listEdiciones.setCellRenderer(new javax.swing.ListCellRenderer<DataEdicionEvento>() {
@@ -510,13 +528,33 @@ public class ConsultaUsuario extends JInternalFrame {
                     }
                 });
             } else {
-                javax.swing.DefaultListModel<DataEdicionEvento> model = new javax.swing.DefaultListModel<>();
-                // Crear objeto temporal para mostrar mensaje
-                DataEdicionEvento mensajeVacio = new DataEdicionEvento("No hay ediciones asociadas", "", 
-                    null, null, null, "", "");
-                model.addElement(mensajeVacio);
-                listEdiciones.setModel(model);
+                // Cuando no hay ediciones, configurar un renderer especial para mostrar mensaje
+                listEdiciones.setCellRenderer(new javax.swing.ListCellRenderer<DataEdicionEvento>() {
+                    @Override
+                    public java.awt.Component getListCellRendererComponent(
+                            javax.swing.JList<? extends DataEdicionEvento> list, 
+                            DataEdicionEvento value, 
+                            int index, 
+                            boolean isSelected, 
+                            boolean cellHasFocus) {
+                        
+                        JLabel label = new JLabel();
+                        label.setText("No hay ediciones asociadas a este organizador");
+                        label.setForeground(java.awt.Color.GRAY);
+                        label.setFont(label.getFont().deriveFont(java.awt.Font.ITALIC));
+                        
+                        if (isSelected) {
+                            label.setBackground(list.getSelectionBackground());
+                        } else {
+                            label.setBackground(list.getBackground());
+                        }
+                        label.setOpaque(true);
+                        return label;
+                    }
+                });
             }
+            
+            listEdiciones.setModel(model);
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, 
@@ -525,88 +563,196 @@ public class ConsultaUsuario extends JInternalFrame {
                 JOptionPane.ERROR_MESSAGE);
             
             javax.swing.DefaultListModel<DataEdicionEvento> model = new javax.swing.DefaultListModel<>();
-            DataEdicionEvento mensajeError = new DataEdicionEvento("Error al cargar ediciones", "", 
-                null, null, null, "", "");
-            model.addElement(mensajeError);
             listEdiciones.setModel(model);
+            
+            // Configurar renderer para mensaje de error
+            listEdiciones.setCellRenderer(new javax.swing.ListCellRenderer<DataEdicionEvento>() {
+                @Override
+                public java.awt.Component getListCellRendererComponent(
+                        javax.swing.JList<? extends DataEdicionEvento> list, 
+                        DataEdicionEvento value, 
+                        int index, 
+                        boolean isSelected, 
+                        boolean cellHasFocus) {
+                    
+                    JLabel label = new JLabel();
+                    label.setText("Error al cargar las ediciones");
+                    label.setForeground(java.awt.Color.RED);
+                    label.setFont(label.getFont().deriveFont(java.awt.Font.ITALIC));
+                    
+                    if (isSelected) {
+                        label.setBackground(list.getSelectionBackground());
+                    } else {
+                        label.setBackground(list.getBackground());
+                    }
+                    label.setOpaque(true);
+                    return label;
+                }
+            });
         }
     }
     
     private void cargarRegistrosAsistente(String nicknameAsistente) {
-        try {
-            List<ParEdicionRegistro> registros = controlUsr.getRegistrosAsistente(nicknameAsistente);
-            
-            if (registros != null && !registros.isEmpty()) {
-                javax.swing.DefaultListModel<ParEdicionRegistro> model = new javax.swing.DefaultListModel<>();
-                for (ParEdicionRegistro registro : registros) {
-                    model.addElement(registro);
-                }
-                listRegistros.setModel(model);
-                
-                // Configurar renderer para mostrar información más detallada
-                listRegistros.setCellRenderer(new javax.swing.ListCellRenderer<ParEdicionRegistro>() {
-                    @Override
-                    public java.awt.Component getListCellRendererComponent(
-                            javax.swing.JList<? extends ParEdicionRegistro> list, 
-                            ParEdicionRegistro value, 
-                            int index, 
-                            boolean isSelected, 
-                            boolean cellHasFocus) {
-                        
-                        JLabel label = new JLabel();
-                        if (value != null) {
-                            String evento = value.getNombreEvento();
-                            String texto = "Edición: " + value.getNombreEdicion();
-                            if (evento != null && !evento.equals("N/A")) {
-                                texto = "Evento: " + evento + " | " + texto;
-                            }
-                            if (value.getFechaRegistro() != null) {
-                                texto += " | Fecha: " + value.getFechaRegistro();
-                            }
-                            label.setText(texto);
-                        }
-                        
-                        if (isSelected) {
-                            label.setBackground(list.getSelectionBackground());
-                            label.setForeground(list.getSelectionForeground());
-                        } else {
-                            label.setBackground(list.getBackground());
-                            label.setForeground(list.getForeground());
-                        }
-                        label.setOpaque(true);
-                        return label;
-                    }
-                });
-            } else {
-                javax.swing.DefaultListModel<ParEdicionRegistro> model = new javax.swing.DefaultListModel<>();
-                model.addElement(new ParEdicionRegistro("No hay registros", ""));
-                listRegistros.setModel(model);
+    try {
+        List<ParEdicionRegistro> registros = controlUsr.getRegistrosAsistente(nicknameAsistente);
+        
+        javax.swing.DefaultListModel<ParEdicionRegistro> model = new javax.swing.DefaultListModel<>();
+        
+        if (registros != null && !registros.isEmpty()) {
+            for (ParEdicionRegistro registro : registros) {
+                model.addElement(registro);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, 
-                "Error al cargar registros del asistente: " + e.getMessage(),
-                "Error", 
-                JOptionPane.ERROR_MESSAGE);
             
-            javax.swing.DefaultListModel<ParEdicionRegistro> model = new javax.swing.DefaultListModel<>();
-            model.addElement(new ParEdicionRegistro("Error al cargar", "registros"));
-            listRegistros.setModel(model);
+            // Configurar renderer para mostrar información más detallada
+            listRegistros.setCellRenderer(new javax.swing.ListCellRenderer<ParEdicionRegistro>() {
+                @Override
+                public java.awt.Component getListCellRendererComponent(
+                        javax.swing.JList<? extends ParEdicionRegistro> list, 
+                        ParEdicionRegistro value, 
+                        int index, 
+                        boolean isSelected, 
+                        boolean cellHasFocus) {
+                    
+                    JLabel label = new JLabel();
+                    if (value != null) {
+                        String evento = value.getNombreEvento();
+                        String texto = "Edición: " + value.getNombreEdicion();
+                        if (evento != null && !evento.equals("N/A")) {
+                            texto = "Evento: " + evento + " | " + texto;
+                        }
+                        if (value.getFechaRegistro() != null) {
+                            texto += " | Fecha: " + value.getFechaRegistro();
+                        }
+                        label.setText(texto);
+                    }
+                    
+                    if (isSelected) {
+                        label.setBackground(list.getSelectionBackground());
+                        label.setForeground(list.getSelectionForeground());
+                    } else {
+                        label.setBackground(list.getBackground());
+                        label.setForeground(list.getForeground());
+                    }
+                    label.setOpaque(true);
+                    return label;
+                }
+            });
+            
+            // Habilitar la lista para que se pueda hacer clic
+            listRegistros.setEnabled(true);
+            
+        } else {
+            // Cuando no hay registros, mantener la lista vacía
+            // Configurar renderer para mostrar mensaje informativo
+            listRegistros.setCellRenderer(new javax.swing.ListCellRenderer<ParEdicionRegistro>() {
+                @Override
+                public java.awt.Component getListCellRendererComponent(
+                        javax.swing.JList<? extends ParEdicionRegistro> list, 
+                        ParEdicionRegistro value, 
+                        int index, 
+                        boolean isSelected, 
+                        boolean cellHasFocus) {
+                    
+                    JLabel label = new JLabel();
+                    label.setText("No hay registros disponibles");
+                    label.setForeground(java.awt.Color.GRAY);
+                    label.setFont(label.getFont().deriveFont(java.awt.Font.ITALIC));
+                    
+                    // Usar el color de fondo normal incluso cuando está "seleccionado"
+                    label.setBackground(list.getBackground());
+                    label.setForeground(java.awt.Color.GRAY);
+                    
+                    label.setOpaque(true);
+                    return label;
+                }
+            });
+            
+            // Deshabilitar la lista para que no se pueda hacer clic
+            listRegistros.setEnabled(false);
         }
+        
+        listRegistros.setModel(model);
+        
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, 
+            "Error al cargar registros del asistente: " + e.getMessage(),
+            "Error", 
+            JOptionPane.ERROR_MESSAGE);
+        
+        javax.swing.DefaultListModel<ParEdicionRegistro> model = new javax.swing.DefaultListModel<>();
+        listRegistros.setModel(model);
+        
+        // Configurar renderer para mensaje de error
+        listRegistros.setCellRenderer(new javax.swing.ListCellRenderer<ParEdicionRegistro>() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(
+                    javax.swing.JList<? extends ParEdicionRegistro> list, 
+                    ParEdicionRegistro value, 
+                    int index, 
+                    boolean isSelected, 
+                    boolean cellHasFocus) {
+                
+                JLabel label = new JLabel();
+                label.setText("Error al cargar los registros");
+                label.setForeground(java.awt.Color.RED);
+                label.setFont(label.getFont().deriveFont(java.awt.Font.ITALIC));
+                
+                // Usar el color de fondo normal incluso cuando está "seleccionado"
+                label.setBackground(list.getBackground());
+                label.setForeground(java.awt.Color.RED);
+                
+                label.setOpaque(true);
+                return label;
+            }
+        });
+        
+        // Deshabilitar la lista en caso de error
+        listRegistros.setEnabled(false);
     }
+}
     
     private void mostrarDetallesEdicion(IEventos ICE) {
         DataEdicionEvento edicionSeleccionada = listEdiciones.getSelectedValue();
         
-        if (edicionSeleccionada == null || edicionSeleccionada.getNombre().equals("No hay ediciones")) {
+        // Verificar si hay una edición válida seleccionada
+        if (edicionSeleccionada == null) {
             return; 
         }
         
-        ConsultaEdicionEvento ventanaEdicion = new ConsultaEdicionEvento(ICE);
-        ventanaEdicion.mostrarDetallesEdicion(edicionSeleccionada.getNombre());
+        // Verificar si la lista está vacía (no hay ediciones reales)
+        javax.swing.ListModel<DataEdicionEvento> model = listEdiciones.getModel();
+        if (model.getSize() == 0) {
+            JOptionPane.showMessageDialog(this, 
+                "No hay ediciones disponibles para mostrar detalles.",
+                "Información", 
+                JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         
-        getParent().add(ventanaEdicion);
-        ventanaEdicion.setVisible(true);
-        limpiarYCerrar();
+        // Verificar que la edición tenga datos válidos (no sea un mensaje placeholder)
+        if (edicionSeleccionada.getNombre() == null || 
+            edicionSeleccionada.getNombre().trim().isEmpty() ||
+            edicionSeleccionada.getSigla() == null) {
+            JOptionPane.showMessageDialog(this, 
+                "No hay ediciones disponibles para mostrar detalles.",
+                "Información", 
+                JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        try {
+            ConsultaEdicionEvento ventanaEdicion = new ConsultaEdicionEvento(ICE);
+            ventanaEdicion.mostrarDetallesEdicion(edicionSeleccionada.getNombre());
+            
+            getParent().add(ventanaEdicion);
+            ventanaEdicion.setVisible(true);
+            limpiarYCerrar();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, 
+                "Error al mostrar detalles de la edición: " + e.getMessage(),
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     
@@ -633,16 +779,62 @@ public class ConsultaUsuario extends JInternalFrame {
         textFieldDescripcion.setText("");
         textFieldUrl.setText("");
         
-        // Limpiar y resetear listas
+        // Limpiar y resetear listas con modelos vacíos
         javax.swing.DefaultListModel<DataEdicionEvento> modelEdiciones = new javax.swing.DefaultListModel<>();
-        DataEdicionEvento mensajePlaceholder = new DataEdicionEvento("Seleccione un organizador para ver ediciones", "", 
-            null, null, null, "", "");
-        modelEdiciones.addElement(mensajePlaceholder);
         listEdiciones.setModel(modelEdiciones);
         
+        // Configurar renderer para placeholder de ediciones
+        listEdiciones.setCellRenderer(new javax.swing.ListCellRenderer<DataEdicionEvento>() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(
+                    javax.swing.JList<? extends DataEdicionEvento> list, 
+                    DataEdicionEvento value, 
+                    int index, 
+                    boolean isSelected, 
+                    boolean cellHasFocus) {
+                
+                JLabel label = new JLabel();
+                label.setText("Seleccione un organizador para ver sus ediciones");
+                label.setForeground(java.awt.Color.GRAY);
+                label.setFont(label.getFont().deriveFont(java.awt.Font.ITALIC));
+                
+                if (isSelected) {
+                    label.setBackground(list.getSelectionBackground());
+                } else {
+                    label.setBackground(list.getBackground());
+                }
+                label.setOpaque(true);
+                return label;
+            }
+        });
+        
         javax.swing.DefaultListModel<ParEdicionRegistro> modelRegistros = new javax.swing.DefaultListModel<>();
-        modelRegistros.addElement(new ParEdicionRegistro("Seleccione un asistente para ver registros", ""));
         listRegistros.setModel(modelRegistros);
+        
+        // Configurar renderer para placeholder de registros  
+        listRegistros.setCellRenderer(new javax.swing.ListCellRenderer<ParEdicionRegistro>() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(
+                    javax.swing.JList<? extends ParEdicionRegistro> list, 
+                    ParEdicionRegistro value, 
+                    int index, 
+                    boolean isSelected, 
+                    boolean cellHasFocus) {
+                
+                JLabel label = new JLabel();
+                label.setText("Seleccione un asistente para ver sus registros");
+                label.setForeground(java.awt.Color.GRAY);
+                label.setFont(label.getFont().deriveFont(java.awt.Font.ITALIC));
+                
+                if (isSelected) {
+                    label.setBackground(list.getSelectionBackground());
+                } else {
+                    label.setBackground(list.getBackground());
+                }
+                label.setOpaque(true);
+                return label;
+            }
+        });
         
         // Deshabilitar pestañas específicas hasta que se seleccione un usuario
         tabbedPaneDetalles.setEnabledAt(1, false); // Ediciones
