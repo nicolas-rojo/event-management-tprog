@@ -51,6 +51,7 @@ public class Principal {
     private ConsultaRegistro consuRegistroInternalFrame;
     private ConsultaEvento consEventoInternalFrame;
     private ConsultaEdicionEvento consEdicionEventoInternalFrame;
+    private ProcesarEdicion procesarEdicionInternalFrame;
     //Consulta Patrocinio
     private ConsultaPatrocinio consPatrocinioInternalFrame;
     
@@ -121,6 +122,9 @@ public class Principal {
         crearEdicionInternalFrame = new CrearEdicion(ICE, ICU);
         crearEdicionInternalFrame.setVisible(false);
         
+        procesarEdicionInternalFrame = new ProcesarEdicion(ICE);
+        procesarEdicionInternalFrame.setVisible(false);
+        
         // Nuevos InternalFrames para Instituciones
         creInstitucionInternalFrame = new CrearInstitucion(IIN);
         creInstitucionInternalFrame.setVisible(false);
@@ -134,6 +138,7 @@ public class Principal {
         //Consulta Patrocinio
         consPatrocinioInternalFrame = new ConsultaPatrocinio(ICE);
         consPatrocinioInternalFrame.setVisible(false);
+        
          
         frmGestionDeUsuarios.getContentPane().setLayout(null);
 
@@ -148,6 +153,7 @@ public class Principal {
         frmGestionDeUsuarios.getContentPane().add(consuTRegistroInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(consuRegistroInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(crearEdicionInternalFrame);
+        frmGestionDeUsuarios.getContentPane().add(procesarEdicionInternalFrame);
         
         // Agregar nuevos InternalFrames al contenido
         frmGestionDeUsuarios.getContentPane().add(creInstitucionInternalFrame);
@@ -313,12 +319,23 @@ public class Principal {
         		crearEdicionInternalFrame.setVisible(true);
         	}
         });
+        
+        JMenuItem menuItemProcesarEdicion = new JMenuItem("Procesar Edicion");
+        menuItemProcesarEdicion.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e) {
+        		procesarEdicionInternalFrame.cargarEventos();
+        		
+        		procesarEdicionInternalFrame.setVisible(true);
+        	}
+        });
+        		
         menuEventos.add(menuItemAltaEvento);
         menuEventos.add(menuItemAltaEdicion);
         menuEventos.add(menuItemAltaTRegistro);
         menuEventos.add(menuItemConsultaEvento);
         menuEventos.add(menuItemConsultaEdicionEvento);
         menuEventos.add(menuItemConsultaTRegistro);
+        menuEventos.add(menuItemProcesarEdicion);
         
         
         // Nueva pestaña para Instituciones

@@ -13,6 +13,7 @@ import logica.datatypes.DataEventoCompleto;
 import logica.datatypes.DataEdicion;
 import logica.datatypes.DataEvento;
 import logica.datatypes.DataTRegistro;
+import logica.datatypes.Estado;
 import logica.datatypes.DataPatrocinioCompleto;
 import logica.EdicionEvento;
 
@@ -59,6 +60,8 @@ public interface IEventos {
 		public abstract List<String> obtenerRegistrosEdicion(String nombreEvento, String nombreEdicionEvento);
 		
 		public abstract String obtenerOrganizadorEdicion(String nombreEvento, String nombreEdicionEvento);
+		
+		public abstract void procesarEdicion(String evento,String eventoEdicion,Estado estado);
 		
 		// NUEVOS PARA CONSULTA PATROCINIOS
 		public abstract List<String> listarPatrocinios(String evento, String edicion); 

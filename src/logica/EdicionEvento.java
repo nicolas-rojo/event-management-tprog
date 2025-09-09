@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import logica.datatypes.DataEdicion;
+import logica.datatypes.Estado;
 
 public class EdicionEvento {
 	private String nombre;
@@ -20,6 +21,7 @@ public class EdicionEvento {
 	private Set<TipoRegistro> tipoRegistros;
 	private Set<Patrocinio> patrocinios;
 	private List<Registro> registros;
+	private Estado estado;
 	
 	public EdicionEvento(DataEdicion dataEd) {
 		this.nombre = dataEd.getNombre();
@@ -68,6 +70,10 @@ public class EdicionEvento {
 		return this.organizador;
 	}
 	
+	public Estado getEstado() {
+		return this.estado;
+	}
+	
 	public Set<Patrocinio> getPatrocinios(){
 		return this.patrocinios;
 	}
@@ -94,6 +100,10 @@ public class EdicionEvento {
 	
 	public void setOrganizador(Organizador o) {
 		this.organizador = o;
+	}
+	
+	public void setEstado(Estado e) {
+		this.estado = e;
 	}
 	
 	public List<String> getTRegistro() {

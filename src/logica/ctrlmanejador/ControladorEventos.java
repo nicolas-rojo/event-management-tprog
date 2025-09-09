@@ -14,8 +14,8 @@ import logica.datatypes.DataEvento;
 import logica.datatypes.DataEventoCompleto;
 import logica.datatypes.DataTRegistro;
 import logica.datatypes.DataEdicion;
-import logica.datatypes.DataEdicion;
 import logica.datatypes.DataPatrocinioCompleto;
+import logica.datatypes.Estado;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -347,5 +347,12 @@ public class ControladorEventos implements IEventos {
             }
         }
         return null;
+    }
+    
+    public void procesarEdicion(String evento,String edicion, Estado estado){
+    	ManejadorEvento manejadorE = ManejadorEvento.getInstance();
+    	Evento eventoSeleccionado = manejadorE.getEvento(evento);
+    	EdicionEvento edicionE = eventoSeleccionado.getEdicion(edicion);
+    	edicionE.setEstado(estado);
     }
 }
