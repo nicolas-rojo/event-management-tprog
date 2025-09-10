@@ -355,4 +355,11 @@ public class ControladorEventos implements IEventos {
     	EdicionEvento edicionE = eventoSeleccionado.getEdicion(edicion);
     	edicionE.setEstado(estado);
     }
+    
+    public Estado getEstado(String edicion, String evento) {
+    	ManejadorEvento manejadorE = ManejadorEvento.getInstance();
+    	Evento eventoSeleccionado = manejadorE.getEvento(evento);
+    	EdicionEvento edicionE = eventoSeleccionado.getEdicion(edicion);
+    	return edicionE.getEstado();
+    }
 }

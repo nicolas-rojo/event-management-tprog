@@ -29,9 +29,12 @@ public class ProcesarEdicion extends JInternalFrame {
 	
 	private JButton btnAceptarEdicion;
     private JButton btnRechazarEdicion;
+    private JButton btnCerrar;
     
     private JLabel lblEventos;
     private JLabel lblEdicionesEvento;
+    
+    private boolean cargandoEdiciones;
     
     public ProcesarEdicion(IEventos controladorEventos) {
     		        
@@ -41,7 +44,7 @@ public class ProcesarEdicion extends JInternalFrame {
         setMaximizable(true);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
-        setTitle("Alta Edicion de Evento");
+        setTitle("Procesar Edicion");
         setBounds(0, 10, 546, 366);
         
         getContentPane().setLayout(null);                     
@@ -51,40 +54,51 @@ public class ProcesarEdicion extends JInternalFrame {
         getContentPane().add(lblEventos);
 
         comboBoxEventos = new JComboBox<String>();
-        comboBoxEventos.setBounds(115, 27, 354, 20);
+        comboBoxEventos.setBounds(120, 27, 349, 20);
         getContentPane().add(comboBoxEventos);
 
         
         lblEdicionesEvento = new JLabel("Edicion de Evento :");
         lblEdicionesEvento.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblEdicionesEvento.setBounds(30, 60, 80, 15);
+        lblEdicionesEvento.setBounds(0, 105, 111, 15);
         getContentPane().add(lblEdicionesEvento);
 
         comboBoxEdiciones = new JComboBox<String>();
-        comboBoxEdiciones.setBounds(115, 57, 354, 20);
+        comboBoxEdiciones.setBounds(121, 102, 348, 20);
         getContentPane().add(comboBoxEdiciones);
         
         Action Aceptar = new aceptarEdicion();
         btnAceptarEdicion = new JButton(Aceptar);
-        btnAceptarEdicion.setBounds(251, 299, 95, 23);
+        btnAceptarEdicion.setBounds(281, 164, 95, 23);
         getContentPane().add(btnAceptarEdicion);                                                       
         btnAceptarEdicion.setText("Aceptar");
         
         Action Cancelar = new rechazarEdicion();
         btnRechazarEdicion = new JButton(Cancelar);
-        btnRechazarEdicion.setBounds(381, 299, 90, 23);
+        btnRechazarEdicion.setBounds(386, 164, 90, 23);
         getContentPane().add(btnRechazarEdicion);
         btnRechazarEdicion.setText("Rechazar");
         
+        Action Cerrar = new cerrar();
+        btnCerrar = new JButton(Cerrar);
+        btnCerrar.setBounds(30, 299, 490, 23);
+        getContentPane().add(btnCerrar);
+        btnCerrar.setText("Cerrar");
         
-        
-     
-	}
-    	
-    
-    
-    
-    
+        comboBoxEventos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String eventoSeleccionado = (String) comboBoxEventos.getSelectedItem();
+				if(eventoSeleccionado == null || comboBoxEventos.getSelectedItem().equals("No hay eventos") ) {
+					comboBoxEdiciones.setEnabled(false);
+					return;
+				}
+				comboBoxEdiciones.setEnabled(true);
+				cargarEdicionesEvento(controlEvt.listarEdiciones(eventoSeleccionado));
+				
+			}
+		});
+		    
+}    
     private class aceptarEdicion extends AbstractAction {
         public aceptarEdicion() {
             putValue(NAME, "aceptarEdicion");
@@ -108,72 +122,110 @@ public class ProcesarEdicion extends JInternalFrame {
     }
     
     protected void confirmoEdicion(ActionEvent aceptar) {
-    	String evento = (String) comboBoxEventos.getSelectedItem();
-        String eventoEdicion = (String) comboBoxEventos.getSelectedItem();
+        String evento = (String) comboBoxEventos.getSelectedItem();
+        String eventoEdicion = (String) comboBoxEdiciones.getSelectedItem();
         Estado estado = Estado.Confirmado;                    
-        if (checkFormulario()) {
-        	controlEvt.procesarEdicion(evento,eventoEdicion, estado);
-        	comboBoxEdiciones.removeItem(eventoEdicion);
+        if (checkFormulario()) {    
+            controlEvt.procesarEdicion(evento, eventoEdicion, estado);
+            JOptionPane.showMessageDialog(this, "Edición Aceptada","Procesar Edición", JOptionPane.INFORMATION_MESSAGE);
+            comboBoxEdiciones.removeItem(eventoEdicion);
+            if (comboBoxEdiciones.getItemCount() == 0) {
+                comboBoxEdiciones.addItem("No hay ediciones a procesar");
+                comboBoxEdiciones.setEnabled(false);
+            }
         } 
     }
-    
+
     protected void rechazoEdicion(ActionEvent rechazar) {
-    	String evento = (String) comboBoxEventos.getSelectedItem();
-        String eventoEdicion = (String) comboBoxEventos.getSelectedItem();
+        String evento = (String) comboBoxEventos.getSelectedItem();
+        String eventoEdicion = (String) comboBoxEdiciones.getSelectedItem();
         Estado estado = Estado.Rechazado;                    
         if (checkFormulario()) {
-        	controlEvt.procesarEdicion(evento,eventoEdicion, estado);
-        	comboBoxEdiciones.removeItem(eventoEdicion);
+            controlEvt.procesarEdicion(evento, eventoEdicion, estado);
+            JOptionPane.showMessageDialog(this, "Edición Rechazada","Procesar Edición", JOptionPane.INFORMATION_MESSAGE);
+            comboBoxEdiciones.removeItem(eventoEdicion);
+            if (comboBoxEdiciones.getItemCount() == 0) {
+                comboBoxEdiciones.addItem("No hay ediciones a procesar");
+                comboBoxEdiciones.setEnabled(false);
+            }
         } 
     }
     
-    
-    
+    private class cerrar extends AbstractAction {
+        public cerrar() {
+            putValue(NAME, "cerrar");
+            putValue(SHORT_DESCRIPTION, "cerrar ventana");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {       	
+            setVisible(false);
+            limpiarFormulario();
+        }
+    }
+      
     private boolean checkFormulario() {
     	if(comboBoxEventos.getSelectedItem().equals("No hay eventos") 
-    		|| comboBoxEdiciones.getSelectedItem().equals("No hay ediciones"));
-    	return false;
-    }
-
-    public void limpiarFormulario() {
-    	comboBoxEventos.removeAllItems();
-    	comboBoxEdiciones.removeAllItems();
-   
+    			   ||comboBoxEdiciones.getItemCount() == 0 || comboBoxEventos.getItemCount() == 0 || comboBoxEdiciones.getSelectedItem().equals("No hay ediciones a procesar")) {
+    			    JOptionPane.showMessageDialog(this, "No puede haber campos vacíos","Alta de Edicion", JOptionPane.ERROR_MESSAGE);
+    			    return false;
+    			}
+    			return true;
     }
     
-	public void cargarEventos() {
-		
-		try {
-			comboBoxEventos.removeAllItems();
-			List<String> eventos = controlEvt.listarEventos();
-			if (eventos != null && !eventos.isEmpty()) {
-				for (String e : eventos) {
-					comboBoxEventos.addItem(e);
-				}
-			} else {
-				comboBoxEventos.addItem("No hay eventos");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			comboBoxEventos.removeAllItems();
-			comboBoxEventos.addItem("No hay eventos");
-		}
-	}
-	
-public void cargarEdicionesEvento(List<String> edicionesEvento) {
-		
-		comboBoxEdiciones.removeAllItems();
-		if (edicionesEvento != null && !edicionesEvento.isEmpty()) {
-            
-            for (String edicion : edicionesEvento) {
-                comboBoxEdiciones.addItem(edicion);
+    public void cargarEventos() {
+        try {
+            comboBoxEventos.removeAllItems();
+            List<String> eventos = controlEvt.listarEventos();
+            if (eventos != null && !eventos.isEmpty()) {
+                for (String e : eventos)
+                    comboBoxEventos.addItem(e);
+                comboBoxEventos.setSelectedIndex(0);
             }
-        }else{
-        	comboBoxEdiciones.addItem("No hay ediciones");
+            else {
+            	comboBoxEventos.addItem("No hay eventos");
+                comboBoxEdiciones.addItem("No hay ediciones a procesar");
+            }
+            comboBoxEventos.setSelectedIndex(0);
+            comboBoxEdiciones.setSelectedIndex(0);           
+            comboBoxEdiciones.setEnabled(false);
+        	}
+            catch (Exception e) {
+            e.printStackTrace();
+            comboBoxEventos.removeAllItems();
+        	}
+    	}
+	
+	public void cargarEdicionesEvento(List<String> edicionesEvento) {
+        try {
+        	String evento = (String) comboBoxEventos.getSelectedItem();
+        	cargandoEdiciones = true;
+            comboBoxEdiciones.removeAllItems();
+            if (edicionesEvento != null && !edicionesEvento.isEmpty()) {
+                for (String ed : edicionesEvento) 
+                	if (controlEvt.getEstado(ed, evento) == Estado.Ingresada) {
+                    comboBoxEdiciones.addItem(ed);
+                	}
+                if(comboBoxEdiciones.getItemCount() == 0){
+                	comboBoxEdiciones.addItem("No hay ediciones a procesar");
+                	comboBoxEdiciones.setEnabled(false);
+                comboBoxEdiciones.setSelectedIndex(0);
+                	}
+            } 
+           else {
+            	comboBoxEdiciones.addItem("No hay ediciones a procesar");
+                comboBoxEdiciones.setSelectedIndex(0);
+                comboBoxEdiciones.setEnabled(false);
+            }
+            cargandoEdiciones = false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            comboBoxEdiciones.removeAllItems();
         }
+    }
 	
-
+	public void limpiarFormulario() {
+		comboBoxEventos.removeAllItems();
+		comboBoxEdiciones.removeAllItems();	
 	}
-	
-
 }

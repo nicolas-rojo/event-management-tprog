@@ -323,6 +323,7 @@ public class Principal {
         JMenuItem menuItemProcesarEdicion = new JMenuItem("Procesar Edicion");
         menuItemProcesarEdicion.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e) {
+        		procesarEdicionInternalFrame.limpiarFormulario();
         		procesarEdicionInternalFrame.cargarEventos();
         		
         		procesarEdicionInternalFrame.setVisible(true);

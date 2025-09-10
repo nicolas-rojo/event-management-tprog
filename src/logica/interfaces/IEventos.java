@@ -67,4 +67,6 @@ public interface IEventos {
 		public abstract List<String> listarPatrocinios(String evento, String edicion); 
 		
 		public abstract DataPatrocinioCompleto obtenerDTOPatrocinioCompleto(String evento, String edicion, String codigo);
+		
+		public abstract Estado getEstado(String edicion, String evento);
 }
