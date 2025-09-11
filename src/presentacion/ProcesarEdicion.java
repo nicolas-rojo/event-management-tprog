@@ -69,13 +69,13 @@ public class ProcesarEdicion extends JInternalFrame {
         
         Action Aceptar = new aceptarEdicion();
         btnAceptarEdicion = new JButton(Aceptar);
-        btnAceptarEdicion.setBounds(281, 164, 95, 23);
+        btnAceptarEdicion.setBounds(261, 164, 95, 23);
         getContentPane().add(btnAceptarEdicion);                                                       
         btnAceptarEdicion.setText("Aceptar");
         
         Action Cancelar = new rechazarEdicion();
         btnRechazarEdicion = new JButton(Cancelar);
-        btnRechazarEdicion.setBounds(386, 164, 90, 23);
+        btnRechazarEdicion.setBounds(375, 164, 90, 23);
         getContentPane().add(btnRechazarEdicion);
         btnRechazarEdicion.setText("Rechazar");
         

@@ -24,7 +24,7 @@ public class EdicionEvento {
 	private Estado estado;
 	
 	public EdicionEvento(DataEdicion dataEd) {
-		this.estado = Estado.Confirmado;
+		this.estado = Estado.Ingresada;
 		this.nombre = dataEd.getNombre();
 		this.sigla = dataEd.getSigla();
 		this.fechaIni = dataEd.getFechaIni();
