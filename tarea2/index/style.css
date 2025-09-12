@@ -9,13 +9,16 @@ body {
 .topbar {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    background-color: #333;
-    color: #f1eeee;
     position: fixed;
+    align-items: center;
+    
     width: 100%;
     padding: 10px 20px;
+    z-index: 1;
+    
     box-sizing: border-box;
+    background-color: #3b383884;
+    color: #f1eeee;
 }
 
 .topbar-logo {
@@ -63,14 +66,14 @@ body {
     display: flex;
     flex-direction: column;
     position: fixed;
-    
+
     gap: 20px;
-    top: 60px;
+    top: 100;
     width: 260px;
     height: 100vh;
-    padding-top: 30px;
+    padding-top: 100px;
     
-    background-color: #444;
+    background-color: #4b4a4acd;
     
     align-items: center;
 }
@@ -96,7 +99,7 @@ body {
 ========================================= */
 .content {
     display: flex;
-    background: linear-gradient(135deg, #74ebd5, #9face6);
+    background: linear-gradient(135deg, #4397db, #dbb5ec);
     padding: 20px;
     height: 100vh;
     justify-content: center;
