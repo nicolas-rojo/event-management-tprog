@@ -80,26 +80,11 @@ body {
 }
 
 .sidebar a:hover {
-    background-color: #555;
+    text-decoration: underline;
 }
 
-.botonessidebar {
-    background: #f1eeee;
-    border: none;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    cursor: pointer;
 
-    /* Box model */
-    width: 180px;
-    height: 60px;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 14px;
-    box-sizing: border-box;
-}
+
 
 .botonessidebar:hover {
     opacity: 0.9;
@@ -213,6 +198,23 @@ body {
     color: #555;
 }
 
-.texto-ed {
-    color:#444;;
+.contenedorEdiciones{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.informacion-edicion{
+    height: 120px;
+    flex-direction: column;
+    display: flex;
+}
+
+.detalles-edicion{
+    display: flex;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+    flex-direction: column;
+
 }
