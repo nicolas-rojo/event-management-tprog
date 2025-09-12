@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    font-family: outfit;
+}
+
+/* Barra superior */
+.topbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    background-color: #333;
+    color: #f1eeee;
+    position: fixed;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.topbar-logo {
+    justify-self: start;
+}
+
+.topbar-logo img {
+    height: 40px;
+}
+
+.topbar-search {
+    justify-self: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.topbar-search input {
+    width: 60%;
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+.topbar-right {
+    justify-self: end;
+}
+
+.topbar-right a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #f1eeee;
+    font-weight: bold;
+}
+
+.topbar-right a:hover {
+    text-decoration: underline;
+}
+
+/* Barra lateral */
+.sidebar {
+    position: fixed;
+    top: 60px;
+    width: 260px;
+    height: 100vh;
+    background-color: #444;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    gap: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px 20px;
+    color: #f1eeee;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background-color: #555;
+}
+
+.botonessidebar {
+    background: #f1eeee;
+    border: none;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 180px;
+    height: 60px;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.botonessidebar:hover {
+    opacity: 0.9;
+}
+
+/* Contenido principal */
+.content {
+    display: flex;
+    background: linear-gradient(135deg, #74ebd5, #9face6);
+    padding: 20px;
+    height: 100vh;
+    justify-content: center;
+}
+
+.contenedores {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 60px;
+}
+
+.contenedor {
+    background-color: #f1eeee;
+    width: 600px;
+    height: 160px;
+    border-radius: 30px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 20px;
+    flex-direction: row;
+    gap: 20px;
+    cursor:pointer;
+    transition: all 0.3s ease;
+}
+
+.contenedor:hover {
+    background-color: #e0e0e0;   /* cambio de color sutil */
+    box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.3); /* más sombra */
+}
+
+.imagenes {
+    border-radius: 25px;
+}
+
+.informacion {
+    height: 120px;
+    flex-direction: column;
+}

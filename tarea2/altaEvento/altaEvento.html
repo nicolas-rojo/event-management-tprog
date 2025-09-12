@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Evento</title>
+
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <img src="../src/images/logo.png" alt="logo" class="logo">
+    <div class="login-container">
+        <h2>Nuevo Evento</h2>
+        <form id="formEvento">
+            <input type="text" id="nombreEv" placeholder="Nombre" required>
+            <textarea id="desc" placeholder="Descripción" required></textarea>
+            <input type="text" id="sigla" placeholder="Siglas" required>
+            <div class="form-group">
+                <label for="categorias">Categorías:</label>
+                <select id="categorias" name="categorias[]" multiple>
+                    <option value="Tecnología">Tecnología</option>
+                    <option value="Innovación">Innovación</option>
+                    <option value="Literatura">Literatura</option>
+                    <option value="Cultura">Cultura</option>
+                    <option value="Música">Música</option>
+                    <option value="Deporte">Deporte</option>
+                    <option value="Salud">Salud</option>
+                    <option value="Entretenimiento">Entretenimiento</option>
+                    <option value="Agro">Agro</option>
+                    <option value="Negocios">Negocios</option>
+                    <option value="Moda">Moda</option>
+                    <option value="Investigación">Investigación</option>
+                </select>
+            </div>
+            <input type="file" id="imagen" name="imagen" accept="image/*">
+            <div class="button-group">
+                <button type="submit">Aceptar</button>
+                <button type="button" id="cancelarBtn">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
