@@ -17,7 +17,9 @@
 	<!-- Barra superior -->
 	<div class="topbar">
 		<div class="topbar-logo">
-			<img src="../src/images/logo.png">
+			<a href="../index/index.html">
+				<img src="../src/images/logo.png">
+			</a>
 		</div>
 
 		<div class="topbar-search">
@@ -26,34 +28,39 @@
 
 		<div class="topbar-right">
 			<a href="../login/login.html">Ingresar</a>
-			<a href="#">Registrarse</a>
+			<a href="../register/register.html">Registrarse</a>
 		</div>
 	</div>
 
 	<!-- Barra lateral -->
 	<div class="sidebar">
-		<button class="botonessidebar" type="submit">Consultar Evento</button>
-		<button class="botonessidebar" type="submit">Consultar Usuario</button>
+		<a class="botonessidebar" href="../index/index.html">Consultar Evento</a>
+		<a class="botonessidebar" href="#">Consultar Usuario</a>
 	</div>
 
 	<!-- Contenido -->
 	<div class="content">
 		<div class="contenedores">
-			<div class="contenedor" alt="Maraton Montevideo">
-				<img class="imagenes" src="../src/images/maraton.jpg" width="120px" height="120px">
-				<div class="informacion">
-					<h2>Maratón de Montevideo</h2>
-					<p>Competencia deportiva anual en la capital.</p>
+			<a href="../consultaEvento/consultaEvento.html" class="contenedor-link">
+				<div class="contenedor" alt="Maraton Montevideo">
+					<img class="imagenes" src="../src/images/maraton.jpg" width="120px" height="120px">
+					<div class="informacion">
+						<h2>Maratón de Montevideo</h2>
+						<p>Competencia deportiva anual en la capital.</p>
+					</div>
 				</div>
-			</div>
+			</a>
 
-			<div class="contenedor" alt="Montevideo Rock">
-				<img class="imagenes" src="../src/images/mrock.png" width="120px" height="120px">
-				<div class="informacion">
-					<h2>Montevideo Rock</h2>
-					<p>Festival de rock con artistas nacionales e internacionales.</p>
+			<!-- Estos contenedores se van a generar automaticamente con los eventos del sistema y van a linkear a su propia consulta de evento -->
+			<a href="../consultaEvento/consultaEvento.html" class="contenedor-link">
+				<div class="contenedor" alt="Montevideo Rock">
+					<img class="imagenes" src="../src/images/mrock.png" width="120px" height="120px">
+					<div class="informacion">
+						<h2>Montevideo Rock</h2>
+						<p>Festival de rock con artistas nacionales e internacionales.</p>
+					</div>
 				</div>
-			</div>
+			</a>
 		</div>
 	</div>
 </body>
