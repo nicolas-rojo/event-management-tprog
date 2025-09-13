@@ -1,0 +1,92 @@
+/* =========================================
+   BARRA SUPERIOR
+========================================= */
+.topbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    position: fixed;
+    align-items: center;
+    
+    width: 100%;
+    padding: 10px 20px;
+    z-index: 1;
+    
+    box-sizing: border-box;
+    background-color: #3b383884;
+    color: #f1eeee;
+}
+
+.topbar-logo {
+    justify-self: start;
+    /* background: white; */
+    margin-left: 25px;
+}
+
+.topbar-logo img {
+    height: 40px;
+}
+
+.topbar-search {
+    justify-self: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.topbar-search input {
+    width: 60%;
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+.topbar-right {
+    justify-self: end;
+}
+
+.topbar-right a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #f1eeee;
+    font-weight: bold;
+}
+
+.topbar-right a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   BARRA LATERAL
+========================================= */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+
+    gap: 20px;
+    top: 100;
+    width: 260px;
+    height: 100vh;
+    padding-top: 100px;
+    
+    background-color: #4b4a4acd;
+    
+    align-items: center;
+}
+
+.sidebar a {
+    display: block;
+    
+    padding: 12px 25px;
+
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    
+    color: #f1eeee;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}

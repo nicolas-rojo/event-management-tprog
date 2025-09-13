@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Mis Eventos</title>
@@ -11,32 +12,13 @@
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../componentes/style.css">
 </head>
 
 <body>
-	<!-- Barra superior -->
-	<div class="topbar">
-		<div class="topbar-logo">
-			<a href="../index/index.html">
-				<img src="../src/images/logo.png">
-			</a>
-		</div>
-
-		<div class="topbar-search">
-			<input type="text" placeholder="Buscar evento, edicion... 🔍">
-		</div>
-
-		<div class="topbar-right">
-			<a href="../login/login.html">Ingresar</a>
-			<a href="../register/register.html">Registrarse</a>
-		</div>
-	</div>
-
-	<!-- Barra lateral -->
-	<div class="sidebar">
-		<a class="botonessidebar" href="../index/index.html">Consultar Evento</a>
-		<a class="botonessidebar" href="#">Consultar Usuario</a>
-	</div>
+	<!-- Cargamos la topbar y el sidebar -->
+	<div id="topbar"></div>
+	<div id="sidebar"></div>
 
 	<!-- Contenido -->
 	<div class="content">
@@ -50,7 +32,7 @@
 					</div>
 				</div>
 			</a>
-
+			
 			<!-- Estos contenedores se van a generar automaticamente con los eventos del sistema y van a linkear a su propia consulta de evento -->
 			<a href="../consultaEvento/consultaEvento.html" class="contenedor-link">
 				<div class="contenedor" alt="Montevideo Rock">
@@ -63,6 +45,8 @@
 			</a>
 		</div>
 	</div>
+	
+	<script src="../componentes/cargarComponentes.js"></script>
 </body>
 
 </html>

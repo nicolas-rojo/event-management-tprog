@@ -12,32 +12,13 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../componentes/style.css">
 </head>
 
 <body>
-    <!-- Barra superior -->
-    <div class="topbar">
-        <div class="topbar-logo">
-            <a href="../index/index.html">
-				<img src="../src/images/logo.png">
-			</a>
-        </div>
-
-        <div class="topbar-search">
-            <input type="text" placeholder="Buscar evento, edicion... 🔍">
-        </div>
-
-        <div class="topbar-right">
-            <a href="../login/login.html">Ingresar</a>
-            <a href="#">Registrarse</a>
-        </div>
-    </div>
-
-    <!-- Barra lateral -->
-    <div class="sidebar">
-        <a class="botonessidebar" href="../index/index.html">Consultar Evento</a>
-		<a class="botonessidebar" href="#">Consultar Usuario</a>
-    </div>
+    <!-- Cargamos la topbar y el sidebar -->
+	<div id="topbar"></div>
+	<div id="sidebar"></div>
 
     <!-- Contenido -->
     <div class="content">
@@ -54,6 +35,7 @@
                 </div>
             </div>
             <h2 class="texto-ed">Ediciones:</p>
+
             <!-- ACÁ IRÍAN LAS EDICIONES -->
             <div class="contenedorEdiciones">
                 <div class="contenedor">
@@ -68,6 +50,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="contenedor">
                     <img class="imagenes" src="../src/images/maraton24.jpg" width="120px" height="120px">
                     <div class="informacion-edicion">
@@ -83,6 +66,8 @@
             </div>
         </div>
     </div>
+
+    <script src="../componentes/cargarComponentes.js"></script>
 </body>
 
 </html>
