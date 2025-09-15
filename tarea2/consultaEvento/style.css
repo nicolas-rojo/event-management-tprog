@@ -31,7 +31,7 @@ body {
 
     /* Box model */
     width: 600px;
-    height: 160px;
+    height: 150px;
     padding-left: 20px;
 
     /* Estética */
@@ -73,8 +73,8 @@ body {
     gap: 20px;
 
     /* Box model */
-    width: 600px;
-    height: 200px;
+    width: 650px;
+    height: 210px;
     padding-left: 24px;
 
     /* Estética */
@@ -129,5 +129,22 @@ body {
     font-size: 14px;
     color: #555;
     flex-direction: column;
+}
 
+.agregarEdicion{
+    display: block;
+    width: 130px;
+    
+    padding: 12px 25px;
+
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    
+    color: #060606;
+}
+
+.agregarEdicion:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
