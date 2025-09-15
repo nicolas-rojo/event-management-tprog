@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Evento</title>
+
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../index/index.html">
+        <img src="../src/images/logo.png" alt="logo" class="logo">
+    </a>
+    <div class="login-container">
+        <h2>Nueva Edición</h2>
+        <form id="formEdicion">
+            <input type="text" id="nombreEd" placeholder="Nombre" required>
+            <input id="sigla" placeholder="Siglas" required></textarea>
+            <input type="text" id="ciudad" placeholder="Ciudad" required>
+            <input type="text" id="pais" placeholder="Pais" required>
+            <label for="fechaIni">Fecha de Inicio:</label>
+            <input type="date" id="fechaIni" placeholder="Fecha de Inicio" required>
+            <label for="fechaFin">Fecha de Fin:</label>
+            <input type="date" id="fechaFin" placeholder="Fecha de Finalización" required>
+            <input type="file" id="imagen" name="imagen" accept="image/*">
+            <div class="button-group">
+                <button type="submit">Aceptar</button>
+                <button type="button" id="cancelarBtn">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
