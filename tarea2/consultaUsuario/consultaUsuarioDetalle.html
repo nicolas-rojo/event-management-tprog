@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Usuario</title>
+
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../componentes/style.css">
+    <link rel="stylesheet" href="styleDetalle.css">
+</head>
+
+<body class="asistente"> <!-- Esta clase cambiará según el tipo de usuario -->
+    <!-- Cargamos la topbar y el sidebar -->
+    <div id="topbar"></div>
+    <div id="sidebar"></div>
+
+    <!-- Contenido -->
+    <div class="content">
+        <div class="contenedores">
+            <!-- Botón para volver -->
+            <button class="boton-volver" onclick="window.location.href='consultaUsuario.html'">← Volver a la lista</button>
+            
+            <!-- Información principal del usuario -->
+            <div class="contenedor-principal">
+                <div class="imagen-usuario">Sin imagen</div>
+                <div class="informacion-usuario">
+                    <h1 class="nombre-usuario">Cargando...</h1>
+                    <p class="nickname-usuario">@...</p>
+                    <div class="detalles-usuario">
+                        <div class="detalle-item">
+                            <span class="icono">📧</span>
+                            <span>Cargando...</span>
+                        </div>
+                        <div class="detalle-item">
+                            <span class="icono">👤</span>
+                            <span>Tipo: Cargando...</span>
+                        </div>
+                        <div class="detalle-item">
+                            <span class="icono">🎂</span>
+                            <span>Fecha de nacimiento: Cargando...</span>
+                        </div>
+                        <div class="detalle-item">
+                            <span class="icono">📅</span>
+                            <span>Edad: Cargando...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de registros a ediciones (solo para asistentes) -->
+            <div class="solo-asistente">
+                <h2 class="seccion-titulo">Registros a Eventos</h2>
+                <div class="contenedor-secundario">
+                    <div class="lista-items">
+                        <div class="item">
+                            <span>Cargando registros...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de ediciones de eventos (solo para organizadores) -->
+            <div class="solo-organizador">
+                <h2 class="seccion-titulo">Ediciones de Eventos Organizadas</h2>
+                <div class="contenedor-secundario">
+                    <div class="lista-items">
+                        <div class="item">
+                            <span>Cargando eventos...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de acción (solo si es el usuario actual) -->
+            <div class="solo-propio">
+                <div class="botones-accion">
+                    <button class="boton boton-primario">Editar Perfil</button>
+                    <button class="boton boton-secundario">Cerrar Sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../componentes/cargarComponentes.js"></script>
+    <script src="scriptDetalle.js"></script>
+</body>
+
+</html>

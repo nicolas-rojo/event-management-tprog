@@ -1,0 +1,230 @@
+body {
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #4397db, #dbb5ec);
+    min-height: 100vh;
+}
+
+.content {
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.contenedores {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+/* Botón para volver a la lista */
+.boton-volver {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-bottom: 25px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.boton-volver:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Contenedor principal del usuario */
+.contenedor-principal {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+    padding: 30px;
+    background-color: #f1eeee;
+    border-radius: 30px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+/* Estilos para cuando es el usuario actual */
+.es-usuario-actual .contenedor-principal {
+    box-shadow: 0px 0px 0px 4px #ffcc00, 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.imagen-usuario {
+    width: 200px;
+    height: 200px;
+    border-radius: 25px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-style: italic;
+    flex-shrink: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.informacion-usuario {
+    flex-grow: 1;
+}
+
+.nombre-usuario {
+    margin: 0 0 10px 0;
+    font-size: 32px;
+    color: #4397db;
+    font-weight: 700;
+}
+
+.nickname-usuario {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    color: #666;
+    font-weight: 500;
+}
+
+.detalles-usuario {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.detalle-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    color: #555;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.detalle-item:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.icono {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+}
+
+/* Títulos de secciones */
+.seccion-titulo {
+    font-size: 24px;
+    margin: 0 0 20px 0;
+    color: white;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+}
+
+/* Contenedores secundarios */
+.contenedor-secundario {
+    background-color: #f1eeee;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.contenedor-secundario:hover {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.lista-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    padding: 18px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+    background-color: #fafafa;
+}
+
+/* Botones de acción */
+.botones-accion {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.boton {
+    padding: 12px 24px;
+    border-radius: 25px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.boton-primario {
+    background-color: #4397db;
+    color: white;
+    box-shadow: 0 4px 12px rgba(67, 151, 219, 0.3);
+}
+
+.boton-primario:hover {
+    background-color: #3a7bc8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(67, 151, 219, 0.4);
+}
+
+.boton-secundario {
+    background-color: #e0e0e0;
+    color: #555;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.boton-secundario:hover {
+    background-color: #d5d5d5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Controlar visibilidad según el tipo de usuario */
+.solo-organizador,
+.solo-asistente,
+.solo-propio {
+    display: none;
+}
+
+.organizador .solo-organizador,
+.asistente .solo-asistente,
+.propio .solo-propio {
+    display: block;
+}
