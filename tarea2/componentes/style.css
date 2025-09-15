@@ -43,10 +43,14 @@
 
 .topbar-right {
     justify-self: end;
+    display: flex;
+    align-items: center;
 }
 
 .topbar-right a {
     margin-left: 15px;
+    display: flex;
+    align-items: center;
     text-decoration: none;
     color: #f1eeee;
     font-weight: bold;
@@ -54,6 +58,10 @@
 
 .topbar-right a:hover {
     text-decoration: underline;
+}
+
+.topbar-right img {
+    height: 40px;
 }
 
 /* =========================================

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const campoUrl = document.getElementById('url');
     const campoApellido = document.getElementById('apellido');
     const campoFecha = document.getElementById('fechaNac');
-    
+
     const form = document.getElementById('form');
     const confirmarError = document.getElementById('confirmarError');
     const password = document.getElementById('password');
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             campoUrl.value = "";
             campoApellido.value = 'default';
             campoFecha.value = '0001-01-01';
-            
+
         } else if (tipoSelect.value === 'Asistente') {
             camposOrg.style.display = 'none';
             camposAsist.style.display = 'block';
@@ -33,19 +33,22 @@ document.addEventListener('DOMContentLoaded', () => {
             camposAsist.style.display = 'none';
         }
     }
-    
+
     // Ejecuta al cambiar la selección
     tipoSelect.addEventListener('change', actualizarCampos);
-    
+
     // Ejecuta al cargar la página para mostrar los campos
     actualizarCampos();
-    
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         if (password.value !== confirmacion.value) {
             confirmarError.innerText = "Las contraseñas no coinciden";
         } else {
+            localStorage.setItem("isLogged", "true");
             confirmarError.innerText = "";
+            window.location.href = "../index/index.html";
+
         }
     });
 });

@@ -13,7 +13,18 @@
     </div>
 
     <div class="topbar-right">
-        <a href="../login/login.html">Ingresar</a>
-        <a href="../register/register.html">Registrarse</a>
+        <!-- Campos si no se está logeado -->
+        <div class="not-logged">
+            <a href="../login/login.html">Ingresar</a>
+            <a href="../register/register.html">Registrarse</a>
+        </div>
+
+        <!-- Campos si se está logeado -->
+        <div class="logged">
+            <a href="#">Cerrar Sesión</a>
+            <a href="#">
+                <img src="../src/images/stockusr.png" alt="logo" class="logo">
+            </a>
+        </div>
     </div>
 </div>
