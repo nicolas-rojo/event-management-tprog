@@ -2,6 +2,23 @@
 <link rel="stylesheet" href="style.css">
 
 <div class="sidebar">
-    <a class="botonessidebar" href="../index/index.html">Consultar Evento</a>
-    <a class="botonessidebar" href="#">Consultar Usuario</a>
+    <!-- Visible si se inició sesión -->
+    <a href="#" id="miPerfil" class="elementTitle" style="display: none;">Mi Perfil</a>
+    
+    <!-- Visible si se inició sesión como Organizador -->
+    <div class="opc-org" style="display: none;">
+        <a href="#" class="element">Alta Evento</a>
+        <a href="#" class="element">Alta Institución</a>
+        <a href="#" class="element">Nuevo Tipo de Registro</a>
+        <a href="#" class="element">Nuevo Patrocinio</a>
+    </div>
+
+    <!-- Visible si se inició sesión como Asistente -->
+    <div class="opc-asist" style="display: none;">
+        <a href="#" class="element">Ver Registros</a>
+    </div>
+
+    <!-- Siempre visibles -->
+    <a href="../index/index.html" class="element">Consultar Evento</a>
+    <a href="#" class="element">Consultar Usuario</a>
 </div>

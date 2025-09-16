@@ -6,11 +6,11 @@
     grid-template-columns: 1fr 1fr 1fr;
     position: fixed;
     align-items: center;
-    
+
     width: 100%;
     padding: 10px 20px;
     z-index: 1;
-    
+
     box-sizing: border-box;
     background-color: #3b383884;
     color: #f1eeee;
@@ -54,10 +54,12 @@
     text-decoration: none;
     color: #f1eeee;
     font-weight: bold;
+    transition: all 0.3s ease;
 }
 
 .topbar-right a:hover {
     text-decoration: underline;
+    color: #8cb4ff;
 }
 
 .topbar-right img {
@@ -72,29 +74,40 @@
     flex-direction: column;
     position: fixed;
 
-    gap: 20px;
     top: 100;
     width: 260px;
     height: 100vh;
     padding-top: 100px;
-    
+
     background-color: #4b4a4acd;
-    
-    align-items: center;
+
+    align-items: start;
 }
 
-.sidebar a {
-    display: block;
-    
-    padding: 12px 25px;
-
-    text-align: center;
-    font-weight: bold;
-    text-decoration: none;
-    
+.element, .elementTitle {
     color: #f1eeee;
+    font-size: auto;
+    padding: 6px 15px;
+    border-left: 2px solid #f1eeee;
+    cursor: pointer;
+    margin-left: 50px;
+    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
-.sidebar a:hover {
-    text-decoration: underline;
+.elementTitle {
+    display: flex; 
+    font-size: 25px; 
+    margin-left: 33px; 
+    border-left: none;
+}
+
+.element:hover, .elementTitle:hover {
+    color: #8cb4ff;
+    border-left: 2px solid #8cb4ff;
+}
+
+.opc-org, .opc-asist {
+    display: flex;
+    flex-direction: column;
 }
