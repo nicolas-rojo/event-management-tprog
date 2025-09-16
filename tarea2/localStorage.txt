@@ -1,0 +1,6 @@
+Lista de Variables Locales Utilizadas:
+    - isLogged: (true, false)
+        Indica si se está logeado en el sistema o no, independientemente del usuario.
+    
+    - usrRole: (organizador, asistente)
+        Indica el tipo de usuario logeado en el sistema.

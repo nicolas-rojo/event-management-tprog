@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Cargar componentes
 	loadComponent("../componentes/topbar.html", "topbar", initTopbar);
 	loadComponent("../componentes/sidebar.html", "sidebar", initSidebar);
+	setTimeout(highlightActiveLink, 200);
 });
 
 // Funcion para cargar componentes
@@ -27,8 +28,7 @@ function initTopbar() {
 			e.preventDefault();
 			localStorage.setItem("isLogged", "false");
 			localStorage.removeItem("usrRole");
-			updateTopbar();
-			updateSidebar();
+			location.reload();
 		});
 	}
 }
@@ -56,12 +56,10 @@ function updateSidebar() {
 	const opcOrg = document.querySelector(".opc-org");
 	const opcAsist = document.querySelector(".opc-asist");
 
-	// Mi Perfil visible si hay sesión iniciada
-	if (miPerfil) {
-		miPerfil.style.display = isLogged ? "flex" : "none";
-		if (isLogged) {
-			miPerfil.setAttribute("href", "../perfil/perfil.html");
-		}
+	if (isLogged) {
+		miPerfil.setAttribute("href", "#");
+	} else {
+		miPerfil.setAttribute("href", "../register/register.html");
 	}
 
 	// Opciones por rol
@@ -76,3 +74,17 @@ function updateSidebar() {
 	}
 }
 
+// Funcion para resaltar la opcion seleccionada de la barra lateral
+function highlightActiveLink() {
+	const currentPath = window.location.pathname.split("/").pop();
+	const links = document.querySelectorAll(".sidebar a");
+
+	links.forEach(link => {
+		const linkPath = link.getAttribute("href").split("/").pop();
+		if (linkPath === currentPath) {
+			link.classList.add("active");
+		} else {
+			link.classList.remove("active");
+		}
+	});
+}

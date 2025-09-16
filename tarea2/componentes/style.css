@@ -87,10 +87,10 @@
 .element, .elementTitle {
     color: #f1eeee;
     font-size: auto;
-    padding: 6px 15px;
-    border-left: 2px solid #f1eeee;
+    padding: 12px 15px;
+    /* border-left: 2px solid #f1eeee; */
     cursor: pointer;
-    margin-left: 50px;
+    margin-left: 25px;
     transition: all 0.3s ease;
     text-decoration: none;
 }
@@ -104,10 +104,16 @@
 
 .element:hover, .elementTitle:hover {
     color: #8cb4ff;
-    border-left: 2px solid #8cb4ff;
+    /* border-left: 2px solid #8cb4ff; */
 }
 
 .opc-org, .opc-asist {
     display: flex;
     flex-direction: column;
+}
+
+.element.active {
+    background-color: #fdfeff3c;
+    width: 175px;
+    border-radius: 8px;
 }
