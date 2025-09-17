@@ -4,3 +4,6 @@ Lista de Variables Locales Utilizadas:
     
     - usrRole: (organizador, asistente)
         Indica el tipo de usuario logeado en el sistema.
+
+    - usrAvatar: (ruta)
+        Indica la ruta que contiene la imagen de usuario del usuario logeado en el sistema.

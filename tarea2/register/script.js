@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             confirmarError.innerText = "Las contraseñas no coinciden";
         } else {
             localStorage.setItem("isLogged", "true");
+            localStorage.setItem("usrRole", tipoSelect.value);
             confirmarError.innerText = "";
             window.location.href = redirect || "../index/index.html";
         }
