@@ -87,7 +87,7 @@ body {
     display: flex;
     height: 150px;
     flex-direction: column;
-    gap: 0px;
+    gap: 25px;
 }
 
 .nombre-evento {
@@ -109,6 +109,7 @@ body {
     gap: 15px;
     font-size: 14px;
     color: #555;
+    
 }
 
 .contenedorEdiciones{
@@ -129,5 +130,22 @@ body {
     font-size: 14px;
     color: #555;
     flex-direction: column;
+    width: 100%;
 
+}
+
+.btn-nuevaedicion {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4397db;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.boton-div {
+    display: flex;
+    width: 100%;
 }
