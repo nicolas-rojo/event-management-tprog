@@ -224,7 +224,8 @@ function actualizarEventosOrganizador(eventos, esPropio) {
 }
 
 function manejarNuevoTipoRegistro(nombreEvento) {
-    alert(`Funcionalidad "Nuevo Tipo de Registro" para el evento: ${nombreEvento}\n\nEsta funcionalidad será implementada próximamente.`);
+    sessionStorage.setItem('eventoTipoRegistro', nombreEvento);
+    window.location.href = '../altaTReg/altaTReg.html';
 }
 
 function manejarNuevoPatrocinio(nombreEvento) {
