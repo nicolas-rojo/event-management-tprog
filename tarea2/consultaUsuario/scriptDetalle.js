@@ -1,3 +1,4 @@
+// Base de datos simulada de usuarios (debe ser la misma que en consultaUsuario.html)
 const usuariosDB = {
     'sofirod': {
         tipo: 'asistente',
@@ -227,11 +228,14 @@ function manejarNuevoTipoRegistro(nombreEvento) {
 }
 
 function manejarNuevoPatrocinio(nombreEvento) {
-    alert(`Funcionalidad "Nuevo Patrocinio" para el evento: ${nombreEvento}\n\nEsta funcionalidad será implementada próximamente.`);
+    sessionStorage.setItem('eventoPatrocinio', nombreEvento);
+    window.location.href = '../altaPatrocinio/altaPatrocinio.html';
 }
 
 function agregarBotonEditarPerfil() {
     const informacionUsuario = document.querySelector('.informacion-usuario');
+
+    // Verificar si el botón ya existe para evitar duplicados
     if (document.querySelector('.boton-editar-perfil')) {
         return;
     }
