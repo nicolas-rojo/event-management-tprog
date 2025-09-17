@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="stylePrueba.css">
+    <link rel="stylesheet" href="styleUsuario.css">
     <link rel="stylesheet" href="../componentes/style.css">
 </head>
 
@@ -25,22 +25,74 @@
     <div class="content">
         <div class="contenedores">
             <h1 class="seccion-titulo">Usuarios Registrados</h1>
+            
+            <div class="contenedor-usuarios">
+                <!-- Asistente - Ana Torres (Usuario actual simulado) -->
+                <div class="tarjeta-usuario asistente usuario-actual" onclick="verDetalleAsistente()">
+                    <div class="imagen-usuario">
+                        <img src="../src/images/IMG-US01.jpg" alt="Ana Torres" onerror="this.parentElement.innerHTML='Sin imagen'">
+                    </div>
+                    <span class="tipo-usuario tipo-asistente">Asistente</span>
+                    <span class="etiqueta-usuario-actual">Tú</span>
+                    <div class="contenido-usuario">
+                        <h3 class="nombre-usuario">Ana Torres</h3>
+                        <p class="nickname-usuario">@atorres</p>
+                        <div class="detalles-usuario">
+                            <div class="detalle-item">
+                                <span class="icono">📧</span>
+                                <span>atorres@gmail.com</span>
+                            </div>
+                            <div class="detalle-item">
+                                <span class="icono">🎂</span>
+                                <span>12/05/1990 (34 años)</span>
+                            </div>
+                            <div class="detalle-item">
+                                <span class="icono">🏃‍♀️</span>
+                                <span>Registrada en: Maratón Montevideo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Filtros opcionales -->
-            <div class="filtros">
-                <button class="filtro-btn active" data-filtro="todos">Todos</button>
-                <button class="filtro-btn" data-filtro="asistente">Asistentes</button>
-                <button class="filtro-btn" data-filtro="organizador">Organizadores</button>
-            </div>
-
-            <div class="contenedor-usuarios" id="contenedor-usuarios">
-                <!-- Los usuarios se cargarán dinámicamente -->
+                <!-- Organizador - MisEventos -->
+                <div class="tarjeta-usuario organizador" onclick="verDetalleOrganizador()">
+                    <div class="imagen-usuario">
+                        <img src="../src/images/IMG-US04.jpeg" alt="MisEventos" onerror="this.parentElement.innerHTML='Sin imagen'">
+                    </div>
+                    <span class="tipo-usuario tipo-organizador">Organizador</span>
+                    <div class="contenido-usuario">
+                        <h3 class="nombre-usuario">MisEventos</h3>
+                        <p class="nickname-usuario">@miseventos</p>
+                        <div class="detalles-usuario">
+                            <div class="detalle-item">
+                                <span class="icono">📧</span>
+                                <span>contacto@miseventos.com</span>
+                            </div>
+                            <div class="detalle-item">
+                                <span class="icono">📋</span>
+                                <span>Organiza eventos deportivos y tecnológicos</span>
+                            </div>
+                            <div class="detalle-item">
+                                <span class="icono">🌐</span>
+                                <span>https://miseventos.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="../componentes/cargarComponentes.js"></script>
-    <script src="script.js"></script>
+    <script>
+        function verDetalleAsistente() {
+            window.location.href = 'consultaDetalleAsistente.html';
+        }
+
+        function verDetalleOrganizador() {
+            window.location.href = 'consultaDetalleOrganizador.html';
+        }
+    </script>
 </body>
 
 </html>
