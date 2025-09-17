@@ -1,4 +1,3 @@
-// Base de datos simulada de usuarios (debe ser la misma que en consultaUsuario.html)
 const usuariosDB = {
     'sofirod': {
         tipo: 'asistente',
@@ -96,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (tipoUsuario === 'asistente') {
         actualizarRegistrosAsistente(datosUsuario.registros);
     } else if (tipoUsuario === 'organizador') {
-        actualizarEventosOrganizador(datosUsuario.eventos);
+        actualizarEventosOrganizador(datosUsuario.eventos, esPropio);
     }
 
     // Configurar botones si es el usuario actual
@@ -136,6 +135,11 @@ function actualizarInformacionPrincipal(datos, esPropio) {
         detalles[3].querySelector('span:nth-child(2)').textContent =
             'Descripción: ' + datos.descripcion;
     }
+
+    // Si es el usuario actual, agregar botón de editar perfil
+    if (esPropio) {
+        agregarBotonEditarPerfil();
+    }
 }
 
 function actualizarRegistrosAsistente(registros) {
@@ -162,7 +166,7 @@ function actualizarRegistrosAsistente(registros) {
     });
 }
 
-function actualizarEventosOrganizador(eventos) {
+function actualizarEventosOrganizador(eventos, esPropio) {
     const listaItems = document.querySelector('.solo-organizador .lista-items');
     listaItems.innerHTML = '';
 
@@ -176,32 +180,68 @@ function actualizarEventosOrganizador(eventos) {
 
     eventos.forEach(evento => {
         const item = document.createElement('div');
-        item.className = 'item';
+        item.className = 'item-evento';
 
         const icono = evento.estado === 'Aceptada' ? '✅' :
             evento.estado === 'Ingresada' ? '⏳' : '❌';
 
-        item.innerHTML = `<span>${icono} ${evento.evento} - Estado: ${evento.estado}</span>`;
+        // Contenedor principal del evento
+        const eventoInfo = document.createElement('div');
+        eventoInfo.className = 'evento-info';
+        eventoInfo.innerHTML = `<span>${icono} ${evento.evento} - Estado: ${evento.estado}</span>`;
+
+        item.appendChild(eventoInfo);
+
+        // Si es el usuario actual (organizador propietario), agregar botones
+        if (esPropio) {
+            const botonesContainer = document.createElement('div');
+            botonesContainer.className = 'botones-evento';
+
+            const botonTipoRegistro = document.createElement('button');
+            botonTipoRegistro.className = 'boton-evento boton-tipo-registro';
+            botonTipoRegistro.textContent = 'Nuevo Tipo de Registro';
+            botonTipoRegistro.addEventListener('click', (e) => {
+                e.stopPropagation();
+                manejarNuevoTipoRegistro(evento.evento);
+            });
+
+            const botonPatrocinio = document.createElement('button');
+            botonPatrocinio.className = 'boton-evento boton-patrocinio';
+            botonPatrocinio.textContent = 'Nuevo Patrocinio';
+            botonPatrocinio.addEventListener('click', (e) => {
+                e.stopPropagation();
+                manejarNuevoPatrocinio(evento.evento);
+            });
+
+            botonesContainer.appendChild(botonTipoRegistro);
+            botonesContainer.appendChild(botonPatrocinio);
+            item.appendChild(botonesContainer);
+        }
+
         listaItems.appendChild(item);
     });
 }
 
-function configurarBotonesAccion() {
-    const botonEditar = document.querySelector('.boton-primario');
-    const botonCerrarSesion = document.querySelector('.boton-secundario');
+function manejarNuevoTipoRegistro(nombreEvento) {
+    alert(`Funcionalidad "Nuevo Tipo de Registro" para el evento: ${nombreEvento}\n\nEsta funcionalidad será implementada próximamente.`);
+}
 
-    if (botonEditar) {
-        botonEditar.addEventListener('click', function () {
-            alert('Funcionalidad de editar perfil - Por implementar');
-        });
+function manejarNuevoPatrocinio(nombreEvento) {
+    alert(`Funcionalidad "Nuevo Patrocinio" para el evento: ${nombreEvento}\n\nEsta funcionalidad será implementada próximamente.`);
+}
+
+function agregarBotonEditarPerfil() {
+    const informacionUsuario = document.querySelector('.informacion-usuario');
+    if (document.querySelector('.boton-editar-perfil')) {
+        return;
     }
 
-    if (botonCerrarSesion) {
-        botonCerrarSesion.addEventListener('click', function () {
-            if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
-                // Aquí irías a la página de login
-                window.location.href = '../login/login.html';
-            }
-        });
-    }
+    const botonEditar = document.createElement('button');
+    botonEditar.className = 'boton-editar-perfil';
+    botonEditar.textContent = '✏️ Editar Perfil';
+    botonEditar.addEventListener('click', function () {
+        alert('Funcionalidad de editar perfil - Por implementar');
+    });
+
+    informacionUsuario.appendChild(botonEditar);
 }

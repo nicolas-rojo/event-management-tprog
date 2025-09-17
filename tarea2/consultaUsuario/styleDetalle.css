@@ -79,6 +79,33 @@ body {
 
 .informacion-usuario {
     flex-grow: 1;
+    position: relative;
+}
+
+/* Botón de editar perfil en la información del usuario */
+.boton-editar-perfil {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #4397db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(67, 151, 219, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.boton-editar-perfil:hover {
+    background-color: #3a7bc8;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(67, 151, 219, 0.4);
 }
 
 .nombre-usuario {
@@ -172,59 +199,81 @@ body {
     background-color: #fafafa;
 }
 
-/* Botones de acción */
-.botones-accion {
+/* Estilos específicos para eventos de organizador */
+.item-evento {
     display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-weight: 500;
     gap: 15px;
-    margin-top: 25px;
-    justify-content: flex-end;
-    flex-wrap: wrap;
 }
 
-.boton {
-    padding: 12px 24px;
-    border-radius: 25px;
+.item-evento:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+    background-color: #fafafa;
+}
+
+.evento-info {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.botones-evento {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+.boton-evento {
+    padding: 8px 16px;
+    border-radius: 20px;
     border: none;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-width: 120px;
+    min-width: 140px;
+    font-family: 'Outfit', sans-serif;
 }
 
-.boton-primario {
-    background-color: #4397db;
-    color: white;
-    box-shadow: 0 4px 12px rgba(67, 151, 219, 0.3);
+.boton-tipo-registro {
+    background-color: #74ebd5;
+    color: #2d5a4f;
+    box-shadow: 0 3px 8px rgba(116, 235, 213, 0.3);
 }
 
-.boton-primario:hover {
-    background-color: #3a7bc8;
+.boton-tipo-registro:hover {
+    background-color: #5de0c6;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(67, 151, 219, 0.4);
+    box-shadow: 0 5px 12px rgba(116, 235, 213, 0.4);
 }
 
-.boton-secundario {
-    background-color: #e0e0e0;
-    color: #555;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.boton-patrocinio {
+    background-color: #9face6;
+    color: #4a5d8f;
+    box-shadow: 0 3px 8px rgba(159, 172, 230, 0.3);
 }
 
-.boton-secundario:hover {
-    background-color: #d5d5d5;
+.boton-patrocinio:hover {
+    background-color: #8a9bdc;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 12px rgba(159, 172, 230, 0.4);
 }
 
 /* Controlar visibilidad según el tipo de usuario */
 .solo-organizador,
-.solo-asistente,
-.solo-propio {
+.solo-asistente {
     display: none;
 }
 
 .organizador .solo-organizador,
-.asistente .solo-asistente,
-.propio .solo-propio {
+.asistente .solo-asistente {
     display: block;
 }
