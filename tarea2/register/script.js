@@ -6,11 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const campoUrl = document.getElementById('url');
     const campoApellido = document.getElementById('apellido');
     const campoFecha = document.getElementById('fechaNac');
-
     const form = document.getElementById('form');
     const confirmarError = document.getElementById('confirmarError');
     const password = document.getElementById('password');
     const confirmacion = document.getElementById('confirmacion');
+    const params = new URLSearchParams(window.location.search);
+    const redirect = params.get("redirect");
 
     function actualizarCampos() {
         if (tipoSelect.value === 'Organizador') {
@@ -47,8 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             localStorage.setItem("isLogged", "true");
             confirmarError.innerText = "";
-            window.location.href = "../index/index.html";
-
+            window.location.href = redirect || "../index/index.html";
         }
     });
 });

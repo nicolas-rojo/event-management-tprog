@@ -20,8 +20,28 @@ function initTopbar() {
 	const loggedMenu = document.querySelector(".logged");
 	const notLoggedMenu = document.querySelector(".not-logged");
 	const logoutBtn = loggedMenu?.querySelector("a:first-child");
-
+	const loginBtn = document.querySelector(".not-logged a[href*='login.html']");
+	const regBtn = document.querySelector(".not-logged a[href*='register.html']");
+	
 	updateTopbar();
+
+	if (loginBtn) {
+		loginBtn.addEventListener("click", e => {
+			e.preventDefault();
+			const currentPage = window.location.pathname;
+			loginBtn.href = `../login/login.html?redirect=${encodeURIComponent(currentPage)}`;
+			window.location.href = loginBtn.href;
+		});
+	}
+
+	if (regBtn) {
+		regBtn.addEventListener("click", e => {
+			e.preventDefault();
+			const currentPage = window.location.pathname;
+			regBtn.href = `../register/register.html?redirect=${encodeURIComponent(currentPage)}`;
+			window.location.href = regBtn.href;
+		});
+	}
 
 	if (logoutBtn) {
 		logoutBtn.addEventListener("click", e => {
