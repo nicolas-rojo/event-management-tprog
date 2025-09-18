@@ -13,10 +13,10 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="../componentes/style.css">
-    <link rel="stylesheet" href="styleAsistente.css">
+    <link rel="stylesheet" href="styleDetalles.css">
 </head>
 
-<body class="asistente es-usuario-actual">
+<body class="asistente">
     <!-- Cargamos la topbar y el sidebar -->
     <div id="topbar"></div>
     <div id="sidebar"></div>
@@ -35,6 +35,7 @@
                 <div class="informacion-usuario">
                     <h1 class="nombre-usuario">Ana Torres</h1>
                     <p class="nickname-usuario">@atorres</p>
+                    <button class="boton-editar-perfil solo-propio" onclick="alert('Funcionalidad de editar perfil - Por implementar')">✏️ Editar Perfil</button>
                     <div class="detalles-usuario">
                         <div class="detalle-item">
                             <span class="icono">📧</span>
@@ -82,18 +83,11 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Botones de acción (solo para usuario logueado y propio) -->
-            <div class="botones-accion solo-propio" style="display: none;">
-                <button class="boton boton-primario" onclick="alert('Funcionalidad de editar perfil - Por implementar')">Editar Perfil</button>
-                <button class="boton boton-secundario" onclick="confirmarCerrarSesion()">Cerrar Sesión</button>
-            </div>
         </div>
     </div>
 
     <script src="../componentes/cargarComponentes.js"></script>
-    <script>
-    </script>
+    <script src="scriptAsistente.js"></script>
 </body>
 
 </html>

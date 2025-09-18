@@ -15,7 +15,6 @@ body {
     padding: 20px;
     justify-content: center;
     width: 100%;
-    margin-left: 260px;
     box-sizing: border-box;
 }
 
@@ -59,7 +58,16 @@ body {
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
     margin-bottom: 30px;
     transition: all 0.3s ease;
+}
+
+/* Estilo específico para organizador */
+body.organizador .contenedor-principal {
     border-top: 5px solid #9face6;
+}
+
+/* Usuario actual - borde dorado */
+.es-usuario-actual .contenedor-principal {
+    box-shadow: 0px 0px 0px 4px #ffcc00, 0px 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .imagen-usuario {
@@ -90,6 +98,8 @@ body {
 .informacion-usuario {
     flex: 1;
     min-width: 0;
+    position: relative;
+    /* Necesario para que el botón se posicione dentro */
 }
 
 .nombre-usuario {
@@ -166,7 +176,15 @@ body {
     border-radius: 15px;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+}
+
+/* Diferente borde izquierdo según el tipo de usuario */
+body.organizador .item {
     border-left: 4px solid #9face6;
+}
+
+body.asistente .item {
+    border-left: 4px solid #74ebd5;
 }
 
 .item:hover {
@@ -174,11 +192,13 @@ body {
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Estilos específicos para eventos */
+/* Estilos específicos para eventos (organizador) */
 .info-evento {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    position: relative;
+    /* Para que los botones se ubiquen dentro */
 }
 
 .nombre-evento {
@@ -193,7 +213,8 @@ body {
     font-weight: 500;
 }
 
-.fecha-evento {
+.fecha-evento,
+.fecha-costo {
     font-size: 13px;
     color: #888;
     background-color: #f8f9fa;
@@ -203,7 +224,20 @@ body {
     margin-top: 5px;
 }
 
-/* Información adicional */
+/* Estilos específicos para registros (asistente) */
+.info-registro {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detalle-registro {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Información adicional (organizador) */
 .info-adicional {
     display: flex;
     flex-direction: column;
@@ -286,7 +320,74 @@ body {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* Usuario actual - borde dorado */
-.es-usuario-actual .contenedor-principal {
-    box-shadow: 0px 0px 0px 4px #ffcc00, 0px 8px 20px rgba(0, 0, 0, 0.2);
+/* Botón editar perfil */
+.boton-editar-perfil {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #4397db;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(67, 151, 219, 0.3);
+}
+
+.boton-editar-perfil:hover {
+    background-color: #3a7bc8;
+    transform: translateY(-2px);
+}
+
+/* Botones de evento - arriba a la derecha (organizador) */
+.botones-evento {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 8px;
+}
+
+.boton-evento {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+    font-family: 'Outfit', sans-serif;
+}
+
+.boton-tipo-registro {
+    background-color: #74ebd5;
+    color: #2d5a4f;
+    box-shadow: 0 3px 8px rgba(116, 235, 213, 0.3);
+}
+
+.boton-tipo-registro:hover {
+    background-color: #5de0c6;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(116, 235, 213, 0.4);
+}
+
+.boton-patrocinio {
+    background-color: #9face6;
+    color: #4a5d8f;
+    box-shadow: 0 3px 8px rgba(159, 172, 230, 0.3);
+}
+
+.boton-patrocinio:hover {
+    background-color: #8a9bdc;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(159, 172, 230, 0.4);
+}
+
+/* Clase para ocultar elementos solo visibles para el propio usuario */
+.solo-propio {
+    display: none;
 }

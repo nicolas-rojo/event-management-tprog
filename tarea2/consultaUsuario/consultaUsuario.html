@@ -28,12 +28,12 @@
             
             <div class="contenedor-usuarios">
                 <!-- Asistente - Ana Torres (Usuario actual simulado) -->
-                <div class="tarjeta-usuario asistente usuario-actual" onclick="verDetalleAsistente()">
+                <div class="tarjeta-usuario asistente" onclick="verDetalleAsistente()">
                     <div class="imagen-usuario">
                         <img src="../src/images/IMG-US01.jpg" alt="Ana Torres" onerror="this.parentElement.innerHTML='Sin imagen'">
                     </div>
                     <span class="tipo-usuario tipo-asistente">Asistente</span>
-                    <span class="etiqueta-usuario-actual">Tú</span>
+                    <span class="etiqueta-usuario-actual" style="display: none;">Tú</span>
                     <div class="contenido-usuario">
                         <h3 class="nombre-usuario">Ana Torres</h3>
                         <p class="nickname-usuario">@atorres</p>
@@ -60,6 +60,7 @@
                         <img src="../src/images/IMG-US04.jpeg" alt="MisEventos" onerror="this.parentElement.innerHTML='Sin imagen'">
                     </div>
                     <span class="tipo-usuario tipo-organizador">Organizador</span>
+                    <span class="etiqueta-usuario-actual" style="display: none;">Tú</span>
                     <div class="contenido-usuario">
                         <h3 class="nombre-usuario">MisEventos</h3>
                         <p class="nickname-usuario">@miseventos</p>
@@ -84,15 +85,7 @@
     </div>
 
     <script src="../componentes/cargarComponentes.js"></script>
-    <script>
-        function verDetalleAsistente() {
-            window.location.href = 'consultaDetalleAsistente.html';
-        }
-
-        function verDetalleOrganizador() {
-            window.location.href = 'consultaDetalleOrganizador.html';
-        }
-    </script>
+    <script src="scriptUsuarios.js"></script>
 </body>
 
 </html>

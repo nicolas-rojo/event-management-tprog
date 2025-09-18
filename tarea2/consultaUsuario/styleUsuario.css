@@ -131,7 +131,7 @@ body {
 }
 
 .usuario-actual {
-    box-shadow: 0 0 0 3px #ffcc00;
+    box-shadow: 0 0 0 3px #ffcc00; /* borde dorado */
 }
 
 .etiqueta-usuario-actual {
