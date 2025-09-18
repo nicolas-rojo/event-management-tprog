@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const isLogged = localStorage.getItem('isLogged') === 'true';
-    const usuarioActual = localStorage.getItem('nickname'); // valor guardado en localStorage
+    const usuarioActual = localStorage.getItem('usrNickname'); // valor guardado en localStorage
 
     // Seleccionamos todas las tarjetas de usuario
     const tarjetas = document.querySelectorAll('.tarjeta-usuario');

@@ -4,7 +4,9 @@ Lista de Variables Locales Utilizadas:
     
     - usrRole: (organizador, asistente)
         Indica el tipo de usuario logeado en el sistema.
-    
-    - nickname: (string)
-        Almacena el nombre de usuario o correo ingresado al iniciar sesión, 
-        permitiendo identificar al usuario logeado dentro de la aplicación.
+
+    - usrAvatar: (ruta)
+        Indica la ruta que contiene la imagen de usuario del usuario logeado en el sistema.
+
+    -usrNickname: (string)
+        Indica el nickname del usuario logueado en el sistema.

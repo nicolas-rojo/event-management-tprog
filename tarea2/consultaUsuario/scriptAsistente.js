@@ -1,6 +1,6 @@
 function verificarUsuarioLogueado() {
     const isLogged = localStorage.getItem('isLogged') === 'true';
-    const usuarioActual = localStorage.getItem('nickname'); // valor real guardado
+    const usuarioActual = localStorage.getItem('usrNickname'); // valor real guardado
 
     if (isLogged && usuarioActual === 'atorres') {
         const elementosPropios = document.querySelectorAll('.solo-propio');

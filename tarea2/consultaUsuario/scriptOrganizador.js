@@ -1,7 +1,7 @@
 // Verificar si el usuario está logueado y si es el propio organizador
 function verificarUsuarioLogueado() {
     const isLogged = localStorage.getItem('isLogged') === 'true';
-    const usuarioActual = localStorage.getItem('nickname');  // Simular usuario actual
+    const usuarioActual = localStorage.getItem('usrNickname');  // Simular usuario actual
 
     // Si está logueado y es el propio organizador, mostrar elementos privados
     if (isLogged && usuarioActual === 'miseventos') {

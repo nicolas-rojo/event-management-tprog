@@ -22,9 +22,12 @@ function initTopbar() {
 	const logoutBtn = loggedMenu?.querySelector("a:first-child");
 	const loginBtn = document.querySelector(".not-logged a[href*='login.html']");
 	const regBtn = document.querySelector(".not-logged a[href*='register.html']");
+	const avatarImg = document.querySelector(".topbar-right img");
+	const avatar = localStorage.getItem("usrAvatar");
 	
 	updateTopbar();
 
+	
 	if (loginBtn) {
 		loginBtn.addEventListener("click", e => {
 			e.preventDefault();
@@ -32,6 +35,10 @@ function initTopbar() {
 			loginBtn.href = `../login/login.html?redirect=${encodeURIComponent(currentPage)}`;
 			window.location.href = loginBtn.href;
 		});
+	}
+	
+	if (avatar && avatarImg) {
+		avatarImg.src = avatar;
 	}
 
 	if (regBtn) {
@@ -48,6 +55,7 @@ function initTopbar() {
 			e.preventDefault();
 			localStorage.setItem("isLogged", "false");
 			localStorage.removeItem("usrRole");
+			localStorage.removeItem("usrAvatar");
 			location.reload();
 		});
 	}
