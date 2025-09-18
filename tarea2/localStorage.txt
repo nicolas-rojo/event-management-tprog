@@ -7,3 +7,6 @@ Lista de Variables Locales Utilizadas:
 
     - usrAvatar: (ruta)
         Indica la ruta que contiene la imagen de usuario del usuario logeado en el sistema.
+
+    -usrNickname: (string)
+        Indica el nickname del usuario logueado en el sistema.

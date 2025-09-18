@@ -1,11 +1,11 @@
 
-document.addEventListener("DOMContentLoaded", function() {
-    const tipoCorrecto = true;
-    const organizadorDeEdicion = true; 
-    const listado = document.getElementById("listado-registros");
-    const textoListadoRegistro = document.getElementById("tlr");
+document.addEventListener("DOMContentLoaded", function () {
 
-    if (tipoCorrecto && organizadorDeEdicion) {
+    const isLogged = localStorage.getItem("isLogged");
+    const tipoCorrecto = localStorage.getItem("usrRole");
+    const nombreOrganizador = localStorage.getItem("usrName");
+
+    if (tipoCorrecto === "organizador" && isLogged === "true" && nombreOrganizador ) {
         listado.style.display = "flex";
         textoListadoRegistro.style.display = "block";
     } else {
