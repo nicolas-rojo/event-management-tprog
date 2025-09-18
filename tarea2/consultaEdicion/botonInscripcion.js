@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const tipoCorrecto = true;
-    const noInscripto = true;
-    // obtenemos el DIV contenedor de cada botón
+    const isLogged = localStorage.getItem("isLogged");
+    const tipoCorrecto = localStorage.getItem("usrRole") == "asistente";
+    const nombreAsistente = localStorage.getItem("usrNickname");
+    const nombreEdicionElem = document.getElementById("nombreMaraton");
     const botonesDiv = document.querySelectorAll(".boton-div");
     botonesDiv.forEach(div => {
-        if (tipoCorrecto && noInscripto) {
+        const cond = (nombreAsistente == "atorres" && (nombreEdicionElem.textContent == "Maratón de Montevideo 2024" || nombreEdicionElem.textContent == "Web Summit 2026"));
+        if (isLogged && tipoCorrecto && !cond) {
             div.style.display = "flex";
         } else {
             div.style.display = "none";

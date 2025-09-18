@@ -17,108 +17,75 @@
 
 <body>
     <!-- Cargamos la topbar y el sidebar -->
-	<div id="topbar"></div>
-	<div id="sidebar"></div>
+    <div id="topbar"></div>
+    <div id="sidebar"></div>
 
     <!-- Contenido -->
     <div class="content">
         <div class="columna-izquierda"></div>
         <div class="columna-central">
             <div class="contenedor-principal">
-                <img class="imagenes" src="../src/images/maraton25.png" width="150px" height="150px">
+                <img class="imagenes" src="../src/images/IMG-EDEV03.jpeg" width="150px" height="150px">
                 <div class="informacion-evento">
-                    <h2 class="nombre-evento">Maratón de Montevideo 2025</h2>
+                    <h2 class="nombre-evento" id="nombreMaraton">Maratón de Montevideo 2024</h2>
                     <div class="detalles-evento">
                         <span class="pais">Montevideo, Uruguay</span>
-                        <span class="fechas">Desde: 14/09/2025 - Hasta: 14/09/2025</span>
-                        <span class="fecha-alta">Alta: 05/02/2025</span>
-                        <span class="siglas">SIG: MARATON25</span>
+                        <span class="fechas">Desde: 14/09/2024 - Hasta: 14/09/2024 </span>
+                        <span class="fecha-alta">Alta: 21/04/2024</span>
+                        <span class="siglas">SIG: MARATON24 </span>
                     </div>
                 </div>
             </div>
             <h2 class="texto-ed">Tipos de Registro:</p>
 
-            <!-- ACÁ IRÍAN Los TRegistros -->
-            <div class="contenedorTRegistros">
-                <div class="contenedor">
-                    <div class="informacion-TRegistro">
-                        <h2 class="nombre-evento">Maratón 42K</h2>
-                        <div class="detalles-TRegistro">
-                            <span class="descripcion-TRegistro">Inscripción a la maratón completa.</span>
-                            <span class="costo-TRegistro">Costo: $1200.</span>
-                            <span class="Cupos-TRegistro">499 cupos restantes.</span>
-                            <div id="botondiv1" class="boton-div" style="display: none;">
-                                <button id="boton1" class="btn-inscribirse">Inscribirse</button>
+                <!-- ACÁ IRÍAN Los TRegistros -->
+                <div class="contenedorTRegistros">
+                    <div class="contenedor">
+                        <div class="informacion-TRegistro">
+                            <h2 class="nombre-evento">Corredor 21K</h2>
+                            <div class="detalles-TRegistro">
+                                <span class="descripcion-TRegistro">Inscripción a la media maratón .</span>
+                                <span class="costo-TRegistro">Costo: $500.</span>
+                                <span class="Cupos-TRegistro">499 cupos restantes.</span>
+                                <div id="botondiv1" class="boton-div" style="display: none;">
+                                    <button id="boton1" class="btn-inscribirse">Inscribirse</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="contenedor">
-                    <div class="informacion-TRegistro">
-                        <h2 class="nombre-evento">Maratón 21K</h2>
-                        <div class="detalles-TRegistro">
-                            <span class="descripcion-TRegistro">Inscripción a la media maratón.</span>
-                            <span class="costo-TRegistro">Costo: $800.</span>
-                            <span class="Cupos-TRegistro">700 cupos restantes.</span>
-                            <div id="botondiv1" class="boton-div" style="display: none;">
-                                <button id="boton1" class="btn-inscribirse">Inscribirse</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <h2 class="texto-ed">Patrocinan:</p>
 
-            <!-- ACÁ IRÍAN Los TRegistros -->
-            <div class="contenedorTRegistros">
-                <div class="contenedor">
-                    <img class="imagenes" src="../src/images/antel.png" width="120px" height="120px">
-                    <div class="informacion-edicion">
-                        <h2 class="nombre-evento">Antel</h2>
-                        <div class="detalles-edicion">
-                            <span class="fecha-patrocinio">Fecha: 2025-03-04</span>
-                            <span class="aporte-patrocinio">Aporte: $25000.</span>
-                            <span class="nivel-patrocinio">Nivel: Platino.</span>
-                            <span class="tipo-patrocinio">Código: TR05.</span>
-                            <span class="Cupos-patrocinio">Cupos: 10.</span>
-                        </div>
-                    </div>
-                </div>             
-            </div>
         </div>
         <div class="columna-derecha">
             <h2 class="texto-og">Organiza:</p>
-            <div class="contenedor-derecha">
-                <img class="imagenes" src="../src/images/imm.png" width="120px" height="120px">
-                <div class="informacion-TRegistro">
-                    <h2 class="nombre-og">Intendencia de Montevideo</h2>
-                    <div class="detalles-TRegistro">
-                        <span class="email-org">intendencia@montevideo.gub.uy</span>                         
+                <div class="contenedor-derecha">
+                    <div class="informacion-TRegistro">
+                        <h2 class="nombre-og">Intendencia de Montevideo</h2>
+                        <div class="detalles-TRegistro">
+                            <span class="email-org">contacto@imm.gub.uy</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <h2 class="texto-registro" id="tr" style="display: none;">Registro:</p>
-            <div class="contenedor-derecha-alt" id="registro" style="display: none;">
-                <div class="informacion-TRegistro">
-                    <h2 class="nombre-og">Maratón 42K</h2>
-                    <div class="detalles-TRegistro">
-                        <span class="dato-registro">Costo: $1200</span>
-                        <span class="dato-registro">Registrado el: 25/5/2025</span>                       
+                <h2 class="texto-registro" id="tr" style="display: none;">Registro:</p>
+                    <div class="contenedor-derecha-alt" id="registro" style="display: none;">
+                        <div class="informacion-TRegistro">
+                            <h2 class="nombre-og">Corredor 21K</h2>
+                            <div class="detalles-TRegistro">
+                                <span class="dato-registro">Costo: $500</span>
+                                <span class="dato-registro">Registrado el: 30/07/2024</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <h2 class="texto-registro" id="tlr" style="display: none;">Listado de registros: </p>
-            <div class="contenedor-derecha-alt" id="listado-registros" style="display: none;">
-                <div class="informacion-TRegistro">
-                    <div class="detalles-TRegistro">
-                        <div class="registro-item">Registro 1: pedrito1</div>
-                        <div class="registro-item">Registro 2: pedrito2</div>
-                        <div class="registro-item">Registro 3: pedrito3</div>
-                        <div class="registro-item">Registro 4: pedrito4</div>                       
-                    </div>
-                </div>
-            </div>
-        </div>      
+                    <h2 class="texto-registro" id="tlr" style="display: none;">Listado de registros: </p>
+                        <div class="contenedor-derecha-alt" id="listado-registros" style="display: none;">
+                            <div class="informacion-TRegistro">
+                                <div class="detalles-TRegistro">
+                                    <div class="registro-item">Nickname: atorres- fecha registro: 30/07/2024- sin código
+                                        aplicado. </div>
+                                </div>
+                            </div>
+                        </div>
+        </div>
     </div>
     <script src="../componentes/cargarComponentes.js"></script>
     <script src="botonInscripcion.js"></script>
@@ -127,3 +94,7 @@
 </body>
 
 </html>
+
+<!-- se muestra el registro si ingresa el usuario atorres, el listado de registros
+no se muestra pues organiza US06 no sera ingresado. El boton se oculpa
+si ingresa atorres agregar imagen edicion03-->

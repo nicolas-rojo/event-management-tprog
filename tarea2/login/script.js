@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			localStorage.setItem("isLogged", "true");
 			localStorage.setItem("usrRole", user.role);
 			localStorage.setItem("usrAvatar", user.img);
-			// Acá se podría guardar el nickname en el localStorage
+			localStorage.setItem("usrNickname", user.nickname);
 			confirmarError.innerText = "";
 			// Redirigimos a la pagina desde la que se quiso iniciar sesión
 			window.location.href = redirect || "../index/index.html";
