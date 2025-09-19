@@ -35,7 +35,6 @@
                 <div class="informacion-usuario">
                     <h1 class="nombre-usuario">MisEventos</h1>
                     <p class="nickname-usuario">@miseventos</p>
-                    <button class="boton-editar-perfil solo-propio" onclick="alert('Funcionalidad de editar perfil - Por implementar')">✏️ Editar Perfil</button>
                     <div class="detalles-usuario">
                         <div class="detalle-item">
                             <span class="icono">📧</span>
@@ -69,17 +68,7 @@
                                 <span class="detalle-evento">Estado: Aceptada - Montevideo, Uruguay</span>
                                 <span class="fecha-evento">Fecha: 14/09/2024 - Ingresada: 21/04/2024</span>
                                 <div class="botones-evento solo-propio">
-                                    <button class="boton-evento boton-tipo-registro" onclick="window.location.href='../altaTReg/altaTReg.html'">Nuevo Tipo Registro</button>
-                                    <button class="boton-evento boton-patrocinio" onclick="window.location.href='../altaPatrocinio/altaPatrocinio.html'">Nuevo Patrocinio</button>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- Edición Rechazada (solo visible si es el propio organizador logueado) -->
-                        <div class="item solo-propio" style="display: none;">
-                            <div class="info-evento">
-                                <span class="nombre-evento">❌ Maratón de Montevideo 2022</span>
-                                <span class="detalle-evento">Estado: Rechazada - Montevideo, Uruguay</span>
-                                <span class="fecha-evento">Fecha: 14/09/2022 - Ingresada: 21/05/2022</span>
                             </div>
                         </div>
                     </div>
@@ -89,7 +78,6 @@
     </div>
 
     <script src="../componentes/cargarComponentes.js"></script>
-    <script src="scriptOrganizador.js"></script> 
 </body>
 
 </html>
