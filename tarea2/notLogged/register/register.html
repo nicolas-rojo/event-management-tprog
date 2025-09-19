@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../index/index.html">
+        <img src="../../src/images/logo.png" alt="logo" class="logo">
+	</a>
+    <div class="login-container">
+        <h2>Registrarse</h2>
+        <form id="form">
+            <div class="form-group">
+                <label for="tipoUsr">Tipo de Usuario:</label>
+                <select id="tipo" name="tipo">
+                    <option value="organizador">Organizador</option>
+                    <option value="asistente">Asistente</option>
+                </select>
+            </div>
+            <input type="text" id="nickname" placeholder="Nickname" required>
+            <input type="email" id="mail" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <div id="confirmarError" style = "color:red;"></div>
+            <input type="password" id="confirmacion" placeholder="Confirmar Contraseña" required>
+            <input type="text" id="nombre" placeholder="Nombre" required>
+
+            <!-- Campos de Organizador -->
+            <div id="Campos-Org" style="display: none;">
+                <input type="text" id="url" placeholder="Link al Sitio Web" required>
+                <textarea id="desc" placeholder="Descripción" required></textarea>
+            </div>
+            
+            <!-- Campos de Asistente -->
+            <div id="Campos-Asist" style="display: none;">
+                <input type="text" id="apellido" placeholder="Apellido" required>
+                <label for="fechaNac">Fecha de Nacimiento:</label>
+                <input type="date" id="fechaNac" placeholder="Fecha de Nacimiento" required>
+            </div>
+            <label for="fotoPerfil">Foto de Perfil:</label>
+            <input type="file" id="imagen" name="imagen" accept="image/*">
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

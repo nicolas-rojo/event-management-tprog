@@ -1,0 +1,361 @@
+body {
+    margin: 0;
+    font-family: outfit;
+}
+
+body {
+    margin: 0;
+    font-family: outfit;
+}
+
+/* =========================================
+   BARRA SUPERIOR
+========================================= */
+.topbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    position: fixed;
+    align-items: center;
+
+    width: 100%;
+    padding: 10px 20px;
+    z-index: 1;
+
+    box-sizing: border-box;
+    background-color: #3b383884;
+    color: #f1eeee;
+}
+
+.topbar-logo {
+    justify-self: start;
+    /* background: white; */
+    margin-left: 25px;
+}
+
+.topbar-logo img {
+    height: 40px;
+}
+
+.topbar-search {
+    justify-self: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.topbar-search input {
+    width: 60%;
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+.topbar-right {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+}
+
+.topbar-right a {
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #f1eeee;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.topbar-right a:hover {
+    text-decoration: underline;
+    color: #8cb4ff;
+}
+
+.topbar-right img {
+    height: 40px;
+    border-radius: 20px;
+}
+
+/* =========================================
+   BARRA LATERAL
+========================================= */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+
+    top: 100;
+    width: 260px;
+    height: 100vh;
+    padding-top: 100px;
+
+    background-color: #4b4a4acd;
+
+    align-items: start;
+}
+
+.element, .elementTitle {
+    color: #f1eeee;
+    font-size: auto;
+    padding: 12px 15px;
+    /* border-left: 2px solid #f1eeee; */
+    cursor: pointer;
+    margin-left: 25px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.elementTitle {
+    display: flex; 
+    font-size: 25px; 
+    margin-left: 33px; 
+    border-left: none;
+}
+
+.element:hover, .elementTitle:hover {
+    color: #8cb4ff;
+    /* border-left: 2px solid #8cb4ff; */
+}
+
+.opc-org {
+    display: flex;
+    flex-direction: column;
+}
+
+.element.active {
+    background-color: #fdfeff3c;
+    width: 175px;
+    border-radius: 8px;
+}
+
+/* =========================================
+   CONTENIDO PRINCIPAL
+========================================= */
+.content {
+    display: flex;
+    background: linear-gradient(135deg, #4397db, #dbb5ec);
+    padding: 20px;
+    height: 100%;
+    min-height: 100vh;
+    justify-content: center;
+}
+
+.columna-central {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 60px;
+    width: 33%;
+    align-items: center;
+}
+
+.columna-izquierda {
+    width: 33%;
+}
+
+ .columna-derecha {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 60px;
+    width: 33%;
+    align-items: center;
+    
+}
+
+.contenedor {
+    /* Layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+
+    /* Box model */
+    width: 600px;
+    height: 160px;
+    padding-left: 20px;
+
+    /* Estética */
+    background-color: #f1eeee;
+    border-radius: 30px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+
+}
+
+.contenedor-derecha {
+    /* Layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+
+    /* Box model */
+    width: 450px;
+    height: 160px;
+    padding-left: 20px;
+
+    /* Estética */
+    background-color: #f1eeee;
+    border-radius: 30px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+    
+.contenedor-derecha:hover {
+    background-color: #e0e0e0;
+    box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.contenedor-derecha-alt {
+    /* Layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+
+    /* Box model */
+    width: 450px;
+    height: 160px;
+    padding-left: 20px;
+
+    /* Estética */
+    background-color: #f1eeee;
+    border-radius: 30px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+
+}
+
+.imagenes {
+    border-radius: 25px;
+}
+
+.nombre-og{
+    font-size: 23px;
+    margin-top: 0px;
+}
+
+.email-org{
+    margin-top: 0px;
+    padding-top: 0px;
+ 
+}
+.texto-og{
+    margin-top: 0px;
+}
+
+.informacion {
+    height: 120px;
+    flex-direction: column;
+}
+
+.contenedor-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.contenedor-principal {
+    /* Layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+
+    /* Box model */
+    width: 600px;
+    height: 200px;
+    padding-left: 24px;
+
+    /* Estética */
+    background-color: #f1eeee;
+    border-radius: 30px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.informacion-evento {
+    display: flex;
+    height: 150px;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.nombre-evento {
+    margin: 0px;
+    font-size: 30px;
+}
+
+.descripcion-evento {
+    margin: 0;
+    margin-right: 15px;
+    
+    font-size: 18px;
+    text-align:justify;
+}
+
+.detalles-evento {
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.contenedorTRegistros{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.informacion-TRegistro {
+    height: 120px;
+    flex-direction: column;
+    display: flex;
+}
+
+.detalles-TRegistro {
+    display: flex;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+    flex-direction: column;
+
+}
+
+.boton-div {
+    margin-top: 18px;
+    display: flex;
+    width: 100%;
+}
+
+.btn-inscribirse {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4397db;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-inscribirse:hover {
+    background-color: #357abd;
+}
+
+.detalles-edicion{
+    display: flex;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+    flex-direction: column;
+
+}
+

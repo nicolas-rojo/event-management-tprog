@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Eventos</title>
+
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../componentes/style.css">
+</head>
+
+<body>
+    <!-- TOPBAR -->
+	<div class="topbar">
+		<div class="topbar-logo">
+			<a href="../index/index.html">
+				<img src="../../src/images/logo.png">
+			</a>
+		</div>
+
+		<div class="topbar-search">
+			<input type="text" placeholder="Buscar evento, edicion... 🔍">
+		</div>
+
+		<div class="topbar-right">
+			<a href="../../notLogged/consultaEvento/consultaEventoMaraton.html">Cerrar Sesión</a>
+			<a href="#">
+				<img alt="logo" class="logo">
+			</a>
+		</div>
+	</div>
+
+	<!-- SIDEBAR -->
+	<div class="sidebar">
+		<a href="#" id="miPerfil" class="elementTitle" style="display: flex;">Mi Perfil</a>
+		<a href="#" class="element">Ver Registros</a>
+		<a href="../index/index.html" class="element">Consultar Evento</a>
+		<a href="../consultaUsuario/ConsultaUsuario.html" class="element">Consultar Usuario</a>
+	</div>
+
+    <!-- Contenido -->
+    <div class="content">
+        <div class="contenedores">
+            <div class="contenedor-principal">
+                <img class="imagenes" src="../src/images/IMG-EV04.png" width="150px" height="150px">
+                <div class="informacion-evento">
+                    <h2 class="nombre-evento">Maratón de Montevideo</h2>
+                    <p class="descripcion-evento">Competencia deportiva anual en la capital.</p>
+                    <div class="detalles-evento">
+                        <span class="siglas">SIG: MARATON</span>
+                        <span class="fecha-alta">Alta: 01/01/2022</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="texto-ed">Ediciones:</p>
+
+            <div class="contenedorEdiciones">
+                <a href="../consultaEdicion/consultaEdicionMaraton24.html" class="contenedor-link">
+                    <div class="contenedor">
+                        <img class="imagenes" src="../src/images/IMG-EDEV03.jpeg" width="120px" height="120px">
+                        <div class="informacion-edicion">
+                            <h2 class="nombre-evento">Maratón de Montevideo 2024</h2>
+                            <div class="detalles-edicion">
+                                <span class="siglas">SIGLA: MARATON24</span>
+                                <span class="pais">Montevideo, Uruguay</span>
+                                <span class="fechas">Fecha Alta: 21/04/2024</span>
+                                <span class="fechas">Desde: 14/09/2024 - Hasta: 14/09/2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

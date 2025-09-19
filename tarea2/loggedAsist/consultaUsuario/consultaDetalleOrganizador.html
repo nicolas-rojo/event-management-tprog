@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MisEventos - Detalle de Organizador</title>
+
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../componentes/style.css">
+    <link rel="stylesheet" href="styleDetalles.css">
+</head>
+
+<body class="organizador">
+    <!-- TOPBAR -->
+	<div class="topbar">
+		<div class="topbar-logo">
+			<a href="../index/index.html">
+				<img src="../../src/images/logo.png">
+			</a>
+		</div>
+
+		<div class="topbar-search">
+			<input type="text" placeholder="Buscar evento, edicion... 🔍">
+		</div>
+
+		<div class="topbar-right">
+			<a href="../../notLogged/consultaUsuario/consultaDetalleOrganizador.html">Cerrar Sesión</a>
+			<a href="#">
+				<img alt="logo" class="logo">
+			</a>
+		</div>
+	</div>
+
+	<!-- SIDEBAR -->
+	<div class="sidebar">
+		<a href="#" id="miPerfil" class="elementTitle" style="display: flex;">Mi Perfil</a>
+		<a href="#" class="element">Ver Registros</a>
+		<a href="../index/index.html" class="element">Consultar Evento</a>
+		<a href="../consultaUsuario/ConsultaUsuario.html" class="element">Consultar Usuario</a>
+	</div>
+
+    <!-- Contenido -->
+    <div class="content">
+        <div class="contenedores">
+            <!-- Botón para volver -->
+            <button class="boton-volver" onclick="window.location.href='consultaUsuario.html'">← Volver a la lista</button>
+            
+            <!-- Información principal del usuario -->
+            <div class="contenedor-principal">
+                <div class="imagen-usuario">
+                    <img src="../src/images/IMG-US04.jpeg" alt="MisEventos" onerror="this.style.display='none'; this.parentElement.innerHTML='Sin imagen'">
+                </div>
+                <div class="informacion-usuario">
+                    <h1 class="nombre-usuario">MisEventos</h1>
+                    <p class="nickname-usuario">@miseventos</p>
+                    <div class="detalles-usuario">
+                        <div class="detalle-item">
+                            <span class="icono">📧</span>
+                            <span>contacto@miseventos.com</span>
+                        </div>
+                        <div class="detalle-item">
+                            <span class="icono">👤</span>
+                            <span>Tipo: Organizador</span>
+                        </div>
+                        <div class="detalle-item">
+                            <span class="icono">🌐</span>
+                            <span>https://miseventos.com</span>
+                        </div>
+                        <div class="detalle-item">
+                            <span class="icono">📝</span>
+                            <span>Empresa de organización de eventos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de eventos organizados -->
+            <div class="seccion-eventos">
+                <h2 class="seccion-titulo">Ediciones de Eventos Organizadas</h2>
+                <div class="contenedor-secundario">
+                    <div class="lista-items">
+                        <!-- Edición Aceptada (siempre visible) -->
+                        <div class="item">
+                            <div class="info-evento">
+                                <span class="nombre-evento">✅ Maratón de Montevideo 2024</span>
+                                <span class="detalle-evento">Estado: Aceptada - Montevideo, Uruguay</span>
+                                <span class="fecha-evento">Fecha: 14/09/2024 - Ingresada: 21/04/2024</span>
+                                <div class="botones-evento solo-propio">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

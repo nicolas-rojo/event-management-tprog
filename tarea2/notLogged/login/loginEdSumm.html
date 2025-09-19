@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../index/index.html">
+        <img src="../src/images/logo.png" alt="logo" class="logo">
+	</a>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form>
+            <input type="text" id="usuario" placeholder="Nickname / Mail" required>
+            <input type="password" id="clave" placeholder="Contraseña" required>
+            <div id="confirmarError" style = "color:red;"></div>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+    <script src="scriptEdSumm.js"></script>
+</body>
+
+</html>

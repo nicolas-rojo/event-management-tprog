@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Eventos</title>
+
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../componentes/style.css">
+</head>
+
+<body>
+    <!-- TOPBAR -->
+	<div class="topbar">
+		<div class="topbar-logo">
+			<a href="../../notLogged/indexNL/indexNL.html">
+				<img src="../../src/images/logo.png">
+			</a>
+		</div>
+
+		<div class="topbar-search">
+			<input type="text" placeholder="Buscar evento, edicion... 🔍">
+		</div>
+
+		<div class="topbar-right">
+			<a href="../login/loginConsultaEvTec.html">Ingresar</a>
+			<a href="../../register/register.html">Registrarse</a>
+		</div>
+	</div>
+
+	<!-- SIDEBAR -->
+	<div class="sidebar">
+		<a href="../../notLogged/indexNL/indexNL.html" class="element">Consultar Evento</a>
+		<a href="../consultaUsuarioNL/consultaUsuario.html" class="element">Consultar Usuario</a>
+	</div>
+
+    <!-- Contenido -->
+    <div class="content">
+        <div class="contenedores">
+            <div class="contenedor-principal">
+                <img class="imagenes" src="" alt="logoEvento" width="150px" height="150px">
+                <div class="informacion-evento">
+                    <h2 class="nombre-evento">Conferencia de Tecnología</h2>
+                    <p class="descripcion-evento">Evento sobre innovación tecnológica.</p>
+                    <div class="detalles-evento">
+                        <span class="siglas">SIG: CONFTEC</span>
+                        <span class="fecha-alta">Alta: 10/01/2025</span>
+                    </div>
+                    <div id="botondiv1" class="boton-div" style="display: none;">
+                        <button id="boton1" class="btn-nuevaedicion">+ Nueva edicion</button>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="texto-ed">Ediciones:</p>
+
+            <div class="contenedorEdiciones">
+                <a href="../consultaEdicion/consultaEdicionTecPunta.html" class="contenedor-link">
+                    <div class="contenedor">
+                        <img class="imagenes" src="" alt="logoEdición" width="120px" height="120px">
+                        <div class="informacion-edicion">
+                            <h2 class="nombre-evento">Tecnología Punta del Este 2026</h2>
+                            <div class="detalles-edicion">
+                                <span class="siglas">SIGLA: CONFTECH26</span>
+                                <span class="pais">Montevideo, Uruguay</span>
+                                <span class="fechas">Fecha Alta: 05/02/2025</span>
+                                <span class="fechas">Desde: 06/04/2026 - Hasta: 10/04/2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="../consultaEdicion/consultaEdicionSummit.html" class="contenedor-link">
+                    <div class="contenedor">
+                        <img class="imagenes" src="" alt="logoEdición" width="120px" height="120px">
+                        <div class="informacion-edicion">
+                            <h2 class="nombre-evento">Web Summit 2026</h2>
+                            <div class="detalles-edicion">
+                                <span class="siglas">SIGLA: WS26</span>
+                                <span class="pais">Lisboa, Portugal</span>
+                                <span class="fechas">Fecha Alta: 04/06/2025</span>
+                                <span class="fechas">Desde: 13/01/2026 - Hasta: 01/02/2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
