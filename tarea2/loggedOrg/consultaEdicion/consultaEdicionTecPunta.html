@@ -29,20 +29,20 @@
 		</div>
 
 		<div class="topbar-right">
-			<a href="../../notLogged/consultaEdicion/consultaEdicionTecPunta.html">Cerrar Sesión</a>
-			<a href="#">
-				<img alt="logo" class="logo">
+			<a href="../../notLogged/index/index.html">Cerrar Sesión</a>
+			<a href="../consultaUsuario/consultaDetalleOrganizador.html">
+				<img src="../../src/images/IMG-US04.jpeg">
 			</a>
 		</div>
 	</div>
 
 	<!-- SIDEBAR -->
 	<div class="sidebar">
-		<a href="#" id="miPerfil" class="elementTitle" style="display: flex;">Mi Perfil</a>
-		<a href="#" class="element">Alta Evento</a>
-		<a href="#" class="element">Alta Institución</a>
-		<a href="#" class="element">Nuevo Tipo de Registro</a>
-		<a href="#" class="element">Nuevo Patrocinio</a>
+		<a href="../consultaUsuario/consultaDetalleOrganizador.html" id="miPerfil" class="elementTitle" style="display: flex;">Mi Perfil</a>
+		<a href="../altaEvento/altaEvento.html" class="element">Alta Evento</a>
+		<a href="../altaInstitucion/altaInstitucion.html" class="element">Alta Institución</a>
+		<a href="../altaTReg/altaTReg.html" class="element">Nuevo Tipo de Registro</a>
+		<a href="../altaPatrocinio/altaPatrocinio.html" class="element">Nuevo Patrocinio</a>
 		<a href="../index/index.html" class="element">Consultar Evento</a>
 		<a href="../consultaUsuario/ConsultaUsuario.html" class="element">Consultar Usuario</a>
 	</div>
@@ -53,7 +53,7 @@
 
         <div class="columna-central">
             <div class="contenedor-principal">
-                <img class="imagenes" src="" alt="logoEdición" width="150px" height="150px">
+                <img class="imagenes" src="../../src/images/IMG-NO.png" alt="logoEdición" width="150px" height="150px">
                 <div class="informacion-evento">
                     <h2 class="nombre-evento" id="nombreMaraton">Tecnología Punta del Este 2026</h2>
                     <div class="detalles-evento">
@@ -69,7 +69,6 @@
 
             <div class="contenedorTRegistros">
                 <div class="contenedor">
-                    <img class="imagenes" src="" alt="logoTR" width="120px" height="120px">
                     <div class="informacion-TRegistro">
                         <h2 class="nombre-evento">Estudiante </h2>
                         <div class="detalles-TRegistro">
@@ -85,7 +84,7 @@
 
             <div class="contenedorTRegistros">
                 <div class="contenedor">
-                    <img class="imagenes" src="" alt="logoPatro" width="120px" height="120px">
+                    <img class="imagenes" src="../../src/images/IMG-NO.png" alt="logoPatro" width="120px" height="120px">
                     <div class="informacion-edicion">
                         <h2 class="nombre-evento">Facultad de Ingeniería</h2>
                         <div class="detalles-edicion">
@@ -102,16 +101,18 @@
 
         <div class="columna-derecha">
             <h2 class="texto-og">Organiza:</p>
-
-            <div class="contenedor-derecha">
-                <img class="imagenes" src="" alt="logoOrg" width="120px" height="120px">
-                <div class="informacion-TRegistro">
-                    <h2 class="nombre-og">Universidad de la República</h2>
-                    <div class="detalles-TRegistro">
-                        <span class="email-org">contacto@udelar.edu.uy</span>
+            
+            <a href="../consultaUsuario/consultaDetalleOrganizador.html" class="contenedor-link">
+                <div class="contenedor-derecha">
+                    <img class="imagenes" src="../../src/images/IMG-NO.png" alt="logoOrg" width="120px" height="120px">
+                    <div class="informacion-TRegistro">
+                        <h2 class="nombre-og">Universidad de la República</h2>
+                        <div class="detalles-TRegistro">
+                            <span class="email-org">contacto@udelar.edu.uy</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <h2 class="texto-registro" id="tlr" style="display: none;">Listado de registros: </p>
             <div class="contenedor-derecha-alt" id="listado-registros" style="display: none;">
