@@ -1,0 +1,7 @@
+Se pueden setear atributos de sesion para tener una especie de variable global, por ejemplo, para saber si el usuario
+logeado es asistente u organizador, para usarlo, hay que tener cuidado con el nombre que se usa tanto para el atributo
+como para los valores, en este archivo listamos todos los atributos y los valores que usamos para que sean usables por
+los demas y evitar codigo repetido o posibles errores.
+
+Atributo: "rol"
+Valores: "organizador" | "asistente"
