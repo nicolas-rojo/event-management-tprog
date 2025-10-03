@@ -400,23 +400,23 @@ public class Principal {
     		IEV.nuevaCategoria("Moda");
     		IEV.nuevaCategoria("Investigacion");
         	
-        	ICU.registrarAsistente(new DataAsistente("Ana ", "atorres", "atorres@gmail.com", "Torres", LocalDate.of(1990, 5, 12)));
-        	ICU.registrarAsistente(new DataAsistente("Martin", "msilva", "martin.silva@fing.edu.uy", "Silva",  LocalDate.of(1987, 8, 21)));
-        	ICU.registrarAsistente(new DataAsistente("Sofia", "sofirod", "srodriguez@outlook.com", "Rodriguez",  LocalDate.of(1995, 2, 3)));
-        	ICU.registrarAsistente(new DataAsistente("Valentina", "vale23", "valentina.costa@mail.com", "Costa",  LocalDate.of(1992, 12, 1)));
-        	ICU.registrarAsistente(new DataAsistente("Lucia", "luciag", "lucia.garcia@mail.com", "Garcia",  LocalDate.of(1993, 11, 9)));
-        	ICU.registrarAsistente(new DataAsistente("Ana", "AnaG", "ana.gomez@hotmail.com", "Gomez",  LocalDate.of(2000, 6, 10)));
-        	ICU.registrarAsistente(new DataAsistente("Javier", "JaviL", "javier.lopez@outlook.com", "Lopez",  LocalDate.of(1998, 3, 15)));
-        	ICU.registrarAsistente(new DataAsistente("Mariıa", "MariR", "maria.rodriguez@gmail.com", "Rodriguez",  LocalDate.of(1995, 7, 22)));
-        	ICU.registrarAsistente(new DataAsistente("Sofia", "SofiM", "sofia.martinez@yahoo.com", "Martinez",  LocalDate.of(2000, 11, 10)));
-        	ICU.registrarAsistente(new DataAsistente("Andrea", "andrearod", "andrea.rod@mail.com", "Rodriguez", LocalDate.of(1997, 2, 5)));
+        	ICU.registrarAsistente(new DataAsistente("Ana ", "atorres", "atorres@gmail.com", "123", "Torres", LocalDate.of(1990, 5, 12)));
+        	ICU.registrarAsistente(new DataAsistente("Martin", "msilva", "martin.silva@fing.edu.uy", "123", "Silva",  LocalDate.of(1987, 8, 21)));
+        	ICU.registrarAsistente(new DataAsistente("Sofia", "sofirod", "srodriguez@outlook.com", "123", "Rodriguez",  LocalDate.of(1995, 2, 3)));
+        	ICU.registrarAsistente(new DataAsistente("Valentina", "vale23", "valentina.costa@mail.com", "123", "Costa",  LocalDate.of(1992, 12, 1)));
+        	ICU.registrarAsistente(new DataAsistente("Lucia", "luciag", "lucia.garcia@mail.com", "123", "Garcia",  LocalDate.of(1993, 11, 9)));
+        	ICU.registrarAsistente(new DataAsistente("Ana", "AnaG", "ana.gomez@hotmail.com", "123", "Gomez",  LocalDate.of(2000, 6, 10)));
+        	ICU.registrarAsistente(new DataAsistente("Javier", "JaviL", "javier.lopez@outlook.com", "123", "Lopez",  LocalDate.of(1998, 3, 15)));
+        	ICU.registrarAsistente(new DataAsistente("Mariıa", "MariR", "maria.rodriguez@gmail.com", "123", "Rodriguez",  LocalDate.of(1995, 7, 22)));
+        	ICU.registrarAsistente(new DataAsistente("Sofia", "SofiM", "sofia.martinez@yahoo.com", "123", "Martinez",  LocalDate.of(2000, 11, 10)));
+        	ICU.registrarAsistente(new DataAsistente("Andrea", "andrearod", "andrea.rod@mail.com", "123", "Rodriguez", LocalDate.of(1997, 2, 5)));
         	
         	
-        	ICU.registrarOrganizador(new DataOrganizador("MisEventos", "miseventos", "contacto@miseventos.com", "Empresa de organizacion de eventos.", "https://miseventos.com/"));
-        	ICU.registrarOrganizador(new DataOrganizador("Corporaci´on Tecnol´ogica", "techcorp", "info@techcorp.com", "Empresa l´ıder en tecnolog´ıas de la informaci´on", ""));
-        	ICU.registrarOrganizador(new DataOrganizador("Intendencia de Montevideo", "imm", "contacto@imm.gub.uy", "Gobierno departamental de Montevideo.", "https://montevideo.gub.uy/"));
-        	ICU.registrarOrganizador(new DataOrganizador("Universidad de la Rep´ublica", "udelar", "contacto@udelar.edu.uy", "Universidad publica de Uruguay.", "https://udelar.edu.uy/"));
-        	ICU.registrarOrganizador(new DataOrganizador("Ministerio de Educacion y Cultura", "mec", "mec@mec.gub.uy", "Institucion publica promotora de cultura", "https://mec.gub.uy/"));
+        	ICU.registrarOrganizador(new DataOrganizador("MisEventos", "miseventos", "contacto@miseventos.com", "123", "Empresa de organizacion de eventos.", "https://miseventos.com/"));
+        	ICU.registrarOrganizador(new DataOrganizador("Corporaci´on Tecnol´ogica", "techcorp", "info@techcorp.com", "123", "Empresa l´ıder en tecnolog´ıas de la informaci´on", ""));
+        	ICU.registrarOrganizador(new DataOrganizador("Intendencia de Montevideo", "imm", "contacto@imm.gub.uy", "123", "Gobierno departamental de Montevideo.", "https://montevideo.gub.uy/"));
+        	ICU.registrarOrganizador(new DataOrganizador("Universidad de la Rep´ublica", "udelar", "contacto@udelar.edu.uy", "123", "Universidad publica de Uruguay.", "https://udelar.edu.uy/"));
+        	ICU.registrarOrganizador(new DataOrganizador("Ministerio de Educacion y Cultura", "mec", "mec@mec.gub.uy", "123", "Institucion publica promotora de cultura", "https://mec.gub.uy/"));
         	
         	II.nuevaInstitucion(new DataInstitucion("Facultad de Ingenieria", "Facultad de Ingenier´ıa de la Universidad de la Rep´ublica", "https://www.fing.edu.uy/"));
         	II.nuevaInstitucion(new DataInstitucion("ORT Uruguay", "Universidad privada enfocada en tecnologia y gestion", "https://ort.edu.uy"));

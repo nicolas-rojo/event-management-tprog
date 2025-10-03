@@ -9,8 +9,8 @@ public class Organizador extends Usuario{
 	private String url;
 	private HashMap<String, EdicionEvento> ediciones;
 	
-	public Organizador(String nombre, String nickname, String email, String descripcion, String url){
-		super(nombre, nickname, email);
+	public Organizador(String nombre, String nickname, String email, String pass, String descripcion, String url){
+		super(nombre, nickname, email, pass);
         this.descripcion = descripcion;
         this.url = url;
         
@@ -18,7 +18,7 @@ public class Organizador extends Usuario{
     }
 	
 	public Organizador(DataOrganizador dataOrg){
-		super(dataOrg.getNombre(), dataOrg.getNickname(), dataOrg.getEmail());
+		super(dataOrg.getNombre(), dataOrg.getNickname(), dataOrg.getEmail(), dataOrg.getPass());
         this.descripcion = dataOrg.getDescripcion();
         this.url = dataOrg.getUrl();
     }

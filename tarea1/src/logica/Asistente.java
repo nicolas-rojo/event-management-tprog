@@ -14,8 +14,8 @@ public class Asistente extends Usuario{
 	
 	private List<Registro> regs;
 	
-	public Asistente(String nombre, String nickname, String email, String apellido, LocalDate fechaNac){
-		super(nombre, nickname, email);
+	public Asistente(String nombre, String nickname, String email, String pass, String apellido, LocalDate fechaNac){
+		super(nombre, nickname, email, pass);
         this.apellido = apellido;
         this.fechaNac = fechaNac;
         
@@ -23,7 +23,7 @@ public class Asistente extends Usuario{
     }
 	
 	public Asistente(DataAsistente dataAsistente){
-		super(dataAsistente.getNombre(), dataAsistente.getNickname(), dataAsistente.getEmail());
+		super(dataAsistente.getNombre(), dataAsistente.getNickname(), dataAsistente.getEmail(), dataAsistente.getPass());
         this.apellido = dataAsistente.getApellido();
         this.fechaNac = dataAsistente.getFechaNac();
         

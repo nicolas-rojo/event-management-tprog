@@ -4,11 +4,13 @@ public class DataUsuario {
     private String nombre;
     private String nickname;
     private String email;
+    private String pass;
 
-    public DataUsuario(String nombre, String nickname, String email) {
+    public DataUsuario(String nombre, String nickname, String email, String pass) {
         this.nombre = nombre;
         this.nickname = nickname;
         this.email = email;
+        this.pass = pass;
     }
 
     public String getNombre() {
@@ -21,6 +23,10 @@ public class DataUsuario {
 
     public String getEmail() {
         return email;
+    }
+    
+    public String getPass() {
+        return pass;
     }
 
     @Override

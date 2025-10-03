@@ -162,6 +162,7 @@ public class TestEventos extends TestCase {
                 "Test Organizador_" + uniqueId,
                 "testorg_" + uniqueId,
                 "testorg_" + uniqueId + "@test.com",
+                "pass" + uniqueId,
                 "Organizador de prueba",
                 "https://test.com"
             );
@@ -218,6 +219,7 @@ public class TestEventos extends TestCase {
                 "Test Organizador_" + uniqueId,
                 "testorg_" + uniqueId,
                 "testorg_" + uniqueId + "@test.com",
+                "pass" + uniqueId,
                 "Organizador de prueba",
                 "https://test.com"
             );
@@ -338,6 +340,7 @@ public class TestEventos extends TestCase {
                 "Test Organizador_" + uniqueId,
                 "testorg_" + uniqueId,
                 "testorg_" + uniqueId + "@test.com",
+                "pass" + uniqueId,
                 "Organizador de prueba",
                 "https://test.com"
             );

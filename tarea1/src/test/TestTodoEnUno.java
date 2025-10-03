@@ -63,25 +63,25 @@ public class TestTodoEnUno {
         
         // 2. Crear asistentes
         assertDoesNotThrow(() -> {
-            controladorUsuario.registrarAsistente("Ana", "atorres", "atorres@gmail.com", "Torres", LocalDate.of(1990, 5, 12));
-            controladorUsuario.registrarAsistente("Martin", "msilva", "martin.silva@fing.edu.uy", "Silva", LocalDate.of(1987, 8, 21)); // Pruebo los dos constructores
-            controladorUsuario.registrarAsistente(new DataAsistente("Sofia", "sofirod", "srodriguez@outlook.com", "Rodriguez", LocalDate.of(1995, 2, 3)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Valentina", "vale23", "valentina.costa@mail.com", "Costa", LocalDate.of(1992, 12, 1)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Lucia", "luciag", "lucia.garcia@mail.com", "Garcia", LocalDate.of(1993, 11, 9)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Ana", "AnaG", "ana.gomez@hotmail.com", "Gomez", LocalDate.of(1998, 3, 15)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Javier", "JaviL", "javier.lopez@outlook.com", "Lopez", LocalDate.of(1995, 7, 22)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Maria", "MariR", "maria.rodriguez@gmail.com", "Rodriguez", LocalDate.of(2000, 11, 10)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Sofia", "SofiM", "sofia.martinez@yahoo.com", "Martinez", LocalDate.of(1997, 2, 5)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Andrea", "andrearod", "andrea.rod@mail.com", "Rodriguez", LocalDate.of(2000, 6, 10)));
+            controladorUsuario.registrarAsistente("Ana", "atorres", "atorres@gmail.com", "123", "Torres", LocalDate.of(1990, 5, 12));
+            controladorUsuario.registrarAsistente("Martin", "msilva", "martin.silva@fing.edu.uy", "123", "Silva", LocalDate.of(1987, 8, 21)); // Pruebo los dos constructores
+            controladorUsuario.registrarAsistente(new DataAsistente("Sofia", "sofirod", "srodriguez@outlook.com", "123", "Rodriguez", LocalDate.of(1995, 2, 3)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Valentina", "vale23", "valentina.costa@mail.com", "123", "Costa", LocalDate.of(1992, 12, 1)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Lucia", "luciag", "lucia.garcia@mail.com", "123", "Garcia", LocalDate.of(1993, 11, 9)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Ana", "AnaG", "ana.gomez@hotmail.com", "123", "Gomez", LocalDate.of(1998, 3, 15)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Javier", "JaviL", "javier.lopez@outlook.com", "123", "Lopez", LocalDate.of(1995, 7, 22)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Maria", "MariR", "maria.rodriguez@gmail.com", "123", "Rodriguez", LocalDate.of(2000, 11, 10)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Sofia", "SofiM", "sofia.martinez@yahoo.com", "123", "Martinez", LocalDate.of(1997, 2, 5)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Andrea", "andrearod", "andrea.rod@mail.com", "123", "Rodriguez", LocalDate.of(2000, 6, 10)));
         });
         
         // 3. Crear organizadores
         assertDoesNotThrow(() -> {
-            controladorUsuario.registrarOrganizador("MisEventos", "miseventos", "contacto@miseventos.com", "Empresa de organizacion de eventos.", "https://miseventos.com/"); 
-            controladorUsuario.registrarOrganizador("Corporación Tecnológica", "techcorp", "info@techcorp.com", "Empresa líder en tecnologías de la información", ""); // Pruebo los dos constructores
-            controladorUsuario.registrarOrganizador(new DataOrganizador("Intendencia de Montevideo", "imm", "contacto@imm.gub.uy", "Gobierno departamental de Montevideo.", "https://montevideo.gub.uy/"));
-            controladorUsuario.registrarOrganizador(new DataOrganizador("Universidad de la República", "udelar", "contacto@udelar.edu.uy", "Universidad publica de Uruguay.", "https://udelar.edu.uy/"));
-            controladorUsuario.registrarOrganizador(new DataOrganizador("Ministerio de Educacion y Cultura", "mec", "mec@mec.gub.uy", "Institucion publica promotora de cultura", "https://mec.gub.uy/"));
+            controladorUsuario.registrarOrganizador("MisEventos", "miseventos", "contacto@miseventos.com", "123", "Empresa de organizacion de eventos.", "https://miseventos.com/"); 
+            controladorUsuario.registrarOrganizador("Corporación Tecnológica", "techcorp", "info@techcorp.com", "123", "Empresa líder en tecnologías de la información", ""); // Pruebo los dos constructores
+            controladorUsuario.registrarOrganizador(new DataOrganizador("Intendencia de Montevideo", "imm", "contacto@imm.gub.uy", "123", "Gobierno departamental de Montevideo.", "https://montevideo.gub.uy/"));
+            controladorUsuario.registrarOrganizador(new DataOrganizador("Universidad de la República", "udelar", "contacto@udelar.edu.uy", "123", "Universidad publica de Uruguay.", "https://udelar.edu.uy/"));
+            controladorUsuario.registrarOrganizador(new DataOrganizador("Ministerio de Educacion y Cultura", "mec", "mec@mec.gub.uy", "123", "Institucion publica promotora de cultura", "https://mec.gub.uy/"));
         });
         
         // 4. Crear instituciones
@@ -298,7 +298,7 @@ public class TestTodoEnUno {
         
         // Usuario duplicado (mismo nickname)
         assertThrows(UsuarioRepetidoException.class, () -> {
-            controladorUsuario.registrarAsistente(new DataAsistente("Pedro", "atorres", "pedro@gmail.com", "Perez", LocalDate.of(1990, 1, 1)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Pedro", "atorres", "pedro@gmail.com", "123", "Perez", LocalDate.of(1990, 1, 1)));
         });
         
         // Evento duplicado
@@ -343,7 +343,7 @@ public class TestTodoEnUno {
             controladorEventos.nuevaCategoria("TestCategoria");
             
             // Crear usuario adicional
-            controladorUsuario.registrarAsistente(new DataAsistente("Test", "testuser", "test@test.com", "Testero", LocalDate.of(1990, 1, 1)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Test", "testuser", "test@test.com", "123", "Testero", LocalDate.of(1990, 1, 1)));
             
             // Crear institución adicional
             controladorInstituciones.nuevaInstitucion(new DataInstitucion("Test Institution", "Test description", "http://test.com"));
@@ -390,7 +390,7 @@ public class TestTodoEnUno {
     @DisplayName("Modificar Asistente")
     void testModificarAsistente_exito() throws Exception {    	
     	// Arrange
-        controladorUsuario.registrarAsistente("Ana ", "atorres", "atorres@gmail.com", "Torres", LocalDate.of(1990, 5, 12));
+        controladorUsuario.registrarAsistente("Ana ", "atorres", "atorres@gmail.com", "123", "Torres", LocalDate.of(1990, 5, 12));
 
         // Act
         controladorUsuario.modificarAsistente("atorres@gmail.com", "NuevoNombre", "NuevoApellido");
@@ -417,7 +417,7 @@ public class TestTodoEnUno {
     @DisplayName("Modificar Organizador")
     void testModificarOrganizador_exito() throws Exception {
     	// Arrange
-        controladorUsuario.registrarOrganizador("MisEventos", "miseventos", "contacto@miseventos.com", "Empresa de organizacion de eventos.", "https://miseventos.com/");
+        controladorUsuario.registrarOrganizador("MisEventos", "miseventos", "contacto@miseventos.com", "123", "Empresa de organizacion de eventos.", "https://miseventos.com/");
 
         // Act
         controladorUsuario.modificarOrganizador("contacto@miseventos.com", "NuevoNombre", "NuevaDescripcion", "NuevaURL");

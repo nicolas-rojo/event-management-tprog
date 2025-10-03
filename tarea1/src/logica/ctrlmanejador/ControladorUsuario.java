@@ -21,7 +21,7 @@ public class ControladorUsuario implements IUsuario {
     public ControladorUsuario() {
     }
 
-    public void registrarAsistente(String nombre, String nickname, String email, String apellido, LocalDate fechaNac) throws UsuarioRepetidoException {
+    public void registrarAsistente(String nombre, String nickname, String email, String pass, String apellido, LocalDate fechaNac) throws UsuarioRepetidoException {
         ManejadorUsuario mu = ManejadorUsuario.getInstance();
         Usuario u = mu.getUsuarioNickname(nickname);
         if (u != null)
@@ -29,7 +29,7 @@ public class ControladorUsuario implements IUsuario {
         u = mu.getUsuarioEmail(email);
         if (u != null)
             throw new UsuarioRepetidoException("Email ya en uso");
-        Asistente a = new Asistente(nombre, nickname, email, apellido, fechaNac);
+        Asistente a = new Asistente(nombre, nickname, email, pass, apellido, fechaNac);
         mu.addUsuario(a);
     }
     
@@ -41,11 +41,11 @@ public class ControladorUsuario implements IUsuario {
         u = mu.getUsuarioEmail(datos.getEmail());
         if (u != null)
             throw new UsuarioRepetidoException("Email ya en uso");
-        Asistente a = new Asistente(datos.getNombre(), datos.getNickname(), datos.getEmail(), datos.getApellido(), datos.getFechaNac());
+        Asistente a = new Asistente(datos.getNombre(), datos.getNickname(), datos.getEmail(), datos.getPass(), datos.getApellido(), datos.getFechaNac());
         mu.addUsuario(a);
     }
     
-    public void registrarOrganizador(String nombre, String nickname, String email, String descripcion, String url) throws UsuarioRepetidoException {
+    public void registrarOrganizador(String nombre, String nickname, String email, String pass, String descripcion, String url) throws UsuarioRepetidoException {
     	ManejadorUsuario mu = ManejadorUsuario.getInstance();
         Usuario u = mu.getUsuarioNickname(nickname);
         if (u != null)
@@ -53,7 +53,7 @@ public class ControladorUsuario implements IUsuario {
         u = mu.getUsuarioEmail(email);
         if (u != null)
             throw new UsuarioRepetidoException("Email ya en uso");
-        Organizador o = new Organizador(nombre, nickname, email, descripcion, url);
+        Organizador o = new Organizador(nombre, nickname, email, pass, descripcion, url);
         mu.addUsuario(o);
     }
     
@@ -65,7 +65,7 @@ public class ControladorUsuario implements IUsuario {
         u = mu.getUsuarioEmail(datos.getEmail());
         if (u != null)
             throw new UsuarioRepetidoException("Email ya en uso");
-        Organizador o = new Organizador(datos.getNombre(), datos.getNickname(), datos.getEmail(), datos.getDescripcion(), datos.getUrl());
+        Organizador o = new Organizador(datos.getNombre(), datos.getNickname(), datos.getEmail(), datos.getPass(), datos.getDescripcion(), datos.getUrl());
         mu.addUsuario(o);
     }
 
@@ -73,7 +73,7 @@ public class ControladorUsuario implements IUsuario {
     	ManejadorUsuario mu = ManejadorUsuario.getInstance();
     	Asistente a = (Asistente) mu.getUsuarioEmail(email);
     	if (a != null)
-    		return new DataAsistente(a.getNombre(), a.getNickname(), a.getEmail(), a.getApellido(), a.getFechaNac());
+    		return new DataAsistente(a.getNombre(), a.getNickname(), a.getEmail(), "", a.getApellido(), a.getFechaNac());
     	else
     		throw new UsuarioNoExisteException("No existe usuario con dicho email");
     }
@@ -82,7 +82,7 @@ public class ControladorUsuario implements IUsuario {
     	ManejadorUsuario mu = ManejadorUsuario.getInstance();
     	Organizador o = (Organizador) mu.getUsuarioEmail(email);
     	if (o != null)
-    		return new DataOrganizador(o.getNombre(), o.getNickname(), o.getEmail(), o.getDescripcion(), o.getUrl());
+    		return new DataOrganizador(o.getNombre(), o.getNickname(), o.getEmail(), "", o.getDescripcion(), o.getUrl());
     	else 
     		throw new UsuarioNoExisteException("No existe usuario con dicho email");    		
     }
@@ -97,7 +97,7 @@ public class ControladorUsuario implements IUsuario {
 
             for (int i = 0; i < usrs.length; i++) {
                 usuario = usrs[i];
-                du[i] = new DataUsuario(usuario.getNombre(), usuario.getNickname(), usuario.getEmail());
+                du[i] = new DataUsuario(usuario.getNombre(), usuario.getNickname(), usuario.getEmail(), "");
             }
 
             return du;

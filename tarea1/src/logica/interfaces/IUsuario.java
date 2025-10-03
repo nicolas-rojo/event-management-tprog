@@ -12,13 +12,13 @@ import logica.datatypes.*;
 
 public interface IUsuario {
     
-	public abstract void registrarAsistente(String nombre, String nickname, String email, String apellido, LocalDate fechaNac) throws UsuarioRepetidoException;
+	public abstract void registrarAsistente(String nombre, String nickname, String email, String pass, String apellido, LocalDate fechaNac) throws UsuarioRepetidoException;
 	
-	public abstract void registrarAsistente(DataAsistente dataAsistente) throws UsuarioRepetidoException;
+	public abstract void registrarAsistente(DataAsistente dataAsistente) throws UsuarioRepetidoException; //pass 
 	
-	public abstract void registrarOrganizador(String nombre, String nickname, String email, String descripcion, String url) throws UsuarioRepetidoException;
+	public abstract void registrarOrganizador(String nombre, String nickname, String email, String pass, String descripcion, String url) throws UsuarioRepetidoException;
 	
-	public abstract void registrarOrganizador(DataOrganizador dataOrg) throws UsuarioRepetidoException;
+	public abstract void registrarOrganizador(DataOrganizador dataOrg) throws UsuarioRepetidoException; //pass
 
     public abstract DataUsuario[] getUsuarios() throws UsuarioNoExisteException;
     

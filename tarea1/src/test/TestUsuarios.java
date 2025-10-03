@@ -69,7 +69,8 @@ public class TestUsuarios extends TestCase {
         DataAsistente asistenteData = new DataAsistente(
             "Ana", 
             "atorres_" + uniqueId, 
-            "atorres_" + uniqueId + "@gmail.com", 
+            "atorres_" + uniqueId + "@gmail.com",
+            "pass" + uniqueId,
             "Torres", 
             LocalDate.of(1990, 5, 12)
         );
@@ -87,7 +88,8 @@ public class TestUsuarios extends TestCase {
         DataOrganizador organizadorData = new DataOrganizador(
             "MisEventos",
             "miseventos_" + uniqueId, 
-            "contacto_" + uniqueId + "@miseventos.com", 
+            "contacto_" + uniqueId + "@miseventos.com",
+            "pass" + uniqueId,
             "Empresa de organizacion de eventos.", 
             "https://miseventos.com/"
         );
@@ -105,7 +107,8 @@ public class TestUsuarios extends TestCase {
         DataAsistente asistente1 = new DataAsistente(
             "Ana", 
             "atorres_" + uniqueId, 
-            "atorres_" + uniqueId + "@gmail.com", 
+            "atorres_" + uniqueId + "@gmail.com",
+            "pass" + uniqueId,
             "Torres", 
             LocalDate.of(1990, 5, 12)
         );
@@ -114,6 +117,7 @@ public class TestUsuarios extends TestCase {
             "Pedro", 
             "atorres_" + uniqueId, // Mismo nickname
             "pedro_" + uniqueId + "@gmail.com", 
+            "pass" + uniqueId,
             "Perez", 
             LocalDate.of(1985, 3, 10)
         );
@@ -136,6 +140,7 @@ public class TestUsuarios extends TestCase {
             "Ana", 
             "atorres_" + uniqueId, 
             "email_" + uniqueId + "@gmail.com", 
+            "pass" + uniqueId,
             "Torres", 
             LocalDate.of(1990, 5, 12)
         );
@@ -144,6 +149,7 @@ public class TestUsuarios extends TestCase {
             "Pedro", 
             "pedro_" + uniqueId,
             "email_" + uniqueId + "@gmail.com", // Mismo email
+            "pass" + uniqueId,
             "Perez", 
             LocalDate.of(1985, 3, 10)
         );
@@ -166,6 +172,7 @@ public class TestUsuarios extends TestCase {
             "MisEventos",
             "miseventos_" + uniqueId, 
             "contacto1_" + uniqueId + "@miseventos.com", 
+            "pass" + uniqueId,
             "Empresa de organizacion de eventos.", 
             "https://miseventos.com/"
         );
@@ -174,6 +181,7 @@ public class TestUsuarios extends TestCase {
             "OtraEmpresa",
             "miseventos_" + uniqueId, // Mismo nickname
             "contacto2_" + uniqueId + "@empresa.com", 
+            "pass" + uniqueId,
             "Otra empresa de eventos.", 
             "https://otra.com/"
         );
@@ -195,16 +203,16 @@ public class TestUsuarios extends TestCase {
         
         try {
             // Registrar asistentes
-            controladorUsuario.registrarAsistente(new DataAsistente("Ana", "atorres_" + uniqueId, "atorres_" + uniqueId + "@gmail.com", "Torres", LocalDate.of(1990, 5, 12)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Martin", "msilva_" + uniqueId, "martin.silva_" + uniqueId + "@fing.edu.uy", "Silva", LocalDate.of(1987, 8, 21)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Sofia", "sofirod_" + uniqueId, "srodriguez_" + uniqueId + "@outlook.com", "Rodriguez", LocalDate.of(1995, 2, 3)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Valentina", "vale23_" + uniqueId, "valentina.costa_" + uniqueId + "@mail.com", "Costa", LocalDate.of(1992, 12, 1)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Lucia", "luciag_" + uniqueId, "lucia.garcia_" + uniqueId + "@mail.com", "Garcia", LocalDate.of(1993, 11, 9)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Ana", "atorres_" + uniqueId, "atorres_" + uniqueId + "@gmail.com", "pass" + uniqueId, "Torres", LocalDate.of(1990, 5, 12)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Martin", "msilva_" + uniqueId, "martin.silva_" + uniqueId + "@fing.edu.uy", "pass" + uniqueId, "Silva", LocalDate.of(1987, 8, 21)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Sofia", "sofirod_" + uniqueId, "srodriguez_" + uniqueId + "@outlook.com", "pass" + uniqueId, "Rodriguez", LocalDate.of(1995, 2, 3)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Valentina", "vale23_" + uniqueId, "valentina.costa_" + uniqueId + "@mail.com", "pass" + uniqueId, "Costa", LocalDate.of(1992, 12, 1)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Lucia", "luciag_" + uniqueId, "lucia.garcia_" + uniqueId + "@mail.com", "pass" + uniqueId, "Garcia", LocalDate.of(1993, 11, 9)));
             
             // Registrar organizadores
-            controladorUsuario.registrarOrganizador(new DataOrganizador("MisEventos", "miseventos_" + uniqueId, "contacto_" + uniqueId + "@miseventos.com", "Empresa de organizacion de eventos.", "https://miseventos.com/"));
-            controladorUsuario.registrarOrganizador(new DataOrganizador("Corporación Tecnológica", "techcorp_" + uniqueId, "info_" + uniqueId + "@techcorp.com", "Empresa líder en tecnologías de la información", ""));
-            controladorUsuario.registrarOrganizador(new DataOrganizador("Intendencia de Montevideo", "imm_" + uniqueId, "contacto_" + uniqueId + "@imm.gub.uy", "Gobierno departamental de Montevideo.", "https://montevideo.gub.uy/"));
+            controladorUsuario.registrarOrganizador(new DataOrganizador("MisEventos", "miseventos_" + uniqueId, "contacto_" + uniqueId + "@miseventos.com", "pass" + uniqueId, "Empresa de organizacion de eventos.", "https://miseventos.com/"));
+            controladorUsuario.registrarOrganizador(new DataOrganizador("Corporación Tecnológica", "techcorp_" + uniqueId, "info_" + uniqueId + "@techcorp.com", "pass" + uniqueId, "Empresa líder en tecnologías de la información", ""));
+            controladorUsuario.registrarOrganizador(new DataOrganizador("Intendencia de Montevideo", "imm_" + uniqueId, "contacto_" + uniqueId + "@imm.gub.uy", "pass" + uniqueId, "Gobierno departamental de Montevideo.", "https://montevideo.gub.uy/"));
             
             // Verificar que todos los usuarios existen
             assertTrue("atorres debería existir", existeUsuario("atorres_" + uniqueId));
@@ -234,6 +242,7 @@ public class TestUsuarios extends TestCase {
             "Ana", 
             nickname, 
             email, 
+            "pass" + uniqueId,
             "Torres", 
             LocalDate.of(1990, 5, 12)
         );
@@ -257,9 +266,9 @@ public class TestUsuarios extends TestCase {
         
         try {
             // Crear usuarios específicos para este test
-            controladorUsuario.registrarAsistente(new DataAsistente("Ana", "ana_list_" + uniqueId, "ana_" + uniqueId + "@test.com", "Torres", LocalDate.of(1990, 5, 12)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Martin", "martin_list_" + uniqueId, "martin_" + uniqueId + "@test.com", "Silva", LocalDate.of(1987, 8, 21)));
-            controladorUsuario.registrarOrganizador(new DataOrganizador("TestEventos", "test_eventos_" + uniqueId, "test_" + uniqueId + "@eventos.com", "Empresa de test.", "https://test.com/"));
+            controladorUsuario.registrarAsistente(new DataAsistente("Ana", "ana_list_" + uniqueId, "ana_" + uniqueId + "@test.com", "pass" + uniqueId, "Torres", LocalDate.of(1990, 5, 12)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Martin", "martin_list_" + uniqueId, "martin_" + uniqueId + "@test.com", "pass" + uniqueId, "Silva", LocalDate.of(1987, 8, 21)));
+            controladorUsuario.registrarOrganizador(new DataOrganizador("TestEventos", "test_eventos_" + uniqueId, "test_" + uniqueId + "@eventos.com", "pass" + uniqueId, "Empresa de test.", "https://test.com/"));
             
             DataUsuario[] usuarios = controladorUsuario.getUsuarios();
             assertNotNull("Array de usuarios no debería ser null", usuarios);
@@ -275,9 +284,9 @@ public class TestUsuarios extends TestCase {
         
         try {
             // Crear usuarios específicos para este test
-            controladorUsuario.registrarAsistente(new DataAsistente("Ana", "ana_listas_" + uniqueId, "ana_listas_" + uniqueId + "@test.com", "Torres", LocalDate.of(1990, 5, 12)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Martin", "martin_listas_" + uniqueId, "martin_listas_" + uniqueId + "@test.com", "Silva", LocalDate.of(1987, 8, 21)));
-            controladorUsuario.registrarOrganizador(new DataOrganizador("ListEventos", "list_eventos_" + uniqueId, "list_" + uniqueId + "@eventos.com", "Empresa de list.", "https://list.com/"));
+            controladorUsuario.registrarAsistente(new DataAsistente("Ana", "ana_listas_" + uniqueId, "ana_listas_" + uniqueId + "@test.com", "pass" + uniqueId, "Torres", LocalDate.of(1990, 5, 12)));
+            controladorUsuario.registrarAsistente(new DataAsistente("Martin", "martin_listas_" + uniqueId, "martin_listas_" + uniqueId + "@test.com", "pass" + uniqueId, "Silva", LocalDate.of(1987, 8, 21)));
+            controladorUsuario.registrarOrganizador(new DataOrganizador("ListEventos", "list_eventos_" + uniqueId, "list_" + uniqueId + "@eventos.com", "pass" + uniqueId, "Empresa de list.", "https://list.com/"));
             
             List<String> asistentes = controladorUsuario.listarAsistentes();
             List<String> organizadores = controladorUsuario.listarOrganizadores();
@@ -305,6 +314,7 @@ public class TestUsuarios extends TestCase {
             "TestAsistente", 
             "test_asist_" + uniqueId, 
             email, 
+            "pass" + uniqueId,
             "Apellido", 
             LocalDate.of(1990, 1, 1)
         );
@@ -332,6 +342,7 @@ public class TestUsuarios extends TestCase {
             "TestOrganizador", 
             "test_org_" + uniqueId, 
             email, 
+            "pass" + uniqueId,
             "Descripción de prueba", 
             "https://test.com"
         );
@@ -357,8 +368,8 @@ public class TestUsuarios extends TestCase {
         String emailOrganizador = "organizador_tipo_" + uniqueId + "@test.com";
         
         try {
-            controladorUsuario.registrarAsistente(new DataAsistente("Ana", "ana_tipo_" + uniqueId, emailAsistente, "Torres", LocalDate.of(1990, 5, 12)));
-            controladorUsuario.registrarOrganizador(new DataOrganizador("Org", "org_tipo_" + uniqueId, emailOrganizador, "Descripción", ""));
+            controladorUsuario.registrarAsistente(new DataAsistente("Ana", "ana_tipo_" + uniqueId, emailAsistente, "pass" + uniqueId, "Torres", LocalDate.of(1990, 5, 12)));
+            controladorUsuario.registrarOrganizador(new DataOrganizador("Org", "org_tipo_" + uniqueId, emailOrganizador, "pass" + uniqueId, "Descripción", ""));
             
             String tipoAsistente = controladorUsuario.getTipoUsuario(emailAsistente);
             String tipoOrganizador = controladorUsuario.getTipoUsuario(emailOrganizador);

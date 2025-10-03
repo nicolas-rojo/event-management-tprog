@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import com.toedter.calendar.JDateChooser;
 import java.util.Date;
 import java.time.ZoneId;
+import javax.swing.JPasswordField;
 
 @SuppressWarnings("serial")
 public class CrearUsuario extends JInternalFrame {
@@ -34,6 +35,8 @@ public class CrearUsuario extends JInternalFrame {
     private JTextField textFieldNombre;
     private JTextField textFieldNickname;
     private JTextField textFieldEmail;
+    private JPasswordField passwordField;
+    private JPasswordField passwordFieldCon;
     private JLabel lblIngreseNombre;
     private JLabel lblIngreseNickname;
     private JLabel lblIngreseEmail;
@@ -61,7 +64,7 @@ public class CrearUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Registrar un Usuario");
-        setBounds(10, 40, 460, 350);
+        setBounds(10, 40, 460, 430);
         getContentPane().setLayout(null);
 
         // Tipo de Usuario
@@ -116,10 +119,29 @@ public class CrearUsuario extends JInternalFrame {
         textFieldEmail.setBounds(120, 120, 300, 25);
         textFieldEmail.setColumns(10);
         getContentPane().add(textFieldEmail);
+        
+        // Contraseña 
+        JLabel lblContrasea = new JLabel("Contraseña:");
+        lblContrasea.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblContrasea.setBounds(0, 156, 115, 25);
+        getContentPane().add(lblContrasea);
+        
+        JLabel lblContrasea_1 = new JLabel("Confirmacion:");
+        lblContrasea_1.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblContrasea_1.setBounds(0, 192, 115, 25);
+        getContentPane().add(lblContrasea_1);
+        
+        passwordField = new JPasswordField();
+        passwordField.setBounds(120, 156, 300, 25);
+        getContentPane().add(passwordField);
+        
+        passwordFieldCon = new JPasswordField();
+        passwordFieldCon.setBounds(120, 192, 300, 25);
+        getContentPane().add(passwordFieldCon);
 
         // Panel para campos de Asistente
         panelAsistente = new JPanel();
-        panelAsistente.setBounds(0, 155, 420, 30);
+        panelAsistente.setBounds(0, 264, 420, 30);
         panelAsistente.setLayout(null);
         
         JLabel lblApellido = new JLabel("Apellido:");
@@ -137,12 +159,12 @@ public class CrearUsuario extends JInternalFrame {
 
         // Fecha de nacimiento (solo para Asistente)
         lblFechaNac = new JLabel("Fecha Nacimiento:");
-        lblFechaNac.setBounds(0, 195, 115, 25);
+        lblFechaNac.setBounds(0, 228, 115, 25);
         lblFechaNac.setHorizontalAlignment(SwingConstants.RIGHT);
         getContentPane().add(lblFechaNac);
 
         dateChooser = new JDateChooser();
-        dateChooser.setBounds(120, 195, 300, 25);
+        dateChooser.setBounds(120, 228, 300, 25);
         dateChooser.setDateFormatString("dd/MM/yyyy");
         // Establecer fecha por defecto: 20 años atrás
         java.util.Calendar cal = java.util.Calendar.getInstance();
@@ -152,7 +174,7 @@ public class CrearUsuario extends JInternalFrame {
 
         // Panel para campos de Organizador
         panelOrganizador = new JPanel();
-        panelOrganizador.setBounds(0, 155, 420, 90);
+        panelOrganizador.setBounds(0, 264, 420, 90);
         panelOrganizador.setLayout(null);
         
         JLabel lblDescripcion = new JLabel("Descripción:");
@@ -182,17 +204,16 @@ public class CrearUsuario extends JInternalFrame {
 
         // Botones
         btnAceptar = new JButton("Aceptar");
-        btnAceptar.setBounds(209, 250, 100, 30);
+        btnAceptar.setBounds(209, 359, 100, 30);
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 cmdRegistroUsuarioActionPerformed(arg0);
-                limpiarFormulario();
             }
         });
         getContentPane().add(btnAceptar);
 
         btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(320, 250, 100, 30);
+        btnCancelar.setBounds(320, 359, 100, 30);
         btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 limpiarFormulario();
@@ -234,7 +255,8 @@ public class CrearUsuario extends JInternalFrame {
         String nicknameU = this.textFieldNickname.getText();
         String emailU = this.textFieldEmail.getText();
         String tipoUsuario = (String) comboBoxTipoUsuario.getSelectedItem();
-
+        String pass = new String(this.passwordField.getPassword());
+        
         if (checkFormulario()) {
             try {
                 if ("Asistente".equals(tipoUsuario)) {
@@ -244,16 +266,17 @@ public class CrearUsuario extends JInternalFrame {
                     Date fechaNacDate = dateChooser.getDate();
                     LocalDate fechaNac = fechaNacDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     
-                    controlUsr.registrarAsistente(nombreU, nicknameU, emailU, apellidoU, fechaNac);
+                    controlUsr.registrarAsistente(nombreU, nicknameU, emailU, pass, apellidoU, fechaNac);
                 } else if ("Organizador".equals(tipoUsuario)) {
                     String descripcionU = this.textAreaDescripcion.getText();
                     String urlU = this.textFieldUrl.getText();
                     
-                    controlUsr.registrarOrganizador(nombreU, nicknameU, emailU, descripcionU, urlU);
+                    controlUsr.registrarOrganizador(nombreU, nicknameU, emailU, pass, descripcionU, urlU);
                 }
 
                 JOptionPane.showMessageDialog(this, "El Usuario se ha creado con éxito", "Registrar Usuario",
                         JOptionPane.INFORMATION_MESSAGE);
+                limpiarFormulario();
 
             } catch (UsuarioRepetidoException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Registrar Usuario", JOptionPane.ERROR_MESSAGE);
@@ -268,14 +291,24 @@ public class CrearUsuario extends JInternalFrame {
         String nicknameU = this.textFieldNickname.getText();
         String emailU = this.textFieldEmail.getText();
         String tipoUsuario = (String) comboBoxTipoUsuario.getSelectedItem();
+        String pass = new String(this.passwordField.getPassword());
+        String passCon = new String(this.passwordFieldCon.getPassword());
 
         // Datos comunes obligatorios
-        if (nombreU.isEmpty() || nicknameU.isEmpty() || emailU.isEmpty()) {
+        if (nombreU.isEmpty() || nicknameU.isEmpty() || emailU.isEmpty() || pass.isEmpty() || passCon.isEmpty()) {
             JOptionPane.showMessageDialog(this, 
-                "Nombre, nickname y correo electrónico son obligatorios", 
+                "Nombre, nickname, correo electrónico y contraseña son obligatorios", 
                 "Registrar Usuario", 
                 JOptionPane.ERROR_MESSAGE);
             return false;
+        }
+        
+        if (!pass.equals(passCon)) {
+        	JOptionPane.showMessageDialog(this, 
+                    "Las contraseñas no coinciden", 
+                    "Registrar Usuario", 
+                    JOptionPane.ERROR_MESSAGE);
+                return false;
         }
 
         if ("Asistente".equals(tipoUsuario)) {
@@ -319,6 +352,8 @@ public class CrearUsuario extends JInternalFrame {
         textFieldNickname.setText("");
         textFieldEmail.setText("");
         textFieldApellido.setText("");
+        passwordField.setText("");
+        passwordFieldCon.setText("");
         
         // Restablecer la fecha a 20 años atrás
         java.util.Calendar cal = java.util.Calendar.getInstance();
