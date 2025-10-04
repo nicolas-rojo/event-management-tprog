@@ -24,7 +24,7 @@ public interface IEventos {
 		public abstract void nuevaCategoria(String cat) throws CategoriaRepetidaException;
 		
 		public abstract List<String> listarEventos();
-		
+				
 		public abstract List<String> listarCategorias();
 		
 		public abstract List<String> listarEdiciones(String eventoSeleccionado);

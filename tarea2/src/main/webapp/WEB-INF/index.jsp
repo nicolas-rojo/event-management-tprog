@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Arrays" %>
+<%@ page import="logica.datatypes.*" %>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Principal :: Mis Eventos</title>
+
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/indexStyle.css">
+</head>
+
+<body>
+	<!-- TOPBAR -->
+	<jsp:include page="/WEB-INF/template/topbar.jsp" />
+	
+	<!-- SIDEBAR -->
+	<jsp:include page="/WEB-INF/template/sidebar.jsp" />
+	
+    <div class="content">
+        <div class="contenedores">
+        	<%
+        		DataEventoCompleto[] eventos = (DataEventoCompleto[]) request.getAttribute("eventos");
+        		for (DataEventoCompleto evento : eventos) {
+        	%>
+        		<a href="" class="contenedor-link">
+					<div class="contenedor">
+						<img class="imagenes" src="" alt="logoEvento" width="120px" height="120px"> <!-- IMG DEL EVENTO -->
+						<div class="informacion">
+							<h2><%= evento.getNombre() %></h2>
+							<p><%= evento.getDescripcion() %></p>
+						</div>
+					</div>
+				</a>
+        	<%
+        		} 
+        	%>
+        </div>
+    </div>
+</body>
+
+</html>
