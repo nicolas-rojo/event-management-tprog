@@ -22,7 +22,7 @@
 			if (tipo == null) {
 		%>
 			<a href="${pageContext.request.contextPath}/login">Ingresar</a> <!-- REF AL JSP DE LOGIN -->
-			<a href="">Registrarse</a> <!-- REF AL JSP DEL REGISTER -->
+			<a href="${pageContext.request.contextPath}/register">Registrarse</a> <!-- REF AL JSP DEL REGISTER -->
 		
 		<%
 			} else {

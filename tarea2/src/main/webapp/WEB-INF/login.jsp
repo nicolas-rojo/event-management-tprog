@@ -34,8 +34,8 @@
             <%
             	}
             %>
-            <button type="submit">Entrar</button>
-            <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/home'">Cancelar</button>
+            <button type="submit">Ingresar</button>
+            <button type="button" onclick="window.location.href=document.referrer;">Cancelar</button>
         </form>
     </div>
 </body>
