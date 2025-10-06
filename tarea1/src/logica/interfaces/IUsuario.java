@@ -41,4 +41,6 @@ public interface IUsuario {
     public abstract List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado);
     
     public abstract DataDetalleRegistro getDetallesRegistro(String asistenteSeleccionado, ParEdicionRegistro regEdicion)  throws ErrorDetallesRegistroException;
+    
+    public abstract ResLogin login(String nickmail, String pass);
 }
