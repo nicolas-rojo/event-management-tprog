@@ -21,16 +21,16 @@
 		<%
 			if (tipo == null) {
 		%>
-			<a href="">Ingresar</a> <!-- REF AL JSP DE LOGIN -->
-			<a href="">Registrarse</a> <!-- REF AL JSP DEL REGISTER -->
+			<a href="${pageContext.request.contextPath}/login">Ingresar</a> <!-- REF AL JSP DE LOGIN -->
+			<a href="${pageContext.request.contextPath}/register">Registrarse</a> <!-- REF AL JSP DEL REGISTER -->
 		
 		<%
 			} else {
 		%>		
 			
-			<a href="">Cerrar Sesión</a> <!-- REF AL SERVLET DE LOGOUT -->
+			<a href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a> <!-- REF AL SERVLET DE LOGOUT -->
 			<a href=""> <!-- REF A LA CONSULTA DEL PERFIL DEL USUARIO ACTUAL -->
-				<img src="" alt="imgUsr"> <!-- IMG DEL USUARIO ACTUAL -->
+				<img src="" alt="logoUsr" onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/stockusr.png';"> <!-- IMG DEL USUARIO ACTUAL -->
 			</a>
 		
 		<%

@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import logica.Fabrica;
-
 import logica.interfaces.*;
 import logica.datatypes.*;
 import excepciones.*;
