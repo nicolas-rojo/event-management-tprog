@@ -12,7 +12,11 @@
 	%>
 		
 		<a href="" id="miPerfil" class="elementTitle" style="display: flex;">Mi Perfil</a> <!-- REF AL JSP DE CONSULTA DE PERFIL -->
-		<a href="" class="element">Alta Evento</a> <!-- REF AL JSP DE ALTA DE EVENTO -->
+		
+		
+		<a href="${pageContext.request.contextPath}/NuevoEvento" class="element">Alta Evento</a> <!-- REF AL JSP DE ALTA EVENTO -->
+		
+		
 		<a href="" class="element">Alta Institución</a> <!-- REF AL JSP DE ALTA DE INSTITUCION -->
 		<a href="" class="element">Nuevo Tipo de Registro</a> <!-- REF AL JSP DEL NUEVO TREG -->
 		<a href="" class="element">Nuevo Patrocinio</a> <!-- REF AL JSP DE NUEVO PATROCINIO -->
