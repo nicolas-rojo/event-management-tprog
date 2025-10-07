@@ -29,5 +29,5 @@
 	%>
 	
 	<a href="${pageContext.request.contextPath}/home" class="element">Consultar Evento</a>
-	<a href="" class="element">Consultar Usuario</a> <!-- REF A JSP DE LISTADO DE USUARIOS -->
+	<a href="${pageContext.request.contextPath}/consultaUsuario" class="element">Consultar Usuario</a> <!-- REF A JSP DE LISTADO DE USUARIOS -->
 </div>
