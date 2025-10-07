@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo Evento</title>
+    <title>Nuevo Evento :: Mis Eventos</title>
 
     <!-- Fuente -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,8 @@
             <div class="error-message" id="errorSigla">Las siglas son requeridas</div>
 
             <div class="form-group">
-                <label for="categorias">Categorías (mantén Ctrl/Cmd para seleccionar múltiples):</label>
+                <label for="categorias">Categorías:</label>
+                <p1>Mantén Ctrl/Cmd Para Selección Múltiple</p1>
                 <select id="categorias" name="categorias" multiple size="6">
                     <option value="Tecnologia">Tecnología</option>
                     <option value="Innovacion">Innovación</option>
