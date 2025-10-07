@@ -16,7 +16,7 @@ import logica.datatypes.*;
 import excepciones.*;
 import java.util.Arrays;
 
-@WebServlet("/NuevoEvento")
+@WebServlet("/altaEvento")
 public class NuevoEvento extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private IEventos IEV;
