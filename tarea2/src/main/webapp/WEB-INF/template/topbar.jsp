@@ -30,7 +30,7 @@
 			
 			<a href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a> <!-- REF AL SERVLET DE LOGOUT -->
 			<a href=""> <!-- REF A LA CONSULTA DEL PERFIL DEL USUARIO ACTUAL -->
-				<img src="" alt="imgUsr"> <!-- IMG DEL USUARIO ACTUAL -->
+				<img src="" alt="logoUsr" onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/stockusr.png';"> <!-- IMG DEL USUARIO ACTUAL -->
 			</a>
 		
 		<%

@@ -55,6 +55,15 @@
 
             <!-- Inputs ocultos para las categorías seleccionadas -->
             <div id="categoriasHidden"></div>
+            
+            <% 
+            	String error = (String) request.getAttribute("error");
+            	if (error != null) {
+            %>
+            	<div id="confirmarError" style = "color:red;"><%= error %></div>
+            <%
+            	}
+            %>
 
             <div class="button-group">
                 <button type="submit">Aceptar</button>
