@@ -33,24 +33,38 @@
                 </select>
             </div>
             
-            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
-            <input type="text" id="nickname" name="nick" placeholder="Nickname" required>
-            <input type="email" id="mail" name="mail" placeholder="Email" required>
-            <input type="password" id="password" name="pass" placeholder="Contraseña" required>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+            <div class="error-message" id="errorNombre">El nombre es requerido</div>
+            
+            <input type="text" id="nickname" name="nick" placeholder="Nickname">
+            <div class="error-message" id="errorNickname">El nickname es requerido</div>
+            
+            <input type="email" id="mail" name="mail" placeholder="Email">
+            <div class="error-message" id="errorMail">El mail es requerido</div>
+            
+            <input type="password" id="password" name="pass" placeholder="Contraseña">
+            <div class="error-message" id="errorPassword">La contraseña es requerida</div>
+            
             <div id="confirmarError" style = "color:red;"></div>
-            <input type="password" id="confirmacion" name="conPass" placeholder="Confirmar Contraseña" required>
+            
+            <input type="password" id="confirmacion" name="conPass" placeholder="Confirmar Contraseña">
 
             <!-- Campos de Organizador -->
             <div id="Campos-Org" style="display: none;">
-                <input type="text" id="url" name="url" placeholder="Link al Sitio Web" required>
-                <textarea id="desc" name="desc" placeholder="Descripción" required></textarea>
+                <input type="text" id="url" name="url" placeholder="Link al Sitio Web">
+                
+                <textarea id="desc" name="desc" placeholder="Descripción"></textarea>
+            	<div class="error-message" id="errorDesc">La descripcion es requerida</div>
             </div>
             
             <!-- Campos de Asistente -->
             <div id="Campos-Asist" style="display: none;">
-                <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+                <input type="text" id="apellido" name="apellido" placeholder="Apellido">
+                <div class="error-message" id="errorApellido">El apellido es requerido</div>
+                
                 <label for="fechaNac">Fecha de Nacimiento:</label>
-                <input type="date" id="fechaNac" name="fechaNac" placeholder="Fecha de Nacimiento" required>
+                <input type="date" id="fechaNac" name="fechaNac" placeholder="Fecha de Nacimiento">
+				<div class="error-message" id="errorFechaNac">La fecha de nacimiento es requerida</div>            
             </div>
             
             <label for="fotoPerfil">Foto de Perfil:</label>
