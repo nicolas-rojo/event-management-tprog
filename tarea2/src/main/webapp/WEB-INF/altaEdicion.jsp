@@ -22,6 +22,7 @@
         <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" class="logo">
     </a>
     <div class="login-container">
+    	<h2>Nueva Edición</h2>
         <form action="${pageContext.request.contextPath}/AltaEdicion" method="post" id="formEdicion" enctype="multipart/form-data">
             <input type="text" id="nombreEd" name="nombreEd" placeholder="Nombre">
              <div class="error-message" id="errorNombreEd">El nombre es requerido</div>
