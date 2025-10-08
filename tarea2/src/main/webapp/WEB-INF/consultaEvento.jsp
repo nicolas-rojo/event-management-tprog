@@ -18,6 +18,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= evento.getNombre() %> - Mis Eventos</title>
 
     <!-- Fuente -->
@@ -69,10 +70,10 @@
                 <img class="imagenes" 
                      src="<%= request.getContextPath() %>/resources/images/IMG-NO.png" 
                      alt="<%= evento.getNombre() %>"
-                     width="150px" height="150px">
+                     width="150" height="150">
                 <div class="informacion-evento">
                     <h2 class="nombre-evento"><%= evento.getNombre() %></h2>
-                    <p class="descripcion-evento"><%= evento.getDescripcion() %></p>
+                    <p class="descripcion-evento"><%= evento.getDescripcion() != null ? evento.getDescripcion() : "" %></p>
                     <div class="detalles-evento">
                         <span class="siglas">SIG: <%= evento.getSigla() %></span>
                         <span class="fecha-alta">Alta: <%= evento.getFechaAlta() %></span>
@@ -86,13 +87,15 @@
                 <% 
                 if (ediciones != null && !ediciones.isEmpty()) {
                     for (DataEdicion edicion : ediciones) {
+                        String eventoEncoded = java.net.URLEncoder.encode(evento.getNombre(), "UTF-8");
+                        String edicionEncoded = java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8");
                 %>
-                <a href="<%= request.getContextPath() %>/consultaEdicionEvento?evento=<%= java.net.URLEncoder.encode(evento.getNombre(), "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8") %>&esOrganizador=<%= esOrganizador %>" class="contenedor-link">
+                <a href="<%= request.getContextPath() %>/consultaEdicionEvento?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>&esOrganizador=<%= esOrganizador %>" class="contenedor-link">
                     <div class="contenedor">
                         <img class="imagenes" 
                              src="<%= request.getContextPath() %>/resources/images/IMG-NO.png" 
                              alt="<%= edicion.getNombre() %>"
-                             width="120px" height="120px">
+                             width="120" height="120">
                         <div class="informacion-edicion">
                             <h2 class="nombre-evento"><%= edicion.getNombre() %></h2>
                             <div class="detalles-edicion">
