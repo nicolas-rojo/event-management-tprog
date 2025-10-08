@@ -9,6 +9,10 @@
         response.sendRedirect(request.getContextPath() + "/home");
         return;
     }
+    
+    // Verificar si el usuario logueado es organizador
+    DataUsuario usuario = (DataUsuario) session.getAttribute("usuarioData");
+    boolean esOrganizador = (usuario != null && usuario instanceof DataOrganizador);
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -83,7 +87,7 @@
                 if (ediciones != null && !ediciones.isEmpty()) {
                     for (DataEdicion edicion : ediciones) {
                 %>
-                <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= java.net.URLEncoder.encode(evento.getNombre(), "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8") %>" class="contenedor-link">
+                <a href="<%= request.getContextPath() %>/consultaEdicionEvento?evento=<%= java.net.URLEncoder.encode(evento.getNombre(), "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8") %>&esOrganizador=<%= esOrganizador %>" class="contenedor-link">
                     <div class="contenedor">
                         <img class="imagenes" 
                              src="<%= request.getContextPath() %>/resources/images/IMG-NO.png" 
