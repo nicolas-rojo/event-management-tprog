@@ -31,7 +31,7 @@
         		DataEventoCompleto[] eventos = (DataEventoCompleto[]) request.getAttribute("eventos");
         		for (DataEventoCompleto evento : eventos) {
         	%>
-        		<a href="<%= request.getContextPath() %>/consultaEvento?evento=<%= evento.getNombre() %>" class="contenedor-link">
+        		<a href="<%= request.getContextPath() %>/consultaEvento?evento=<%= java.net.URLEncoder.encode(evento.getNombre(), "UTF-8") %>" class="contenedor-link">
 						<div class="contenedor">
 							<img class="imagenes" 
 								src="" 
