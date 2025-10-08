@@ -264,3 +264,15 @@ body {
     display: flex;
     width: 100%;
 }
+
+/* Agregar al final de consultaEventoStyle.css */
+
+.boton-div a {
+    text-decoration: none;
+}
+
+.btn-nuevaedicion:hover {
+    background-color: #3681c4;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}

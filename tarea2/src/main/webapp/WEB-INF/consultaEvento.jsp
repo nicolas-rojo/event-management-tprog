@@ -4,15 +4,7 @@
 <%
     DataEventoCompleto evento = (DataEventoCompleto) request.getAttribute("evento");
     List<DataEdicion> ediciones = (List<DataEdicion>) request.getAttribute("ediciones");
-    
-    if (evento == null) {
-        response.sendRedirect(request.getContextPath() + "/home");
-        return;
-    }
-    
-    // Verificar si el usuario logueado es organizador
-    DataUsuario usuario = (DataUsuario) session.getAttribute("usuarioData");
-    boolean esOrganizador = (usuario != null && usuario instanceof DataOrganizador);
+    String tipo = (String) session.getAttribute("tipoUsr");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,36 +24,10 @@
 
 <body>
     <!-- TOPBAR -->
-    <div class="topbar">
-        <div class="topbar-logo">
-            <a href="<%= request.getContextPath() %>/home">
-                <img src="<%= request.getContextPath() %>/resources/images/logo.png" alt="Logo">
-            </a>
-        </div>
-
-        <div class="topbar-search">
-            <input type="text" placeholder="Buscar evento, edicion... 🔍">
-        </div>
-
-        <div class="topbar-right">
-            <% if (session.getAttribute("usuario") != null) { %>
-                <a href="<%= request.getContextPath() %>/logout">Cerrar Sesión</a>
-                <a href="<%= request.getContextPath() %>/consultaUsuario">
-                    <img alt="logo" src="<%= request.getContextPath() %>/resources/images/IMG-NO.png" class="logo">
-                </a>
-            <% } else { %>
-                <a href="<%= request.getContextPath() %>/login">Iniciar Sesión</a>
-            <% } %>
-        </div>
-    </div>
-
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <a href="<%= request.getContextPath() %>/consultaUsuario" id="miPerfil" class="elementTitle" style="display: flex;">Mi Perfil</a>
-        <a href="<%= request.getContextPath() %>/consultaUsuario" class="element">Ver Registros</a>
-        <a href="<%= request.getContextPath() %>/home" class="element">Consultar Evento</a>
-        <a href="<%= request.getContextPath() %>/consultaUsuario/lista" class="element">Consultar Usuario</a>
-    </div>
+	<jsp:include page="/WEB-INF/template/topbar.jsp" />
+	
+	<!-- SIDEBAR -->
+	<jsp:include page="/WEB-INF/template/sidebar.jsp" />
 
     <!-- Contenido -->
     <div class="content">
@@ -78,6 +44,13 @@
                         <span class="siglas">SIG: <%= evento.getSigla() %></span>
                         <span class="fecha-alta">Alta: <%= evento.getFechaAlta() %></span>
                     </div>
+                    <% if ("organizador".equals(tipo)) { %>
+                    <div id="botondiv1" class="boton-div">
+                        <a href="<%= request.getContextPath() %>/altaEdicion">
+                            <button id="boton1" class="btn-nuevaedicion">+ Nueva edicion</button>
+                        </a>
+                    </div>
+                    <% } %>
                 </div>
             </div>
 
@@ -90,7 +63,7 @@
                         String eventoEncoded = java.net.URLEncoder.encode(evento.getNombre(), "UTF-8");
                         String edicionEncoded = java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8");
                 %>
-                <a href="<%= request.getContextPath() %>/consultaEdicionEvento?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>&esOrganizador=<%= esOrganizador %>" class="contenedor-link">
+                <a href="<%= request.getContextPath() %>/consultaEdicionEvento?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="contenedor-link">
                     <div class="contenedor">
                         <img class="imagenes" 
                              src="<%= request.getContextPath() %>/resources/images/IMG-NO.png" 
