@@ -287,8 +287,11 @@
                                 // Ignorar error
                             }
                             
-                            // Verificar si es el usuario actual TODAVIA NO LO HICE
-                            boolean esUsuarioActual = false; // ACA TENDRIA QUE PONER EL CHEQUEO
+                            boolean esUsuarioActual = false;
+                            String nickMAIL = (String) session.getAttribute("nickmail");
+                            if(usuario.getEmail().equals(nickMAIL) || usuario.getNickname().equals(nickMAIL)){
+                            	esUsuarioActual = true;
+                            }
             %>
                             <div class="tarjeta-usuario <%= claseTarjeta %> <%= esUsuarioActual ? "usuario-actual" : "" %>" 
                                  onclick="window.location.href='${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(usuario.getEmail(), "UTF-8") %>'">

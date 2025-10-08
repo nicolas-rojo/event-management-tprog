@@ -58,8 +58,7 @@ public class DetalleUsuario extends HttpServlet {
                 request.setAttribute("ediciones", ediciones);
             }
             
-            request.getRequestDispatcher("/WEB-INF/detalleUsuario.jsp")
-                   .forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/detalleUsuario.jsp").forward(request, response);
                    
         } catch (UsuarioNoExisteException e) {
             request.setAttribute("error", "El usuario solicitado no existe.");

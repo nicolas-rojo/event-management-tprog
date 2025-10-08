@@ -437,6 +437,9 @@ body.asistente .item {
                 <div class="informacion-usuario">
                     <h1 class="nombre-usuario"><%= usuario.getNombre() %></h1>
                     <p class="nickname-usuario">@<%= usuario.getNickname() %></p>
+                    <%if(usuario.getEmail().equals(session.getAttribute("nickmail")) || usuario.getNickname().equals(session.getAttribute("nickmail"))){%>
+                    	<button class="boton-editar-perfil" onclick="alert('Funcionalidad de editar perfil - Por implementar')">✏️ Editar Perfil</button>
+                    <%} %>
                     <div class="detalles-usuario">
                         <div class="detalle-item">
                             <span class="icono">📧</span>
@@ -542,6 +545,7 @@ body.asistente .item {
                                     <div class="lista-items">
                                     <%
                                         for (DataEdicion edicion : ediciones) {
+                                        	// if(edicion.getStatus().equals("Aceptada")){
                                     %>
                                         <div class="item">
                                             <div class="info-evento">
@@ -554,9 +558,32 @@ body.asistente .item {
                                                 <span class="fecha-evento">
                                                     Fecha: <%= edicion.getFechaIni() %> - <%= edicion.getFechaFin() %> | Ingresada: <%= edicion.getFechaAlta() %>
                                                 </span>
+                                                <%if(usuario.getEmail().equals(session.getAttribute("nickmail")) || usuario.getNickname().equals(session.getAttribute("nickmail"))){%>
+				                                    <div class="botones-evento">
+					                                    <button class="boton-evento boton-tipo-registro" onclick="window.location.href='../altaTReg/altaTReg.html'">Nuevo Tipo Registro</button>
+					                                    <button class="boton-evento boton-patrocinio" onclick="window.location.href='../altaPatrocinio/altaPatrocinio.html'">Nuevo Patrocinio</button>
+					                                </div>
+                    							<%} %>
                                             </div>
                                         </div>
                                     <%
+                                        	// }else{
+                                    %>
+                                    <!--	<div class="item">
+                                            <div class="info-evento">
+                                                <span class="nombre-evento">
+                                                    ❌ <%= edicion.getNombre() %> (<%= edicion.getSigla() %>)
+                                                </span>
+                                                <span class="detalle-evento">
+                                                    Estado: Rechazada - <%= edicion.getCiudad() %>, <%= edicion.getPais() %>
+                                                </span>
+                                                <span class="fecha-evento">
+                                                    Fecha: <%= edicion.getFechaIni() %> - <%= edicion.getFechaFin() %> | Ingresada: <%= edicion.getFechaAlta() %>
+                                                </span>
+                                            </div>
+                                        </div>  -->
+                                    <%
+                                        	//}
                                         }
                                     %>
                                     </div>
