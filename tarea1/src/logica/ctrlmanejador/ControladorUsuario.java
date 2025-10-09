@@ -170,6 +170,17 @@ public class ControladorUsuario implements IUsuario {
 		return a.getEdicionesRegistros();
 	}
 	
+	public ParEdicionRegistro estaRegistrado(String asistente, String edicion) {
+		List<ParEdicionRegistro> registros = getRegistrosAsistente(asistente);
+		ParEdicionRegistro res = null;
+		for (ParEdicionRegistro registro : registros) {
+			if (registro.getNombreEdicion().equals(edicion))
+				res = registro;
+				break;
+		}
+		return res;
+	}
+	
 	public DataDetalleRegistro getDetallesRegistro(String asistenteSeleccionado, ParEdicionRegistro regEdicion) throws ErrorDetallesRegistroException {
 		ManejadorUsuario mu = ManejadorUsuario.getInstance();
 		Asistente a = (Asistente) mu.getUsuarioNickname(asistenteSeleccionado);
