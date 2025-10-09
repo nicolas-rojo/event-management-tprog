@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
 
     <%
-        String tipo = (String) request.getAttribute("tipo");
+        String tipo = (String) request.getAttribute("tipoUsr");
         DataEdicion dataEd = (DataEdicion) request.getAttribute("dataEdicion");
         DataOrganizador dataOrg = (DataOrganizador) request.getAttribute("dataOrganizador");
         List<DataTRegistro> dataTRegistros = (List<DataTRegistro>) request.getAttribute("dataTRegistros");
@@ -69,15 +69,22 @@
                                     <span class="descripcion-TRegistro"><%= dataTR.getDescr() %>.</span>
                                     <span class="costo-TRegistro">Costo: $<%= dataTR.getCosto() %>.</span>
                                     <span class="Cupos-TRegistro"><%= dataTR.getCupo() %> cupos restantes.</span>
+                                    <% if ("asistente".equals(session.getAttribute("tipoUsr")) && (request.getAttribute("registrado").equals(false))) { %>
+                                    <div id="botondiv1" class="boton-div" style="display: flex;">
+                                    
+                                <button type="button" id="boton1" class="btn-inscribirse" onclick="window.location.href='../altaReg/altaReg.html'">Inscribirse</button>
+                            </div>
+                                <%} %>
                                 </div>
+                                
                             </div>
                         </div>
                     <% } %>
                 </div>
             <% } %>
 
-            <h2 class="texto-ed">Patrocinan:</h2>
             <% if (dataPatrocinios != null && !dataPatrocinios.isEmpty()) { %>
+            <h2 class="texto-ed">Patrocinan:</h2>
                 <div class="contenedorTRegistros">
                     <% for (DataPatrocinioCompleto dataP : dataPatrocinios) { %>
                         <div class="contenedor">
@@ -118,13 +125,13 @@
                 </div>
             </a>
 
-            <% if ("asistente".equals(tipo)) { %>
+            <% if ("asistente".equals(session.getAttribute("tipoUsr")) && (request.getAttribute("registrado").equals(true))) { %>
                 <h2 class="texto-registro" id="registro-titulo">Registro:</h2>
 
                 <div class="contenedor-derecha-alt" id="registro-detalle" style="display: flex;">
                     <div class="informacion-TRegistro">
                         <div class="detalles-TRegistro">
-                            <div class="registro-item"><%= request.getAttribute("nickmail") %></div>
+                            <div class="registro-item"><%= session.getAttribute("nickmail") %></div>
 
                             <%
                                 Boolean registrado = (Boolean) request.getAttribute("registrado");
@@ -145,7 +152,7 @@
                     </div>
                 </div>
 
-            <% } else if ("organizador".equals(tipo) && Boolean.TRUE.equals(request.getAttribute("organizaEdicion"))) { 
+            <% } else if ("organizador".equals(session.getAttribute("tipoUsr")) && Boolean.TRUE.equals(request.getAttribute("organizaEdicion"))) { 
                    List<String> dataRegistros = (List<String>) request.getAttribute("dataRegistros");
             %>
                 <h2 class="texto-registro" id="listado-titulo">Listado de registros:</h2>

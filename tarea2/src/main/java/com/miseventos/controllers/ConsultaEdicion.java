@@ -34,7 +34,8 @@ public class ConsultaEdicion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
-
+		
+        request.setAttribute("registrado", false);
 		String eventoSeleccionado = request.getParameter("evento");
 		String edicionSeleccionada = request.getParameter("edicion");	
 		String tipo = (String) session.getAttribute("tipoUsr");
