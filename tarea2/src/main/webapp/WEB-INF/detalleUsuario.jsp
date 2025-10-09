@@ -497,7 +497,7 @@ body.asistente .item {
                         <h2 class="seccion-titulo">Mis Registros a Eventos</h2>
                         <div class="contenedor-secundario">
                             <%
-                                if (registros != null && !registros.isEmpty()) {
+                                if (registros != null && !registros.isEmpty() && (usuario.getEmail().equals(session.getAttribute("nickmail")) || usuario.getNickname().equals(session.getAttribute("nickmail")))) {
                             %>
                                     <div class="lista-items">
                                     <%
