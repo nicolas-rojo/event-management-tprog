@@ -31,18 +31,18 @@
         		DataEventoCompleto[] eventos = (DataEventoCompleto[]) request.getAttribute("eventos");
         		for (DataEventoCompleto evento : eventos) {
         	%>
-        		<a href="" class="contenedor-link">
-					<div class="contenedor">
-						<img class="imagenes" 
-							src="" 
-							alt="logoEvento" 
-							width="120px" height="120px"
-							onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';"> <!-- IMG DEL EVENTO -->
-						<div class="informacion">
-							<h2><%= evento.getNombre() %></h2>
-							<p><%= evento.getDescripcion() %></p>
+        		<a href="<%= request.getContextPath() %>/consultaEvento?evento=<%= java.net.URLEncoder.encode(evento.getNombre(), "UTF-8") %>" class="contenedor-link">
+						<div class="contenedor">
+							<img class="imagenes" 
+								src="" 
+								alt="logoEvento" 
+								width="120px" height="120px"
+								onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';"> <!-- IMG DEL EVENTO -->
+							<div class="informacion">
+								<h2><%= evento.getNombre() %></h2>
+								<p><%= evento.getDescripcion() %></p>
+							</div>
 						</div>
-					</div>
 				</a>
         	<%
         		} 
