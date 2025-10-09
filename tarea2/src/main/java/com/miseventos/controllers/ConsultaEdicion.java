@@ -1,7 +1,6 @@
 package com.miseventos.controllers;
 
 import jakarta.servlet.ServletException;
-
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,8 +17,6 @@ import logica.interfaces.*;
 import logica.datatypes.*;
 import excepciones.*;
 import java.util.Arrays;
-
-import excepciones.*;
 
 @WebServlet("/consultaEdicion")
 public class ConsultaEdicion extends HttpServlet {
@@ -51,7 +48,7 @@ public class ConsultaEdicion extends HttpServlet {
 
 		String organizador = IEV.obtenerOrganizadorEdicion(eventoSeleccionado, edicionSeleccionada);
 		DataEdicion dataEd = IEV.getDataEdicion(eventoSeleccionado, edicionSeleccionada);
-		
+
 		if (dataEd == null) {
 			request.setAttribute("error", "No se encontró la edición del evento");
 			request.getRequestDispatcher("/WEB-INF/consultaEdicion.jsp").forward(request, response);
@@ -80,26 +77,32 @@ public class ConsultaEdicion extends HttpServlet {
 					dataTRegistros.add(data);
 			}
 		}
-		
-		if (tipo == null ) {
-            response.sendRedirect(request.getContextPath() + "/consultarEdicion.jsp");
-            return;
-        }
-		else {       
-            if ("Asistente".equals(tipo)) {
-            	
-                
-            } else if("Organizador".equals(tipo)) {
 
-
-            }
+		if (tipo == null) {
+			response.sendRedirect(request.getContextPath() + "/consultarEdicion.jsp");
+			return;
+		} else {
+			if ("asistente".equals(tipo)) {
+				ParEdicionRegistro registro = ICU.estaRegistrado(nickmail, edicionSeleccionada);
+				if (registro != null) {
+					request.setAttribute("registrado", true);
+					request.setAttribute("dataRegistro", registro);
+				}
+			} else if ("organizador".equals(tipo)) {
+				if (dataOrg.getNickname().equals(IEV.obtenerOrganizadorEdicion(eventoSeleccionado, edicionSeleccionada))) {
+					request.setAttribute("organizaEdicion", true);
+					List<String > dataRegistros = IEV.obtenerRegistrosEdicion(eventoSeleccionado, edicionSeleccionada);
+					request.setAttribute("dataRegistros", dataRegistros);
+					
+				}
+			}
+		}
 
 		request.setAttribute("dataEdicion", dataEd);
 		request.setAttribute("dataOrganizador", dataOrg);
 		request.setAttribute("dataTRegistros", dataTRegistros);
 		request.setAttribute("dataPatrocinios", dataPatrocinios);
 		request.getRequestDispatcher("/WEB-INF/consultaEdicion.jsp").forward(request, response);
-		}
 	}
-	
 }
+	
