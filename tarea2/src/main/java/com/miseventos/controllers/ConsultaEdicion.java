@@ -1,6 +1,7 @@
 package com.miseventos.controllers;
 
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -83,7 +84,7 @@ public class ConsultaEdicion extends HttpServlet {
 			return;
 		} else {
 			if ("asistente".equals(tipo)) {
-				ParEdicionRegistro registro = ICU.estaRegistrado(nickmail, edicionSeleccionada);
+				ParEdicionRegistro registro = ICU.estaRegistrado(nickmail, edicionSeleccionada);//
 				if (registro != null) {
 					request.setAttribute("registrado", true);
 					request.setAttribute("dataRegistro", registro);
