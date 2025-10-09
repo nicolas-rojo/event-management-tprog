@@ -136,8 +136,11 @@
                                     Fecha de registro: <%= dataRegistro.getFechaRegistro() %>
                                 </div>
                                 <div class="registro-item">
-                                    <%= //codigo?// %>
-                                </div>                          
+                                    <% //codigo?// %>
+                                </div> 
+                                <%
+        							} 
+   							%>                         
                               
                         </div>
                     </div>
