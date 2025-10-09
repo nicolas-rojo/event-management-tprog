@@ -34,13 +34,14 @@ public class AltaRegistro extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String asistente = request.getParameter("asistente");
+		
+		HttpSession session = request.getSession();
+		String asistente = (String) session.getAttribute("nickmail");
 		String evento = request.getParameter("evento");
 		String edicion = request.getParameter("edicion");
 		String tiporegistro= request.getParameter("tipoReg");
 		LocalDate fecha = LocalDate.now();		
 		
-		//System.out.println("Ya registrado");
 		try {
 			ICU.nuevoRegistro(asistente, evento, edicion, tiporegistro, fecha);
 			response.sendRedirect(request.getContextPath() + "/home");
