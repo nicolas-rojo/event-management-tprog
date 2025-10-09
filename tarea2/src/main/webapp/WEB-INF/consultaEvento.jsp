@@ -63,7 +63,7 @@
                         String eventoEncoded = java.net.URLEncoder.encode(evento.getNombre(), "UTF-8");
                         String edicionEncoded = java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8");
                 %>
-                <a href="<%= request.getContextPath() %>/consultaEdicionEvento?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="contenedor-link">
+                <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="contenedor-link">
                     <div class="contenedor">
                         <img class="imagenes" 
                              src="<%= request.getContextPath() %>/resources/images/IMG-NO.png" 

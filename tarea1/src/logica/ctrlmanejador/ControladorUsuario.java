@@ -78,13 +78,19 @@ public class ControladorUsuario implements IUsuario {
     		throw new UsuarioNoExisteException("No existe usuario con dicho email");
     }
     
-    public DataOrganizador getOrganizador(String email) throws UsuarioNoExisteException{
+    public DataOrganizador getOrganizador(String nickmail) throws UsuarioNoExisteException{
     	ManejadorUsuario mu = ManejadorUsuario.getInstance();
-    	Organizador o = (Organizador) mu.getUsuarioEmail(email);
+    	Organizador o = (Organizador) mu.getUsuarioEmail(nickmail);
     	if (o != null)
     		return new DataOrganizador(o.getNombre(), o.getNickname(), o.getEmail(), "", o.getDescripcion(), o.getUrl());
-    	else 
-    		throw new UsuarioNoExisteException("No existe usuario con dicho email");    		
+    	else {
+    		o = (Organizador) mu.getUsuarioNickname(nickmail);
+    		if (o != null) {
+    			return new DataOrganizador(o.getNombre(), o.getNickname(), o.getEmail(), "", o.getDescripcion(), o.getUrl());    			
+    		} else {
+    			throw new UsuarioNoExisteException("No existe usuario con dicho email");    			
+    		}    		
+    	}
     }
     
     public DataUsuario[] getUsuarios() throws UsuarioNoExisteException {

@@ -24,7 +24,7 @@ public interface IUsuario {
     
     public abstract DataAsistente getAsistente(String email) throws UsuarioNoExisteException;
     
-    public abstract DataOrganizador getOrganizador(String email) throws UsuarioNoExisteException;
+    public abstract DataOrganizador getOrganizador(String nickmail) throws UsuarioNoExisteException;
     
     public abstract void modificarAsistente(String email, String nuevoNombre, String nuevoApellido) throws UsuarioNoExisteException;
     

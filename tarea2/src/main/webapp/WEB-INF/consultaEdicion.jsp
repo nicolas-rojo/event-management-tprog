@@ -23,7 +23,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/consultaEdicionStyle.css">
 </head>
 
