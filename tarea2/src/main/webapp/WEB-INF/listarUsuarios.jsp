@@ -54,6 +54,7 @@
 
 .tarjeta-usuario {
     background-color: white;
+    text-decoration: none;
     border-radius: 20px;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -76,10 +77,16 @@
 }
 
 .tarjeta-usuario a {
+    display: block;
     text-decoration: none;
     color: inherit;
-    display: block;
-    height: 100%;
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    position: relative;
 }
 
 .imagen-usuario {
@@ -296,34 +303,34 @@
                             	esUsuarioActual = true;
                             }
             %>
-                            <div class="tarjeta-usuario <%= claseTarjeta %> <%= esUsuarioActual ? "usuario-actual" : "" %>" 
-                                 onclick="window.location.href='${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(usuario.getEmail(), "UTF-8") %>'">
-                                
-                                <% if (esUsuarioActual) { %>
-                                    <div class="etiqueta-usuario-actual">Tú</div>
-                                <% } %>
-                                
-                                <div class="imagen-usuario">
-                                    <img src="${pageContext.request.contextPath}/resources/images/usuarios/<%= usuario.getNickname() %>.jpg" 
-                                         alt="<%= usuario.getNombre() %>" 
-                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                    <div class="sin-imagen" style="display:none;">Sin imagen</div>
-                                </div>
-                                
-                                <span class="tipo-usuario <%= claseTipo %>"><%= tipoUsuario %></span>
-                                
-                                <div class="contenido-usuario">
-                                    <h3 class="nombre-usuario"><%= usuario.getNombre() %></h3>
-                                    <p class="nickname-usuario">@<%= usuario.getNickname() %></p>
-                                    <div class="detalles-usuario">
-                                        <div class="detalle-item">
-                                            <span class="icono">📧</span>
-                                            <span><%= usuario.getEmail() %></span>
-                                        </div>
-                                        <%= detallesAdicionales %>
-                                    </div>
-                                </div>
-                            </div>
+                            <a class="tarjeta-usuario <%= claseTarjeta %> <%= esUsuarioActual ? "usuario-actual" : "" %>" 
+							   href="${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(usuario.getEmail(), "UTF-8") %>">
+							    
+							    <% if (esUsuarioActual) { %>
+							        <div class="etiqueta-usuario-actual">Tú</div>
+							    <% } %>
+							    
+							    <div class="imagen-usuario">
+							        <img src="${pageContext.request.contextPath}/resources/images/usuarios/<%= usuario.getNickname() %>.jpg" 
+							             alt="<%= usuario.getNombre() %>" 
+							             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+							        <div class="sin-imagen" style="display:none;">Sin imagen</div>
+							    </div>
+							    
+							    <span class="tipo-usuario <%= claseTipo %>"><%= tipoUsuario %></span>
+							    
+							    <div class="contenido-usuario">
+							        <h3 class="nombre-usuario"><%= usuario.getNombre() %></h3>
+							        <p class="nickname-usuario">@<%= usuario.getNickname() %></p>
+							        <div class="detalles-usuario">
+							            <div class="detalle-item">
+							                <span class="icono">📧</span>
+							                <span><%= usuario.getEmail() %></span>
+							            </div>
+							            <%= detallesAdicionales %>
+							        </div>
+							    </div>
+							</a>
             <%
                         }
             %>

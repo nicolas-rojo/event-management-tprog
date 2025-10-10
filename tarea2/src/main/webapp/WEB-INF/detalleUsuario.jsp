@@ -55,6 +55,8 @@ body {
 
 /* Botón para volver */
 .boton-volver {
+	display: block;
+	width: fit-content;
     background-color: rgba(255, 255, 255, 0.2);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -65,12 +67,16 @@ body {
     font-weight: 500;
     font-size: 14px;
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .boton-volver:hover {
+	display: block;
     background-color: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    color: white;
 }
 
 /* Contenedor principal */
@@ -395,24 +401,32 @@ body.asistente .item {
     background-color: #74ebd5;
     color: #2d5a4f;
     box-shadow: 0 3px 8px rgba(116, 235, 213, 0.3);
+    display: block;
+	width: fit-content;
+    text-decoration: none;
 }
 
 .boton-tipo-registro:hover {
     background-color: #5de0c6;
     transform: translateY(-2px);
     box-shadow: 0 5px 12px rgba(116, 235, 213, 0.4);
+    text-decoration: none;
 }
 
 .boton-patrocinio {
     background-color: #9face6;
     color: #4a5d8f;
     box-shadow: 0 3px 8px rgba(159, 172, 230, 0.3);
+    display: block;
+	width: fit-content;
+    text-decoration: none;
 }
 
 .boton-patrocinio:hover {
     background-color: #8a9bdc;
     transform: translateY(-2px);
     box-shadow: 0 5px 12px rgba(159, 172, 230, 0.4);
+    text-decoration: none;
 }</style>
 </head>
 
@@ -427,7 +441,7 @@ body.asistente .item {
     <div class="content">
         <div class="contenedores">
             <!-- Botón para volver -->
-            <button class="boton-volver" onclick="window.location.href='${pageContext.request.contextPath}/consultaUsuario'">← Volver a la lista</button>
+            <a href="${pageContext.request.contextPath}/consultaUsuario" class="boton-volver">← Volver a la lista</a>
             
             <%
                 if (usuario != null && tipo != null) {
@@ -541,7 +555,7 @@ body.asistente .item {
                     </div>
             <%
                 } else if ("Organizador".equals(tipo)) {
-                    DataEdicion[] ediciones = (DataEdicion[]) request.getAttribute("ediciones");
+                    DataEdicionWeb[] ediciones = (DataEdicionWeb[]) request.getAttribute("ediciones");
             %>
                     <!-- Sección de eventos organizados -->
                     <div class="seccion-eventos">
@@ -552,8 +566,8 @@ body.asistente .item {
                             %>
                                     <div class="lista-items">
                                     <%
-                                        for (DataEdicion edicion : ediciones) {
-                                        	// if(edicion.getStatus().equals("Aceptada")){
+                                        for (DataEdicionWeb edicion : ediciones) {
+                                        	if(edicion.getEstado() == Estado.Confirmado){
                                     %>
                                         <div class="item">
                                             <div class="info-evento">
@@ -561,37 +575,39 @@ body.asistente .item {
                                                     ✅ <%= edicion.getNombre() %> (<%= edicion.getSigla() %>)
                                                 </span>
                                                 <span class="detalle-evento">
-                                                    Estado: Aceptada - <%= edicion.getCiudad() %>, <%= edicion.getPais() %>
+                                                    Estado: Confirmada - <%= edicion.getCiudad() %>, <%= edicion.getPais() %>
                                                 </span>
                                                 <span class="fecha-evento">
                                                     Fecha: <%= edicion.getFechaIni() %> - <%= edicion.getFechaFin() %> | Ingresada: <%= edicion.getFechaAlta() %>
                                                 </span>
                                                 <%if(usuario.getEmail().equals(loggedMail)){%>
 				                                    <div class="botones-evento">
-					                                    <button class="boton-evento boton-tipo-registro" onclick="window.location.href='../altaTReg/altaTReg.html'">Nuevo Tipo Registro</button>
-					                                    <button class="boton-evento boton-patrocinio" onclick="window.location.href='../altaPatrocinio/altaPatrocinio.html'">Nuevo Patrocinio</button>
+					                                    <a href="${pageContext.request.contextPath}/altaTReg" class="boton-evento boton-tipo-registro">Nuevo Tipo Registro</a>
+														<a href="${pageContext.request.contextPath}/altaPatrocinio" class="boton-evento boton-patrocinio">Nuevo Patrocinio</a>
 					                                </div>
                     							<%} %>
                                             </div>
                                         </div>
                                     <%
-                                        	// }else{
+                                        	 }else{
+                                        		 if(usuario.getEmail().equals(loggedMail)){
                                     %>
-                                    <!--	<div class="item">
+                                    	<div class="item">
                                             <div class="info-evento">
                                                 <span class="nombre-evento">
                                                     ❌ <%= edicion.getNombre() %> (<%= edicion.getSigla() %>)
                                                 </span>
                                                 <span class="detalle-evento">
-                                                    Estado: Rechazada - <%= edicion.getCiudad() %>, <%= edicion.getPais() %>
+                                                    Estado: <%= edicion.getEstado()%> edicion - <%= edicion.getCiudad() %>, <%= edicion.getPais() %>
                                                 </span>
                                                 <span class="fecha-evento">
                                                     Fecha: <%= edicion.getFechaIni() %> - <%= edicion.getFechaFin() %> | Ingresada: <%= edicion.getFechaAlta() %>
                                                 </span>
                                             </div>
-                                        </div>  -->
+                                        </div>  
                                     <%
-                                        	//}
+                                        		 }
+                                        	}
                                         }
                                     %>
                                     </div>
