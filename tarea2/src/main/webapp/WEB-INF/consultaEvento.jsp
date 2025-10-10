@@ -46,7 +46,7 @@
                     </div>
                     <% if ("organizador".equals(tipo)) { %>
                     <div id="botondiv1" class="boton-div">
-                        <a href="<%= request.getContextPath() %>/AltaEdicion">
+                        <a href="<%= request.getContextPath() %>/AltaEdicion?evento=<%= java.net.URLEncoder.encode(evento.getNombre(), "UTF-8") %>" class="contenedor-link">
     <button id="boton1" class="btn-nuevaedicion">+ Nueva edición</button>
 </a>
                     </div>

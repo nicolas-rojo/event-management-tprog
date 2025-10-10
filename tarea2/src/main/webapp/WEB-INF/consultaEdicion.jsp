@@ -166,9 +166,9 @@
 			<% } else if ("organizador".equals(session.getAttribute("tipoUsr")) && Boolean.TRUE.equals(request.getAttribute("organizaEdicion"))) { 
                    List<String> dataRegistros = (List<String>) request.getAttribute("dataRegistros");
             %>
+			<% if (dataRegistros != null && !dataRegistros.isEmpty()) { %>
 			<h2 class="texto-registro" id="listado-titulo">Listado de
 				registros:</h2>
-			<% if (dataRegistros != null && !dataRegistros.isEmpty()) { %>
 			<div class="contenedor-derecha-alt" id="listado-registros">
 				<div class="informacion-TRegistro">
 					<div class="detalles-TRegistro">

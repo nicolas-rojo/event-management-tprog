@@ -211,23 +211,53 @@ body {
 }
 
 .contenedor-derecha-alt {
-    /* Layout */
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 10px;
 
-    /* Box model */
-    width: 450px;
-    height: 160px;
-    padding-left: 20px;
+  width: 450px;
+  height: 160px;
+  padding: 10px 20px;
+  box-sizing: border-box;
 
-    /* Estética */
-    background-color: #f1eeee;
-    border-radius: 30px;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;          
+  background-color: #ffffff;  
+  border-radius: 30px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
 
+.contenedor-derecha-alt .informacion-TRegistro {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;  
+  min-height: 0; 
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+.contenedor-derecha-alt .detalles-TRegistro {
+  flex: 1 1 auto;   
+  min-height: 0;      
+  overflow-y: auto;   
+  overflow-x: hidden;
+  padding-right: 6px;
+  margin-top: 10px;
+  -webkit-overflow-scrolling: touch; 
+  background: transparent;
+}
+
+/* Items */
+.contenedor-derecha-alt .registro-item {
+  display: block;
+  width: 100%;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+  background: #f8f8f8; 
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
 }
 
 .imagenes {
