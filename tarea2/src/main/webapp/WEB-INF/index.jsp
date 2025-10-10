@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="logica.datatypes.*" %>
+<%@ page import="com.miseventos.utils.nombreUtils" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -30,14 +31,15 @@
         	<%
         		DataEventoCompleto[] eventos = (DataEventoCompleto[]) request.getAttribute("eventos");
         		for (DataEventoCompleto evento : eventos) {
+        			String nomNormal = nombreUtils.normalizarNombre(evento.getNombre());
         	%>
         		<a href="<%= request.getContextPath() %>/consultaEvento?evento=<%= java.net.URLEncoder.encode(evento.getNombre(), "UTF-8") %>" class="contenedor-link">
 						<div class="contenedor">
 							<img class="imagenes" 
-								src="" 
+								src="${pageContext.request.contextPath}/resources/images/EV-<%= nomNormal %>.png" 
 								alt="logoEvento" 
 								width="120px" height="120px"
-								onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';"> <!-- IMG DEL EVENTO -->
+								onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">
 							<div class="informacion">
 								<h2><%= evento.getNombre() %></h2>
 								<p><%= evento.getDescripcion() %></p>
