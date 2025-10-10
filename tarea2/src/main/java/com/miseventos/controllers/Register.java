@@ -56,7 +56,8 @@ public class Register extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
 				return;
 			}
-			session.setAttribute("nickmail", nick);
+			DataUsuario datos = new DataUsuario(nombre, nick, mail, "");
+			session.setAttribute("datosUsr", datos);
 			response.sendRedirect(request.getContextPath() + "/home");
 		} catch (UsuarioRepetidoException e) {
 			request.setAttribute("error", "Mail o Nickname en uso");

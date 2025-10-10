@@ -180,23 +180,20 @@ public class ControladorUsuario implements IUsuario {
 		return res;
 	}
 	
-	public ResLogin login(String nickmail, String pass) {
+	public DataUsuario login(String nickmail, String pass) {
 		ManejadorUsuario mu = ManejadorUsuario.getInstance();
 		Usuario u = mu.getUsuarioNickname(nickmail);
-		
+
 		if (u == null)
 			u = mu.getUsuarioEmail(nickmail);
-		
+
 		if (u == null)
-			return ResLogin.error;
-		
+			return null;
+
 		if (!u.getPass().equals(pass))
-			return ResLogin.error;
-		
-		if (u.esAsistente())
-			return ResLogin.asistente;
-		else
-			return ResLogin.organizador;
+			return null;
+
+		return (new DataUsuario(u.getNombre(), u.getNickname(), u.getEmail(), ""));
 	}
 }
 

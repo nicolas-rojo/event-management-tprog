@@ -9,6 +9,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%
+		DataUsuario usr = (DataUsuario) session.getAttribute("datosUsr");
+    	String loggedMail = "";
+    	if (usr != null)
+    		loggedMail = usr.getEmail();
         String tipo = (String) request.getAttribute("tipo");
         DataUsuario usuario = (DataUsuario) request.getAttribute("usuario");
         String nombreUsuario = usuario != null ? usuario.getNombre() : "Usuario";
@@ -437,7 +441,7 @@ body.asistente .item {
                 <div class="informacion-usuario">
                     <h1 class="nombre-usuario"><%= usuario.getNombre() %></h1>
                     <p class="nickname-usuario">@<%= usuario.getNickname() %></p>
-                    <%if(usuario.getEmail().equals(session.getAttribute("nickmail")) || usuario.getNickname().equals(session.getAttribute("nickmail"))){%>
+                    <%if(usuario.getEmail().equals(loggedMail)){%>
                     	<button class="boton-editar-perfil" onclick="alert('Funcionalidad de editar perfil - Por implementar')">✏️ Editar Perfil</button>
                     <%} %>
                     <div class="detalles-usuario">
@@ -497,7 +501,7 @@ body.asistente .item {
                         <h2 class="seccion-titulo">Mis Registros a Eventos</h2>
                         <div class="contenedor-secundario">
                             <%
-                                if (registros != null && !registros.isEmpty() && (usuario.getEmail().equals(session.getAttribute("nickmail")) || usuario.getNickname().equals(session.getAttribute("nickmail")))) {
+                                if (registros != null && !registros.isEmpty() && usuario.getEmail().equals(loggedMail)) {
                             %>
                                     <div class="lista-items">
                                     <%
@@ -558,7 +562,7 @@ body.asistente .item {
                                                 <span class="fecha-evento">
                                                     Fecha: <%= edicion.getFechaIni() %> - <%= edicion.getFechaFin() %> | Ingresada: <%= edicion.getFechaAlta() %>
                                                 </span>
-                                                <%if(usuario.getEmail().equals(session.getAttribute("nickmail")) || usuario.getNickname().equals(session.getAttribute("nickmail"))){%>
+                                                <%if(usuario.getEmail().equals(loggedMail)){%>
 				                                    <div class="botones-evento">
 					                                    <button class="boton-evento boton-tipo-registro" onclick="window.location.href='../altaTReg/altaTReg.html'">Nuevo Tipo Registro</button>
 					                                    <button class="boton-evento boton-patrocinio" onclick="window.location.href='../altaPatrocinio/altaPatrocinio.html'">Nuevo Patrocinio</button>

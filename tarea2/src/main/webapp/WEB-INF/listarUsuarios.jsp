@@ -288,8 +288,11 @@
                             }
                             
                             boolean esUsuarioActual = false;
-                            String nickMAIL = (String) session.getAttribute("nickmail");
-                            if(usuario.getEmail().equals(nickMAIL) || usuario.getNickname().equals(nickMAIL)){
+                            DataUsuario datosU = (DataUsuario) session.getAttribute("datosUsr");
+                            String loggedMail = "";
+                            if (datosU != null)
+                            	loggedMail = datosU.getEmail();
+                            if(usuario.getEmail().equals(loggedMail)){
                             	esUsuarioActual = true;
                             }
             %>
