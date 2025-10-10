@@ -1,6 +1,7 @@
 package com.miseventos.controllers;
 
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
@@ -11,103 +12,94 @@ import java.time.LocalDate;
 import logica.Fabrica;
 import logica.interfaces.IEventos;
 import logica.datatypes.DataEdicion;
+import logica.datatypes.DataUsuario;
 import excepciones.EdicionRepetidaExcepcion;
 
 @WebServlet("/AltaEdicion")
 public class AltaEdicion extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private IEventos IEV;
+	private static final long serialVersionUID = 1L;
+	private IEventos IEV;
 
-    @Override
-    public void init() throws ServletException {
-        IEV = Fabrica.getInstance().getIControladorEventos();
-    }
+	@Override
+	public void init() throws ServletException {
+		IEV = Fabrica.getInstance().getIControladorEventos();
+	}
 
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+		String evento = request.getParameter("evento");
 
-        String evento = request.getParameter("evento");
+		if (evento != null) {
+			evento = URLDecoder.decode(evento, StandardCharsets.UTF_8);
 
-        if (evento != null) {
-            evento = URLDecoder.decode(evento, StandardCharsets.UTF_8);
+			request.setAttribute("evento", evento);
 
-        request.setAttribute("evento", evento);
+			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
+		}
+	}
 
-        request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);}
-    }
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+		String evento = request.getParameter("evento");
+		if (evento != null)
+			evento = URLDecoder.decode(evento, StandardCharsets.UTF_8);
 
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
+		String nombre = request.getParameter("nombreEd");
+		String sigla = request.getParameter("sigla");
+		String ciudad = request.getParameter("ciudad");
+		String pais = request.getParameter("pais");
+		String fechaIniStr = request.getParameter("fechaIni");
+		String fechaFinStr = request.getParameter("fechaFin");
+		DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
 
-        String evento = request.getParameter("evento");
-        if (evento != null)
-            evento = URLDecoder.decode(evento, StandardCharsets.UTF_8);
+		// Validación de campos
+		if (nombre == null || nombre.isBlank() || sigla == null || sigla.isBlank() || ciudad == null || ciudad.isBlank()
+				|| pais == null || pais.isBlank() || fechaIniStr == null || fechaIniStr.isBlank() || fechaFinStr == null
+				|| fechaFinStr.isBlank()) {
 
-        String nombre = request.getParameter("nombreEd");
-        String sigla = request.getParameter("sigla");
-        String ciudad = request.getParameter("ciudad");
-        String pais = request.getParameter("pais");
-        String fechaIniStr = request.getParameter("fechaIni");
-        String fechaFinStr = request.getParameter("fechaFin");
+			request.setAttribute("error", "Todos los campos son requeridos");
+			request.setAttribute("evento", evento);
+			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
+			return;
+		}
 
-        System.out.println("Evento recibido en POST: " + evento);
+		try {
+			LocalDate fechaIni = LocalDate.parse(fechaIniStr);
+			LocalDate fechaFin = LocalDate.parse(fechaFinStr);
 
-        // Validación de campos
-        if (nombre == null || nombre.isBlank() ||
-            sigla == null || sigla.isBlank() ||
-            ciudad == null || ciudad.isBlank() ||
-            pais == null || pais.isBlank() ||
-            fechaIniStr == null || fechaIniStr.isBlank() ||
-            fechaFinStr == null || fechaFinStr.isBlank()) {
+			if (fechaFin.isBefore(fechaIni)) {
+				request.setAttribute("error", "La fecha de fin no puede ser anterior a la de inicio");
+				request.setAttribute("evento", evento);
+				request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
+				return;
+			}
 
-            request.setAttribute("error", "Todos los campos son requeridos");
-            request.setAttribute("evento", evento);
-            request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
-            return;
-        }
+			if (session == null || dataU.getNickname() == null) {
+				request.setAttribute("error", "Sesión no válida. Inicie sesión nuevamente.");
+				request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+				return;
+			}
 
-        try {
-            LocalDate fechaIni = LocalDate.parse(fechaIniStr);
-            LocalDate fechaFin = LocalDate.parse(fechaFinStr);
+			String org = dataU.getNickname();
+			LocalDate fechaActual = LocalDate.now();
 
-            if (fechaFin.isBefore(fechaIni)) {
-                request.setAttribute("error", "La fecha de fin no puede ser anterior a la de inicio");
-                request.setAttribute("evento", evento);
-                request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
-                return;
-            }
+			DataEdicion dataEd = new DataEdicion(nombre, sigla, fechaIni, fechaFin, fechaActual, ciudad, pais);
+			IEV.nuevaEdicion(dataEd, evento, org);
 
-            HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("nickmail") == null) {
-                request.setAttribute("error", "Sesión no válida. Inicie sesión nuevamente.");
-                request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-                return;
-            }
+			response.sendRedirect(request.getContextPath() + "/home");
 
-            String org = (String) session.getAttribute("nickmail");
-            LocalDate fechaActual = LocalDate.now();
+		} catch (EdicionRepetidaExcepcion e) {
+			request.setAttribute("error", "Ya existe una edición con ese nombre.");
+			request.setAttribute("evento", evento);
+			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
 
-            DataEdicion dataEd = new DataEdicion(nombre, sigla, fechaIni, fechaFin, fechaActual, ciudad, pais);
-            IEV.nuevaEdicion(dataEd, evento, org);
-
-            response.sendRedirect(request.getContextPath() + "/home");
-
-        } catch (EdicionRepetidaExcepcion e) {
-            request.setAttribute("error", "Ya existe una edición con ese nombre.");
-            request.setAttribute("evento", evento);
-            request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("error", "Ocurrió un error al procesar la solicitud.");
-            request.setAttribute("evento", evento);
-            request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
-        }
-    }
+		}
+	}
 }
