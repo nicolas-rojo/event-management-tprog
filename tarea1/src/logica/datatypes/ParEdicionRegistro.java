@@ -6,13 +6,11 @@ public class ParEdicionRegistro {
     private String nombreEdicion;
     private LocalDate fechaRegistro;
     
-    // Constructor original (según el archivo que me mostraste)
     public ParEdicionRegistro(String nombreEdicion, LocalDate fechaRegistro) {
         this.nombreEdicion = nombreEdicion;
         this.fechaRegistro = fechaRegistro;
     }
     
-    // Constructor adicional para casos especiales en ConsultaUsuario
     public ParEdicionRegistro(String nombreEvento, String nombreEdicion) {
         this.nombreEdicion = nombreEdicion;
         this.fechaRegistro = null;

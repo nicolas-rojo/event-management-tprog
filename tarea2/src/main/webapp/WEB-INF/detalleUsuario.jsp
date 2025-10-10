@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="logica.datatypes.*" %>
+<%@ page import="logica.Fabrica" %>
+<%@ page import="logica.interfaces.*" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -505,18 +507,20 @@ body.asistente .item {
                             %>
                                     <div class="lista-items">
                                     <%
+                                		IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
                                         for (ParEdicionRegistro registro : registros) {
+                                        	DataDetalleRegistro DataReg = ICU.getDetallesRegistro(usuario.getNickname(), registro);
                                     %>
                                         <div class="item">
                                             <div class="info-registro">
                                                 <span class="nombre-evento">
-                                                    ✅ <%= registro.getNombreEvento() %> - <%= registro.getNombreEdicion() %>
+                                                    ✅ <%= registro.getNombreEdicion() %>
                                                 </span>
                                                 <span class="detalle-registro">
-                                                <%--    Tipo: <%= registro.getTipoRegistro() %> - Estado: Confirmado --%>
+                                                	Tipo: <%= DataReg.getTipoRegistro() %>
                                                 </span>
                                                 <span class="fecha-costo">
-                                                <%--  Registrado: <%= registro.getFechaRegistro() %> - Costo: $<%= registro.getCosto() %> --%>
+                                                	Registrado: <%= DataReg.getFechaRegistro() %> - Costo: $<%= DataReg.getCosto() %>
                                                 </span>
                                             </div>
                                         </div>
