@@ -3,6 +3,7 @@
 <%@ page import="excepciones.*" %>
 <%@ page import="logica.Fabrica" %>
 <%@ page import="logica.interfaces.IUsuario" %>
+<%@ page import="com.miseventos.utils.nombreUtils" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -17,7 +18,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
-   <style type="text/css">body {
+   <style type="text/css">
+
+body {
     font-family: outfit;
     margin: 0;
     background: linear-gradient(135deg, #4397db, #dbb5ec);
@@ -301,10 +304,12 @@
                                 
                                 <% if (esUsuarioActual) { %>
                                     <div class="etiqueta-usuario-actual">Tú</div>
-                                <% } %>
+                                <% } 
+                    			String nomNormal = nombreUtils.normalizarNombre(usuario.getNickname());
+                                %>
                                 
                                 <div class="imagen-usuario">
-                                    <img src="${pageContext.request.contextPath}/resources/images/usuarios/<%= usuario.getNickname() %>.jpg" 
+                                    <img src="${pageContext.request.contextPath}/resources/images/USR-<%= nomNormal %>.png" 
                                          alt="<%= usuario.getNombre() %>" 
                                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                     <div class="sin-imagen" style="display:none;">Sin imagen</div>
