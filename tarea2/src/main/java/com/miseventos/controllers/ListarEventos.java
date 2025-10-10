@@ -11,6 +11,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import java.util.Set;
+import java.util.HashSet;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+
 import logica.Fabrica;
 import logica.interfaces.*;
 import logica.datatypes.*;
@@ -33,7 +43,25 @@ public class ListarEventos extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			DataEventoCompleto[] lista = IEV.listarInfoEvento();
+			// Obtener el parámetro de categoría si existe
+			String categoriaFiltro = request.getParameter("categoria");
+			
+			// Cargar todas las categorías para el filtro
+			List<String> categorias = IEV.listarCategorias();
+			request.setAttribute("categorias", categorias);
+			request.setAttribute("categoriaSeleccionada", categoriaFiltro);
+			
+			// Obtener eventos filtrados o todos
+			List<DataEventoCompleto> lista;
+			if (categoriaFiltro != null && !categoriaFiltro.trim().isEmpty()) {
+				// Filtrar eventos por categoría
+				lista = IEV.getEventosConCategoria(categoriaFiltro);
+			} else {
+				// Mostrar todos los eventos
+				DataEventoCompleto[] aux = IEV.listarInfoEvento();
+				lista = new ArrayList<>(Arrays.asList(aux));
+			}
+			
 			request.setAttribute("eventos", lista);
 			request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		} catch (EventoNoExisteExcepcion e) {
