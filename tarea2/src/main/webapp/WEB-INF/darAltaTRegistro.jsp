@@ -28,17 +28,11 @@
             <textarea id="descripcion" name="descripcion" placeholder="Descripción"></textarea>
             <div class="error-message" id="errorDescripcion">La descripcion es requerida</div>
             
-            <input type="number" id="costo" name="costo" placeholder="Costo" min="0" step="0.01">
-            <div class="error-message" id="errorCosto">El costo es requerido</div>
-            <div class="error-message" id="errorCosto" style="color:red; font-size:12px;">
-    			<%= request.getAttribute("errorCosto") != null ? request.getAttribute("errorCosto") : "Debe ingresar un cupo mayor a 0" %>
-			</div>
+            <input type="number" id="costo" name="costo" placeholder="Costo" step="0.01">
+            <div class="error-message" id="errorCosto" style="color:red; font-size:12px; display:none;"></div>
             
             <input type="number" id="cupo" name="cupo" placeholder="Cupo">
-            <div class="error-message" id="errorCupo">El cupo es requerido</div>
-            <div class="error-message" id="errorCosto" style="color:red; font-size:12px;">
-    			<%= request.getAttribute("errorCupo") != null ? request.getAttribute("errorCupo") : "Debe ingresar un costo positivo" %>
-			</div>
+			<div class="error-message" id="errorCupo" style="color:red; font-size:12px; display:none;"></div>
             
             
             <% 

@@ -40,7 +40,7 @@ public class AltaRegistro extends HttpServlet {
 		String evento = request.getParameter("evento");
 		String edicion = request.getParameter("edicion");
 		String tiporegistro= request.getParameter("tipoReg");
-		LocalDate fecha = LocalDate.now();		
+		LocalDate fecha = LocalDate.now();
 		
 		try {
 			ICU.nuevoRegistro(asistente, evento, edicion, tiporegistro, fecha);
