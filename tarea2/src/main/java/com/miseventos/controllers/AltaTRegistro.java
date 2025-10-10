@@ -16,9 +16,9 @@ import logica.interfaces.*;
 import logica.datatypes.*;
 import excepciones.*;
 
-@WebServlet("/altatiporegistro")
+@WebServlet("/altaTRegistro")
 @MultipartConfig
-public class AltaTipoRegistro extends HttpServlet {
+public class AltaTRegistro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IEventos IEV;
 	
@@ -28,7 +28,7 @@ public class AltaTipoRegistro extends HttpServlet {
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/darAltaTRegistro.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/altaTRegistro.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	

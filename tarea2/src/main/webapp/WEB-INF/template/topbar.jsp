@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="logica.datatypes.*" %>
+<%@ page import="com.miseventos.utils.nombreUtils" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/templateStyle.css">
 
 <%
 	String tipo = (String) session.getAttribute("tipoUsr");
+	DataUsuario usr = (DataUsuario) session.getAttribute("datosUsr");
 %>
 
 <div class="topbar">
@@ -26,11 +29,14 @@
 		
 		<%
 			} else {
+				String nickNormal = nombreUtils.normalizarNombre(usr.getNickname());
 		%>		
 			
 			<a href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a> <!-- REF AL SERVLET DE LOGOUT -->
 			<a href=""> <!-- REF A LA CONSULTA DEL PERFIL DEL USUARIO ACTUAL -->
-				<img src="" alt="logoUsr" onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/stockusr.png';"> <!-- IMG DEL USUARIO ACTUAL -->
+				<img src="${pageContext.request.contextPath}/resources/images/USR-<%= nickNormal %>.png" 
+					alt="logoUsr" 
+					onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/stockusr.png';"> <!-- IMG DEL USUARIO ACTUAL -->
 			</a>
 		
 		<%

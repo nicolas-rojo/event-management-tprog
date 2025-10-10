@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="logica.datatypes.*" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.miseventos.utils.nombreUtils" %>
+
 <%
     DataEventoCompleto evento = (DataEventoCompleto) request.getAttribute("evento");
     List<DataEdicion> ediciones = (List<DataEdicion>) request.getAttribute("ediciones");
     String tipo = (String) session.getAttribute("tipoUsr");
 %>
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,10 +37,12 @@
     <div class="content">
         <div class="contenedores">
             <div class="contenedor-principal">
-                <img class="imagenes" 
-                     src="<%= request.getContextPath() %>/resources/images/IMG-NO.png" 
-                     alt="<%= evento.getNombre() %>"
-                     width="150" height="150">
+            	<% String nomNormalEv = nombreUtils.normalizarNombre(evento.getNombre()); %>
+            	<img class="imagenes" 
+					src="${pageContext.request.contextPath}/resources/images/EV-<%= nomNormalEv %>.png" 
+					alt="logoEvento" 
+					width="150px" height="150px"
+					onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">
                 <div class="informacion-evento">
                     <h2 class="nombre-evento"><%= evento.getNombre() %></h2>
                     <p class="descripcion-evento"><%= evento.getDescripcion() != null ? evento.getDescripcion() : "" %></p>
@@ -62,13 +68,15 @@
                     for (DataEdicion edicion : ediciones) {
                         String eventoEncoded = java.net.URLEncoder.encode(evento.getNombre(), "UTF-8");
                         String edicionEncoded = java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8");
+            			String nomNormal = nombreUtils.normalizarNombre(edicion.getNombre());
                 %>
                 <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="contenedor-link">
                     <div class="contenedor">
                         <img class="imagenes" 
-                             src="<%= request.getContextPath() %>/resources/images/IMG-NO.png" 
-                             alt="<%= edicion.getNombre() %>"
-                             width="120" height="120">
+								src="${pageContext.request.contextPath}/resources/images/ED-<%= nomNormal %>.png" 
+								alt="logoEvento" 
+								width="120px" height="120px"
+								onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">
                         <div class="informacion-edicion">
                             <h2 class="nombre-evento"><%= edicion.getNombre() %></h2>
                             <div class="detalles-edicion">

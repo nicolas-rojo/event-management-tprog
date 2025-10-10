@@ -16,7 +16,7 @@ import logica.interfaces.*;
 import logica.datatypes.*;
 import excepciones.*;
 
-@WebServlet("/altaregistro")
+@WebServlet("/altaRegistro")
 @MultipartConfig
 
 public class AltaRegistro extends HttpServlet {
@@ -36,7 +36,9 @@ public class AltaRegistro extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		String asistente = (String) session.getAttribute("nickmail");
+		
+		DataUsuario datosU = (DataUsuario) session.getAttribute("datosUsr");
+		String asistente = datosU.getNickname();		
 		String evento = request.getParameter("evento");
 		String edicion = request.getParameter("edicion");
 		String tiporegistro= request.getParameter("tipoReg");

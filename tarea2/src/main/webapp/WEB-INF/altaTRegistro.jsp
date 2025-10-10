@@ -16,12 +16,13 @@
 </head>
 
 <body>
-    <a href="../index/index.html">
-        <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" class="logo"> 
-    </a>
+    <a href="${pageContext.request.contextPath}/home"> 
+		<img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" class="logo">
+	</a>
+	
     <div class="login-container">
         <h2>Nuevo Tipo de Registro</h2>
-        <form id="formTReg" action="altatiporegistro" method="post">
+        <form id="formTReg" action="${pageContext.request.contextPath}/altaTRegistro" method="post">
             <input type="text" id="nombre" name="nombre" placeholder="Nombre">
             <div class="error-message" id="errorNombre">El nickname es requerido</div>
             
