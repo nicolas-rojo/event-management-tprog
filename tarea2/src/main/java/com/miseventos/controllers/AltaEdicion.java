@@ -62,7 +62,7 @@ public class AltaEdicion extends HttpServlet {
 			} catch (EdicionRepetidaExcepcion e) {
 				e.printStackTrace();
 				request.setAttribute("error", e.getMessage());
-				request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 			}
 		}
 	}
