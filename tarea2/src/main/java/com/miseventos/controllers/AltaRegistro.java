@@ -16,7 +16,7 @@ import logica.interfaces.*;
 import logica.datatypes.*;
 import excepciones.*;
 
-@WebServlet("/altaregistro")
+@WebServlet("/altaRegistro")
 @MultipartConfig
 
 public class AltaRegistro extends HttpServlet {

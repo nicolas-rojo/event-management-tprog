@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo Evento</title>
+    <title>Nuevo Registro :: Mis Eventos</title>
 
     <!-- Fuente -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,18 +16,19 @@
 </head>
 
 <body>
-    <a href="../index/index.html">
-        <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" class="logo"> 
-    </a>
+    <a href="${pageContext.request.contextPath}/home"> 
+		<img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" class="logo">
+	</a>
+	
     <div class="login-container">
-        <h2>Nueva Registro</h2>
-        <form id="formTReg" action="altaregistro" method="post">
+        <h2>Nuevo Registro</h2>
+        <form id="formTReg" action="${pageContext.request.contextPath}/altaRegistro" method="post">
             <div class="divCodigo">
-                <input type="text" id="codigo" placeholder="Codigo">
-                    <div id="confirmarError" style = "color:red;"></div>
+               	<input type="text" id="codigo" placeholder="Codigo">
+            	<div id="confirmarError" style = "color:red;"></div>
                 <button type="button" id="aplicarBtn">Aplicar</button>
             </div>
-            <input type="text" id="costoRegistro" placeholder="$1000" disabled>
+            <input type="text" id="costoRegistro" placeholder="1000" disabled> <!-- ACA VA EL PRECIO DEL TIPO DE REGISTRO CLICKEADO -->
             <div class="button-group">
                 <button type="submit">Aceptar</button>
                 <button type="button" id="cancelarBtn" onclick="history.back()">Cancelar</button>
