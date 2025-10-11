@@ -16,21 +16,31 @@ import logica.interfaces.*;
 import logica.datatypes.*;
 import excepciones.*;
 
-@WebServlet("/altaregistro")
+@WebServlet("/altaRegistro")
 @MultipartConfig
 
 public class AltaRegistro extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private IUsuario ICU;
+	private IEventos IEV;
 	
 	@Override
     public void init() throws ServletException {  
     	ICU = Fabrica.getInstance().getIControladorUsuario();
+    	IEV = Fabrica.getInstance().getIControladorEventos();
+    	
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/altaReg.jsp").forward(request, response);
+		response.setContentType("text/html;charset=UTF-8");
+		String edicion = request.getParameter("edicion");
+		String evento = request.getParameter("evento");
+		String treg = request.getParameter("treg");
+		DataTRegistro dataTR = IEV.getDataTRegistro(evento, edicion, treg);
+		System.out.println(dataTR.getCosto());
+		request.setAttribute("dataTR", dataTR);		
+		request.getRequestDispatcher("/WEB-INF/altaRegistro.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

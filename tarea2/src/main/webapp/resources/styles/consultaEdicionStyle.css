@@ -271,6 +271,16 @@ body {
 	flex-direction: column;
 }
 
+.link-sin-estilo {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+.link-sin-estilo:hover .contenedor-derecha {
+    background-color: #e0e0e0;
+    box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.3);
+}
+
 .contenedor-link {
 	display: block;
 	text-decoration: none;

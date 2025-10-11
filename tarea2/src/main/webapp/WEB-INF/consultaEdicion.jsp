@@ -31,19 +31,6 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/consultaEdicionStyle.css">
 
-<style>
-/* Quitar color y subrayado de los links del organizador */
-.link-sin-estilo {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-.link-sin-estilo:hover .contenedor-derecha {
-    background-color: #e0e0e0;
-    box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.3);
-}
-</style>
-
 </head>
 
 <body>
@@ -102,7 +89,12 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 							%>
 							<div id="botondiv1" class="boton-div" style="display: flex;">
 								<button type="button" class="btn-inscribirse"
-									onclick="window.location.href='${pageContext.request.contextPath}/altaregistro?evento=<%= request.getAttribute("evento") %>&edicion=<%= dataEd.getNombre() %>'">
+									<% 
+									String eventoEncoded = java.net.URLEncoder.encode((String) request.getParameter("evento"), "UTF-8");
+									String edicionEncoded = java.net.URLEncoder.encode(dataEd.getNombre(), "UTF-8");
+									String nombreTREncoded = java.net.URLEncoder.encode(dataTR.getNombre(), "UTF-8");															
+									%>
+									onclick="window.location.href='<%= request.getContextPath() %>/altaRegistro?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>&treg=<%= nombreTREncoded %>'">
 									Inscribirse
 								</button>
 							</div>
@@ -156,11 +148,11 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 		<div class="columna-derecha">
 			<h2 class="texto-og">Organiza:</h2>
 
-			<a href='${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(dataOrg.getEmail(), "UTF-8") %>'
+			<a href='<%= request.getContextPath() %>/detalleUsuario?email=<%= java.net.URLEncoder.encode(dataOrg.getEmail(), "UTF-8") %>'
                class="link-sin-estilo">
 				<div class="contenedor-derecha">
 					<img class="imagenes"
-						src="${pageContext.request.contextPath}/resources/images/USR-<%= nomNormal1 %>.png"										
+						src="<%= request.getContextPath() %>/resources/images/USR-<%= nomNormal1 %>.png"										
 					alt="logoEdición" 
 					width="120px" height="120x"
 					onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">
