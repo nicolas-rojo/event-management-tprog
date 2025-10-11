@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/darAltaTRegistro.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/altaTRegistro.css">
 </head>
 
 <body>
@@ -22,11 +22,11 @@
 	
     <div class="login-container">
         <h2>Nuevo Tipo de Registro</h2>
-        <form id="formTReg" action="${pageContext.request.contextPath}/altaTRegistro" method="post">
+        <form id="formTReg" action="${pageContext.request.contextPath}/altatiporegistro" method="post">
             <input type="text" id="nombre" name="nombre" placeholder="Nombre">
             <div class="error-message" id="errorNombre">El nickname es requerido</div>
             
-            <textarea id="descripcion" name="descripcion" placeholder="Descripción"></textarea>
+            <textarea id="descripcion" name="descripcion" placeholder="Descripciï¿½n"></textarea>
             <div class="error-message" id="errorDescripcion">La descripcion es requerida</div>
             
             <input type="number" id="costo" name="costo" placeholder="Costo" min="0" step="0.01">
@@ -53,7 +53,7 @@
             
             <div class="button-group">
                 <button type="submit">Aceptar</button>
-                <button type="button" id="cancelarBtn" onclick="history.back()">Cancelar</button>
+                <button type="button" id="cancelarBtn" onclick="window.location.href='/home'">Cancelar</button>
             </div>
         </form>
     </div>
