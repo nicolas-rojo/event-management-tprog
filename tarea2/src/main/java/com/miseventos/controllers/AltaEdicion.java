@@ -1,7 +1,7 @@
 package com.miseventos.controllers;
 
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
@@ -15,6 +15,7 @@ import logica.datatypes.DataEdicion;
 import logica.datatypes.DataUsuario;
 import excepciones.EdicionRepetidaExcepcion;
 
+@MultipartConfig
 @WebServlet("/AltaEdicion")
 public class AltaEdicion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
