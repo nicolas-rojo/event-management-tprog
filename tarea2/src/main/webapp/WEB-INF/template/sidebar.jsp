@@ -18,7 +18,6 @@ String categoriaSeleccionada = (String) request.getAttribute("categoriaSeleccion
     
     <a href="${pageContext.request.contextPath}/altaEvento" class="element">Alta Evento</a>
     <a href="${pageContext.request.contextPath}/AltaInstitucion" class="element">Alta Institución</a>
-    <a href="${pageContext.request.contextPath}/AltaPatrocinio" class="element">Nuevo Patrocinio</a>
     
     <%
     } else if ("asistente".equals(tipo)) {

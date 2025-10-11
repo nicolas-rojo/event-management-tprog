@@ -31,11 +31,6 @@
 	<div class="login-container">
 		<h2>Nueva Institución</h2>
 
-		<!-- Mensaje de error del servidor -->
-		<c:if test="${not empty error}">
-			<div style="color: red; margin-bottom: 10px;">${error}</div>
-		</c:if>
-
 		<form action="${pageContext.request.contextPath}/AltaInstitucion"
 			method="post" id="formInstitucion">
 
@@ -52,6 +47,12 @@
 				requerida</div>
 
 			<div id="confirmarError" style="color: red;"></div>
+			
+			<!-- Mensaje de error del servidor -->
+				<c:if test="${not empty error}">
+					<div style="color: red; margin-bottom: 10px;">${error}</div>
+				</c:if>
+			
 
 			<div class="button-group">
 				<button type="submit">Aceptar</button>
