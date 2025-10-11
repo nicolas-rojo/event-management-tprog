@@ -16,17 +16,14 @@ String categoriaSeleccionada = (String) request.getAttribute("categoriaSeleccion
     if ("organizador".equals(tipo)) {
     %>
     
-    <a href="" id="miPerfil" class="elementTitle" style="display: flex;">Mi Perfil</a>
     <a href="${pageContext.request.contextPath}/altaEvento" class="element">Alta Evento</a>
-    <a href="" class="element">Alta Institución</a>
-    <a href="" class="element">Nuevo Tipo de Registro</a>
+    <a href="${pageContext.request.contextPath}/AltaInstitucion" class="element">Alta Institución</a>
     <a href="" class="element">Nuevo Patrocinio</a>
     
     <%
     } else if ("asistente".equals(tipo)) {
     %>
     
-    <a href="" id="miPerfil" class="elementTitle" style="display: flex;">Mi Perfil</a>
     <a href="" class="element">Ver Registros</a>
     
     <%

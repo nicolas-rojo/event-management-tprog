@@ -30,10 +30,11 @@
 		<%
 			} else {
 				String nickNormal = nombreUtils.normalizarNombre(usr.getNickname());
+				DataUsuario datosU = (DataUsuario) session.getAttribute("datosUsr");
 		%>		
 			
 			<a href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a> <!-- REF AL SERVLET DE LOGOUT -->
-			<a href=""> <!-- REF A LA CONSULTA DEL PERFIL DEL USUARIO ACTUAL -->
+			<a href="${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(datosU.getEmail(), "UTF-8") %>"> <!-- REF A LA CONSULTA DEL PERFIL DEL USUARIO ACTUAL -->
 				<img src="${pageContext.request.contextPath}/resources/images/USR-<%= nickNormal %>.png" 
 					alt="logoUsr" 
 					onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/stockusr.png';"> <!-- IMG DEL USUARIO ACTUAL -->
