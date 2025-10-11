@@ -53,7 +53,7 @@
             
             <div class="button-group">
                 <button type="submit">Aceptar</button>
-                <button type="button" id="cancelarBtn" onclick="window.location.href=´/home´">Cancelar</button>
+                <button type="button" id="cancelarBtn" onclick="window.location.href='/home'">Cancelar</button>
             </div>
         </form>
     </div>
