@@ -4,7 +4,6 @@
 
 <% 
 DataTRegistro dataTR = (DataTRegistro) request.getAttribute("dataTR");
-System.out.println(dataTR.getNombre() + " " + dataTR.getDescr());
 %>
 <head>
     <meta charset="UTF-8">

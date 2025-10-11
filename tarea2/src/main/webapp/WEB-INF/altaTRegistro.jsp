@@ -22,11 +22,14 @@
 	
     <div class="login-container">
         <h2>Nuevo Tipo de Registro</h2>
-        <form id="formTReg" action="${pageContext.request.contextPath}/altatiporegistro" method="post">
+        <form id="formTReg" action="${pageContext.request.contextPath}/altaTReg" method="post">
+        	<input type="hidden" name="evento" value="<%= request.getParameter("evento") %>">
+			<input type="hidden" name="edicion" value="<%= request.getParameter("edicion") %>">
+        
             <input type="text" id="nombre" name="nombre" placeholder="Nombre">
             <div class="error-message" id="errorNombre">El nickname es requerido</div>
             
-            <textarea id="descripcion" name="descripcion" placeholder="Descripciï¿½n"></textarea>
+            <textarea id="descripcion" name="descripcion" placeholder="Descripción"></textarea>
             <div class="error-message" id="errorDescripcion">La descripcion es requerida</div>
             
             <input type="number" id="costo" name="costo" placeholder="Costo" min="0" step="0.01">

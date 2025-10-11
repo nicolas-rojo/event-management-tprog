@@ -582,10 +582,16 @@ body.asistente .item {
                                                 <span class="fecha-evento">
                                                     Fecha: <%= edicion.getFechaIni() %> - <%= edicion.getFechaFin() %> | Ingresada: <%= edicion.getFechaAlta() %>
                                                 </span>
-                                                <%if(usuario.getEmail().equals(loggedMail)){%>
+                                                <%
+                                                if(usuario.getEmail().equals(loggedMail)){
+                                            		IEventos IEV = Fabrica.getInstance().getIControladorEventos();
+                                                	String edicionEncoded = java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8");
+													String nombreEvento = IEV.eventoTieneEdicion(edicion.getNombre());
+													String eventoEncoded = java.net.URLEncoder.encode(nombreEvento, "UTF-8");
+                                                %>
 				                                    <div class="botones-evento">
-					                                    <a href="${pageContext.request.contextPath}/altaTReg" class="boton-evento boton-tipo-registro">Nuevo Tipo Registro</a>
-														<a href="${pageContext.request.contextPath}/altaPatrocinio" class="boton-evento boton-patrocinio">Nuevo Patrocinio</a>
+					                                    <a href="${pageContext.request.contextPath}/altaTReg?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="boton-evento boton-tipo-registro">Nuevo Tipo Registro</a>
+														<a href="${pageContext.request.contextPath}/altaPatrocinio" class="boton-evento boton-patrocinio">Nuevo Patrocinio</a>														
 					                                </div>
                     							<%} %>
                                             </div>

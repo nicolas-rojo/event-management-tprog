@@ -38,7 +38,6 @@ public class AltaRegistro extends HttpServlet {
 		String evento = request.getParameter("evento");
 		String treg = request.getParameter("treg");
 		DataTRegistro dataTR = IEV.getDataTRegistro(evento, edicion, treg);
-		System.out.println(dataTR.getNombre() + " " + dataTR.getDescr());
 		request.setAttribute("dataTR", dataTR);		
 		request.getRequestDispatcher("/WEB-INF/altaRegistro.jsp").forward(request, response);
 	}
