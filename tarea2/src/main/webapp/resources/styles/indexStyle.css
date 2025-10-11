@@ -6,13 +6,8 @@ body {
 .content {
     display: flex;
     background: linear-gradient(135deg, #4397db, #dbb5ec);
-    
-    padding-top: 80px;
-    padding-left: 280px;
-    padding-bottom: 20px;
-    
+    padding: 20px;
     min-height: 100vh; 
-    
     justify-content: center;
 }
 
