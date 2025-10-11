@@ -24,7 +24,7 @@ public interface IUsuario {
     
     public abstract DataAsistente getAsistente(String email) throws UsuarioNoExisteException;
     
-    public abstract DataOrganizador getOrganizador(String email) throws UsuarioNoExisteException;
+    public abstract DataOrganizador getOrganizador(String nickmail) throws UsuarioNoExisteException;
     
     public abstract void modificarAsistente(String email, String nuevoNombre, String nuevoApellido) throws UsuarioNoExisteException;
     
@@ -40,7 +40,11 @@ public interface IUsuario {
     
     public abstract List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado);
     
+    public abstract ParEdicionRegistro estaRegistrado(String asistente, String edicion);
+    
     public abstract DataDetalleRegistro getDetallesRegistro(String asistenteSeleccionado, ParEdicionRegistro regEdicion)  throws ErrorDetallesRegistroException;
     
     public abstract DataUsuario login(String nickmail, String pass);
+    
+    public abstract void cargarDatos();
 }
