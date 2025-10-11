@@ -593,7 +593,6 @@ body.asistente .item {
                                                 </span>
                                                 <%
                                                 if(usuario.getEmail().equals(loggedMail)){
-                                            		IEventos IEV = Fabrica.getInstance().getIControladorEventos();
                                                 	String edicionEncoded = java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8");
 													String nombreEvento = IEV.eventoTieneEdicion(edicion.getNombre());
 													String eventoEncoded = java.net.URLEncoder.encode(nombreEvento, "UTF-8");
