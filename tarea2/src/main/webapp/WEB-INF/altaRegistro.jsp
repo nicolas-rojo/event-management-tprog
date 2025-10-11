@@ -4,6 +4,7 @@
 
 <% 
 DataTRegistro dataTR = (DataTRegistro) request.getAttribute("dataTR");
+System.out.println(dataTR.getNombre() + " " + dataTR.getDescr());
 %>
 <head>
     <meta charset="UTF-8">
@@ -29,6 +30,7 @@ DataTRegistro dataTR = (DataTRegistro) request.getAttribute("dataTR");
         <form id="formTReg" action="${pageContext.request.contextPath}/altaRegistro" method="post">
 	        <input type="hidden" name="evento" value="<%= request.getParameter("evento") %>">
 			<input type="hidden" name="edicion" value="<%= request.getParameter("edicion") %>">
+			<input type="hidden" name="treg" value="<%= dataTR.getNombre() %>">
             <div class="divCodigo">
                	<input type="text" id="codigo" placeholder="Codigo">
             	<div id="confirmarError" style = "color:red;"></div>

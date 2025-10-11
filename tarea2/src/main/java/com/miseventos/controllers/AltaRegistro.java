@@ -38,20 +38,18 @@ public class AltaRegistro extends HttpServlet {
 		String evento = request.getParameter("evento");
 		String treg = request.getParameter("treg");
 		DataTRegistro dataTR = IEV.getDataTRegistro(evento, edicion, treg);
-		System.out.println(dataTR.getCosto());
+		System.out.println(dataTR.getNombre() + " " + dataTR.getDescr());
 		request.setAttribute("dataTR", dataTR);		
 		request.getRequestDispatcher("/WEB-INF/altaRegistro.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession();
-		
 		DataUsuario datosU = (DataUsuario) session.getAttribute("datosUsr");
 		String asistente = datosU.getNickname();		
 		String evento = request.getParameter("evento");
 		String edicion = request.getParameter("edicion");
-		String tiporegistro= request.getParameter("tipoReg");
+		String tiporegistro= request.getParameter("treg");
 		LocalDate fecha = LocalDate.now();		
 		
 		try {
