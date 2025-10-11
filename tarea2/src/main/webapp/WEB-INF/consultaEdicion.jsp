@@ -3,6 +3,8 @@
 <%@ page import="java.util.Arrays"%>
 <%@ page import="java.util.List"%>
 <%@ page import="logica.datatypes.*"%>
+<%@ page import="logica.Fabrica" %>
+<%@ page import="logica.interfaces.*" %>
 <%@ page import="com.miseventos.utils.nombreUtils" %>
 
 <!DOCTYPE html>
@@ -182,17 +184,15 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 				<div class="informacion-TRegistro">
 					<div class="detalles-TRegistro">
 						<%
-						DataUsuario dataU = (DataUsuario) session.getAttribute("dataUsr");
-						%>
-						<div class="registro-item"><%=dataU.getNickname()%></div>
-
-						<%
+                		IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+						DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
 						Boolean registrado = (Boolean) request.getAttribute("registrado");
 						if (registrado != null && registrado) {
 							ParEdicionRegistro dataRegistro = (ParEdicionRegistro) request.getAttribute("dataRegistro");
+                        	DataDetalleRegistro detalleReg = ICU.getDetallesRegistro(dataU.getNickname(), dataRegistro);
 						%>
 						<div class="registro-item">
-							Fecha de registro: <%=dataRegistro.getFechaRegistro()%>
+							<span>Registrado el: <%= detalleReg.getFecha() %>, como: <%= detalleReg.getNombreTR() %></span>
 						</div>
 						<%
 						}
