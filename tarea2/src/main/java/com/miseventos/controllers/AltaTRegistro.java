@@ -16,7 +16,7 @@ import logica.interfaces.*;
 import logica.datatypes.*;
 import excepciones.*;
 
-@WebServlet("/altatiporegistro")
+@WebServlet("/altaTReg")
 @MultipartConfig
 public class AltaTRegistro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,12 +32,16 @@ public class AltaTRegistro extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		response.setContentType("text/html;charset=UTF-8");
 		String nombre = request.getParameter("nombre");
 		String descripcion = request.getParameter("descripcion");
 		String costotr = request.getParameter("costo");
 		String cupotr = request.getParameter("cupo");
 		String evento = request.getParameter("evento");
 		String edicion = request.getParameter("edicion");
+		
+		System.out.println(evento);
+		System.out.println(edicion);
 		
 		try {
 			IEV.nuevoTipoRegistro(new DataTRegistro(nombre, descripcion,Float.parseFloat(costotr), Integer.parseInt(cupotr)), evento, edicion);

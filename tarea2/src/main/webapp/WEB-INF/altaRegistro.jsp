@@ -1,6 +1,10 @@
+<%@ page import="logica.datatypes.*"%>
 <!DOCTYPE html>
 <html lang="es">
 
+<% 
+DataTRegistro dataTR = (DataTRegistro) request.getAttribute("dataTR");
+%>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,13 +27,16 @@
     <div class="login-container">
         <h2>Nuevo Registro</h2>
         <form id="formTReg" action="${pageContext.request.contextPath}/altaRegistro" method="post">
+	        <input type="hidden" name="evento" value="<%= request.getParameter("evento") %>">
+			<input type="hidden" name="edicion" value="<%= request.getParameter("edicion") %>">
+			<input type="hidden" name="treg" value="<%= dataTR.getNombre() %>">
             <div class="divCodigo">
                	<input type="text" id="codigo" placeholder="Codigo">
             	<div id="confirmarError" style = "color:red;"></div>
                 <button type="button" id="aplicarBtn">Aplicar</button>
             </div>
-			<input type="text" id="costoRegistro" value="<%= request.getAttribute("costoTR") %>">
-            <div class="button-group">
+				<input type="text" id="costoRegistro" value="<%= dataTR.getCosto() %>" disabled>
+				<div class="button-group">
                 <button type="submit">Aceptar</button>
                 <button type="button" id="cancelarBtn" onclick="window.location.href='/home'">Cancelar</button>
             </div>
