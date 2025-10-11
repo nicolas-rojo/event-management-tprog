@@ -124,41 +124,39 @@
 ========================================= */
 
 .categorias-sidebar {
-    width: 100%; /* Toma el ancho completo de la barra lateral */
+    width: 100%;
     padding: 10px 0;
     margin-top: 20px;
 }
 
-/* 1. TÍTULO 'Categorías' (Mismo estilo que 'Mi Perfil') */
+
 .categorias-title {
     color: #f1eeee;
     font-size: 25px; 
-    margin-left: 33px; /* Alineación del texto del título */
+    margin-left: 33px;
     margin-bottom: 5px; 
     font-weight: bold;
     display: flex;
-    padding: 12px 0; /* Padding vertical para espaciar */
+    padding: 12px 0;
     text-decoration: none;
 }
 
-/* 2. CONTENEDOR CON SCROLL (SOLUCIÓN AL ESPACIO VERTICAL Y DESBORDE) */
 .categorias-scroll-box {
-    /* Clave: Limitamos la altura máxima. Si el contenido la excede, aparece el scroll. */
-    max-height: 250px; /* AJUSTA ESTE VALOR: Altura máxima visible de las categorías. */
-    overflow-y: auto; /* Habilita el scroll vertical (slider) */
     
-    /* Clave: Alineación horizontal. La caja de scroll se mueve para iniciar a 33px. */
+    max-height: 250px;
+    overflow-y: auto; 
+    
+
     margin-left: 33px; 
-    
-    /* Clave: El ancho debe ser calculado para no exceder los 260px del sidebar menos el margen. */
+
     width: calc(100% - 33px); 
     
-    /* Espacio interno a la derecha para que la barra de desplazamiento no tape el texto. */
+
     padding-right: 15px; 
-    box-sizing: border-box; /* Asegura que padding y border no aumenten el width */
+    box-sizing: border-box;
 }
 
-/* Estilo de la barra de desplazamiento (web-kit browsers) */
+
 .categorias-scroll-box::-webkit-scrollbar {
     width: 8px;
 }
@@ -168,21 +166,23 @@
     border-radius: 4px;
 }
 
+
+
 .categorias-scroll-box::-webkit-scrollbar-track {
     background-color: #4b4a4acd; 
 }
 
-/* Contenedor interno de los ítems (flex-column) */
+
 .categorias-box {
     display: flex;
     flex-direction: column;
 }
 
-/* 3. ESTÉTICA DE LOS ÍTEMS (Mismo estilo que otros '.element' ) */
+
 .categoria-item {
     color: #f1eeee;
     font-size: auto;
-    /* Padding horizontal en 0, ya alineado por la caja de scroll (33px) */
+
     padding: 8px 0; 
     cursor: pointer;
     transition: all 0.3s ease;
@@ -192,16 +192,14 @@
 
 .categoria-item:hover {
     color: #8cb4ff;
-    /* Puedes mantener o quitar el background-color dependiendo de si lo quieres igual que '.element' */
-    /* background-color: #5c5a5a; */
 }
 
-/* Estilo para la categoría activa/seleccionada */
+
 .categoria-item.activa {
     font-weight: bold;
     color: #8cb4ff;
     border-left: 4px solid #8cb4ff;
-    padding-left: 11px; /* Ajuste para el borde */
+    padding-left: 11px;
 }
 
 .categoria-item.activa:hover {
