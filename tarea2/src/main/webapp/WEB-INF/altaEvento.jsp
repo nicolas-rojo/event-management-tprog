@@ -21,7 +21,7 @@
     </a>
     <div class="login-container">
         <h2>Nuevo Evento</h2>
-        <form action="${pageContext.request.contextPath}/altaEvento" method="post" id="formEvento">
+        <form action="${pageContext.request.contextPath}/altaEvento" method="post" id="formEvento" enctype="multipart/form-data">
             <input type="text" id="nombreEv" name="nombreEv" placeholder="Nombre">
             <div class="error-message" id="errorNombreEv">El nombre es requerido</div>
 

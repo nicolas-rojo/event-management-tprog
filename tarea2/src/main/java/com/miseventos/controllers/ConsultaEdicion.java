@@ -93,9 +93,13 @@ public class ConsultaEdicion extends HttpServlet {
 		if (tipo != null && dataU != null) {
 			if ("asistente".equals(tipo)) {
 				ParEdicionRegistro registro = ICU.estaRegistrado(nickname, edicionSeleccionada);
+				System.out.println(nickname + " " + edicionSeleccionada);
 				if (registro != null) {
+					System.out.println("ESTOY REGISTRADO");
 					request.setAttribute("registrado", true);
 					request.setAttribute("dataRegistro", registro);
+				} else {
+					System.out.println("NO ESTOY REGISTRADO");
 				}
 			} else if ("organizador".equals(tipo)) {
 				if (dataU.getNickname().equals(organizador)) {

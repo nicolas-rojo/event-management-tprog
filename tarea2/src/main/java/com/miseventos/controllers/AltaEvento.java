@@ -1,13 +1,23 @@
 package com.miseventos.controllers;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import com.miseventos.utils.nombreUtils;
+
 import java.util.ArrayList;
 
 import logica.Fabrica;
@@ -17,7 +27,8 @@ import excepciones.*;
 import java.util.Arrays;
 
 @WebServlet("/altaEvento")
-public class NuevoEvento extends HttpServlet {
+@MultipartConfig
+public class AltaEvento extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private IEventos IEV;
     
@@ -59,6 +70,7 @@ public class NuevoEvento extends HttpServlet {
        
         try {
             IEV.nuevoEvento(data, cats);
+            cargarImg(request, nombre);
             response.sendRedirect(request.getContextPath() + "/home");
         } catch(EventoRepetidoExcepcion | EventoSinCategoriaExcepcion e) {
             e.printStackTrace();
@@ -66,4 +78,20 @@ public class NuevoEvento extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/altaEvento.jsp").forward(request, response);
         }
     }
+    
+    private void cargarImg(HttpServletRequest request, String nick) throws IOException, ServletException {
+		Part filePart = request.getPart("imagen");
+		if (filePart == null || filePart.getSize() == 0) {
+			return; //NO SE SUBIO NINGUNA IMAGEN
+		}
+		
+		String nomNorm = nombreUtils.normalizarNombre(nick);
+		
+		BufferedImage imagen = ImageIO.read(filePart.getInputStream());
+		String rutaRel = "/resources/images/EV-" + nomNorm + ".png";
+		String rutaAbs = getServletContext().getRealPath(rutaRel);
+		
+		File archivoDest = new File(rutaAbs);
+		ImageIO.write(imagen, "png", archivoDest);		
+	}
 }
