@@ -14,6 +14,7 @@ import logica.datatypes.DataEvento;
 import logica.datatypes.DataEventoCompleto;
 import logica.datatypes.DataTRegistro;
 import logica.datatypes.DataEdicion;
+import logica.datatypes.DataEdicionWeb;
 import logica.datatypes.DataPatrocinioCompleto;
 import logica.datatypes.Estado;
 
@@ -265,6 +266,18 @@ public class ControladorEventos implements IEventos {
         for (int i = 0; i < ee.length; i++) {
             res[i] = new DataEdicion(ee[i].getNombre(), ee[i].getSigla(), ee[i].getFechaIni(), ee[i].getFechaFin(), 
                     ee[i].getFechaAlta(), ee[i].getCuidad(), ee[i].getPais());
+        }
+        return res;
+    }
+    
+    public DataEdicionWeb[] getEdicionesEventoOrganizadorWeb(String nickname) {
+        ManejadorUsuario mu = ManejadorUsuario.getInstance();
+        Organizador o = (Organizador) mu.getUsuarioNickname(nickname);
+        EdicionEvento[] ee = o.getEdiciones();
+        DataEdicionWeb[] res = new DataEdicionWeb[ee.length];
+        for (int i = 0; i < ee.length; i++) {
+            res[i] = new DataEdicionWeb(ee[i].getNombre(), ee[i].getSigla(), ee[i].getFechaIni(), ee[i].getFechaFin(), 
+                    ee[i].getFechaAlta(), ee[i].getCuidad(), ee[i].getPais(), ee[i].getEstado());
         }
         return res;
     }

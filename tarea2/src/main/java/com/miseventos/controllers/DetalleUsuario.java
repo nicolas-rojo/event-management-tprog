@@ -54,7 +54,7 @@ public class DetalleUsuario extends HttpServlet {
                 request.setAttribute("tipo", "Organizador");
                 
                 // Cargar ediciones del organizador
-                DataEdicion[] ediciones = IEV.getEdicionesEventoOrganizador(organizador.getNickname());
+                DataEdicionWeb[] ediciones = IEV.getEdicionesEventoOrganizadorWeb(organizador.getNickname());
                 request.setAttribute("ediciones", ediciones);
             }
             
