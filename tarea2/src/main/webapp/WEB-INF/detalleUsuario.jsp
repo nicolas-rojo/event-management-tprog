@@ -242,6 +242,11 @@ body.asistente .item {
     color: #4397db;
 }
 
+.nombre-evento-link{
+	text-decoration: none;
+	color: #4397db;
+}
+
 .detalle-evento {
     font-size: 14px;
     color: #666;
@@ -564,17 +569,21 @@ body.asistente .item {
                         <h2 class="seccion-titulo">Ediciones de Eventos Organizadas</h2>
                         <div class="contenedor-secundario">
                             <%
+                            	IEventos IEV = Fabrica.getInstance().getIControladorEventos();
                                 if (ediciones != null && ediciones.length > 0) {
                             %>
                                     <div class="lista-items">
                                     <%
                                         for (DataEdicionWeb edicion : ediciones) {
+                                        	String evento = IEV.eventoTieneEdicion(edicion.getNombre());
                                         	if(edicion.getEstado() == Estado.Confirmado){
                                     %>
                                         <div class="item">
                                             <div class="info-evento">
                                                 <span class="nombre-evento">
-                                                    ✅ <%= edicion.getNombre() %> (<%= edicion.getSigla() %>)
+                                                    ✅ <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= java.net.URLEncoder.encode(evento, "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(edicion.getNombre(),"UTF-8") %>"
+                                                    class = "nombre-evento-link">
+                                                    <%= edicion.getNombre() %> (<%= edicion.getSigla() %>) </a>
                                                 </span>
                                                 <span class="detalle-evento">
                                                     Estado: Confirmada - <%= edicion.getCiudad() %>, <%= edicion.getPais() %>
@@ -603,7 +612,9 @@ body.asistente .item {
                                     	<div class="item">
                                             <div class="info-evento">
                                                 <span class="nombre-evento">
-                                                    ❌ <%= edicion.getNombre() %> (<%= edicion.getSigla() %>)
+                                                    ❌ <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= java.net.URLEncoder.encode(evento, "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(edicion.getNombre(),"UTF-8") %>"
+                                                    class = "nombre-evento-link">
+                                                    <%= edicion.getNombre() %> (<%= edicion.getSigla() %>) </a>
                                                 </span>
                                                 <span class="detalle-evento">
                                                     Estado: <%= edicion.getEstado()%> edicion - <%= edicion.getCiudad() %>, <%= edicion.getPais() %>
