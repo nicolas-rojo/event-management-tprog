@@ -28,6 +28,8 @@ public interface IEventos {
 				
 		public abstract List<String> listarCategorias();
 		
+		public abstract List<DataEventoCompleto> getEventosConCategoria(String cat);
+		
 		public abstract List<String> listarEdiciones(String eventoSeleccionado);
 		
 		public abstract List<String> listarTRegistros(String eventoSeleccionado, String edicionSeleccionada);

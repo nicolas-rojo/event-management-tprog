@@ -276,3 +276,34 @@ body {
     transform: translateY(-2px);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+
+
+.categorias-evento {
+    margin-top: 15px;
+}
+
+.label-categorias {
+    font-weight: 600;
+    color: #f1eeee;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.tags-categorias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-categoria {
+    background-color: #4a5568;
+    color: #f1eeee;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-block;
+    border: 1px solid #5a6578;
+}

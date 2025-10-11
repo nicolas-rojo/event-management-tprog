@@ -112,3 +112,63 @@
     display: flex;
     flex-direction: column;
 }
+
+
+
+
+
+
+
+/* =========================================
+   FILTRO DE CATEGORIAS EN BARRA LATERAL
+========================================= */
+
+.categorias-sidebar {
+    width: 100%; /* Ensure it takes up the sidebar width for better alignment */
+    padding: 10px 0;
+    margin-top: 20px; /* Add some space above the filter section */
+    border-top: 1px solid #6c6a6a; /* Optional: Separator line */
+}
+
+.categorias-title {
+    color: #f1eeee; /* Same color as other sidebar text */
+    font-size: 18px; /* Slightly smaller than elementTitle */
+    margin-left: 33px; /* Align with elementTitle */
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.categorias-box {
+    display: flex;
+    flex-direction: column;
+    padding-left: 25px;
+}
+
+.categoria-item {
+    color: #f1eeee;
+    font-size: auto;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.categoria-item:hover {
+    color: #8cb4ff;
+    background-color: #5c5a5a;
+}
+
+/* Estilo para la categoría activa/seleccionada */
+.categoria-item.activa {
+    font-weight: bold;
+    color: #8cb4ff;
+    background-color: #3b3838;
+    border-left: 4px solid #8cb4ff;
+    padding-left: 11px; 
+}
+.categoria-item.activa:hover {
+    color: #8cb4ff;
+    background-color: #3b3838;
+}

@@ -3,6 +3,7 @@
 <%@ page import="logica.datatypes.*" %>
 <%@ page import="logica.Fabrica" %>
 <%@ page import="logica.interfaces.*" %>
+<%@ page import="com.miseventos.utils.nombreUtils" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -445,12 +446,13 @@ body.asistente .item {
             
             <%
                 if (usuario != null && tipo != null) {
+                	String nomNormal = nombreUtils.normalizarNombre(usuario.getNickname());
             %>
             
             <!-- Información principal del usuario -->
             <div class="contenedor-principal">
                 <div class="imagen-usuario">
-                    <img src="${pageContext.request.contextPath}/resources/images/usuarios/<%= usuario.getNickname() %>.jpg" 
+                    <img src="${pageContext.request.contextPath}/resources/images/USR-<%= nomNormal %>.png" 
                          alt="<%= usuario.getNombre() %>" 
                          onerror="this.style.display='none'; this.parentElement.innerHTML='Sin imagen'">
                 </div>

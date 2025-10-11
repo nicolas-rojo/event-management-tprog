@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="logica.datatypes.*" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Set" %>
 <%@ page import="com.miseventos.utils.nombreUtils" %>
 
 <%
@@ -49,12 +50,37 @@
                     <div class="detalles-evento">
                         <span class="siglas">SIG: <%= evento.getSigla() %></span>
                         <span class="fecha-alta">Alta: <%= evento.getFechaAlta() %></span>
+                        
+                        <!-- Mostrar categorías -->
+                        <% 
+                        Set<String> categorias = evento.getCategorias();
+                        if (categorias != null && !categorias.isEmpty()) {
+                            int totalCategorias = categorias.size();
+                            int contador = 0;
+                        %>
+                        <span class="categorias-evento">
+                            Categorías: 
+                            <% 
+                            for (String categoria : categorias) { 
+                                contador++;
+                            %>
+                                <%= categoria %><% 
+                                    if (contador < totalCategorias) {
+                                        out.print(", ");
+                                    } else {
+                                        out.print(".");
+                                    }
+                                %>
+                            <% } %>
+                        </span>
+                        <% } %>
                     </div>
+                    
                     <% if ("organizador".equals(tipo)) { %>
                     <div id="botondiv1" class="boton-div">
-                        <a href="<%= request.getContextPath() %>/altaEdicion">
-                            <button id="boton1" class="btn-nuevaedicion">+ Nueva edicion</button>
-                        </a>
+                        <a href="<%= request.getContextPath() %>/AltaEdicion?evento=<%= java.net.URLEncoder.encode(evento.getNombre(), "UTF-8") %>" class="contenedor-link">
+    <button id="boton1" class="btn-nuevaedicion">+ Nueva edición</button>
+</a>
                     </div>
                     <% } %>
                 </div>
@@ -70,7 +96,7 @@
                         String edicionEncoded = java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8");
             			String nomNormal = nombreUtils.normalizarNombre(edicion.getNombre());
                 %>
-                <a href="<%= request.getContextPath() %>/consultaEdicionEvento?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="contenedor-link">
+                <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="contenedor-link">
                     <div class="contenedor">
                         <img class="imagenes" 
 								src="${pageContext.request.contextPath}/resources/images/ED-<%= nomNormal %>.png" 

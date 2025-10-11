@@ -1,5 +1,8 @@
 package logica.ctrlmanejador;
 
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import logica.Evento;
@@ -26,6 +29,11 @@ public class ManejadorEvento {
     
     public static void resetInstance() {
     	instancia = null;
+    }
+    
+    public Set<Evento> getEventosConCategoria(String cat){
+    	Categoria c = categorias.get(cat);
+    	return c.getEventos();
     }
     
     public void addEvento(Evento evento) {

@@ -47,3 +47,14 @@ document.getElementById('formTReg').addEventListener('submit', function(e) {
 	    e.preventDefault(); // Esto evita que el formulario se envíe
 	}
 });
+
+document.querySelectorAll('input, textarea, select').forEach(element => {
+	element.addEventListener('input', function() {
+		this.classList.remove('input-error');
+		const errorId = 'error' + this.id.charAt(0).toUpperCase() + this.id.slice(1);
+		const errorElement = document.getElementById(errorId);
+		if (errorElement) {
+			errorElement.style.display = 'none';
+		}
+	});
+});

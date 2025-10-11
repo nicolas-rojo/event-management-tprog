@@ -49,10 +49,14 @@ public class AltaRegistro extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/home");
 		}catch(AsistenteYaRegistrado e) {
 			request.setAttribute("errorYaRegistrado", "Ya estas registrado a esta edicion");
-			request.getRequestDispatcher("/WEB-INF/altaReg.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/altaRegistro.jsp").forward(request, response);
 		}catch(NoHayCupoEdicionTRegistro e) {
 			request.setAttribute("errorCupo", "No hay cupos disponibles para esta edicion");
-			request.getRequestDispatcher("/WEB-INF/altaReg.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/altaRegistro.jsp").forward(request, response);
+		}catch (Exception e) {
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudo dar de alta el registro");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		}
 	}
 		

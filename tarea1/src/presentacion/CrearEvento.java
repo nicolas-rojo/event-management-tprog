@@ -110,7 +110,7 @@ public class CrearEvento extends JInternalFrame {
         List<String> categorias = ice.listarCategorias();
         if (categorias != null) {
         	categorias1 = categorias.toArray(new String[0]);
-        	}
+        }
         comboBoxCat = new comboBoxMultiple(categorias1);
         comboBoxCat.setBounds(120, 174, 327, 22);
         getContentPane().add(comboBoxCat);
