@@ -28,10 +28,10 @@
             	<div id="confirmarError" style = "color:red;"></div>
                 <button type="button" id="aplicarBtn">Aplicar</button>
             </div>
-            <input type="text" id="costoRegistro" placeholder="1000" disabled> <!-- ACA VA EL PRECIO DEL TIPO DE REGISTRO CLICKEADO -->
+            <input type="text" id="costoRegistro" value="<%= request.getAttribute(´costoTR´)">
             <div class="button-group">
                 <button type="submit">Aceptar</button>
-                <button type="button" id="cancelarBtn" onclick="history.back()">Cancelar</button>
+                <button type="button" id="cancelarBtn" onclick="window.location.href=´/home´">Cancelar</button>
             </div>
             <% if (request.getAttribute("errorYaRegistrado") != null) { %>
             	<div style="color: red; font-size: 12px;"><%= request.getAttribute("errorYaRegistrado") %></div>

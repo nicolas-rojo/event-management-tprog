@@ -16,7 +16,7 @@ import logica.interfaces.*;
 import logica.datatypes.*;
 import excepciones.*;
 
-@WebServlet("/altaTRegistro")
+@WebServlet("/altatiporegistro")
 @MultipartConfig
 public class AltaTRegistro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -41,14 +41,14 @@ public class AltaTRegistro extends HttpServlet {
 		
 		try {
 			IEV.nuevoTipoRegistro(new DataTRegistro(nombre, descripcion,Float.parseFloat(costotr), Integer.parseInt(cupotr)), evento, edicion);
-			response.sendRedirect(request.getContextPath() + "/consultaEvento");// Cambiar la direccion cuando este el consulta evento
+			response.sendRedirect(request.getContextPath() + "/home");// Cambiar la direccion cuando este el consulta evento
 		}catch(TipoDeRegistroRepetidoException e) {
 			request.setAttribute("errorExiste", "Ya existe un tipo de registro con este nombre");
-			request.getRequestDispatcher("/WEB-INF/darAltaTRegistro.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/altaTRegistro.jsp").forward(request, response);
 		}catch (Exception e) {
 			e.printStackTrace();
-	        request.setAttribute("error", "Error Desconocido");
-	        request.getRequestDispatcher("/WEB-INF/darAltaTRegistro.jsp").forward(request, response);
+	        request.setAttribute("error", "No se pudo dar de alta el tipo de registro");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		}
 	}
 }
