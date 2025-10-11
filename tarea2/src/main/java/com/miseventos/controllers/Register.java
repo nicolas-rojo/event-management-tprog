@@ -6,11 +6,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import jakarta.servlet.annotation.MultipartConfig;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import javax.imageio.ImageIO;
+
+import com.miseventos.utils.*;
 import logica.Fabrica;
 import logica.interfaces.*;
 import logica.datatypes.*;
@@ -56,6 +62,7 @@ public class Register extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
 				return;
 			}
+			cargarImg(request, nick);
 			DataUsuario datos = new DataUsuario(nombre, nick, mail, "");
 			session.setAttribute("datosUsr", datos);
 			response.sendRedirect(request.getContextPath() + "/home");
@@ -67,5 +74,21 @@ public class Register extends HttpServlet {
 	        request.setAttribute("error", "Error Desconocido");
 	        request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
 		}
+	}
+	
+	private void cargarImg(HttpServletRequest request, String nick) throws IOException, ServletException {
+		Part filePart = request.getPart("imagen");
+		if (filePart == null || filePart.getSize() == 0) {
+			return; //NO SE SUBIO NINGUNA IMAGEN
+		}
+		
+		String nomNorm = nombreUtils.normalizarNombre(nick);
+		
+		BufferedImage imagen = ImageIO.read(filePart.getInputStream());
+		String rutaRel = "/resources/images/USR-" + nomNorm + ".png";
+		String rutaAbs = getServletContext().getRealPath(rutaRel);
+		
+		File archivoDest = new File(rutaAbs);
+		ImageIO.write(imagen, "png", archivoDest);		
 	}
 }

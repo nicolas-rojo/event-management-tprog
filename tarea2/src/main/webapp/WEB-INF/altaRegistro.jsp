@@ -28,7 +28,7 @@
             	<div id="confirmarError" style = "color:red;"></div>
                 <button type="button" id="aplicarBtn">Aplicar</button>
             </div>
-            <input type="text" id="costoRegistro" value="<%= request.getAttribute('costoTR)">
+			<input type="text" id="costoRegistro" value="<%= request.getAttribute("costoTR") %>">
             <div class="button-group">
                 <button type="submit">Aceptar</button>
                 <button type="button" id="cancelarBtn" onclick="window.location.href='/home'">Cancelar</button>
