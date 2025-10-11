@@ -61,8 +61,10 @@ public class ConsultaEvento extends HttpServlet {
         } catch (EventoNoExisteExcepcion e) {
         	e.printStackTrace();
         } catch (Exception e) {
-        	e.printStackTrace();
-        }
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudo obtener la informacion de el evento");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+		}
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 

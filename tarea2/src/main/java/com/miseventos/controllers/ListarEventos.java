@@ -64,7 +64,11 @@ public class ListarEventos extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		} catch (EventoNoExisteExcepcion e) {
 			request.setAttribute("error", "Error al cargar los datos");
-            request.getRequestDispatcher("/WEB-INF/errorPages/error.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudieron listar los eventos");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		}
 	}
 

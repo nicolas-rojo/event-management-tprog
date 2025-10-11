@@ -76,7 +76,11 @@ public class AltaEvento extends HttpServlet {
             e.printStackTrace();
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("/WEB-INF/altaEvento.jsp").forward(request, response);
-        }
+        } catch (Exception e) {
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudo dar de alta el evento");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+		}
     }
     
     private void cargarImg(HttpServletRequest request, String nick) throws IOException, ServletException {

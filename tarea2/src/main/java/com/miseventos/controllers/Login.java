@@ -61,6 +61,10 @@ public class Login extends HttpServlet {
 		} catch (UsuarioNoExisteException e) {
 			request.setAttribute("error", "Usuario o Contraseña Incorrectos");
 			request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+	        request.setAttribute("error", "Error al intentar iniciar sesion");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		}
 	}
 }

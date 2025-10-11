@@ -54,7 +54,7 @@ public class ConsultaEdicion extends HttpServlet {
 
 		if (eventoSeleccionado == null || edicionSeleccionada == null) {
 			request.setAttribute("error", "Faltan parámetros de evento o edición");
-			request.getRequestDispatcher("/WEB-INF/errorPages/error.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 			return;
 		}
 
@@ -63,7 +63,7 @@ public class ConsultaEdicion extends HttpServlet {
 
 		if (dataEd == null) {
 			request.setAttribute("error", "No se encontró la edición del evento");
-			request.getRequestDispatcher("/WEB-INF/errorPages/error.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 			return;
 		}
 
@@ -75,6 +75,10 @@ public class ConsultaEdicion extends HttpServlet {
 			request.setAttribute("error", "Organizador no existente");
 			request.getRequestDispatcher("/WEB-INF/consultaEdicion.jsp").forward(request, response);
 			return;
+		} catch (Exception e) {
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudieron cargar los datos del organizador");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		}
 
 		List<DataPatrocinioCompleto> dataPatrocinios = IEV.obtenerPatrociniosEdicion(eventoSeleccionado,

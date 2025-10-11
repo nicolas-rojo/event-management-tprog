@@ -52,7 +52,11 @@ public class ListarUsuarios extends HttpServlet {
         } catch (UsuarioNoExisteException e) {
             request.setAttribute("mensaje", "No hay usuarios registrados en el sistema.");
             request.getRequestDispatcher("/WEB-INF/listarUsuarios.jsp").forward(request, response);
-        }
+        } catch (Exception e) {
+			e.printStackTrace();
+	        request.setAttribute("error", "Error al cargar los usuarios registrados del sistema");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+		}
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 

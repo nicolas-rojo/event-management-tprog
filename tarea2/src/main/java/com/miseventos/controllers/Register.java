@@ -71,8 +71,8 @@ public class Register extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-	        request.setAttribute("error", "Error Desconocido");
-	        request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+	        request.setAttribute("error", "Error al intentar registrar");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		}
 	}
 	
