@@ -140,7 +140,7 @@
 
 			<!-- Código de Patrocinio -->
 			<label for="codigo">Código de Patrocinio:</label>
-			<input type="text" id="codigo" name="codigo" placeholder="Código único">
+			<input type="text" id="codigo" name="codigo" placeholder="Código">
 			<div class="error-message" id="errorCodigo">El código es requerido</div>
 
 			<div id="confirmarError" class="confirm-error"></div>
