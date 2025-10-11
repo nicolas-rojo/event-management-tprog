@@ -17,9 +17,16 @@ import logica.datatypes.DataEdicion;
 import logica.datatypes.DataPatrocinioCompleto;
 import logica.datatypes.Estado;
 
+import java.util.Set;
+import java.util.HashSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+
 
 import logica.Evento;
 import logica.Organizador;
@@ -65,12 +72,23 @@ public class ControladorEventos implements IEventos {
                         "La categoría seleccionada no existe en el sistema: " + c);
                 }
                 e.agregarCategoria(categoria);
+                categoria.addEvento(e);
             }
             me.addEvento(e);
         }
         
     }
 
+    public List<DataEventoCompleto> getEventosConCategoria(String cat){
+    	 List<DataEventoCompleto> res = new ArrayList<>();
+    	 ManejadorEvento me = ManejadorEvento.getInstance();
+         Set<Evento> e =  me.getEventosConCategoria(cat);
+         for (Evento ev : e) {
+        	 DataEventoCompleto dt = ev.getDTOEvento();
+        	 res.add(dt);
+         }
+         return res;
+    }
     
     public List<String> listarEventos(){
         ManejadorEvento me = ManejadorEvento.getInstance();

@@ -1,17 +1,25 @@
 package logica;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Categoria {
-	private String nombre;
-	
-	public Categoria(String nombre) {
-		this.nombre = nombre;
-	}
-	
-	public String getNombre() {
-		return nombre;
-	}
-	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    private String nombre;
+    private Set<Evento> eventos;
+    
+    public Categoria(String nombre) {
+        this.nombre = nombre;
+        this.eventos = new HashSet<Evento>();
+    }
+    
+    public void addEvento(Evento evento) {
+        this.eventos.add(evento);
+    }
+    
+    public Set<Evento> getEventos() {
+        return eventos;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
 }
