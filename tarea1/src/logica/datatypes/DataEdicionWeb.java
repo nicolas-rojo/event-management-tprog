@@ -2,7 +2,7 @@ package logica.datatypes;
 
 import java.time.LocalDate;
 
-public class DataEdicion {
+public class DataEdicionWeb {
 	private String nombre;
 	private String sigla;
 	private LocalDate fechaIni;
@@ -11,8 +11,8 @@ public class DataEdicion {
 	private String ciudad;
 	private String pais;
 	private Estado estado;
-		
-	public DataEdicion(String nombre, String sigla, LocalDate fechaIni, LocalDate fechaFin, LocalDate fechaAlta, String ciudad, String pais) {
+		 
+	public DataEdicionWeb(String nombre, String sigla, LocalDate fechaIni, LocalDate fechaFin, LocalDate fechaAlta, String ciudad, String pais, Estado estado) {
 		this.nombre = nombre;
 		this.sigla = sigla;
 		this.fechaIni = fechaIni;
@@ -20,6 +20,7 @@ public class DataEdicion {
 		this.fechaAlta = fechaAlta;
 		this.ciudad = ciudad;
 		this.pais = pais;
+		this.estado = estado;
 	}
 	
 	public String getNombre() {
@@ -48,5 +49,9 @@ public class DataEdicion {
 	
 	public String getPais() {
 		return this.pais;
+	}
+	
+	public Estado getEstado() {
+		return this.estado;
 	}
 }

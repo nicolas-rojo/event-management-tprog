@@ -11,6 +11,7 @@ import excepciones.TipoDeRegistroRepetidoException;
 
 import logica.datatypes.DataEventoCompleto;
 import logica.datatypes.DataEdicion;
+import logica.datatypes.DataEdicionWeb;
 import logica.datatypes.DataEvento;
 import logica.datatypes.DataTRegistro;
 import logica.datatypes.Estado;
@@ -44,6 +45,8 @@ public interface IEventos {
 		public abstract DataEdicion getDataEdicion(String evento, String edicion);
 		
 		public abstract DataEdicion[] getEdicionesEventoOrganizador(String nickname);
+		
+		public abstract DataEdicionWeb[] getEdicionesEventoOrganizadorWeb(String nickname);
 		
 		public abstract boolean existeEvento(String eventoSeleccionado);
 		
