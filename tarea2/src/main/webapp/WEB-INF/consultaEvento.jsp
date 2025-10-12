@@ -46,7 +46,7 @@
 					onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">
                 <div class="informacion-evento">
                     <h2 class="nombre-evento"><%= evento.getNombre() %></h2>
-                    <p class="descripcion-evento"><%= evento.getDescripcion() != null ? evento.getDescripcion() : "" %></p>
+                    <p class="descripcion-evento"><%= evento.getDescripcion() %></p>
                     <div class="detalles-evento">
                         <span class="siglas">SIG: <%= evento.getSigla() %></span>
                         <span class="fecha-alta">Alta: <%= evento.getFechaAlta() %></span>
@@ -79,8 +79,8 @@
                     <% if ("organizador".equals(tipo)) { %>
                     <div id="botondiv1" class="boton-div">
                         <a href="<%= request.getContextPath() %>/AltaEdicion?evento=<%= java.net.URLEncoder.encode(evento.getNombre(), "UTF-8") %>" class="contenedor-link">
-    <button id="boton1" class="btn-nuevaedicion">+ Nueva edición</button>
-</a>
+                            <button id="boton1" class="btn-nuevaedicion">+ Nueva edición</button>
+                        </a>
                     </div>
                     <% } %>
                 </div>
