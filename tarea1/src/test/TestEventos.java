@@ -1,19 +1,24 @@
 package test;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+
 import excepciones.CategoriaRepetidaException;
-import excepciones.EdicionRepetidaExcepcion;
 import excepciones.EventoRepetidoExcepcion;
 import excepciones.EventoSinCategoriaExcepcion;
 import excepciones.TipoDeRegistroRepetidoException;
-import logica.Fabrica;
-import logica.ctrlmanejador.*;
-import logica.datatypes.*;
-import logica.interfaces.*;
-
 import junit.framework.TestCase;
-
-import java.time.LocalDate;
-import java.util.Arrays;
+import logica.Fabrica;
+import logica.ctrlmanejador.ManejadorEvento;
+import logica.ctrlmanejador.ManejadorUsuario;
+import logica.datatypes.DataEdicion;
+import logica.datatypes.DataEvento;
+import logica.datatypes.DataEventoCompleto;
+import logica.datatypes.DataOrganizador;
+import logica.datatypes.DataTRegistro;
+import logica.interfaces.IEventos;
+import logica.interfaces.IUsuario;
 
 public class TestEventos extends TestCase {
     
@@ -401,6 +406,85 @@ public class TestEventos extends TestCase {
             // Test exitoso
             assertTrue("Se esperaba TipoDeRegistroRepetidoException", true);
         } catch (Exception e) {
+            fail("Lanzó excepción incorrecta: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+        }
+    }
+    
+    public void testCategoriasAsociadasCorrectamente(){
+    	String uniqueId = String.valueOf(System.currentTimeMillis());
+    	try {
+    		DataEvento eventoData = new DataEvento(
+                    "Conferencia de Tecnologia_" + uniqueId,
+                    "CONFTEC_" + uniqueId,
+                    LocalDate.of(2025, 1, 10),
+                    "Evento sobre innovacion tecnológica"
+                );    
+    		String cat = "Tecnologia_" + uniqueId;
+            controladorEventos.nuevoEvento(eventoData, Arrays.asList(cat));
+            List<DataEventoCompleto> res = controladorEventos.getEventosConCategoria(cat);
+            if (res.size() != 1) {
+            	fail("No se asoció bien la categoria...");
+            }
+            assertTrue("Categoría bien asociada", true);
+    	}
+    	catch(Exception e){
+    		fail("Lanzó excepción incorrecta: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+    	}
+    }
+    
+    public void testObtenerEdiciones() {
+String uniqueId = String.valueOf(System.currentTimeMillis());
+        
+        try {
+            // PRIMERO: Crear un organizador
+            Fabrica fabrica = Fabrica.getInstance();
+            IUsuario controladorUsuario = fabrica.getIControladorUsuario();
+            
+            DataOrganizador organizadorData = new DataOrganizador(
+                "Test Organizador_" + uniqueId,
+                "testorg_" + uniqueId,
+                "testorg_" + uniqueId + "@test.com",
+                "pass" + uniqueId,
+                "Organizador de prueba",
+                "https://test.com"
+            );
+            controladorUsuario.registrarOrganizador(organizadorData);
+
+            // SEGUNDO: Configuración inicial
+            controladorEventos.nuevaCategoria("Tecnologia_" + uniqueId);
+            
+            DataEvento eventoData = new DataEvento(
+                "Conferencia de Tecnologia_" + uniqueId,
+                "CONFTEC_" + uniqueId,
+                LocalDate.of(2025, 1, 10),
+                "Evento sobre innovacion tecnológica"
+            );
+            
+            controladorEventos.nuevoEvento(eventoData, Arrays.asList("Tecnologia_" + uniqueId));
+            
+            DataEdicion edicionData = new DataEdicion(
+                "Tecnología Punta del Este 2026_" + uniqueId,
+                "CONFTECH26_" + uniqueId,
+                LocalDate.of(2026, 4, 6),
+                LocalDate.of(2026, 4, 10),
+                LocalDate.of(2025, 8, 1),
+                "Punta del Este",
+                "Uruguay"
+            );
+            
+            // Usar el organizador creado
+            controladorEventos.nuevaEdicion(
+                edicionData, 
+                "Conferencia de Tecnologia_" + uniqueId, 
+                "testorg_" + uniqueId
+            );
+            
+            DataEdicion dt = controladorEventos.obtenerEdicionEvento("Conferencia de Tecnologia_" + uniqueId, "Tecnología Punta del Este 2026_" + uniqueId);
+            if (dt == null || dt.getNombre() != "Tecnología Punta del Este 2026_" + uniqueId) {
+            	fail("No se encontró lo deseado");
+            }
+            
+            } catch (Exception e) {
             fail("Lanzó excepción incorrecta: " + e.getClass().getSimpleName() + " - " + e.getMessage());
         }
     }

@@ -242,7 +242,7 @@ public class RegistroEdicionEvento extends JInternalFrame {
 			JOptionPane.showMessageDialog(this, "Seleccione una fecha", "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
 			return false;
 		} 
-		if(fechaSeleccionada.isAfter(ctrlEventos.getDataEdicion(evento, edicion).getFechaFin())) {
+		if(fechaSeleccionada.isAfter(ctrlEventos.obtenerEdicionEvento(evento, edicion).getFechaFin())) {
 			JOptionPane.showMessageDialog(this, "La fecha seleccionada es invalida", "Nuevo Registro", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}

@@ -59,7 +59,7 @@ public class ConsultaEdicion extends HttpServlet {
 		}
 
 		String organizador = IEV.obtenerOrganizadorEdicion(eventoSeleccionado, edicionSeleccionada);
-		DataEdicion dataEd = IEV.getDataEdicion(eventoSeleccionado, edicionSeleccionada);
+		DataEdicion dataEd = IEV.obtenerEdicionEvento(eventoSeleccionado, edicionSeleccionada);
 
 		if (dataEd == null) {
 			request.setAttribute("error", "No se encontró la edición del evento");

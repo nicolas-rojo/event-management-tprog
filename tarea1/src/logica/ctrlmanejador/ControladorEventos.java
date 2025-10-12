@@ -293,15 +293,6 @@ public class ControladorEventos implements IEventos {
         }        
     }
     
-    public DataEdicion getDataEdicion(String evento, String edicion) {
-    	ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(evento);
-        EdicionEvento ed = e.getEdicion(edicion);
-        DataEdicion dataEd = new DataEdicion(ed.getNombre(),ed.getSigla(),ed.getFechaIni(),ed.getFechaFin(),ed.getFechaAlta(),ed.getCuidad(),ed.getPais());
-        return dataEd;
-        
-    }
-    
     public boolean existeEvento(String eventoSeleccionado) {
     	ManejadorEvento me = ManejadorEvento.getInstance();
     	Evento e = me.getEvento(eventoSeleccionado);

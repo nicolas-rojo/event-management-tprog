@@ -42,8 +42,6 @@ public interface IEventos {
 		
 		public abstract DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro);
 		
-		public abstract DataEdicion getDataEdicion(String evento, String edicion);
-		
 		public abstract DataEdicion[] getEdicionesEventoOrganizador(String nickname);
 		
 		public abstract DataEdicionWeb[] getEdicionesEventoOrganizadorWeb(String nickname);

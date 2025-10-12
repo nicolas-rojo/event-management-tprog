@@ -3,20 +3,34 @@ package test;
 import excepciones.InstitucionRepetidaException;
 import excepciones.PatrocinioRepetidoException;
 import logica.Fabrica;
+import logica.ctrlmanejador.ControladorInstituciones;
+import logica.ctrlmanejador.ControladorEventos;
+import logica.ctrlmanejador.ControladorUsuario;
 import logica.ctrlmanejador.ManejadorInstituciones;
+import logica.ctrlmanejador.ManejadorEvento;
+import logica.ctrlmanejador.ManejadorUsuario;
+import logica.datatypes.DataEdicion;
+import logica.datatypes.DataEvento;
+import logica.datatypes.DataEventoCompleto;
 import logica.datatypes.DataInstitucion;
+import logica.datatypes.DataOrganizador;
 import logica.datatypes.DataPatrocinio;
+import logica.datatypes.DataPatrocinioCompleto;
+import logica.datatypes.DataTRegistro;
+import logica.datatypes.Estado;
 import logica.datatypes.Nivel;
 import logica.interfaces.IInstituciones;
-
+import logica.interfaces.IUsuario;
+import logica.interfaces.IEventos;
 import junit.framework.TestCase;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 public class TestInstituciones extends TestCase {
     
     private IInstituciones controladorInstituciones;
-    
     @Override
     protected void setUp() throws Exception {
         super.setUp();
@@ -287,6 +301,121 @@ public class TestInstituciones extends TestCase {
             assertTrue("Se esperaba PatrocinioRepetidoException", true);
         } catch (Exception e) {
             fail("Lanzó excepción incorrecta: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+        }
+    }
+    
+    
+    public void testListadoPatrocinios() {
+		String uniqueId = String.valueOf(System.currentTimeMillis());
+		Fabrica fabrica = Fabrica.getInstance();
+		IUsuario controladorUsuario = fabrica.getIControladorUsuario();
+		IEventos controladorEventos = fabrica.getIControladorEventos();
+        try {
+            // Crear instituciones
+            controladorInstituciones.nuevaInstitucion(new DataInstitucion(
+                "Facultad de Ingenieria_" + uniqueId, 
+                "Facultad de Ingeniería de la Universidad de la República", 
+                "https://www.fing.edu.uy/"
+            ));
+            
+            
+            DataOrganizador organizadorData = new DataOrganizador(
+                    "Test Organizador_" + uniqueId,
+                    "testorg_" + uniqueId,
+                    "testorg_" + uniqueId + "@test.com",
+                    "pass" + uniqueId,
+                    "Organizador de prueba",
+                    "https://test.com"
+                );
+            controladorUsuario.registrarOrganizador(organizadorData);
+
+            // SEGUNDO: Configuración inicial
+            controladorEventos.nuevaCategoria("Tecnologia_" + uniqueId);
+            
+            DataEvento eventoData = new DataEvento(
+                "Conferencia de Tecnologia_" + uniqueId,
+                "CONFTEC_" + uniqueId,
+                LocalDate.of(2025, 1, 10),
+                "Evento sobre innovacion tecnológica"
+            );
+            
+            controladorEventos.nuevoEvento(eventoData, Arrays.asList("Tecnologia_" + uniqueId));
+            
+            List<DataEventoCompleto> cc = controladorEventos.getEventosConCategoria("Tecnologia_" + uniqueId);
+            if (cc.isEmpty()) {
+            	fail("No se registró el evento con su categoria correspondiente");
+            }
+            
+            DataEdicion edicionData = new DataEdicion(
+                "Tecnología Punta del Este 2026_" + uniqueId,
+                "CONFTECH26_" + uniqueId,
+                LocalDate.of(2026, 4, 6),
+                LocalDate.of(2026, 4, 10),
+                LocalDate.of(2025, 8, 1),
+                "Punta del Este",
+                "Uruguay"
+            );
+            
+            // Usar el organizador creado
+            controladorEventos.nuevaEdicion(
+                edicionData, 
+                "Conferencia de Tecnologia_" + uniqueId, 
+                "testorg_" + uniqueId
+            );
+            
+            if (controladorEventos.getEstado("Tecnología Punta del Este 2026_" + uniqueId, "Conferencia de Tecnologia_" + uniqueId) != Estado.Ingresada) {
+            	fail("Falla en el estado");
+            }
+            
+            DataPatrocinio dp = new DataPatrocinio(LocalDate.of(2026, 4, 10), 999999, Nivel.Bronce, uniqueId, 1);
+            
+            DataTRegistro tipoRegistroData = new DataTRegistro(
+                    "General",
+                    "Acceso general",
+                    1500,
+                    500
+                );
+                
+                controladorEventos.nuevoTipoRegistro(
+                    tipoRegistroData,
+                    "Conferencia de Tecnologia_" + uniqueId,
+                    "Tecnología Punta del Este 2026_" + uniqueId
+                );
+                
+            List<String> tr = controladorEventos.obtenerTipoRegistrosEdicion("Conferencia de Tecnologia_" + uniqueId, "Tecnología Punta del Este 2026_" + uniqueId);
+            if (tr.isEmpty()) {
+            	fail("No se registró correctamente el TR");
+            }
+            
+            controladorInstituciones.nuevoPatrocinio(dp, "Facultad de Ingenieria_" + uniqueId, "Conferencia de Tecnologia_" + uniqueId,"Tecnología Punta del Este 2026_" + uniqueId, "General");
+            
+            List<DataPatrocinioCompleto> res = controladorEventos.obtenerPatrociniosEdicion(
+            	    "Conferencia de Tecnologia_" + uniqueId,        // EVENTO
+            	    "Tecnología Punta del Este 2026_" + uniqueId   // EDICIÓN
+            	);
+            
+            if (res.size() != 1) {
+            	fail("No se creo el patrocinio deseado");
+            }
+            
+            List<String> res2 = controladorEventos.listarPatrocinios("Conferencia de Tecnologia_" + uniqueId, "Tecnología Punta del Este 2026_" + uniqueId);
+            
+            if (res.size() != 1) {
+            	fail("No se creo el patrocinio deseado");
+            }
+            
+            String nombre = controladorEventos.obtenerOrganizadorEdicion("Conferencia de Tecnologia_" + uniqueId, "Tecnología Punta del Este 2026_" + uniqueId);
+            if (nombre.equals("Facultad de Ingenieria_" + uniqueId)) {
+            	fail("No se hizo link con organizador");
+            }
+            
+            List<String> l = controladorEventos.obtenerRegistrosEdicion("Conferencia de Tecnologia_" + uniqueId, "Tecnología Punta del Este 2026_" + uniqueId);
+            if (l.isEmpty() == false) {
+            	fail("No deberían hacer registros");
+            }
+            assertTrue("Se creo el patrocinio deseado", true);
+        }catch (Exception e) {
+            fail("No debería lanzar excepción: " + e.getMessage());
         }
     }
 }
