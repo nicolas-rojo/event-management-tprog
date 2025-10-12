@@ -1,7 +1,7 @@
 package excepciones;
 
 /**
- * Excepción utilizada para indicar existencia previa de un tipo de registro para una edicion
+ * Excepción utilizada para indicar existencia previa de un tipo de registro para una edicion.
  * 
  * @author TProg2017
  *
