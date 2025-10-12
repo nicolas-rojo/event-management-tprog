@@ -62,8 +62,12 @@ public class DetalleUsuario extends HttpServlet {
                    
         } catch (UsuarioNoExisteException e) {
             request.setAttribute("error", "El usuario solicitado no existe.");
-            request.getRequestDispatcher("/WEB-INF/errorPages/error.jsp").forward(request, response);
-        }
+            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+        } catch (Exception e) {
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudo obtener la informacion del usuario");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+		}
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 

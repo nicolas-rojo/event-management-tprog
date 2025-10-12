@@ -64,8 +64,9 @@ public class AltaInstitucion extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/altaInstitucion.jsp").forward(request, response);
 
         } catch (Exception e) {
-            request.setAttribute("error", "Error al crear la institución: " + e.getMessage());
-            request.getRequestDispatcher("/WEB-INF/altaInstitucion.jsp").forward(request, response);
-        }
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudo dar de alta la institucion");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+		}
     }
 }

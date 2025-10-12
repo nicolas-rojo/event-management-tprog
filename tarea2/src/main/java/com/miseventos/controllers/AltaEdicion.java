@@ -109,6 +109,10 @@ public class AltaEdicion extends HttpServlet {
 			request.setAttribute("evento", evento);
 			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
 
+		} catch(Exception e) {
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudo dar de alta la edicion");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		}
 	}
 	

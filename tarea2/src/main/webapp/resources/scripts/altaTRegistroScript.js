@@ -21,27 +21,43 @@ document.getElementById('formTReg').addEventListener('submit', function(e) {
 		isValid = false;
 	}
 
-	// Validar apellido
+	// Validar costo
 	const costo = document.getElementById('costo');
 	const valorCosto = parseFloat(costo.value);
-	if (!costo.value.trim() || isNaN(valorCosto) || valorCosto < 0) {
-	    costo.classList.add('input-error');
-	    const errorDiv = document.getElementById('errorCosto');
-	    errorDiv.textContent = !costo.value.trim() ? "El costo es requerido" : "Debe ingresar un costo válido mayor a 0";
-	    errorDiv.style.display = 'block';
-	    isValid = false;
-	}
+	const errorDiv = document.getElementById('errorCosto');
+		if (!costo.value.trim()) {
+			errorDiv.textContent = "El costo es requerido";
+			errorDiv.style.display = 'block';
+			costo.classList.add('input-error');
+			isValid = false;
+		}else if (isNaN(valorCosto) || valorCosto <= 0) {
+			errorDiv.textContent = "Debe ingresar un costo válido positivo";
+			errorDiv.style.display = 'block';
+			costo.classList.add('input-error');
+			isValid = false;
+		}else {
+			errorDiv.style.display = 'none';
+			costo.classList.remove('input-error');
+		}
 
-	// Validar fecha
+	// Validar cupo
 	const cupo = document.getElementById('cupo');
 	const valorCupo = parseInt(cupo.value);
-	if (!cupo.value.trim() || isNaN(valorCupo) || valorCupo <= 0) {
-	    cupo.classList.add('input-error');
-	    const errorDiv = document.getElementById('errorCupo');
-	    errorDiv.textContent = !cupo.value.trim() ? "El cupo es requerido" : "Debe ingresar un cupo válido mayor a 0";
-	    errorDiv.style.display = 'block';
-	    isValid = false;
-	}
+	const errorDiv1 = document.getElementById('errorCupo');
+		if (!cupo.value.trim()) {
+			errorDiv1.textContent = "El cupo es requerido";
+			errorDiv1.style.display = 'block';
+			cupo.classList.add('input-error');
+			isValid = false;
+		}else if (isNaN(valorCupo) || valorCupo <= 0) {
+			errorDiv1.textContent = "Debe ingresar un cupo válido mayor a 0";
+			errorDiv1.style.display = 'block';
+			cupo.classList.add('input-error');
+			isValid = false;
+		}else{
+			errorDiv1.style.display = 'none';
+			cupo.classList.remove('input-error');
+		}
 	
 	if (!isValid) {
 	    e.preventDefault(); // Esto evita que el formulario se envíe
