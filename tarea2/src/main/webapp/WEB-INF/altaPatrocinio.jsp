@@ -33,6 +33,16 @@
 	<div class="form-container">
 		<h2>Nuevo Patrocinio</h2>
 
+		<!-- Mostrar evento y edición -->
+		<% 
+			String evento = (String) request.getAttribute("evento");
+			String edicion = (String) request.getAttribute("edicion");
+			if (evento != null && edicion != null) {
+		%>
+			<h3>Evento: <%= evento %></h3>
+			<h4>Edición: <%= edicion %></h4>
+		<% } %>
+
 		<!-- Mensaje de error del servidor -->
 		<% if (request.getAttribute("error") != null) { %>
 			<div class="server-error"><%= request.getAttribute("error") %></div>
@@ -41,41 +51,9 @@
 		<form action="${pageContext.request.contextPath}/AltaPatrocinio"
 			method="post" id="formPatrocinio">
 
-			<!-- Evento -->
-			<label for="evento">Evento:</label>
-			<select id="evento" name="evento">
-				<option value="">-- Seleccionar Evento --</option>
-				<% 
-					List<String> eventos = (List<String>) request.getAttribute("eventos");
-					String eventoSeleccionado = (String) request.getAttribute("eventoSeleccionado");
-					if (eventos != null) {
-						for (String evento : eventos) {
-				%>
-					<option value="<%= evento %>" <%= (eventoSeleccionado != null && eventoSeleccionado.equals(evento)) ? "selected" : "" %>><%= evento %></option>
-				<% 
-						}
-					}
-				%>
-			</select>
-			<div class="error-message" id="errorEvento">Debe seleccionar un evento</div>
-
-			<!-- Edición -->
-			<label for="edicion">Edición:</label>
-			<select id="edicion" name="edicion">
-				<option value="">-- Seleccionar Edición --</option>
-				<% 
-					List<String> ediciones = (List<String>) request.getAttribute("ediciones");
-					String edicionSeleccionada = (String) request.getAttribute("edicionSeleccionada");
-					if (ediciones != null) {
-						for (String ed : ediciones) {
-				%>
-					<option value="<%= ed %>" <%= (edicionSeleccionada != null && edicionSeleccionada.equals(ed)) ? "selected" : "" %>><%= ed %></option>
-				<% 
-						}
-					}
-				%>
-			</select>
-			<div class="error-message" id="errorEdicion">Debe seleccionar una edición</div>
+			<!-- Campos ocultos para evento y edición -->
+			<input type="hidden" name="evento" value="<%= evento != null ? evento : "" %>">
+			<input type="hidden" name="edicion" value="<%= edicion != null ? edicion : "" %>">
 
 			<!-- Tipo de Registro -->
 			<label for="tipoRegistro">Tipo de Registro:</label>
@@ -140,7 +118,7 @@
 
 			<!-- Código de Patrocinio -->
 			<label for="codigo">Código de Patrocinio:</label>
-			<input type="text" id="codigo" name="codigo" placeholder="Código">
+			<input type="text" id="codigo" name="codigo" placeholder="Código único">
 			<div class="error-message" id="errorCodigo">El código es requerido</div>
 
 			<div id="confirmarError" class="confirm-error"></div>

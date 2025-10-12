@@ -1,77 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const evento = document.getElementById("evento");
-    const edicion = document.getElementById("edicion");
-    const tipoRegistro = document.getElementById("tipoRegistro");
-
-    // Cargar ediciones cuando se selecciona un evento
-    evento.addEventListener("change", function() {
-        // Limpiar ediciones y tipos de registro
-        edicion.innerHTML = '<option value="">-- Seleccionar Edición --</option>';
-        tipoRegistro.innerHTML = '<option value="">-- Seleccionar Tipo de Registro --</option>';
-        
-        const eventoSeleccionado = evento.value;
-        
-        if (eventoSeleccionado && eventoSeleccionado !== "") {
-            // Hacer una petición al servidor para obtener las ediciones
-            const form = document.createElement('form');
-            form.method = 'GET';
-            form.action = 'AltaPatrocinio';
-            
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'accion';
-            input.value = 'cargarEdiciones';
-            form.appendChild(input);
-            
-            const inputEvento = document.createElement('input');
-            inputEvento.type = 'hidden';
-            inputEvento.name = 'evento';
-            inputEvento.value = eventoSeleccionado;
-            form.appendChild(inputEvento);
-            
-            document.body.appendChild(form);
-            form.submit();
-        }
-    });
-
-    // Cargar tipos de registro cuando se selecciona una edición
-    edicion.addEventListener("change", function() {
-        tipoRegistro.innerHTML = '<option value="">-- Seleccionar Tipo de Registro --</option>';
-        
-        const eventoSeleccionado = evento.value;
-        const edicionSeleccionada = edicion.value;
-        
-        if (eventoSeleccionado && edicionSeleccionada && 
-            eventoSeleccionado !== "" && edicionSeleccionada !== "") {
-            
-            const form = document.createElement('form');
-            form.method = 'GET';
-            form.action = 'AltaPatrocinio';
-            
-            const inputAccion = document.createElement('input');
-            inputAccion.type = 'hidden';
-            inputAccion.name = 'accion';
-            inputAccion.value = 'cargarTiposRegistro';
-            form.appendChild(inputAccion);
-            
-            const inputEvento = document.createElement('input');
-            inputEvento.type = 'hidden';
-            inputEvento.name = 'evento';
-            inputEvento.value = eventoSeleccionado;
-            form.appendChild(inputEvento);
-            
-            const inputEdicion = document.createElement('input');
-            inputEdicion.type = 'hidden';
-            inputEdicion.name = 'edicion';
-            inputEdicion.value = edicionSeleccionada;
-            form.appendChild(inputEdicion);
-            
-            document.body.appendChild(form);
-            form.submit();
-        }
-    });
-});
-
 document.getElementById('formPatrocinio').addEventListener('submit', function(e) {
     // Limpiar errores previos
     document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
@@ -79,22 +5,6 @@ document.getElementById('formPatrocinio').addEventListener('submit', function(e)
     document.getElementById('confirmarError').innerText = '';
     
     let isValid = true;
-
-    // Validar evento
-    const evento = document.getElementById('evento');
-    if (!evento.value || evento.value === "") {
-        evento.classList.add('input-error');
-        document.getElementById('errorEvento').style.display = 'block';
-        isValid = false;
-    }
-
-    // Validar edición
-    const edicion = document.getElementById('edicion');
-    if (!edicion.value || edicion.value === "") {
-        edicion.classList.add('input-error');
-        document.getElementById('errorEdicion').style.display = 'block';
-        isValid = false;
-    }
 
     // Validar tipo de registro
     const tipoRegistro = document.getElementById('tipoRegistro');
