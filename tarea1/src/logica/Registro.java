@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public class Registro {
 	private LocalDate fechaReg;
-	private EdicionEvento ed;
-	private TipoRegistro tr;
+	private EdicionEvento edi;
+	private TipoRegistro treg;
 	
-	public Registro(LocalDate f) {
-		this.fechaReg = f;
+	public Registro(LocalDate fecha) {
+		this.fechaReg = fecha;
 	}
 	
 	public LocalDate getFecha() {
@@ -16,34 +16,34 @@ public class Registro {
 	}
 	
 	public TipoRegistro getTipoRegistro() {
-		return this.tr;
+		return this.treg;
 	}
 	
-	public void setFecha(LocalDate f) {
-		this.fechaReg = f;
+	public void setFecha(LocalDate fecha) {
+		this.fechaReg = fecha;
 	}
 	
 	public String getNombreEdicion() {
-		return this.ed.getNombre();
+		return this.edi.getNombre();
 	}
 	
 	public String getNombreTR() {
-		return this.tr.getNombre();
+		return this.treg.getNombre();
 	}
 	
 	public float getCostoTR() {
-		return this.tr.getCosto();
+		return this.treg.getCosto();
 	}
 	
 	public boolean esEdicion(String edicion) {
-		return (ed.getNombre().equals(edicion));
+		return (edi.getNombre().equals(edicion));
 	}
 	
-	public void asociarEdicion(EdicionEvento ed) {
-		this.ed = ed;
+	public void asociarEdicion(EdicionEvento edev) {
+		this.edi = edev;
 	}
 	
-	public void asociarTRegistro(TipoRegistro tr) {
-		this.tr = tr;
+	public void asociarTRegistro(TipoRegistro treg) {
+		this.treg = treg;
 	}
 }

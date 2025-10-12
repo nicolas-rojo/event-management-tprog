@@ -58,16 +58,16 @@ public class Patrocinio {
 		return this.edicion;
 	}
 	
-	public void setFecha(LocalDate f) {
-		this.fecha = f;
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
 	}
 	
-	public void setMonto(float m) {
-		this.monto = m;
+	public void setMonto(float monto) {
+		this.monto = monto;
 	}
 	
-	public void setNivel(Nivel n) {
-		this.nivel = n;
+	public void setNivel(Nivel nivel) {
+		this.nivel = nivel;
 	}
 	
 	public void setCod(String cod) {
@@ -78,15 +78,15 @@ public class Patrocinio {
 		this.ctdCupo = cupo;
 	}
 	
-	public void setTipoRegistro(TipoRegistro t) {
-		this.tipoRegistro = t;
+	public void setTipoRegistro(TipoRegistro treg) {
+		this.tipoRegistro = treg;
 	}
 	
-	public void setInstitucion(Institucion i) {
-		this.institucion = i;
+	public void setInstitucion(Institucion ins) {
+		this.institucion = ins;
 	}
 	
-	public void setEdicionEvento(EdicionEvento ee) {
-		this.edicion = ee;
+	public void setEdicionEvento(EdicionEvento edev) {
+		this.edicion = edev;
 	}
 }

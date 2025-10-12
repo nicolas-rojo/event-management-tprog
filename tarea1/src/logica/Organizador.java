@@ -1,13 +1,14 @@
 package logica;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import logica.datatypes.DataOrganizador;
 
 public class Organizador extends Usuario{
 	private String descripcion;
 	private String url;
-	private HashMap<String, EdicionEvento> ediciones;
+	private Map<String, EdicionEvento> ediciones;
 	
 	public Organizador(String nombre, String nickname, String email, String pass, String descripcion, String url){
 		super(nombre, nickname, email, pass);

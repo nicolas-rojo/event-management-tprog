@@ -37,16 +37,16 @@ public class DataPatrocinio {
 		return ctdCupo;
 	}
 	
-	public void setFecha(LocalDate f) {
-		this.fecha = f;
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
 	}
 	
-	public void setMonto(float m) {
-		this.monto = m;
+	public void setMonto(float monto) {
+		this.monto = monto;
 	}
 	
-	public void setNivel(Nivel n) {
-		this.nivel = n;
+	public void setNivel(Nivel nivel) {
+		this.nivel = nivel;
 	}
 	
 	public void setCod(String cod) {

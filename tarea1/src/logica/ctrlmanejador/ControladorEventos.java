@@ -44,8 +44,8 @@ public class ControladorEventos implements IEventos {
     }
     
     public void nuevoTipoRegistro(DataTRegistro dataTRegistro, String evento, String edicion) throws TipoDeRegistroRepetidoException {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento eventoTRegistro = me.getEvento(evento);
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento eventoTRegistro = mev.getEvento(evento);
         EdicionEvento edicionTRegistro = eventoTRegistro.getEdicion(edicion);
         if(edicionTRegistro.getTRegistro().contains(dataTRegistro.getNombre())) {
             throw new TipoDeRegistroRepetidoException("El Tipo de Registro ingresado ya existe en el sistema");
@@ -56,79 +56,79 @@ public class ControladorEventos implements IEventos {
     
     
     public void nuevoEvento(DataEvento dataEvento, List<String> cats) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(dataEvento.getNombre());
-        if (e != null) {
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento evt = mev.getEvento(dataEvento.getNombre());
+        if (evt != null) {
             throw new EventoRepetidoExcepcion("nombre de evento en uso");
         }        
         else {
             if (cats == null || cats.isEmpty()) {
                 throw new EventoSinCategoriaExcepcion("Faltó ingresar una categoría");
             }
-            e = new Evento(dataEvento);
+            evt = new Evento(dataEvento);
             for(String c : cats) {
-                Categoria categoria = me.getCategoria(c);
+                Categoria categoria = mev.getCategoria(c);
                 if (categoria == null) {
                     throw new EventoSinCategoriaExcepcion(
                         "La categoría seleccionada no existe en el sistema: " + c);
                 }
-                e.agregarCategoria(categoria);
-                categoria.addEvento(e);
+                evt.agregarCategoria(categoria);
+                categoria.addEvento(evt);
             }
-            me.addEvento(e);
+            mev.addEvento(evt);
         }
         
     }
 
     public List<DataEventoCompleto> getEventosConCategoria(String cat){
     	 List<DataEventoCompleto> res = new ArrayList<>();
-    	 ManejadorEvento me = ManejadorEvento.getInstance();
-         Set<Evento> e =  me.getEventosConCategoria(cat);
-         for (Evento ev : e) {
-        	 DataEventoCompleto dt = ev.getDTOEvento();
-        	 res.add(dt);
+    	 ManejadorEvento mev = ManejadorEvento.getInstance();
+         Set<Evento> evt =  mev.getEventosConCategoria(cat);
+         for (Evento ev : evt) {
+        	 DataEventoCompleto dtc = ev.getDTOEvento();
+        	 res.add(dtc);
          }
          return res;
     }
     
     public List<String> listarEventos(){
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        return me.getEventos();
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        return mev.getEventos();
     }
     
     public List<String> listarCategorias(){
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        return me.getCategorias();
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        return mev.getCategorias();
     }
     
     public void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        ManejadorUsuario mu = ManejadorUsuario.getInstance();
-        Organizador o = (Organizador) mu.getUsuarioNickname(org);
-        List<String> eventos = me.getEventos();
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        ManejadorUsuario musr = ManejadorUsuario.getInstance();
+        Organizador orga = (Organizador) musr.getUsuarioNickname(org);
+        List<String> eventos = mev.getEventos();
         
         //Me fijo que no existe una edicion con ese nombre en TODOS los eventos
         
         for(String e : eventos) {
-        	Evento ev = me.getEvento(e);
-        	List<String> ediciones = ev.getEdiciones();
+        	Evento evt = mev.getEvento(e);
+        	List<String> ediciones = evt.getEdiciones();
         	for(String ed : ediciones) {
         		if(ed.equals(dataEdicion.getNombre())) {
         			throw new EdicionRepetidaExcepcion("Nombre de edicion en uso");
         		}
         	}
         }
-        Evento e = me.getEvento(evento);
-        EdicionEvento ee = e.getEdicion(dataEdicion.getNombre()); 
-        ee = new EdicionEvento(dataEdicion);
-        e.agregarEdicion(ee);
-        o.agregarEdicion(ee);
-        ee.agregarOrganizador(o);
+        Evento evt = mev.getEvento(evento);
+        EdicionEvento edev = evt.getEdicion(dataEdicion.getNombre()); 
+        edev = new EdicionEvento(dataEdicion);
+        evt.agregarEdicion(edev);
+        orga.agregarEdicion(edev);
+        edev.agregarOrganizador(orga);
     }
     
     public DataEventoCompleto[] listarInfoEvento() throws EventoNoExisteExcepcion {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento[] eventos = me.getEventosTipoEvento();
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento[] eventos = mev.getEventosTipoEvento();
 
         if (eventos != null && eventos.length > 0) {
             DataEventoCompleto[] dtoEventos = new DataEventoCompleto[eventos.length];
@@ -141,80 +141,80 @@ public class ControladorEventos implements IEventos {
         }
     }
     public List<String> listarEdiciones(String eventoSeleccionado) {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(eventoSeleccionado);
-        if(e==null) {
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento evt = mev.getEvento(eventoSeleccionado);
+        if(evt==null) {
             return new ArrayList<>();
         }
-        return e.getEdiciones();            
+        return evt.getEdiciones();            
     }
     
     public List<String> listarTRegistros(String eventoSeleccionado, String edicionSeleccionada) {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(eventoSeleccionado);
-        if(e ==null) {
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento evt = mev.getEvento(eventoSeleccionado);
+        if(evt ==null) {
             return new ArrayList<>();
         }
-        return e.getTRegistroEdicion(edicionSeleccionada);
+        return evt.getTRegistroEdicion(edicionSeleccionada);
     }
     
     public void nuevoRegistro(Asistente asist, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro {
-        boolean c1 = asist.estaRegistrado(edicion);
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(evento);
-        boolean c2 = e.cupoEdTRegistro(edicion, tipoReg);
-        if (c1) {
+        boolean cond1 = asist.estaRegistrado(edicion);
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento evt = mev.getEvento(evento);
+        boolean cond2 = evt.cupoEdTRegistro(edicion, tipoReg);
+        if (cond1) {
             throw new AsistenteYaRegistrado("el asistente ya está registrado a la edicion seleccionada");
-        } else if (!c2) {
+        } else if (!cond2) {
             throw new NoHayCupoEdicionTRegistro("no hay cupos para el tipo de registro y edicion seleccionados");
         } else { 
             Registro reg = new Registro(fecha);
             asist.agregarRegistro(reg);
-            EdicionEvento ed = e.getEdicion(edicion);
-            TipoRegistro tReg = ed.getTRegistro(tipoReg);
+            EdicionEvento edi = evt.getEdicion(edicion);
+            TipoRegistro tReg = edi.getTRegistro(tipoReg);
             tReg.bajarCupo();
-            reg.asociarEdicion(ed);
+            reg.asociarEdicion(edi);
             reg.asociarTRegistro(tReg);
-            ed.agregarRegistro(reg);
+            edi.agregarRegistro(reg);
         }
     }
     
     public DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro) {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(evento);
-        EdicionEvento ed = e.getEdicion(edicion);
-        TipoRegistro tr =  ed.getTRegistro(tipoRegistro);
-        return new DataTRegistro(tr.getNombre(), tr.getDescripcion(), tr.getCosto(), tr.getCupo());
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento evt = mev.getEvento(evento);
+        EdicionEvento edi = evt.getEdicion(edicion);
+        TipoRegistro treg =  edi.getTRegistro(tipoRegistro);
+        return new DataTRegistro(treg.getNombre(), treg.getDescripcion(), treg.getCosto(), treg.getCupo());
     }
     
     public DataEdicion obtenerEdicionEvento(String nombreEvento, String nombreEdicionEvento) {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(nombreEvento);
-        if (e == null) return null;
-        EdicionEvento ed = e.getEdicion(nombreEdicionEvento);
-        if (ed == null) return null;
-        return new DataEdicion(ed.getNombre(), ed.getSigla(), ed.getFechaIni(), 
-                              ed.getFechaFin(), ed.getFechaAlta(), ed.getCuidad(), ed.getPais());
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento evt = mev.getEvento(nombreEvento);
+        if (evt == null) return null;
+        EdicionEvento edi = evt.getEdicion(nombreEdicionEvento);
+        if (edi == null) return null;
+        return new DataEdicion(edi.getNombre(), edi.getSigla(), edi.getFechaIni(), 
+                              edi.getFechaFin(), edi.getFechaAlta(), edi.getCuidad(), edi.getPais());
     }
     
     public List<String> obtenerTipoRegistrosEdicion(String nombreEvento, String nombreEdicionEvento) {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(nombreEvento);
-        if (e == null) return new ArrayList<>();
-        EdicionEvento ed = e.getEdicion(nombreEdicionEvento);
-        if (ed == null) return new ArrayList<>();
-        return ed.getTRegistro();
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento evt = mev.getEvento(nombreEvento);
+        if (evt == null) return new ArrayList<>();
+        EdicionEvento edev = evt.getEdicion(nombreEdicionEvento);
+        if (edev == null) return new ArrayList<>();
+        return edev.getTRegistro();
     }
     
     public List<DataPatrocinioCompleto> obtenerPatrociniosEdicion(String nombreEvento, String nombreEdicionEvento) {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(nombreEvento);
-        if (e == null) return new ArrayList<>();
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento evt = mev.getEvento(nombreEvento);
+        if (evt == null) return new ArrayList<>();
         
-        EdicionEvento ed = e.getEdicion(nombreEdicionEvento);
-        if (ed == null) return new ArrayList<>();
+        EdicionEvento edev = evt.getEdicion(nombreEdicionEvento);
+        if (edev == null) return new ArrayList<>();
         
-        List<Patrocinio> patrocinios = ed.getPatrociniosLista();
+        List<Patrocinio> patrocinios = edev.getPatrociniosLista();
         List<DataPatrocinioCompleto> result = new ArrayList<>();
         
         for (Patrocinio p : patrocinios) {
@@ -236,93 +236,93 @@ public class ControladorEventos implements IEventos {
     }
     
     public List<String> obtenerRegistrosEdicion(String nombreEvento, String nombreEdicionEvento) {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(nombreEvento);
-        if (e == null) return new ArrayList<>();
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento evt = mev.getEvento(nombreEvento);
+        if (evt == null) return new ArrayList<>();
         
-        EdicionEvento ed = e.getEdicion(nombreEdicionEvento);
-        if (ed == null) return new ArrayList<>();
+        EdicionEvento edi = evt.getEdicion(nombreEdicionEvento);
+        if (edi == null) return new ArrayList<>();
         
-        return ed.getRegistrosInfo();
+        return edi.getRegistrosInfo();
     }
     
     public String obtenerOrganizadorEdicion(String nombreEvento, String nombreEdicionEvento) {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(nombreEvento);
-        if (e == null) return "";
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento evt = mev.getEvento(nombreEvento);
+        if (evt == null) return "";
         
-        EdicionEvento ed = e.getEdicion(nombreEdicionEvento);
-        if (ed == null) return "";
+        EdicionEvento edi = evt.getEdicion(nombreEdicionEvento);
+        if (edi == null) return "";
         
-        Organizador org = ed.getOrganizador();
+        Organizador org = edi.getOrganizador();
         return org != null ? org.getNickname() : "";
     }
     
     public DataEdicion[] getEdicionesEventoOrganizador(String nickname) {
-        ManejadorUsuario mu = ManejadorUsuario.getInstance();
-        Organizador o = (Organizador) mu.getUsuarioNickname(nickname);
-        EdicionEvento[] ee = o.getEdiciones();
-        DataEdicion[] res = new DataEdicion[ee.length];
-        for (int i = 0; i < ee.length; i++) {
-            res[i] = new DataEdicion(ee[i].getNombre(), ee[i].getSigla(), ee[i].getFechaIni(), ee[i].getFechaFin(), 
-                    ee[i].getFechaAlta(), ee[i].getCuidad(), ee[i].getPais());
+        ManejadorUsuario musr = ManejadorUsuario.getInstance();
+        Organizador org = (Organizador) musr.getUsuarioNickname(nickname);
+        EdicionEvento[] edev = org.getEdiciones();
+        DataEdicion[] res = new DataEdicion[edev.length];
+        for (int i = 0; i < edev.length; i++) {
+            res[i] = new DataEdicion(edev[i].getNombre(), edev[i].getSigla(), edev[i].getFechaIni(), edev[i].getFechaFin(), 
+                    edev[i].getFechaAlta(), edev[i].getCuidad(), edev[i].getPais());
         }
         return res;
     }
     
     public DataEdicionWeb[] getEdicionesEventoOrganizadorWeb(String nickname) {
-        ManejadorUsuario mu = ManejadorUsuario.getInstance();
-        Organizador o = (Organizador) mu.getUsuarioNickname(nickname);
-        EdicionEvento[] ee = o.getEdiciones();
-        DataEdicionWeb[] res = new DataEdicionWeb[ee.length];
-        for (int i = 0; i < ee.length; i++) {
-            res[i] = new DataEdicionWeb(ee[i].getNombre(), ee[i].getSigla(), ee[i].getFechaIni(), ee[i].getFechaFin(), 
-                    ee[i].getFechaAlta(), ee[i].getCuidad(), ee[i].getPais(), ee[i].getEstado());
+        ManejadorUsuario musr = ManejadorUsuario.getInstance();
+        Organizador org = (Organizador) musr.getUsuarioNickname(nickname);
+        EdicionEvento[] edev = org.getEdiciones();
+        DataEdicionWeb[] res = new DataEdicionWeb[edev.length];
+        for (int i = 0; i < edev.length; i++) {
+            res[i] = new DataEdicionWeb(edev[i].getNombre(), edev[i].getSigla(), edev[i].getFechaIni(), edev[i].getFechaFin(), 
+                    edev[i].getFechaAlta(), edev[i].getCuidad(), edev[i].getPais(), edev[i].getEstado());
         }
         return res;
     }
 
     public void nuevaCategoria(String cat) throws CategoriaRepetidaException {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Categoria c = me.getCategoria(cat);
-        if(c != null) {
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Categoria cate = mev.getCategoria(cat);
+        if(cate != null) {
             throw new CategoriaRepetidaException("Ya existe esta categoria");
         }else {
             Categoria categoria = new Categoria(cat);
-            me.agregarCategoria(cat, categoria);
+            mev.agregarCategoria(cat, categoria);
         }        
     }
     
     public boolean existeEvento(String eventoSeleccionado) {
-    	ManejadorEvento me = ManejadorEvento.getInstance();
-    	Evento e = me.getEvento(eventoSeleccionado);
-    	return (e.getNombreEvento().equals(eventoSeleccionado));
+    	ManejadorEvento mev = ManejadorEvento.getInstance();
+    	Evento evt = mev.getEvento(eventoSeleccionado);
+    	return (evt.getNombreEvento().equals(eventoSeleccionado));
     }
     
     public boolean existeEdicion(String evento, String edicion) {
-    	ManejadorEvento me = ManejadorEvento.getInstance();
-    	Evento e = me.getEvento(evento);
-    	if (e == null) {
+    	ManejadorEvento mev = ManejadorEvento.getInstance();
+    	Evento evt = mev.getEvento(evento);
+    	if (evt == null) {
     		return false;
     	}
-    	EdicionEvento ed = e.getEdicion(edicion);
-    	if (ed == null) {
+    	EdicionEvento edi = evt.getEdicion(edicion);
+    	if (edi == null) {
     		return false;
     	}
     	return true;
     }
     
-    public boolean existeTR(String evento, String edicion, String tr) {
-    	ManejadorEvento me = ManejadorEvento.getInstance();
-    	Evento e = me.getEvento(evento);
-    	if (e == null) {
+    public boolean existeTR(String evento, String edicion, String treg) {
+    	ManejadorEvento mev = ManejadorEvento.getInstance();
+    	Evento evt = mev.getEvento(evento);
+    	if (evt == null) {
     		return false;
     	}
-    	EdicionEvento ed = e.getEdicion(edicion);
-    	if (ed == null) {
+    	EdicionEvento edi = evt.getEdicion(edicion);
+    	if (edi == null) {
     		return false;
     	}
-    	TipoRegistro tipo = ed.getTRegistro(tr);
+    	TipoRegistro tipo = edi.getTRegistro(treg);
     	if (tipo == null) {
     		return false;
     	}
@@ -330,20 +330,20 @@ public class ControladorEventos implements IEventos {
     }
     
     public String eventoTieneEdicion(String edicion) {
-    	ManejadorEvento me = ManejadorEvento.getInstance();
-    	return me.eventoTieneEdicion(edicion);
+    	ManejadorEvento mev = ManejadorEvento.getInstance();
+    	return mev.eventoTieneEdicion(edicion);
     }
     
     
     //NUEVOS PARA CONSULTA PATROCINIO
     @Override
     public List<String> listarPatrocinios(String evento, String edicion) {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(evento);
-        if (e == null) return new ArrayList<>();
-        EdicionEvento ed = e.getEdicion(edicion);
-        if (ed == null) return new ArrayList<>();
-        List<Patrocinio> patrocinios = ed.getPatrociniosLista();
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento evt = mev.getEvento(evento);
+        if (evt == null) return new ArrayList<>();
+        EdicionEvento edev = evt.getEdicion(edicion);
+        if (edev == null) return new ArrayList<>();
+        List<Patrocinio> patrocinios = edev.getPatrociniosLista();
         List<String> res = new ArrayList<>();
         for (Patrocinio p : patrocinios) {
             // Formatear como "código - nivel"
@@ -354,12 +354,12 @@ public class ControladorEventos implements IEventos {
 
     @Override
     public DataPatrocinioCompleto obtenerDTOPatrocinioCompleto(String evento, String edicion, String codigo) {
-        ManejadorEvento me = ManejadorEvento.getInstance();
-        Evento e = me.getEvento(evento);
-        if (e == null) return null;
-        EdicionEvento ed = e.getEdicion(edicion);
-        if (ed == null) return null;
-        List<Patrocinio> patrocinios = ed.getPatrociniosLista();
+        ManejadorEvento mev = ManejadorEvento.getInstance();
+        Evento evt = mev.getEvento(evento);
+        if (evt == null) return null;
+        EdicionEvento edev = evt.getEdicion(edicion);
+        if (edev == null) return null;
+        List<Patrocinio> patrocinios = edev.getPatrociniosLista();
         for (Patrocinio p : patrocinios) {
             if (p.getCod().equals(codigo)) {
                 String nombreInstitucion = p.getInstitucion().getNombre();

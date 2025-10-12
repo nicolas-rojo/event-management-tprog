@@ -99,12 +99,12 @@ public class EdicionEvento {
 		this.fechaFin = fecha;
 	}
 	
-	public void setOrganizador(Organizador o) {
-		this.organizador = o;
+	public void setOrganizador(Organizador org) {
+		this.organizador = org;
 	}
 	
-	public void setEstado(Estado e) {
-		this.estado = e;
+	public void setEstado(Estado est) {
+		this.estado = est;
 	}
 	
 	public List<String> getTRegistro() {
@@ -154,17 +154,17 @@ public class EdicionEvento {
 	    return lista;
 	}
 
-	public void agregarPatrocinio(Patrocinio p) {
-	    this.patrocinios.add(p);
+	public void agregarPatrocinio(Patrocinio patro) {
+	    this.patrocinios.add(patro);
 	}
 
 	public void agregarOrganizador(Organizador org) {
 	    this.organizador = org;
 	}
 	
-	public void agregarRegistro(Registro r) {
-		if(r != null) {
-			this.registros.add(r);
+	public void agregarRegistro(Registro reg) {
+		if(reg != null) {
+			this.registros.add(reg);
 		}
 	}
 }

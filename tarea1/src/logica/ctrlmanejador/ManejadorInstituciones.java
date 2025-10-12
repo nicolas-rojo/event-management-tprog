@@ -21,8 +21,8 @@ public class ManejadorInstituciones {
     	instancia = null;
     }
 	
-	public void addInstitucion(Institucion i) {
-		this.instituciones.put(i.getNombre(), i);
+	public void addInstitucion(Institucion ins) {
+		this.instituciones.put(ins.getNombre(), ins);
 	}
 	
 	public Institucion getInstitucion(String nombre) {
@@ -34,10 +34,10 @@ public class ManejadorInstituciones {
             return null;
         else {
             Collection<Institucion> ins = instituciones.values();
-            Object[] o = ins.toArray();
-            Institucion[] res = new Institucion[o.length];
-            for (int i = 0; i < o.length; i++) {
-                res[i] = (Institucion) o[i];
+            Object[] obj = ins.toArray();
+            Institucion[] res = new Institucion[obj.length];
+            for (int i = 0; i < obj.length; i++) {
+                res[i] = (Institucion) obj[i];
             }
             return res;
         }

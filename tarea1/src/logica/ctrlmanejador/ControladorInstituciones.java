@@ -19,52 +19,52 @@ public class ControladorInstituciones implements IInstituciones{
 	public ControladorInstituciones() {}
 	
 	public DataInstitucion[] listarInstituciones() {
-		ManejadorInstituciones mi = ManejadorInstituciones.getInstance();
-		Institucion[] ins = mi.getInstituciones();
+		ManejadorInstituciones mins = ManejadorInstituciones.getInstance();
+		Institucion[] ins = mins.getInstituciones();
 		if (ins == null)
 			return null;
 		else {
-			DataInstitucion[] di = new DataInstitucion[ins.length];
+			DataInstitucion[] dataIns = new DataInstitucion[ins.length];
 			for (int i = 0; i<ins.length; i++) {
-				di[i] = new DataInstitucion(ins[i].getNombre(), ins[i].getDescripcion(), ins[i].getUrl());
+				dataIns[i] = new DataInstitucion(ins[i].getNombre(), ins[i].getDescripcion(), ins[i].getUrl());
 			}
-		return di;
+		return dataIns;
 		}
 
 	}
 	
-	public void nuevaInstitucion(DataInstitucion di) throws InstitucionRepetidaException {
-		ManejadorInstituciones mi = ManejadorInstituciones.getInstance();
-		Institucion ins = mi.getInstitucion(di.getNombre());
+	public void nuevaInstitucion(DataInstitucion dataIns) throws InstitucionRepetidaException {
+		ManejadorInstituciones mins = ManejadorInstituciones.getInstance();
+		Institucion ins = mins.getInstitucion(dataIns.getNombre());
 		if(ins != null) {
 			throw new InstitucionRepetidaException("Ya existe esta institucion");
 		}else {
-			Institucion i = new Institucion(di);
-			mi.addInstitucion(i);
+			Institucion inst = new Institucion(dataIns);
+			mins.addInstitucion(inst);
 		}
 	}
 	
-	public void nuevoPatrocinio(DataPatrocinio dp, String institucion, String evento, String edicion, String t) throws PatrocinioRepetidoException {
-		ManejadorInstituciones mi = ManejadorInstituciones.getInstance();
-		Patrocinio p = new Patrocinio(dp);
+	public void nuevoPatrocinio(DataPatrocinio dataP, String institucion, String evento, String edicion, String nomTReg) throws PatrocinioRepetidoException {
+		ManejadorInstituciones mins = ManejadorInstituciones.getInstance();
+		Patrocinio patro = new Patrocinio(dataP);
 		
-		Institucion i = mi.getInstitucion(institucion);
-		p.setInstitucion(i);
+		Institucion ins = mins.getInstitucion(institucion);
+		patro.setInstitucion(ins);
 		
-		ManejadorEvento me = ManejadorEvento.getInstance();
-		Evento e = me.getEvento(evento);
-		EdicionEvento ee = e.getEdicion(edicion);
-		p.setEdicionEvento(ee);
-		Set<Patrocinio> patrocinios = ee.getPatrocinios();
+		ManejadorEvento mev = ManejadorEvento.getInstance();
+		Evento evt = mev.getEvento(evento);
+		EdicionEvento edev = evt.getEdicion(edicion);
+		patro.setEdicionEvento(edev);
+		Set<Patrocinio> patrocinios = edev.getPatrocinios();
 		for(Patrocinio pat : patrocinios) {
 			if(pat.getInstitucion().getNombre().equals(institucion)) {
 				throw new PatrocinioRepetidoException("Ya existe este patrocinio en esta edicion");
 			}
 		}
-		TipoRegistro tr = ee.getTRegistro(t);
-		p.setTipoRegistro(tr);
-		i.añadirPatrocinio(p);
-		ee.agregarPatrocinio(p);
+		TipoRegistro treg = edev.getTRegistro(nomTReg);
+		patro.setTipoRegistro(treg);
+		ins.añadirPatrocinio(patro);
+		edev.agregarPatrocinio(patro);
 	}
 
 }

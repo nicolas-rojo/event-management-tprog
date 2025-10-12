@@ -38,12 +38,12 @@ public class TipoRegistro {
 		this.descripcion = desc;
 	}
 	
-	public void setCosto(float c) {
-		this.costo = c;
+	public void setCosto(float cost) {
+		this.costo = cost;
 	}
 	
-	public void setCupo(int c) {
-		this.cupo = c;
+	public void setCupo(int cupo) {
+		this.cupo = cupo;
 	}
 	
 	public boolean tieneCupo() {

@@ -12,8 +12,8 @@ import java.util.Collection;
 
 public class ManejadorEvento {
     private static ManejadorEvento instancia = null;
-    private HashMap<String, Evento> eventos;
-    private HashMap<String, Categoria> categorias;
+    private Map<String, Evento> eventos;
+    private Map<String, Categoria> categorias;
     
     private ManejadorEvento() {
         eventos = new HashMap<String, Evento>();
@@ -32,8 +32,8 @@ public class ManejadorEvento {
     }
     
     public Set<Evento> getEventosConCategoria(String cat){
-    	Categoria c = categorias.get(cat);
-    	return c.getEventos();
+    	Categoria cate = categorias.get(cat);
+    	return cate.getEventos();
     }
     
     public void addEvento(Evento evento) {
@@ -64,8 +64,8 @@ public class ManejadorEvento {
         return new ArrayList<>(this.categorias.keySet());
     }
 
-    public void agregarCategoria(String cat, Categoria c) {
-        this.categorias.put(cat, c);
+    public void agregarCategoria(String cat, Categoria categoria) {
+        this.categorias.put(cat, categoria);
     }
     
     public Evento[] getEventosTipoEvento() {
@@ -73,10 +73,10 @@ public class ManejadorEvento {
             return null;
         else {
             Collection<Evento> allEventos = eventos.values();
-            Object[] o = allEventos.toArray();
-            Evento[] eventosArray = new Evento[o.length];
-            for (int i = 0; i < o.length; i++) {
-                eventosArray[i] = (Evento) o[i];
+            Object[] obj = allEventos.toArray();
+            Evento[] eventosArray = new Evento[obj.length];
+            for (int i = 0; i < obj.length; i++) {
+                eventosArray[i] = (Evento) obj[i];
             }
             return eventosArray;
         }

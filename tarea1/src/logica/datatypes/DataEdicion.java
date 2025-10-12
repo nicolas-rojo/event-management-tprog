@@ -10,7 +10,6 @@ public class DataEdicion {
 	private LocalDate fechaAlta;
 	private String ciudad;
 	private String pais;
-	private Estado estado;
 		
 	public DataEdicion(String nombre, String sigla, LocalDate fechaIni, LocalDate fechaFin, LocalDate fechaAlta, String ciudad, String pais) {
 		this.nombre = nombre;

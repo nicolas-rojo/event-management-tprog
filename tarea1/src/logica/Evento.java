@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 
 public class Evento {
@@ -17,7 +18,7 @@ public class Evento {
 	private LocalDate fechaAlta;
 	private String descripcion;
 	
-	private HashMap<String, EdicionEvento> ediciones;
+	private Map<String, EdicionEvento> ediciones;
 	private Set<Categoria> categorias;
 	
 	public Evento(DataEvento dataevento) {
@@ -54,8 +55,8 @@ public class Evento {
 		this.sigla = sigla;
 	}
 	
-	public void setFechaAlta(LocalDate f) {
-		this.fechaAlta = f;
+	public void setFechaAlta(LocalDate fecha) {
+		this.fechaAlta = fecha;
 	}
 	
 	public void setDesc(String desc) {
@@ -88,16 +89,16 @@ public class Evento {
 	}
 	
 	public List<String> getTRegistroEdicion(String edSeleccionada) {
-	    EdicionEvento ed = this.getEdicion(edSeleccionada);
-	    return ed.getTRegistro();
+	    EdicionEvento edi = this.getEdicion(edSeleccionada);
+	    return edi.getTRegistro();
 	}
 	
 	public boolean cupoEdTRegistro(String edicion, String tReg) {
-	    EdicionEvento ed = this.ediciones.get(edicion);
-	    return ed.cupoTRegistro(tReg);
+	    EdicionEvento edi = this.ediciones.get(edicion);
+	    return edi.cupoTRegistro(tReg);
 	}
 	
-	public void agregarCategoria(Categoria c) {
-		this.categorias.add(c);
+	public void agregarCategoria(Categoria cat) {
+		this.categorias.add(cat);
 	}
 }

@@ -9,10 +9,10 @@ public class Institucion {
     private String url;
     private Set<Patrocinio> patrocinios;
     
-    public Institucion(DataInstitucion di) {
-        this.nombre = di.getNombre();
-        this.descripcion = di.getDescripcion();
-        this.url = di.getUrl();
+    public Institucion(DataInstitucion dataIns) {
+        this.nombre = dataIns.getNombre();
+        this.descripcion = dataIns.getDescripcion();
+        this.url = dataIns.getUrl();
         this.patrocinios = new HashSet<>();
     }
     
@@ -32,7 +32,7 @@ public class Institucion {
         return this.patrocinios;
     }
     
-    public void añadirPatrocinio(Patrocinio p) {
-        this.patrocinios.add(p);
+    public void añadirPatrocinio(Patrocinio patro) {
+        this.patrocinios.add(patro);
     }
 }

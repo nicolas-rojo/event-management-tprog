@@ -35,71 +35,71 @@ public class ControladorUsuario implements IUsuario {
     }
 
     public void registrarAsistente(String nombre, String nickname, String email, String pass, String apellido, LocalDate fechaNac) throws UsuarioRepetidoException {
-        ManejadorUsuario mu = ManejadorUsuario.getInstance();
-        Usuario u = mu.getUsuarioNickname(nickname);
-        if (u != null)
+        ManejadorUsuario musr = ManejadorUsuario.getInstance();
+        Usuario usr = musr.getUsuarioNickname(nickname);
+        if (usr != null)
             throw new UsuarioRepetidoException("Nickname ya en uso");
-        u = mu.getUsuarioEmail(email);
-        if (u != null)
+        usr = musr.getUsuarioEmail(email);
+        if (usr != null)
             throw new UsuarioRepetidoException("Email ya en uso");
-        Asistente a = new Asistente(nombre, nickname, email, pass, apellido, fechaNac);
-        mu.addUsuario(a);
+        Asistente asist = new Asistente(nombre, nickname, email, pass, apellido, fechaNac);
+        musr.addUsuario(asist);
     }
     
     public void registrarAsistente(DataAsistente datos) throws UsuarioRepetidoException {
-        ManejadorUsuario mu = ManejadorUsuario.getInstance();
-        Usuario u = mu.getUsuarioNickname(datos.getNickname());
-        if (u != null)
+        ManejadorUsuario musr = ManejadorUsuario.getInstance();
+        Usuario usr = musr.getUsuarioNickname(datos.getNickname());
+        if (usr != null)
             throw new UsuarioRepetidoException("Nickname ya en uso");
-        u = mu.getUsuarioEmail(datos.getEmail());
-        if (u != null)
+        usr = musr.getUsuarioEmail(datos.getEmail());
+        if (usr != null)
             throw new UsuarioRepetidoException("Email ya en uso");
-        Asistente a = new Asistente(datos.getNombre(), datos.getNickname(), datos.getEmail(), datos.getPass(), datos.getApellido(), datos.getFechaNac());
-        mu.addUsuario(a);
+        Asistente asist = new Asistente(datos.getNombre(), datos.getNickname(), datos.getEmail(), datos.getPass(), datos.getApellido(), datos.getFechaNac());
+        musr.addUsuario(asist);
     }
     
     public void registrarOrganizador(String nombre, String nickname, String email, String pass, String descripcion, String url) throws UsuarioRepetidoException {
-    	ManejadorUsuario mu = ManejadorUsuario.getInstance();
-        Usuario u = mu.getUsuarioNickname(nickname);
-        if (u != null)
+    	ManejadorUsuario musr = ManejadorUsuario.getInstance();
+        Usuario usr = musr.getUsuarioNickname(nickname);
+        if (usr != null)
             throw new UsuarioRepetidoException("Nickname ya en uso");
-        u = mu.getUsuarioEmail(email);
-        if (u != null)
+        usr = musr.getUsuarioEmail(email);
+        if (usr != null)
             throw new UsuarioRepetidoException("Email ya en uso");
-        Organizador o = new Organizador(nombre, nickname, email, pass, descripcion, url);
-        mu.addUsuario(o);
+        Organizador orga = new Organizador(nombre, nickname, email, pass, descripcion, url);
+        musr.addUsuario(orga);
     }
     
     public void registrarOrganizador(DataOrganizador datos) throws UsuarioRepetidoException {
-    	ManejadorUsuario mu = ManejadorUsuario.getInstance();
-        Usuario u = mu.getUsuarioNickname(datos.getNickname());
-        if (u != null)
+    	ManejadorUsuario musr = ManejadorUsuario.getInstance();
+        Usuario usr = musr.getUsuarioNickname(datos.getNickname());
+        if (usr != null)
             throw new UsuarioRepetidoException("Nickname ya en uso");
-        u = mu.getUsuarioEmail(datos.getEmail());
-        if (u != null)
+        usr = musr.getUsuarioEmail(datos.getEmail());
+        if (usr != null)
             throw new UsuarioRepetidoException("Email ya en uso");
-        Organizador o = new Organizador(datos.getNombre(), datos.getNickname(), datos.getEmail(), datos.getPass(), datos.getDescripcion(), datos.getUrl());
-        mu.addUsuario(o);
+        Organizador orga = new Organizador(datos.getNombre(), datos.getNickname(), datos.getEmail(), datos.getPass(), datos.getDescripcion(), datos.getUrl());
+        musr.addUsuario(orga);
     }
 
     public DataAsistente getAsistente(String email) throws UsuarioNoExisteException{
-    	ManejadorUsuario mu = ManejadorUsuario.getInstance();
-    	Asistente a = (Asistente) mu.getUsuarioEmail(email);
-    	if (a != null)
-    		return new DataAsistente(a.getNombre(), a.getNickname(), a.getEmail(), "", a.getApellido(), a.getFechaNac());
+    	ManejadorUsuario musr = ManejadorUsuario.getInstance();
+    	Asistente asist = (Asistente) musr.getUsuarioEmail(email);
+    	if (asist != null)
+    		return new DataAsistente(asist.getNombre(), asist.getNickname(), asist.getEmail(), "", asist.getApellido(), asist.getFechaNac());
     	else
     		throw new UsuarioNoExisteException("No existe usuario con dicho email");
     }
     
     public DataOrganizador getOrganizador(String nickmail) throws UsuarioNoExisteException{
-    	ManejadorUsuario mu = ManejadorUsuario.getInstance();
-    	Organizador o = (Organizador) mu.getUsuarioEmail(nickmail);
-    	if (o != null)
-    		return new DataOrganizador(o.getNombre(), o.getNickname(), o.getEmail(), "", o.getDescripcion(), o.getUrl());
+    	ManejadorUsuario musr = ManejadorUsuario.getInstance();
+    	Organizador orga = (Organizador) musr.getUsuarioEmail(nickmail);
+    	if (orga != null)
+    		return new DataOrganizador(orga.getNombre(), orga.getNickname(), orga.getEmail(), "", orga.getDescripcion(), orga.getUrl());
     	else {
-    		o = (Organizador) mu.getUsuarioNickname(nickmail);
-    		if (o != null) {
-    			return new DataOrganizador(o.getNombre(), o.getNickname(), o.getEmail(), "", o.getDescripcion(), o.getUrl());    			
+    		orga = (Organizador) musr.getUsuarioNickname(nickmail);
+    		if (orga != null) {
+    			return new DataOrganizador(orga.getNombre(), orga.getNickname(), orga.getEmail(), "", orga.getDescripcion(), orga.getUrl());    			
     		} else {
     			throw new UsuarioNoExisteException("No existe usuario con dicho email");    			
     		}    		
@@ -107,58 +107,58 @@ public class ControladorUsuario implements IUsuario {
     }
     
     public DataUsuario[] getUsuarios() throws UsuarioNoExisteException {
-        ManejadorUsuario mu = ManejadorUsuario.getInstance();
-        Usuario[] usrs = mu.getUsuarios();
+        ManejadorUsuario musr = ManejadorUsuario.getInstance();
+        Usuario[] usrs = musr.getUsuarios();
 
         if (usrs != null) {
-            DataUsuario[] du = new DataUsuario[usrs.length];
+            DataUsuario[] dataU = new DataUsuario[usrs.length];
             Usuario usuario;
 
             for (int i = 0; i < usrs.length; i++) {
                 usuario = usrs[i];
-                du[i] = new DataUsuario(usuario.getNombre(), usuario.getNickname(), usuario.getEmail(), "");
+                dataU[i] = new DataUsuario(usuario.getNombre(), usuario.getNickname(), usuario.getEmail(), "");
             }
 
-            return du;
+            return dataU;
         } else
             throw new UsuarioNoExisteException("No existen usuarios registrados");
 
     }
 
 	public void modificarAsistente(String email, String nuevoNombre, String nuevoApellido) throws UsuarioNoExisteException {
-	    ManejadorUsuario mu = ManejadorUsuario.getInstance();
-	    Usuario u = mu.getUsuarioEmail(email);
-	    if (u == null) {
+	    ManejadorUsuario musr = ManejadorUsuario.getInstance();
+	    Usuario usr = musr.getUsuarioEmail(email);
+	    if (usr == null) {
 	        throw new UsuarioNoExisteException("Error, no hay usuario con el email ingresdo");
 	    }
-	    Asistente a = (Asistente) u;
-	    a.setNombre(nuevoNombre);
-	    a.setApellido(nuevoApellido);
+	    Asistente asist = (Asistente) usr;
+	    asist.setNombre(nuevoNombre);
+	    asist.setApellido(nuevoApellido);
 	}
 	
 	public void modificarOrganizador(String email, String nuevoNombre, String descripcion, String url) throws UsuarioNoExisteException {
-	    ManejadorUsuario mu = ManejadorUsuario.getInstance();
-	    Usuario u = mu.getUsuarioEmail(email);
-	    if (u == null) {
+	    ManejadorUsuario musr = ManejadorUsuario.getInstance();
+	    Usuario usr = musr.getUsuarioEmail(email);
+	    if (usr == null) {
 	        throw new UsuarioNoExisteException("Error, no hay usuario con el email ingresdo");
 	    }
-	    Organizador o = (Organizador) u;
-	    o.setNombre(nuevoNombre);
-	    o.setDescripcion(descripcion);
-	    o.setUrl(url);
+	    Organizador orga = (Organizador) usr;
+	    orga.setNombre(nuevoNombre);
+	    orga.setDescripcion(descripcion);
+	    orga.setUrl(url);
 	}
 	
 	public String getTipoUsuario(String email) throws UsuarioNoExisteException {
-        ManejadorUsuario mu = ManejadorUsuario.getInstance();
-        Usuario u = mu.getUsuarioEmail(email);
+        ManejadorUsuario musr = ManejadorUsuario.getInstance();
+        Usuario usr = musr.getUsuarioEmail(email);
         
-        if (u == null) {
+        if (usr == null) {
             throw new UsuarioNoExisteException("No existe usuario con email: " + email);
         }
         
-        if (u instanceof Asistente) {
+        if (usr instanceof Asistente) {
             return "Asistente";
-        } else if (u instanceof Organizador) {
+        } else if (usr instanceof Organizador) {
             return "Organizador";
         } else {
             throw new UsuarioNoExisteException("Tipo de usuario desconocido para email: " + email);
@@ -166,27 +166,27 @@ public class ControladorUsuario implements IUsuario {
     }
 	
 	public List<String> listarAsistentes() {
-		ManejadorUsuario mu = ManejadorUsuario.getInstance();
-		return mu.getNombreAsist();
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		return musr.getNombreAsist();
 	}
 	
 	public List<String> listarOrganizadores() {
-		ManejadorUsuario mu = ManejadorUsuario.getInstance();
-		return mu.getOrganizadores();
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		return musr.getOrganizadores();
 	}
 	
 	public void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro {
-		ManejadorUsuario mu = ManejadorUsuario.getInstance();
-		Usuario u = mu.getUsuarioNickname(asistenteSeleccionado);
-		Asistente asistente = (Asistente) u;
-		ControladorEventos ce = new ControladorEventos();
-		ce.nuevoRegistro(asistente, evento, edicion, tipoReg, fecha);
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioNickname(asistenteSeleccionado);
+		Asistente asistente = (Asistente) usr;
+		ControladorEventos cevt = new ControladorEventos();
+		cevt.nuevoRegistro(asistente, evento, edicion, tipoReg, fecha);
 	}
 	
 	public List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado) {
-		ManejadorUsuario mu = ManejadorUsuario.getInstance();
-		Asistente a = (Asistente) mu.getUsuarioNickname(asistenteSeleccionado);
-		return a.getEdicionesRegistros();
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Asistente asist = (Asistente) musr.getUsuarioNickname(asistenteSeleccionado);
+		return asist.getEdicionesRegistros();
 	}
 	
 	public ParEdicionRegistro estaRegistrado(String asistente, String edicion) {
@@ -202,9 +202,9 @@ public class ControladorUsuario implements IUsuario {
 	}
 	
 	public DataDetalleRegistro getDetallesRegistro(String asistenteSeleccionado, ParEdicionRegistro regEdicion) throws ErrorDetallesRegistroException {
-		ManejadorUsuario mu = ManejadorUsuario.getInstance();
-		Asistente a = (Asistente) mu.getUsuarioNickname(asistenteSeleccionado);
-		DataDetalleRegistro res = a.getDetallesRegistro(regEdicion);
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Asistente asist = (Asistente) musr.getUsuarioNickname(asistenteSeleccionado);
+		DataDetalleRegistro res = asist.getDetallesRegistro(regEdicion);
 		if (res == null) {
 			throw new ErrorDetallesRegistroException("Hubo un error al recuperar los datos del registro seleccionado");
 		}
@@ -212,26 +212,26 @@ public class ControladorUsuario implements IUsuario {
 	}
 	
 	public DataUsuario login(String nickmail, String pass) {
-		ManejadorUsuario mu = ManejadorUsuario.getInstance();
-		Usuario u = mu.getUsuarioNickname(nickmail);
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioNickname(nickmail);
 
-		if (u == null)
-			u = mu.getUsuarioEmail(nickmail);
+		if (usr == null)
+			usr = musr.getUsuarioEmail(nickmail);
 
-		if (u == null)
+		if (usr == null)
 			return null;
 
-		if (!u.getPass().equals(pass))
+		if (!usr.getPass().equals(pass))
 			return null;
 
-		return (new DataUsuario(u.getNombre(), u.getNickname(), u.getEmail(), ""));
+		return (new DataUsuario(usr.getNombre(), usr.getNickname(), usr.getEmail(), ""));
 	}
 	
 	public void cargarDatos() {
 		Fabrica fabrica = Fabrica.getInstance();
 		IEventos IEV = fabrica.getIControladorEventos();
 		IUsuario ICU = fabrica.getIControladorUsuario();
-		IInstituciones II = fabrica.getIControladorInstituciones();
+		IInstituciones IIns = fabrica.getIControladorInstituciones();
 		
 		try {
     		IEV.nuevaCategoria("Tecnologia");
@@ -264,11 +264,11 @@ public class ControladorUsuario implements IUsuario {
         	ICU.registrarOrganizador(new DataOrganizador("Universidad de la República", "udelar", "contacto@udelar.edu.uy", "25udelar", "Universidad pública de Uruguay.", "https://udelar.edu.uy"));
         	ICU.registrarOrganizador(new DataOrganizador("Ministerio de Educación y Cultura", "mec", "mec@mec.gub.uy", "mec2025ok", "Institución pública promotora de cultura", "https://mec.gub.uy"));
         	
-        	II.nuevaInstitucion(new DataInstitucion("Facultad de Ingeniería", "Facultad de Ingeniería de la Universidad de la República", "https://www.fing.edu.uy"));
-        	II.nuevaInstitucion(new DataInstitucion("ORT Uruguay", "Universidad privada enfocada en tecnología y gestiín", "https://ort.edu.uy"));
-        	II.nuevaInstitucion(new DataInstitucion("Universidad Católica del Uruguay", "Institución de educación superior privada", "https://ucu.edu.uy"));
-        	II.nuevaInstitucion(new DataInstitucion("Antel", "Empresa estatal de telecomunicaciones", "https://antel.com.uy"));
-        	II.nuevaInstitucion(new DataInstitucion("Agencia Nacional de Investigación e Innovación (ANII)", "Fomenta la investigación y la innovación en Uruguay", "https://anii.org.uy"));
+        	IIns.nuevaInstitucion(new DataInstitucion("Facultad de Ingeniería", "Facultad de Ingeniería de la Universidad de la República", "https://www.fing.edu.uy"));
+        	IIns.nuevaInstitucion(new DataInstitucion("ORT Uruguay", "Universidad privada enfocada en tecnología y gestiín", "https://ort.edu.uy"));
+        	IIns.nuevaInstitucion(new DataInstitucion("Universidad Católica del Uruguay", "Institución de educación superior privada", "https://ucu.edu.uy"));
+        	IIns.nuevaInstitucion(new DataInstitucion("Antel", "Empresa estatal de telecomunicaciones", "https://antel.com.uy"));
+        	IIns.nuevaInstitucion(new DataInstitucion("Agencia Nacional de Investigación e Innovación (ANII)", "Fomenta la investigación y la innovación en Uruguay", "https://anii.org.uy"));
         	
         }catch(UsuarioRepetidoException | CategoriaRepetidaException | InstitucionRepetidaException e){
         	e.printStackTrace();
@@ -341,10 +341,10 @@ public class ControladorUsuario implements IUsuario {
 			IEV.nuevoTipoRegistro(new DataTRegistro("Full","Acceso a todos los eventos de la semana", 450, 50),"Montevideo Fashion Week","Montevideo Fashion Week 2026");
 			IEV.nuevoTipoRegistro(new DataTRegistro("Visitante","Acceso parcial a os eventos de la semana", 150, 25),"Montevideo Fashion Week","Montevideo Fashion Week 2026");
 			
-			II.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 8, 21), 20000 , Nivel.Oro, "TECHUDELAR", 4), "Facultad de Ingeniería", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "Estudiante");
-			II.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 8, 20), 10000, Nivel.Plata, "TECHANII", 1), "Agencia Nacional de Investigación e Innovación (ANII)", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "General");
-			II.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 3, 4), 25000, Nivel.Platino, "CORREANTEL", 10), "Antel", "Maratón de Montevideo", "Maratón de Montevideo 2025", "Corredor 10k");
-			II.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 5, 5), 15000, Nivel.Bronce, "EXPOCAT", 10), "Universidad Católica del Uruguay", "Expointer Uruguay", "Expointer Uruguay 2025", "General");
+			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 8, 21), 20000 , Nivel.Oro, "TECHUDELAR", 4), "Facultad de Ingeniería", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "Estudiante");
+			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 8, 20), 10000, Nivel.Plata, "TECHANII", 1), "Agencia Nacional de Investigación e Innovación (ANII)", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "General");
+			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 3, 4), 25000, Nivel.Platino, "CORREANTEL", 10), "Antel", "Maratón de Montevideo", "Maratón de Montevideo 2025", "Corredor 10k");
+			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 5, 5), 15000, Nivel.Bronce, "EXPOCAT", 10), "Universidad Católica del Uruguay", "Expointer Uruguay", "Expointer Uruguay 2025", "General");
 			
 			ICU.nuevoRegistro("sofirod", "Montevideo Rock", "Montevideo Rock 2025", "VIP", LocalDate.of(2025, 5, 14));
 			ICU.nuevoRegistro("sofirod", "Maratón de Montevideo", "Maratón de Montevideo 2024", "Corredor 21K", LocalDate.of(2024, 7, 30));
@@ -366,13 +366,13 @@ public class ControladorUsuario implements IUsuario {
 	}
 	
 	public List<String> getUsuariosRegistrados(String edicion) {
-		ManejadorUsuario mu = ManejadorUsuario.getInstance();
-		List<String> listaU = mu.getNombreAsist();
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		List<String> listaU = musr.getNombreAsist();
 		List<String> res = new ArrayList<>();
 		for (String u : listaU) {
-			Asistente a = (Asistente) mu.getUsuarioNickname(u);
-			if (a.estaRegistrado(edicion)) {
-				Registro reg = a.getRegistro(edicion);
+			Asistente asist = (Asistente) musr.getUsuarioNickname(u);
+			if (asist.estaRegistrado(edicion)) {
+				Registro reg = asist.getRegistro(edicion);
 				res.add("Usuario: " + u + " - Fecha: " + reg.getFecha() + " - Tipo: " + reg.getTipoRegistro().getNombre());
 			}
 		}

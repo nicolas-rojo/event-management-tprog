@@ -50,7 +50,7 @@ public interface IEventos {
 		
 		public abstract boolean existeEdicion(String evento, String edicion);
 		
-		public abstract boolean existeTR(String evento, String edicion, String tr);
+		public abstract boolean existeTR(String evento, String edicion, String tipoReg);
 		
 		public abstract String eventoTieneEdicion(String edicion); 
 		
