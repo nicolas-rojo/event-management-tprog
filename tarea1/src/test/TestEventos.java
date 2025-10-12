@@ -420,6 +420,7 @@ public class TestEventos extends TestCase {
                     "Evento sobre innovacion tecnológica"
                 );    
     		String cat = "Tecnologia_" + uniqueId;
+    		controladorEventos.nuevaCategoria(cat);
             controladorEventos.nuevoEvento(eventoData, Arrays.asList(cat));
             List<DataEventoCompleto> res = controladorEventos.getEventosConCategoria(cat);
             if (res.size() != 1) {
@@ -480,10 +481,10 @@ String uniqueId = String.valueOf(System.currentTimeMillis());
             );
             
             DataEdicion dt = controladorEventos.obtenerEdicionEvento("Conferencia de Tecnologia_" + uniqueId, "Tecnología Punta del Este 2026_" + uniqueId);
-            if (dt == null || dt.getNombre() != "Tecnología Punta del Este 2026_" + uniqueId) {
+            if (dt == null || !dt.getNombre().equals("Tecnología Punta del Este 2026_" + uniqueId)) {
             	fail("No se encontró lo deseado");
             }
-            
+            assertTrue("Se encontró :)", true);
             } catch (Exception e) {
             fail("Lanzó excepción incorrecta: " + e.getClass().getSimpleName() + " - " + e.getMessage());
         }
