@@ -4,6 +4,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -29,55 +31,46 @@ public class AltaPatrocinio extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String accion = request.getParameter("accion");
+        // Obtener evento y edición de la URL
+        String evento = request.getParameter("evento");
+        String edicion = request.getParameter("edicion");
         
-        // Si es una petición para cargar ediciones
-        if ("cargarEdiciones".equals(accion)) {
-            String evento = request.getParameter("evento");
-            try {
-                List<String> ediciones = IEV.listarEdiciones(evento);
-                request.setAttribute("ediciones", ediciones);
-                request.setAttribute("eventoSeleccionado", evento);
-            } catch (Exception e) {
-                request.setAttribute("error", "Error al cargar ediciones: " + e.getMessage());
-            }
+        if (evento != null) {
+            evento = URLDecoder.decode(evento, StandardCharsets.UTF_8);
         }
         
-        // Si es una petición para cargar tipos de registro
-        if ("cargarTiposRegistro".equals(accion)) {
-            String evento = request.getParameter("evento");
-            String edicion = request.getParameter("edicion");
-            try {
-                List<String> ediciones = IEV.listarEdiciones(evento);
-                List<String> tiposRegistro = IEV.listarTRegistros(evento, edicion);
-                request.setAttribute("ediciones", ediciones);
-                request.setAttribute("tiposRegistro", tiposRegistro);
-                request.setAttribute("eventoSeleccionado", evento);
-                request.setAttribute("edicionSeleccionada", edicion);
-            } catch (Exception e) {
-    			e.printStackTrace();
-    	        request.setAttribute("error", "No se pudieron cargar los tipos de registro");
-    	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
-    		}
+        if (edicion != null) {
+            edicion = URLDecoder.decode(edicion, StandardCharsets.UTF_8);
         }
         
-        // Cargar datos iniciales para los combos
+        // Validar que vengan evento y edición
+        if (evento == null || edicion == null) {
+            request.setAttribute("error", "Debe especificar un evento y una edición");
+            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+            return;
+        }
+        
         try {
-            // Cargar eventos
-            List<String> eventos = IEV.listarEventos();
-            request.setAttribute("eventos", eventos);
+            // Cargar tipos de registro de la edición
+            List<String> tiposRegistro = IEV.listarTRegistros(evento, edicion);
+            request.setAttribute("tiposRegistro", tiposRegistro);
             
             // Cargar instituciones
             DataInstitucion[] instituciones = IInst.listarInstituciones();
             request.setAttribute("instituciones", instituciones);
             
-            // Cargar niveles de patrocinio (enum Nivel)
+            // Cargar niveles de patrocinio
             request.setAttribute("niveles", Nivel.values());
+            
+            // Pasar evento y edición al JSP
+            request.setAttribute("evento", evento);
+            request.setAttribute("edicion", edicion);
             
         } catch (Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "No se pudieron cargar los datos");
 	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+	        return;
 		}
         
         request.getRequestDispatcher("/WEB-INF/altaPatrocinio.jsp").forward(request, response);
@@ -99,6 +92,14 @@ public class AltaPatrocinio extends HttpServlet {
         String montoStr = request.getParameter("monto");
         String cantidadCuposStr = request.getParameter("cantidadCupos");
         String codigo = request.getParameter("codigo");
+        
+        if (evento != null) {
+            evento = URLDecoder.decode(evento, StandardCharsets.UTF_8);
+        }
+        
+        if (edicion != null) {
+            edicion = URLDecoder.decode(edicion, StandardCharsets.UTF_8);
+        }
 
         // Validación de campos vacíos
         if (evento == null || evento.isBlank() || 
@@ -110,7 +111,7 @@ public class AltaPatrocinio extends HttpServlet {
             cantidadCuposStr == null || cantidadCuposStr.isBlank() ||
             codigo == null || codigo.isBlank()) {
             
-            recargarFormularioConError(request, response, "No puede haber campos vacíos");
+            recargarFormularioConError(request, response, evento, edicion, "No puede haber campos vacíos");
             return;
         }
 
@@ -121,12 +122,12 @@ public class AltaPatrocinio extends HttpServlet {
 
             // Validaciones de negocio
             if (monto <= 0) {
-                recargarFormularioConError(request, response, "El monto debe ser un valor positivo");
+                recargarFormularioConError(request, response, evento, edicion, "El monto debe ser un valor positivo");
                 return;
             }
 
             if (cantidadCupos <= 0) {
-                recargarFormularioConError(request, response, "La cantidad de cupos debe ser un valor positivo");
+                recargarFormularioConError(request, response, evento, edicion, "La cantidad de cupos debe ser un valor positivo");
                 return;
             }
 
@@ -135,7 +136,7 @@ public class AltaPatrocinio extends HttpServlet {
             float costoTotalRegistros = cantidadCupos * dataTRegistro.getCosto();
 
             if (costoTotalRegistros > (0.2f * monto)) {
-                recargarFormularioConError(request, response, 
+                recargarFormularioConError(request, response, evento, edicion, 
                     "El costo de los registros gratuitos supera el 20% del aporte económico");
                 return;
             }
@@ -157,36 +158,41 @@ public class AltaPatrocinio extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/home");
 
         } catch (NumberFormatException ex) {
-            recargarFormularioConError(request, response, 
+            recargarFormularioConError(request, response, evento, edicion, 
                 "Error en los datos numéricos. Verifique el monto y cantidad de cupos.");
             
         } catch (PatrocinioRepetidoException ex) {
-            recargarFormularioConError(request, response, 
-                "Ya existe un patrocinio con ese código para esta institución.");
+            recargarFormularioConError(request, response, evento, edicion, 
+                "Esta institución ya está patrocinando esta edición.");
             
         } catch (Exception ex) {
-            recargarFormularioConError(request, response, 
+            recargarFormularioConError(request, response, evento, edicion, 
                 "Error al crear el patrocinio: " + ex.getMessage());
         }
     }
 
-    private void recargarFormularioConError(HttpServletRequest request, HttpServletResponse response, String error) 
-            throws ServletException, IOException {
+    private void recargarFormularioConError(HttpServletRequest request, HttpServletResponse response, 
+            String evento, String edicion, String error) throws ServletException, IOException {
         
         // Recargar los datos para los combos
         try {
-            List<String> eventos = IEV.listarEventos();
-            request.setAttribute("eventos", eventos);
+            List<String> tiposRegistro = IEV.listarTRegistros(evento, edicion);
+            request.setAttribute("tiposRegistro", tiposRegistro);
             
             DataInstitucion[] instituciones = IInst.listarInstituciones();
             request.setAttribute("instituciones", instituciones);
             
             request.setAttribute("niveles", Nivel.values());
             
+            // Mantener evento y edición
+            request.setAttribute("evento", evento);
+            request.setAttribute("edicion", edicion);
+            
         } catch (Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "No se pudo hacer la recarga");
 	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+	        return;
 		}
         
         request.setAttribute("error", error);

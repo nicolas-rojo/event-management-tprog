@@ -599,7 +599,7 @@ body.asistente .item {
                                                 %>
 				                                    <div class="botones-evento">
 					                                    <a href="${pageContext.request.contextPath}/altaTReg?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="boton-evento boton-tipo-registro">Nuevo Tipo Registro</a>
-														<a href="${pageContext.request.contextPath}/altaPatrocinio" class="boton-evento boton-patrocinio">Nuevo Patrocinio</a>														
+														<a href="<%= request.getContextPath() %>/AltaPatrocinio?evento=<%= java.net.URLEncoder.encode(evento, "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(edicion.getNombre(),"UTF-8") %>" class="boton-evento boton-patrocinio">Nuevo Patrocinio</a>														
 					                                </div>
                     							<%} %>
                                             </div>
