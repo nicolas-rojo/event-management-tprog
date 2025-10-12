@@ -104,7 +104,7 @@ public class ConsultaEdicion extends HttpServlet {
 			} else if ("organizador".equals(tipo)) {
 				if (dataU.getNickname().equals(organizador)) {
 					request.setAttribute("organizaEdicion", true);
-					List<String> dataRegistros = IEV.obtenerRegistrosEdicion(eventoSeleccionado, edicionSeleccionada);
+					List<String> dataRegistros = ICU.getUsuariosRegistrados(edicionSeleccionada);
 					request.setAttribute("dataRegistros", dataRegistros);
 				}
 			}
