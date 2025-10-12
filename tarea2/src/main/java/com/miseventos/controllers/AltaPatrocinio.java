@@ -46,7 +46,7 @@ public class AltaPatrocinio extends HttpServlet {
         // Validar que vengan evento y edición
         if (evento == null || edicion == null) {
             request.setAttribute("error", "Debe especificar un evento y una edición");
-            request.getRequestDispatcher("/WEB-INF/altaPatrocinio.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
             return;
         }
         
@@ -67,8 +67,11 @@ public class AltaPatrocinio extends HttpServlet {
             request.setAttribute("edicion", edicion);
             
         } catch (Exception e) {
-            request.setAttribute("error", "Error al cargar datos: " + e.getMessage());
-        }
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudieron cargar los datos");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+	        return;
+		}
         
         request.getRequestDispatcher("/WEB-INF/altaPatrocinio.jsp").forward(request, response);
     }
@@ -186,8 +189,11 @@ public class AltaPatrocinio extends HttpServlet {
             request.setAttribute("edicion", edicion);
             
         } catch (Exception e) {
-            // Si falla la recarga, usar mensaje genérico
-        }
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudo hacer la recarga");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+	        return;
+		}
         
         request.setAttribute("error", error);
         request.getRequestDispatcher("/WEB-INF/altaPatrocinio.jsp").forward(request, response);

@@ -86,4 +86,13 @@ public class Asistente extends Usuario{
     	}
     	return null;
     }
+    
+    public Registro getRegistro(String edicion) {
+    	for (Registro r : regs) {
+    		if (r.getNombreEdicion().equals(edicion)) {
+    			return r;
+    		}
+    	}
+    	return null;
+    }
 }

@@ -54,16 +54,16 @@ public class ConsultaEdicion extends HttpServlet {
 
 		if (eventoSeleccionado == null || edicionSeleccionada == null) {
 			request.setAttribute("error", "Faltan parámetros de evento o edición");
-			request.getRequestDispatcher("/WEB-INF/errorPages/error.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 			return;
 		}
 
 		String organizador = IEV.obtenerOrganizadorEdicion(eventoSeleccionado, edicionSeleccionada);
-		DataEdicion dataEd = IEV.getDataEdicion(eventoSeleccionado, edicionSeleccionada);
+		DataEdicion dataEd = IEV.obtenerEdicionEvento(eventoSeleccionado, edicionSeleccionada);
 
 		if (dataEd == null) {
 			request.setAttribute("error", "No se encontró la edición del evento");
-			request.getRequestDispatcher("/WEB-INF/errorPages/error.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 			return;
 		}
 
@@ -75,6 +75,10 @@ public class ConsultaEdicion extends HttpServlet {
 			request.setAttribute("error", "Organizador no existente");
 			request.getRequestDispatcher("/WEB-INF/consultaEdicion.jsp").forward(request, response);
 			return;
+		} catch (Exception e) {
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudieron cargar los datos del organizador");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		}
 
 		List<DataPatrocinioCompleto> dataPatrocinios = IEV.obtenerPatrociniosEdicion(eventoSeleccionado,
@@ -93,14 +97,18 @@ public class ConsultaEdicion extends HttpServlet {
 		if (tipo != null && dataU != null) {
 			if ("asistente".equals(tipo)) {
 				ParEdicionRegistro registro = ICU.estaRegistrado(nickname, edicionSeleccionada);
+				System.out.println(nickname + " " + edicionSeleccionada);
 				if (registro != null) {
+					System.out.println("ESTOY REGISTRADO");
 					request.setAttribute("registrado", true);
 					request.setAttribute("dataRegistro", registro);
+				} else {
+					System.out.println("NO ESTOY REGISTRADO");
 				}
 			} else if ("organizador".equals(tipo)) {
 				if (dataU.getNickname().equals(organizador)) {
 					request.setAttribute("organizaEdicion", true);
-					List<String> dataRegistros = IEV.obtenerRegistrosEdicion(eventoSeleccionado, edicionSeleccionada);
+					List<String> dataRegistros = ICU.getUsuariosRegistrados(edicionSeleccionada);
 					request.setAttribute("dataRegistros", dataRegistros);
 				}
 			}

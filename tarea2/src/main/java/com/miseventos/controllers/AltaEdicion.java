@@ -4,10 +4,17 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+
+import javax.imageio.ImageIO;
+
+import com.miseventos.utils.nombreUtils;
 
 import logica.Fabrica;
 import logica.interfaces.IEventos;
@@ -93,6 +100,7 @@ public class AltaEdicion extends HttpServlet {
 
 			DataEdicion dataEd = new DataEdicion(nombre, sigla, fechaIni, fechaFin, fechaActual, ciudad, pais);
 			IEV.nuevaEdicion(dataEd, evento, org);
+			cargarImg(request, nombre);
 
 			response.sendRedirect(request.getContextPath() + "/home");
 
@@ -101,6 +109,26 @@ public class AltaEdicion extends HttpServlet {
 			request.setAttribute("evento", evento);
 			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
 
+		} catch(Exception e) {
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudo dar de alta la edicion");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		}
+	}
+	
+	private void cargarImg(HttpServletRequest request, String nick) throws IOException, ServletException {
+		Part filePart = request.getPart("imagen");
+		if (filePart == null || filePart.getSize() == 0) {
+			return; //NO SE SUBIO NINGUNA IMAGEN
+		}
+		
+		String nomNorm = nombreUtils.normalizarNombre(nick);
+		
+		BufferedImage imagen = ImageIO.read(filePart.getInputStream());
+		String rutaRel = "/resources/images/ED-" + nomNorm + ".png";
+		String rutaAbs = getServletContext().getRealPath(rutaRel);
+		
+		File archivoDest = new File(rutaAbs);
+		ImageIO.write(imagen, "png", archivoDest);		
 	}
 }

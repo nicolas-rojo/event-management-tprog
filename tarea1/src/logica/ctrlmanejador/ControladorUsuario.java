@@ -17,11 +17,13 @@ import excepciones.PatrocinioRepetidoException;
 import excepciones.TipoDeRegistroRepetidoException;
 import excepciones.UsuarioNoExisteException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import logica.Asistente;
 import logica.Fabrica;
 import logica.Organizador;
+import logica.Registro;
 import logica.Usuario;
 import logica.datatypes.*;
 
@@ -191,9 +193,10 @@ public class ControladorUsuario implements IUsuario {
 		List<ParEdicionRegistro> registros = getRegistrosAsistente(asistente);
 		ParEdicionRegistro res = null;
 		for (ParEdicionRegistro registro : registros) {
-			if (registro.getNombreEdicion().equals(edicion))
+			if (registro.getNombreEdicion().equals(edicion)) {
 				res = registro;
-				break;
+				break;				
+			}
 		}
 		return res;
 	}
@@ -360,6 +363,20 @@ public class ControladorUsuario implements IUsuario {
     	}catch(TipoDeRegistroRepetidoException | NoHayCupoEdicionTRegistro |  AsistenteYaRegistrado | PatrocinioRepetidoException e){
     		e.printStackTrace();
     	}
+	}
+	
+	public List<String> getUsuariosRegistrados(String edicion) {
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		List<String> listaU = mu.getNombreAsist();
+		List<String> res = new ArrayList<>();
+		for (String u : listaU) {
+			Asistente a = (Asistente) mu.getUsuarioNickname(u);
+			if (a.estaRegistrado(edicion)) {
+				Registro reg = a.getRegistro(edicion);
+				res.add("Usuario: " + u + " - Fecha: " + reg.getFecha() + " - Tipo: " + reg.getTipoRegistro().getNombre());
+			}
+		}
+		return res;
 	}
 }
 

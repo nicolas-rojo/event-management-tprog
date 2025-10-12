@@ -46,7 +46,7 @@ public class ConsultaEvento extends HttpServlet {
             
             if (nombresEdiciones != null) {
                 for (String nombreEdicion : nombresEdiciones) {
-                    DataEdicion edicion = IEV.getDataEdicion(nombreEvento, nombreEdicion);
+                    DataEdicion edicion = IEV.obtenerEdicionEvento(nombreEvento, nombreEdicion);
                     if (edicion != null && IEV.getEstado(nombreEdicion, nombreEvento) ==Estado.Confirmado) {
                         ediciones.add(edicion);
                     }
@@ -61,8 +61,10 @@ public class ConsultaEvento extends HttpServlet {
         } catch (EventoNoExisteExcepcion e) {
         	e.printStackTrace();
         } catch (Exception e) {
-        	e.printStackTrace();
-        }
+			e.printStackTrace();
+	        request.setAttribute("error", "No se pudo obtener la informacion de el evento");
+	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+		}
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 

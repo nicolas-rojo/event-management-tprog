@@ -40,12 +40,11 @@ public class AltaTRegistro extends HttpServlet {
 		String evento = request.getParameter("evento");
 		String edicion = request.getParameter("edicion");
 		
-		System.out.println(evento);
-		System.out.println(edicion);
+
 		
 		try {
 			IEV.nuevoTipoRegistro(new DataTRegistro(nombre, descripcion,Float.parseFloat(costotr), Integer.parseInt(cupotr)), evento, edicion);
-			response.sendRedirect(request.getContextPath() + "/home");// Cambiar la direccion cuando este el consulta evento
+			response.sendRedirect(request.getContextPath() + "/home");
 		}catch(TipoDeRegistroRepetidoException e) {
 			request.setAttribute("errorExiste", "Ya existe un tipo de registro con este nombre");
 			request.getRequestDispatcher("/WEB-INF/altaTRegistro.jsp").forward(request, response);
