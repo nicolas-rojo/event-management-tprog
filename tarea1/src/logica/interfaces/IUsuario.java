@@ -47,4 +47,6 @@ public interface IUsuario {
     public abstract DataUsuario login(String nickmail, String pass);
     
     public abstract void cargarDatos();
+    
+    public List<String> getUsuariosRegistrados(String edicion);
 }
