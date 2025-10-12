@@ -45,129 +45,10 @@ public class TestTodoEnUno {
     void testCargaCompletaDatos() {
         // Este test replica la funcionalidad del método cargarDatos() de Principal.java
         
-        // 1. Crear categorías
-        assertDoesNotThrow(() -> {
-            controladorEventos.nuevaCategoria("Tecnologia");
-            controladorEventos.nuevaCategoria("Innovacion");
-            controladorEventos.nuevaCategoria("Literatura");
-            controladorEventos.nuevaCategoria("Cultura");
-            controladorEventos.nuevaCategoria("Musica");
-            controladorEventos.nuevaCategoria("Deporte");
-            controladorEventos.nuevaCategoria("Salud");
-            controladorEventos.nuevaCategoria("Entretenimiento");
-            controladorEventos.nuevaCategoria("Agro");
-            controladorEventos.nuevaCategoria("Negocios");
-            controladorEventos.nuevaCategoria("Moda");
-            controladorEventos.nuevaCategoria("Investigacion");
-        });
-        
-        // 2. Crear asistentes
-        assertDoesNotThrow(() -> {
-            controladorUsuario.registrarAsistente("Ana", "atorres", "atorres@gmail.com", "123", "Torres", LocalDate.of(1990, 5, 12));
-            controladorUsuario.registrarAsistente("Martin", "msilva", "martin.silva@fing.edu.uy", "123", "Silva", LocalDate.of(1987, 8, 21)); // Pruebo los dos constructores
-            controladorUsuario.registrarAsistente(new DataAsistente("Sofia", "sofirod", "srodriguez@outlook.com", "123", "Rodriguez", LocalDate.of(1995, 2, 3)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Valentina", "vale23", "valentina.costa@mail.com", "123", "Costa", LocalDate.of(1992, 12, 1)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Lucia", "luciag", "lucia.garcia@mail.com", "123", "Garcia", LocalDate.of(1993, 11, 9)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Ana", "AnaG", "ana.gomez@hotmail.com", "123", "Gomez", LocalDate.of(1998, 3, 15)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Javier", "JaviL", "javier.lopez@outlook.com", "123", "Lopez", LocalDate.of(1995, 7, 22)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Maria", "MariR", "maria.rodriguez@gmail.com", "123", "Rodriguez", LocalDate.of(2000, 11, 10)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Sofia", "SofiM", "sofia.martinez@yahoo.com", "123", "Martinez", LocalDate.of(1997, 2, 5)));
-            controladorUsuario.registrarAsistente(new DataAsistente("Andrea", "andrearod", "andrea.rod@mail.com", "123", "Rodriguez", LocalDate.of(2000, 6, 10)));
-        });
-        
-        // 3. Crear organizadores
-        assertDoesNotThrow(() -> {
-            controladorUsuario.registrarOrganizador("MisEventos", "miseventos", "contacto@miseventos.com", "123", "Empresa de organizacion de eventos.", "https://miseventos.com/"); 
-            controladorUsuario.registrarOrganizador("Corporación Tecnológica", "techcorp", "info@techcorp.com", "123", "Empresa líder en tecnologías de la información", ""); // Pruebo los dos constructores
-            controladorUsuario.registrarOrganizador(new DataOrganizador("Intendencia de Montevideo", "imm", "contacto@imm.gub.uy", "123", "Gobierno departamental de Montevideo.", "https://montevideo.gub.uy/"));
-            controladorUsuario.registrarOrganizador(new DataOrganizador("Universidad de la República", "udelar", "contacto@udelar.edu.uy", "123", "Universidad publica de Uruguay.", "https://udelar.edu.uy/"));
-            controladorUsuario.registrarOrganizador(new DataOrganizador("Ministerio de Educacion y Cultura", "mec", "mec@mec.gub.uy", "123", "Institucion publica promotora de cultura", "https://mec.gub.uy/"));
-        });
-        
-        // 4. Crear instituciones
-        assertDoesNotThrow(() -> {
-            controladorInstituciones.nuevaInstitucion(new DataInstitucion("Facultad de Ingenieria", "Facultad de Ingeniería de la Universidad de la República", "https://www.fing.edu.uy/"));
-            controladorInstituciones.nuevaInstitucion(new DataInstitucion("ORT Uruguay", "Universidad privada enfocada en tecnologia y gestion", "https://ort.edu.uy"));
-            controladorInstituciones.nuevaInstitucion(new DataInstitucion("Universidad Catolica del Uruguay", "Institucion de educacion superior privada", "https://ucu.edu.uy/"));
-            controladorInstituciones.nuevaInstitucion(new DataInstitucion("Antel", "Empresa estatal de telecomunicaciones", "https://antel.com.uy/"));
-            controladorInstituciones.nuevaInstitucion(new DataInstitucion("Agencia Nacional de Investigacion e Innovacion (ANII)", "Fomenta la investigacion y la innovacion en Uruguay", "https://anii.org.uy/"));
-        });
-        
-        // 5. Crear eventos
-        assertDoesNotThrow(() -> {
-            controladorEventos.nuevoEvento(new DataEvento("Conferencia de Tecnologia", "CONFTEC", LocalDate.of(2025, 1, 10), "Evento sobre innovacion tecnologica"), Arrays.asList("Tecnologia", "Innovacion"));
-            controladorEventos.nuevoEvento(new DataEvento("Feria del Libro", "FERLIB", LocalDate.of(2025, 2, 1), "Encuentro anual de literatura"), Arrays.asList("Literatura", "Cultura"));
-            controladorEventos.nuevoEvento(new DataEvento("Montevideo Rock", "MONROCK", LocalDate.of(2023, 3, 15), "Festival de rock con artistas nacionales e internacionales"), Arrays.asList("Cultura", "Musica"));
-            controladorEventos.nuevoEvento(new DataEvento("Maratón de Montevideo", "MARATON", LocalDate.of(2022, 1, 1), "Competencia deportiva anual en la capital"), Arrays.asList("Deporte", "Salud"));
-            controladorEventos.nuevoEvento(new DataEvento("Montevideo Comics", "COMICS", LocalDate.of(2024, 4, 10), "Convencion de historietas, cine y cultura geek"), Arrays.asList("Cultura", "Entretenimiento"));
-            controladorEventos.nuevoEvento(new DataEvento("Expointer Uruguay", "EXPOAGRO", LocalDate.of(2024, 12, 12), "Exposicion internacional agropecuaria y ganadera"), Arrays.asList("Agro", "Negocios"));
-            controladorEventos.nuevoEvento(new DataEvento("Montevideo Fashion Week", "MFASHION", LocalDate.of(2025, 7, 20), "Pasarela de moda uruguaya e internacional"), Arrays.asList("Cultura", "Moda"));
-        });
-        
-        // 6. Crear ediciones
-        assertDoesNotThrow(() -> {
-        	controladorEventos.nuevaEdicion(new DataEdicion("Montevideo Rock 2025", "MONROCK25", LocalDate.of(2025, 11, 20), LocalDate.of(2025, 11, 22), LocalDate.of(2025, 3, 12), "Montevideo", "Uruguay"),"Montevideo Rock","imm");
-        	controladorEventos.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2025", "MARATON25", LocalDate.of(2025, 9, 14), LocalDate.of(2025, 9, 14), LocalDate.of(2025, 2, 5), "Montevideo", "Uruguay"),"Maratón de Montevideo","imm");
-        	controladorEventos.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2024", "MARATON24", LocalDate.of(2024, 9, 14), LocalDate.of(2024, 9, 14), LocalDate.of(2024, 4, 21), "Montevideo", "Uruguay"),"Maratón de Montevideo","imm");
-        	controladorEventos.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2022", "MARATON22", LocalDate.of(2022, 9, 14), LocalDate.of(2022, 9, 14), LocalDate.of(2022, 5, 21), "Montevideo", "Uruguay"),"Maratón de Montevideo","imm");
-        	controladorEventos.nuevaEdicion(new DataEdicion("Montevideo Comics 2024", "COMICS24", LocalDate.of(2024, 7, 18), LocalDate.of(2024, 7, 21), LocalDate.of(2024, 6, 20), "Montevideo", "Uruguay"),"Montevideo Comics","miseventos");
-        	controladorEventos.nuevaEdicion(new DataEdicion("Montevideo Comics 2025", "COMICS25", LocalDate.of(2025, 8, 4), LocalDate.of(2025, 8, 6), LocalDate.of(2025, 7, 4), "Montevideo", "Uruguay"),"Montevideo Comics","miseventos");
-        	controladorEventos.nuevaEdicion(new DataEdicion("Expointer Uruguay 2025", "EXPOAGRO25", LocalDate.of(2025, 9, 11), LocalDate.of(2025, 9, 17), LocalDate.of(2025, 2, 1), "Durazno", "Uruguay"),"Expointer Uruguay","miseventos");
-        	controladorEventos.nuevaEdicion(new DataEdicion("Tecnología Punta del Este 2026", "CONFTECH26", LocalDate.of(2026, 4, 6), LocalDate.of(2026, 4, 10), LocalDate.of(2025, 8, 1), "Punta del Este", "Uruguay"),"Conferencia de Tecnologia","udelar");
-        	controladorEventos.nuevaEdicion(new DataEdicion("Mobile World Congress 2025", "MWC", LocalDate.of(2025, 12, 12), LocalDate.of(2025, 12, 15), LocalDate.of(2025, 8, 21), "Barcelona", "España"),"Conferencia de Tecnologia","techcorp");
-        	controladorEventos.nuevaEdicion(new DataEdicion("Web Summit 2026", "WS26", LocalDate.of(2026, 1, 13), LocalDate.of(2026, 2, 1), LocalDate.of(2025, 6, 4), "Lisboa", "Portugal"),"Conferencia de Tecnologia","techcorp");
-        });
-        
-        // 7. Crear Tipos de Registro
-        assertDoesNotThrow(() -> {
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("General","Acceso general a MontevideoRock (2 días)", 1500, 2000),"Montevideo Rock","Montevideo Rock 2025");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("VIP","Incluye backstage + acceso preferencial", 4000, 200),"Montevideo Rock","Montevideo Rock 2025");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Corredor 42K","Inscripción a la maratón completa", 1200, 499),"Maratón de Montevideo","Maratón de Montevideo 2025");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Corredor 21K","Inscripción a la media maratón", 800, 700),"Maratón de Montevideo","Maratón de Montevideo 2025");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Corredor 10K","Inscripción a la carrera 10K", 500, 1000),"Maratón de Montevideo","Maratón de Montevideo 2025");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Corredor 42K","Inscripción a la maratón completa", 1000, 300),"Maratón de Montevideo","Maratón de Montevideo 2024");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Corredor 21K","Inscripción a la media maratón", 500, 500),"Maratón de Montevideo","Maratón de Montevideo 2024");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Corredor 42K","Inscripción a la maratón completa", 1100, 450),"Maratón de Montevideo","Maratón de Montevideo 2022");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Corredor 21K","Inscripción a la media maratón", 900, 750),"Maratón de Montevideo","Maratón de Montevideo 2022");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Corredor 10K","Inscripción a la carrera 10K", 650, 1400),"Maratón de Montevideo","Maratón de Montevideo 2022");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("General","Entrada para los 4 días de Montevideo Comics", 600, 1500),"Montevideo Comics","Montevideo Comics 2024");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Cosplayer","Entrada especial con acreditación para concurso cosplay", 300, 50),"Montevideo Comics","Montevideo Comics 2024");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("General","Entrada para los 4 días de Montevideo Comics", 800, 1000),"Montevideo Comics","Montevideo Comics 2025");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Cosplayer","Entrada especial con acreditación para concurso cosplay", 500, 100),"Montevideo Comics","Montevideo Comics 2025");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("General","Acceso a la exposición agropecuaria", 300, 5000),"Expointer Uruguay","Expointer Uruguay 2025");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Empresarial","Acceso para empresas + networking", 2000, 5),"Expointer Uruguay","Expointer Uruguay 2025");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Full","Acceso ilimitado + Cena de gala", 1800, 300),"Conferencia de Tecnologia","Tecnología Punta del Este 2026");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("General","Acceso general", 1500, 500),"Conferencia de Tecnologia","Tecnología Punta del Este 2026");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Estudiante","Acceso para estudiantes", 1000, 50),"Conferencia de Tecnologia","Tecnología Punta del Este 2026");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Full","Acceso ilimitado + Cena de gala", 750, 550),"Conferencia de Tecnologia","Mobile World Congress 2025");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("General","Acceso general", 500, 400),"Conferencia de Tecnologia","Mobile World Congress 2025");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Estudiante","Acceso para estudiantes", 250, 400),"Conferencia de Tecnologia","Mobile World Congress 2025");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Full","Acceso ilimitado + Cena de gala", 900, 30),"Conferencia de Tecnologia","Web Summit 2026");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("General","Acceso general", 650, 5),"Conferencia de Tecnologia","Web Summit 2026");
-        	controladorEventos.nuevoTipoRegistro(new DataTRegistro("Estudiante","Acceso para estudiantes", 300, 1),"Conferencia de Tecnologia","Web Summit 2026");
-        });
-        
-        // 8. Crear patrocinios
-        assertDoesNotThrow(() -> {
-        	controladorInstituciones.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 8, 21), 20000 , Nivel.Oro, "TECHFING", 4), "Facultad de Ingenieria", "Conferencia de Tecnologia", "Tecnología Punta del Este 2026", "Estudiante");
-        	controladorInstituciones.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 8, 20), 10000, Nivel.Plata, "TECHANII", 1), "Agencia Nacional de Investigacion e Innovacion (ANII)", "Conferencia de Tecnologia", "Tecnología Punta del Este 2026", "General");
-        	controladorInstituciones.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 3, 4), 25000, Nivel.Platino, "CORREANTEL", 10), "Antel", "Maratón de Montevideo", "Maratón de Montevideo 2025", "Corredor 10k");
-        	controladorInstituciones.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 5, 5), 15000, Nivel.Bronce, "EXPOCAT", 10), "Universidad Catolica del Uruguay", "Expointer Uruguay", "Expointer Uruguay 2025", "General");
-        });
-        
-        // 9. Crear Registros
-        assertDoesNotThrow(() -> {
-        	controladorUsuario.nuevoRegistro("sofirod", "Montevideo Rock", "Montevideo Rock 2025", "VIP", LocalDate.of(2025, 5, 14));
-        	controladorUsuario.nuevoRegistro("sofirod", "Maratón de Montevideo", "Maratón de Montevideo 2024", "Corredor 21K", LocalDate.of(2024, 7, 30));
-        	controladorUsuario.nuevoRegistro("andrearod", "Conferencia de Tecnologia", "Web Summit 2026", "Estudiante", LocalDate.of(2025, 8, 21));
-        	controladorUsuario.nuevoRegistro("sofirod", "Maratón de Montevideo", "Maratón de Montevideo 2025", "Corredor 42K", LocalDate.of(2025, 3, 3));
-        	controladorUsuario.nuevoRegistro("vale23", "Conferencia de Tecnologia", "Mobile World Congress 2025", "Full", LocalDate.of(2025, 8, 22));
-        	controladorUsuario.nuevoRegistro("AnaG", "Maratón de Montevideo", "Maratón de Montevideo 2025", "Corredor 10K", LocalDate.of(2025, 4, 9));
-        	controladorUsuario.nuevoRegistro("JaviL", "Maratón de Montevideo", "Maratón de Montevideo 2025", "Corredor 21K", LocalDate.of(2025, 4, 10));
-        	controladorUsuario.nuevoRegistro("MariR", "Montevideo Comics", "Montevideo Comics 2025", "Cosplayer", LocalDate.of(2025, 8, 3));
-        	controladorUsuario.nuevoRegistro("SofiM", "Montevideo Comics", "Montevideo Comics 2024", "General", LocalDate.of(2024, 7, 16));
-			
-        });
+    	assertDoesNotThrow(() -> {
+    		controladorUsuario.cargarDatos();
+    	});
+    	
         
         // Verificaciones después de la carga completa
         
@@ -185,7 +66,7 @@ public class TestTodoEnUno {
         // Verificar eventos - usando listarEventos() que devuelve List<String>
         List<String> eventos = controladorEventos.listarEventos();
         assertEquals(7, eventos.size());
-        assertTrue(eventos.contains("Conferencia de Tecnologia"));
+        assertTrue(eventos.contains("Conferencia de Tecnología"));
         assertTrue(eventos.contains("Montevideo Fashion Week"));
         
         // Verificar eventos - usando listarInfoEvento()
@@ -215,8 +96,8 @@ public class TestTodoEnUno {
         // Verificar instituciones - usando listarInstituciones()
         DataInstitucion[] instituciones = controladorInstituciones.listarInstituciones();
         assertEquals(5, instituciones.length);
-        assertTrue(existeInstitucionPorNombre("Facultad de Ingenieria", instituciones));
-        assertTrue(existeInstitucionPorNombre("Agencia Nacional de Investigacion e Innovacion (ANII)", instituciones));
+        assertTrue(existeInstitucionPorNombre("Facultad de Ingeniería", instituciones));
+        assertTrue(existeInstitucionPorNombre("Agencia Nacional de Investigación e Innovación (ANII)", instituciones));
     }
     
     // Métodos auxiliares para verificar existencia
@@ -256,7 +137,7 @@ public class TestTodoEnUno {
         assertDoesNotThrow(() -> {
             // Necesitamos obtener el evento de alguna manera
             List<String> eventos = controladorEventos.listarEventos();
-            assertTrue(eventos.contains("Conferencia de Tecnologia"));
+            assertTrue(eventos.contains("Conferencia de Tecnología"));
         });
         
         // Verificar que los usuarios tienen los datos correctos
@@ -272,7 +153,7 @@ public class TestTodoEnUno {
             DataInstitucion[] instituciones = controladorInstituciones.listarInstituciones();
             boolean encontrada = false;
             for (DataInstitucion institucion : instituciones) {
-                if (institucion.getNombre().equals("Facultad de Ingenieria") && 
+                if (institucion.getNombre().equals("Facultad de Ingeniería") && 
                     institucion.getUrl().contains("fing.edu.uy")) {
                     encontrada = true;
                     break;
@@ -303,12 +184,12 @@ public class TestTodoEnUno {
         
         // Evento duplicado
         assertThrows(EventoRepetidoExcepcion.class, () -> {
-            controladorEventos.nuevoEvento(new DataEvento("Conferencia de Tecnologia", "CONF2", LocalDate.of(2025, 1, 1), "Otro evento"), Arrays.asList("Tecnologia"));
+            controladorEventos.nuevoEvento(new DataEvento("Conferencia de Tecnología", "CONF2", LocalDate.of(2025, 1, 1), "Otro evento"), Arrays.asList("Tecnología"));
         });
         
         // Institución duplicada
         assertThrows(InstitucionRepetidaException.class, () -> {
-            controladorInstituciones.nuevaInstitucion(new DataInstitucion("Facultad de Ingenieria", "Otra descripción", "http://otra.url"));
+            controladorInstituciones.nuevaInstitucion(new DataInstitucion("Facultad de Ingeniería", "Otra descripción", "http://otra.url"));
         });
     }
     
@@ -367,7 +248,7 @@ public class TestTodoEnUno {
         // Verificar que los datos originales siguen intactos
         assertTrue(categorias.contains("Tecnologia"));
         assertTrue(existeUsuarioPorNickname("atorres"));
-        assertTrue(eventos.contains("Conferencia de Tecnologia"));
+        assertTrue(eventos.contains("Conferencia de Tecnología"));
     }
     
     @Test

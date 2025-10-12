@@ -346,8 +346,8 @@ public class ControladorUsuario implements IUsuario {
 			II.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 3, 4), 25000, Nivel.Platino, "CORREANTEL", 10), "Antel", "Maratón de Montevideo", "Maratón de Montevideo 2025", "Corredor 10k");
 			II.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 5, 5), 15000, Nivel.Bronce, "EXPOCAT", 10), "Universidad Católica del Uruguay", "Expointer Uruguay", "Expointer Uruguay 2025", "General");
 			
-			ICU.nuevoRegistro("sofirod", "Maratón de Montevideo", "Maratón de Montevideo 2024", "Corredor 21K", LocalDate.of(2024, 7, 30));
 			ICU.nuevoRegistro("sofirod", "Montevideo Rock", "Montevideo Rock 2025", "VIP", LocalDate.of(2025, 5, 14));
+			ICU.nuevoRegistro("sofirod", "Maratón de Montevideo", "Maratón de Montevideo 2024", "Corredor 21K", LocalDate.of(2024, 7, 30));
 			ICU.nuevoRegistro("andrearod", "Conferencia de Tecnología", "Web Summit 2026", "Estudiante", LocalDate.of(2025, 8, 21));
 			ICU.nuevoRegistro("sofirod", "Maratón de Montevideo", "Maratón de Montevideo 2025", "Corredor 42K", LocalDate.of(2025, 3, 3));
 			ICU.nuevoRegistro("vale23", "Conferencia de Tecnología", "Mobile World Congress 2025", "Full", LocalDate.of(2025, 8, 22));
