@@ -124,13 +124,16 @@
                                     <div class="lista-items">
                                     <%
                                 		IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+                                		IEventos IEV= Fabrica.getInstance().getIControladorEventos();
                                         for (ParEdicionRegistro registro : registros) {
                                         	DataDetalleRegistro DataReg = ICU.getDetallesRegistro(usuario.getNickname(), registro);
                                     %>
                                         <div class="item">
                                             <div class="info-registro">
-                                                <span class="nombre-evento">
-                                                    ✅ <%= registro.getNombreEdicion() %>
+                                            	<span class="nombre-evento">
+                                                    ✅ <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= java.net.URLEncoder.encode(IEV.eventoTieneEdicion(registro.getNombreEdicion()), "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(registro.getNombreEdicion(),"UTF-8") %>" 
+                                                    class = "nombre-evento-link"> 
+                                                    <%= registro.getNombreEdicion() %> </a>
                                                 </span>
                                                 <span class="detalle-registro">
                                                 	Tipo: <%= DataReg.getTipoRegistro() %>
