@@ -1,5 +1,7 @@
 package logica;
-import java.util.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import logica.datatypes.DataInstitucion;
 
@@ -32,7 +34,7 @@ public class Institucion {
         return this.patrocinios;
     }
     
-    public void añadirPatrocinio(Patrocinio patro) {
+    public void agregarPatrocinio(Patrocinio patro) {
         this.patrocinios.add(patro);
     }
 }

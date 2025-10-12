@@ -132,7 +132,7 @@ public class EdicionEvento {
 		for (TipoRegistro tr : tipoRegistros) {
 			if (tr.getNombre().equals(tReg)) {
 				int cupo = tr.getCupo();
-				return (cupo > 0);
+				return cupo > 0;
 			}
 		}
 		System.out.println("NO ENCONTRE");
@@ -163,7 +163,7 @@ public class EdicionEvento {
 	}
 	
 	public void agregarRegistro(Registro reg) {
-		if(reg != null) {
+		if (reg != null) {
 			this.registros.add(reg);
 		}
 	}

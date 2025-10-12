@@ -125,7 +125,7 @@
 
 			<div class="button-group">
 				<button type="submit">Aceptar</button>
-				<button type="button" onclick="history.back()">Cancelar</button>
+				<button type="button" id="cancelarBtn" onclick="window.location.href='${pageContext.request.contextPath}/home'">Cancelar</button>
 			</div>
 		</form>
 	</div>

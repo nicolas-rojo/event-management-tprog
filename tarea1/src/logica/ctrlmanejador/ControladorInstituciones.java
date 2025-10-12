@@ -36,7 +36,7 @@ public class ControladorInstituciones implements IInstituciones{
 	public void nuevaInstitucion(DataInstitucion dataIns) throws InstitucionRepetidaException {
 		ManejadorInstituciones mins = ManejadorInstituciones.getInstance();
 		Institucion ins = mins.getInstitucion(dataIns.getNombre());
-		if(ins != null) {
+		if (ins != null) {
 			throw new InstitucionRepetidaException("Ya existe esta institucion");
 		}else {
 			Institucion inst = new Institucion(dataIns);
@@ -56,14 +56,14 @@ public class ControladorInstituciones implements IInstituciones{
 		EdicionEvento edev = evt.getEdicion(edicion);
 		patro.setEdicionEvento(edev);
 		Set<Patrocinio> patrocinios = edev.getPatrocinios();
-		for(Patrocinio pat : patrocinios) {
-			if(pat.getInstitucion().getNombre().equals(institucion)) {
+		for (Patrocinio pat : patrocinios) {
+			if (pat.getInstitucion().getNombre().equals(institucion)) {
 				throw new PatrocinioRepetidoException("Ya existe este patrocinio en esta edicion");
 			}
 		}
 		TipoRegistro treg = edev.getTRegistro(nomTReg);
 		patro.setTipoRegistro(treg);
-		ins.añadirPatrocinio(patro);
+		ins.agregarPatrocinio(patro);
 		edev.agregarPatrocinio(patro);
 	}
 

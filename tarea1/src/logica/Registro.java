@@ -36,7 +36,7 @@ public class Registro {
 	}
 	
 	public boolean esEdicion(String edicion) {
-		return (edi.getNombre().equals(edicion));
+		return edi.getNombre().equals(edicion);
 	}
 	
 	public void asociarEdicion(EdicionEvento edev) {

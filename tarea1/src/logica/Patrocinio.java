@@ -2,7 +2,8 @@ package logica;
 
 import java.time.LocalDate;
 
-import logica.datatypes.*;
+import logica.datatypes.DataPatrocinio;
+import logica.datatypes.Nivel;
 
 public class Patrocinio {
 	private LocalDate fecha;

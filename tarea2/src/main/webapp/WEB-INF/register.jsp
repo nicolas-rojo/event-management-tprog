@@ -80,7 +80,7 @@
             %>
             
             <button type="submit">Registrarse</button>
-            <button type="button" onclick="window.location.href=document.referrer;">Cancelar</button>
+			<button type="button" id="cancelarBtn" onclick="window.location.href='${pageContext.request.contextPath}/home'">Cancelar</button>
         </form>
     </div>
 

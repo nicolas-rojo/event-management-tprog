@@ -19,15 +19,9 @@ import logica.datatypes.DataPatrocinioCompleto;
 import logica.datatypes.Estado;
 
 import java.util.Set;
-import java.util.HashSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.HashMap;
-
 
 import logica.Evento;
 import logica.Organizador;
@@ -47,7 +41,7 @@ public class ControladorEventos implements IEventos {
         ManejadorEvento mev = ManejadorEvento.getInstance();
         Evento eventoTRegistro = mev.getEvento(evento);
         EdicionEvento edicionTRegistro = eventoTRegistro.getEdicion(edicion);
-        if(edicionTRegistro.getTRegistro().contains(dataTRegistro.getNombre())) {
+        if (edicionTRegistro.getTRegistro().contains(dataTRegistro.getNombre())) {
             throw new TipoDeRegistroRepetidoException("El Tipo de Registro ingresado ya existe en el sistema");
         }else {
             edicionTRegistro.agregarTRegistro(new TipoRegistro(dataTRegistro));
@@ -60,13 +54,12 @@ public class ControladorEventos implements IEventos {
         Evento evt = mev.getEvento(dataEvento.getNombre());
         if (evt != null) {
             throw new EventoRepetidoExcepcion("nombre de evento en uso");
-        }        
-        else {
+        } else {
             if (cats == null || cats.isEmpty()) {
                 throw new EventoSinCategoriaExcepcion("Faltó ingresar una categoría");
             }
             evt = new Evento(dataEvento);
-            for(String c : cats) {
+            for (String c : cats) {
                 Categoria categoria = mev.getCategoria(c);
                 if (categoria == null) {
                     throw new EventoSinCategoriaExcepcion(
@@ -109,11 +102,11 @@ public class ControladorEventos implements IEventos {
         
         //Me fijo que no existe una edicion con ese nombre en TODOS los eventos
         
-        for(String e : eventos) {
+        for (String e : eventos) {
         	Evento evt = mev.getEvento(e);
         	List<String> ediciones = evt.getEdiciones();
-        	for(String ed : ediciones) {
-        		if(ed.equals(dataEdicion.getNombre())) {
+        	for (String ed : ediciones) {
+        		if (ed.equals(dataEdicion.getNombre())) {
         			throw new EdicionRepetidaExcepcion("Nombre de edicion en uso");
         		}
         	}
@@ -143,7 +136,7 @@ public class ControladorEventos implements IEventos {
     public List<String> listarEdiciones(String eventoSeleccionado) {
         ManejadorEvento mev = ManejadorEvento.getInstance();
         Evento evt = mev.getEvento(eventoSeleccionado);
-        if(evt==null) {
+        if (evt==null) {
             return new ArrayList<>();
         }
         return evt.getEdiciones();            
@@ -152,7 +145,7 @@ public class ControladorEventos implements IEventos {
     public List<String> listarTRegistros(String eventoSeleccionado, String edicionSeleccionada) {
         ManejadorEvento mev = ManejadorEvento.getInstance();
         Evento evt = mev.getEvento(eventoSeleccionado);
-        if(evt ==null) {
+        if (evt ==null) {
             return new ArrayList<>();
         }
         return evt.getTRegistroEdicion(edicionSeleccionada);
@@ -285,7 +278,7 @@ public class ControladorEventos implements IEventos {
     public void nuevaCategoria(String cat) throws CategoriaRepetidaException {
         ManejadorEvento mev = ManejadorEvento.getInstance();
         Categoria cate = mev.getCategoria(cat);
-        if(cate != null) {
+        if (cate != null) {
             throw new CategoriaRepetidaException("Ya existe esta categoria");
         }else {
             Categoria categoria = new Categoria(cat);
@@ -296,7 +289,7 @@ public class ControladorEventos implements IEventos {
     public boolean existeEvento(String eventoSeleccionado) {
     	ManejadorEvento mev = ManejadorEvento.getInstance();
     	Evento evt = mev.getEvento(eventoSeleccionado);
-    	return (evt.getNombreEvento().equals(eventoSeleccionado));
+    	return evt.getNombreEvento().equals(eventoSeleccionado);
     }
     
     public boolean existeEdicion(String evento, String edicion) {
@@ -371,7 +364,7 @@ public class ControladorEventos implements IEventos {
         return null;
     }
     
-    public void procesarEdicion(String evento,String edicion, Estado estado){
+    public void procesarEdicion(String evento, String edicion, Estado estado){
     	ManejadorEvento manejadorE = ManejadorEvento.getInstance();
     	Evento eventoSeleccionado = manejadorE.getEvento(evento);
     	EdicionEvento edicionE = eventoSeleccionado.getEdicion(edicion);

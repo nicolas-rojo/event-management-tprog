@@ -8,7 +8,11 @@ import excepciones.ErrorDetallesRegistroException;
 import excepciones.NoHayCupoEdicionTRegistro;
 import excepciones.UsuarioNoExisteException;
 import excepciones.UsuarioRepetidoException;
-import logica.datatypes.*;
+import logica.datatypes.DataAsistente;
+import logica.datatypes.DataDetalleRegistro;
+import logica.datatypes.DataOrganizador;
+import logica.datatypes.DataUsuario;
+import logica.datatypes.ParEdicionRegistro;
 
 public interface IUsuario {
     

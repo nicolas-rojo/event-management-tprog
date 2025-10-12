@@ -81,7 +81,7 @@ public class Asistente extends Usuario{
     public DataDetalleRegistro getDetallesRegistro(ParEdicionRegistro regEdicion) {
     	for (Registro r : regs) {
     		if (r.getNombreEdicion().equals(regEdicion.getNombreEdicion()) && r.getFecha().equals(regEdicion.getFechaRegistro())) {
-    			return (new DataDetalleRegistro(regEdicion.getNombreEdicion(), r.getNombreTR(), r.getCostoTR(), regEdicion.getFechaRegistro()));
+    			return new DataDetalleRegistro(regEdicion.getNombreEdicion(), r.getNombreTR(), r.getCostoTR(), regEdicion.getFechaRegistro());
     		}
     	}
     	return null;

@@ -1,5 +1,6 @@
 package logica;
-import logica.datatypes.*;
+
+import logica.datatypes.DataTRegistro;
 
 public class TipoRegistro {
 	private String nombre;
@@ -47,7 +48,7 @@ public class TipoRegistro {
 	}
 	
 	public boolean tieneCupo() {
-		return (cupo > 0);
+		return cupo > 0;
 	}
 	
 	public DataTRegistro getDataTRegistro() {
@@ -55,7 +56,7 @@ public class TipoRegistro {
 	}
 	
 	public void bajarCupo() {
-		if(this.cupo > 0) {
+		if (this.cupo > 0) {
 			this.cupo -= 1;
 		}
 	}

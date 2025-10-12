@@ -2,7 +2,8 @@ package logica.interfaces;
 
 import excepciones.InstitucionRepetidaException;
 import excepciones.PatrocinioRepetidoException;
-import logica.datatypes.*;
+import logica.datatypes.DataInstitucion;
+import logica.datatypes.DataPatrocinio;
 
 public interface IInstituciones {
 	public abstract DataInstitucion[] listarInstituciones();

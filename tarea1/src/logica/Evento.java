@@ -65,14 +65,14 @@ public class Evento {
 	
 	public List<String> getEdiciones(){
 		List<String> res = new ArrayList<>();
-		for(EdicionEvento e : this.ediciones.values()) {
+		for (EdicionEvento e : this.ediciones.values()) {
 			res.add(e.getNombre());
 		}
 		return res;
 	}
 	
 	public EdicionEvento getEdicion(String nombre) {
-		return (this.ediciones.get(nombre));
+		return this.ediciones.get(nombre);
 	}
 	
 	public void agregarEdicion(EdicionEvento edicion) {
