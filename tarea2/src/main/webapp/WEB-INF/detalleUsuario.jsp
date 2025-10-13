@@ -149,11 +149,19 @@
                                     </div>
                             <%
                                 } else {
+                            		if (usr != null && usr.getNickname().equals(usuario.getNickname())) {
                             %>
+                            		<p style="text-align: center; color: #666; padding: 20px;">
+                                        Aún no te has registrado a ninguna edición de evento.
+                                    </p>
+                                    <% 
+                                    } else { 
+                                    %>
                                     <p style="text-align: center; color: #666; padding: 20px;">
-                                        No hay registros disponibles para este asistente.
+                                        Inicia sesión como <%= usuario.getNickname() %> para ver sus registros.
                                     </p>
                             <%
+                            		}
                                 }
                             %>
                         </div>

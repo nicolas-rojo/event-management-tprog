@@ -20,13 +20,7 @@ String categoriaSeleccionada = (String) request.getAttribute("categoriaSeleccion
     <a href="${pageContext.request.contextPath}/AltaInstitucion" class="element">Alta Institución</a>
     
     <%
-    } else if ("asistente".equals(tipo)) {
-    %>
-    
-    <a href="" class="element">Ver Registros</a>
-    
-    <%
-    }
+    } 
     %>
     
     <a href="${pageContext.request.contextPath}/home" class="element">Consultar Evento</a>
@@ -35,22 +29,11 @@ String categoriaSeleccionada = (String) request.getAttribute("categoriaSeleccion
     <% if (categorias != null && !categorias.isEmpty()) { %>
     <div class="categorias-sidebar">
         <h3 class="categorias-title">Categorías</h3> 
-        
         <div class="categorias-scroll-box">
-       
             <div class="categorias-box">
-            
-    <a href="${pageContext.request.contextPath}/home" 
-               class="categoria-item <%= (categoriaSeleccionada == null) ?
-"activa" : "" %>">
-                Todas
-            </a>
-            <% for (String categoria : categorias) { %>
-                <a href="${pageContext.request.contextPath}/home?categoria=<%= java.net.URLEncoder.encode(categoria, "UTF-8") %>" 
-                   class="categoria-item <%= (categoria.equals(categoriaSeleccionada)) ?
-"activa" : "" %>">
-                    <%= categoria %>
-                </a>
+    			<a href="${pageContext.request.contextPath}/home" class="categoria-item <%= (categoriaSeleccionada == null) ? "activa" : "" %>"> Todas </a>
+            	<% for (String categoria : categorias) { %>
+                <a href="${pageContext.request.contextPath}/home?categoria=<%= java.net.URLEncoder.encode(categoria, "UTF-8") %>" class="categoria-item <%= (categoria.equals(categoriaSeleccionada)) ? "activa" : "" %>"> <%= categoria %></a>
             <% } %>
             </div>
             
