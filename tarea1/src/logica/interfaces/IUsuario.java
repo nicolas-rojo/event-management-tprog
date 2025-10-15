@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import excepciones.AsistenteYaRegistrado;
+import excepciones.FechaRegistroInvalidaException;
 import excepciones.ErrorDetallesRegistroException;
 import excepciones.NoHayCupoEdicionTRegistro;
 import excepciones.UsuarioNoExisteException;
@@ -40,7 +41,7 @@ public interface IUsuario {
     
     public abstract List<String> listarOrganizadores();
     
-    public abstract void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro;
+    public abstract void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException;
     
     public abstract List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado);
     

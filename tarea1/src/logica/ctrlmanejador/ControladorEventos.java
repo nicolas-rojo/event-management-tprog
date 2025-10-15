@@ -4,6 +4,7 @@ import logica.interfaces.IEventos;
 import excepciones.TipoDeRegistroRepetidoException;
 import excepciones.EventoRepetidoExcepcion;
 import excepciones.EventoSinCategoriaExcepcion;
+import excepciones.FechaRegistroInvalidaException;
 import excepciones.NoHayCupoEdicionTRegistro;
 import excepciones.AsistenteYaRegistrado;
 import excepciones.CategoriaRepetidaException;
@@ -151,25 +152,39 @@ public class ControladorEventos implements IEventos {
         return evt.getTRegistroEdicion(edicionSeleccionada);
     }
     
-    public void nuevoRegistro(Asistente asist, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro {
-        boolean cond1 = asist.estaRegistrado(edicion);
+    public void nuevoRegistro(Asistente asist, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException {
+    	// VALIDACIÓN 1: Fecha no puede ser nula
+        if (fecha == null) {
+            throw new FechaRegistroInvalidaException("Debe seleccionar una fecha");
+        }
+        // VALIDACIÓN 2: Verificar si ya está registrado
+        if (asist.estaRegistrado(edicion)) {
+            throw new AsistenteYaRegistrado("El asistente ya está registrado a la edición seleccionada");
+        }
+        // Obtener evento y edición
         ManejadorEvento mev = ManejadorEvento.getInstance();
         Evento evt = mev.getEvento(evento);
-        boolean cond2 = evt.cupoEdTRegistro(edicion, tipoReg);
-        if (cond1) {
-            throw new AsistenteYaRegistrado("el asistente ya está registrado a la edicion seleccionada");
-        } else if (!cond2) {
-            throw new NoHayCupoEdicionTRegistro("no hay cupos para el tipo de registro y edicion seleccionados");
-        } else { 
-            Registro reg = new Registro(fecha);
-            asist.agregarRegistro(reg);
-            EdicionEvento edi = evt.getEdicion(edicion);
-            TipoRegistro tReg = edi.getTRegistro(tipoReg);
-            tReg.bajarCupo();
-            reg.asociarEdicion(edi);
-            reg.asociarTRegistro(tReg);
-            edi.agregarRegistro(reg);
+        EdicionEvento edi = evt.getEdicion(edicion);
+        // VALIDACIÓN 3: Fecha no puede ser posterior a la fecha fin del evento
+        if (fecha.isAfter(edi.getFechaFin())) {
+            throw new FechaRegistroInvalidaException("La fecha de registro no puede ser posterior a la fecha de fin del evento");
         }
+        // VALIDACIÓN 4: Verificar cupo disponible
+        if (!evt.cupoEdTRegistro(edicion, tipoReg)) {
+            throw new NoHayCupoEdicionTRegistro("No hay cupos disponibles para el tipo de registro seleccionado");
+        }
+        // Crear y asociar el registro
+        Registro reg = new Registro(fecha);
+        TipoRegistro tReg = edi.getTRegistro(tipoReg);
+        
+        reg.asociarEdicion(edi);
+        reg.asociarTRegistro(tReg);
+        
+        asist.agregarRegistro(reg);
+        edi.agregarRegistro(reg);
+        
+        // Decrementar el cupo
+        tReg.bajarCupo();
     }
     
     public DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro) {
