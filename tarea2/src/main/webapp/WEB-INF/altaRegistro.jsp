@@ -4,6 +4,11 @@
 
 <% 
 DataTRegistro dataTR = (DataTRegistro) request.getAttribute("dataTR");
+if (dataTR == null) {
+    // Redirigir o manejar el error
+    response.sendRedirect(request.getContextPath() + "/home");
+    return;
+}
 %>
 <head>
     <meta charset="UTF-8">
@@ -41,10 +46,12 @@ DataTRegistro dataTR = (DataTRegistro) request.getAttribute("dataTR");
 				<button type="button" id="cancelarBtn" onclick="window.location.href='${pageContext.request.contextPath}/home'">Cancelar</button>
             </div>
             <% if (request.getAttribute("errorYaRegistrado") != null) { %>
-            	<div style="color: red; font-size: 12px;"><%= request.getAttribute("errorYaRegistrado") %></div>
-            <% }else if (request.getAttribute("errorCupo") != null){ %>
-            	<div style="color: red; font-size: 12px;"><%= request.getAttribute("errorCupo") %></div>
-            <% } %>
+			    <div style="color: red; font-size: 12px;"><%= request.getAttribute("errorYaRegistrado") %></div>
+			<% } else if (request.getAttribute("errorCupo") != null) { %>
+			    <div style="color: red; font-size: 12px;"><%= request.getAttribute("errorCupo") %></div>
+			<% } else if (request.getAttribute("errorFecha") != null) { %>
+			    <div style="color: red; font-size: 12px;"><%= request.getAttribute("errorFecha") %></div>
+			<% } %>
         </form>
     </div>
     <script src="../altaReg/scriptCodigo.js"></script>

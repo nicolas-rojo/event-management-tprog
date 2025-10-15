@@ -6,6 +6,7 @@ import logica.interfaces.IUsuario;
 
 import excepciones.UsuarioRepetidoException;
 import excepciones.AsistenteYaRegistrado;
+import excepciones.FechaRegistroInvalidaException;
 import excepciones.CategoriaRepetidaException;
 import excepciones.EdicionRepetidaExcepcion;
 import excepciones.ErrorDetallesRegistroException;
@@ -184,7 +185,7 @@ public class ControladorUsuario implements IUsuario {
 		return musr.getOrganizadores();
 	}
 	
-	public void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro {
+	public void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException {
 		ManejadorUsuario musr = ManejadorUsuario.getInstance();
 		Usuario usr = musr.getUsuarioNickname(asistenteSeleccionado);
 		Asistente asistente = (Asistente) usr;
@@ -369,7 +370,7 @@ public class ControladorUsuario implements IUsuario {
 			ICU.nuevoRegistro("MariR", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "General", LocalDate.of(2025, 10, 10));
 			
 			
-    	} catch (TipoDeRegistroRepetidoException | NoHayCupoEdicionTRegistro |  AsistenteYaRegistrado | PatrocinioRepetidoException e){
+    	} catch (TipoDeRegistroRepetidoException | NoHayCupoEdicionTRegistro |  AsistenteYaRegistrado | PatrocinioRepetidoException | FechaRegistroInvalidaException e){
     		e.printStackTrace();
     	}
 	}
