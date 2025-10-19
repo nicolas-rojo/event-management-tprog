@@ -60,8 +60,8 @@
                     <h1 class="nombre-usuario"><%= usuario.getNombre() %></h1>
                     <p class="nickname-usuario">@<%= usuario.getNickname() %></p>
                     <%if(usuario.getEmail().equals(loggedMail)){%>
-                    	<button class="boton-editar-perfil" onclick="alert('Funcionalidad de editar perfil - Por implementar')">✏️ Editar Perfil</button>
-                    <%} %>
+					    <a href="${pageContext.request.contextPath}/ModificarUsuario" class="boton-editar-perfil">✏️ Editar Perfil</a>
+					<%} %>
                     <div class="detalles-usuario">
                         <div class="detalle-item">
                             <span class="icono">📧</span>

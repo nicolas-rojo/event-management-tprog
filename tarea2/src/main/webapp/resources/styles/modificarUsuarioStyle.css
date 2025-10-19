@@ -1,0 +1,183 @@
+body {
+    font-family: outfit, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #9face6);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.logo {
+    width: 150px;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+}
+
+input, button, textarea, select {
+    font-family: outfit, sans-serif;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+a.boton-cancelar {
+    margin: 8px 0 !important;
+    padding: 10px !important;
+    width: auto !important;
+}
+
+button {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+    font-family: outfit, sans-serif;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.button-group button {
+    flex: 1;
+}
+
+.button-group .boton-cancelar {
+    flex: 1;
+    background: linear-gradient(135deg, #868686, #5a5a5a);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: opacity 0.3s;
+    font-size: 16px;
+    font-family: outfit, sans-serif;
+    border: none;
+    cursor: pointer;
+}
+
+.button-group .boton-cancelar:hover {
+    opacity: 0.9;
+}
+
+/* Campo no editable */
+.campo-no-editable {
+    margin: 12px 0;
+    text-align: left;
+}
+
+.campo-no-editable label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.campo-no-editable input {
+    background-color: #f5f5f5;
+    color: #888;
+    cursor: not-allowed;
+    border-color: #ddd;
+}
+
+/* Campos editables con título */
+.form-group {
+    margin: 12px 0;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    margin-top: 0;
+}
+
+/* Mensajes de error */
+.error-message {
+    color: red;
+    font-size: 12px;
+    display: none;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.input-error {
+    border-color: red !important;
+}
+
+/* Estilos para el formulario */
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+input[required] {
+    border-left: 3px solid #6a11cb;
+}
+
+input[type="url"] {
+    border-left: 3px solid #2575fc;
+}
+
+/* Scroll suave para contenedor */
+.login-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.login-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.login-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border-radius: 10px;
+}
+
+.login-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #5a0db3, #1e5fd9);
+}
