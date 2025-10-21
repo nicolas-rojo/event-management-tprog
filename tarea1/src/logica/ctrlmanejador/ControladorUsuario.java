@@ -17,6 +17,7 @@ import excepciones.NoHayCupoEdicionTRegistro;
 import excepciones.PatrocinioRepetidoException;
 import excepciones.TipoDeRegistroRepetidoException;
 import excepciones.UsuarioNoExisteException;
+import excepciones.ContrasenaIncorrectaException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -387,6 +388,29 @@ public class ControladorUsuario implements IUsuario {
 			}
 		}
 		return res;
+	}
+	
+	public void modificarAsistenteConPassword(String email, String nuevoNombre, String nuevoApellido, String passActual, String passNueva) throws UsuarioNoExisteException, ContrasenaIncorrectaException {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioEmail(email);
+		if (usr == null) {throw new UsuarioNoExisteException("Error, no hay usuario con el email ingresado");}
+		if (!usr.getPass().equals(passActual)) {throw new ContrasenaIncorrectaException("La contraseña actual no es correcta");}
+		Asistente asist = (Asistente) usr;
+		asist.setNombre(nuevoNombre);
+		asist.setApellido(nuevoApellido);
+		asist.setPass(passNueva);
+	}
+		
+	public void modificarOrganizadorConPassword(String email, String nuevoNombre, String descripcion, String url, String passActual, String passNueva) throws UsuarioNoExisteException, ContrasenaIncorrectaException {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioEmail(email);
+		if (usr == null) {throw new UsuarioNoExisteException("Error, no hay usuario con el email ingresado");}
+		if (!usr.getPass().equals(passActual)) {throw new ContrasenaIncorrectaException("La contraseña actual no es correcta");}
+		Organizador orga = (Organizador) usr;
+		orga.setNombre(nuevoNombre);
+		orga.setDescripcion(descripcion);
+		orga.setUrl(url);
+		orga.setPass(passNueva);
 	}
 }
 

@@ -14,6 +14,7 @@ import logica.datatypes.DataDetalleRegistro;
 import logica.datatypes.DataOrganizador;
 import logica.datatypes.DataUsuario;
 import logica.datatypes.ParEdicionRegistro;
+import excepciones.ContrasenaIncorrectaException;
 
 public interface IUsuario {
     
@@ -54,4 +55,8 @@ public interface IUsuario {
     public abstract void cargarDatos();
     
     public List<String> getUsuariosRegistrados(String edicion);
+    
+    public abstract void modificarAsistenteConPassword(String email, String nuevoNombre, String nuevoApellido, String passActual, String passNueva) throws UsuarioNoExisteException, ContrasenaIncorrectaException;
+
+    public abstract void modificarOrganizadorConPassword(String email, String nuevoNombre, String descripcion, String url, String passActual, String passNueva) throws UsuarioNoExisteException, ContrasenaIncorrectaException;   
 }
