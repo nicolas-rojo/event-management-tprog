@@ -107,12 +107,37 @@
 			            <input type="text" id="url" name="url" 
 			                   placeholder="URL (opcional)" 
 			                   value="<%= organizador.getUrl() != null ? organizador.getUrl() : "" %>">
-			            <div class="error-message" id="errorUrl">Ingrese una URL válida</div>
 			        </div>
 			
 			<%
 			    }
 			%>
+
+            <!-- Sección de cambio de contraseña -->
+            <div class="password-section">
+                <h3>Cambiar Contraseña (opcional)</h3>
+                
+                <div class="form-group">
+                    <label for="passActual">Contraseña Actual:</label>
+                    <input type="password" id="passActual" name="passActual" 
+                           placeholder="Ingrese su contraseña actual">
+                    <div class="error-message" id="errorPassActual">La contraseña actual es requerida</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="passNueva">Contraseña Nueva:</label>
+                    <input type="password" id="passNueva" name="passNueva" 
+                           placeholder="Ingrese la nueva contraseña">
+                    <div class="error-message" id="errorPassNueva">La contraseña nueva es requerida</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="passConfirmar">Confirmar Contraseña:</label>
+                    <input type="password" id="passConfirmar" name="passConfirmar" 
+                           placeholder="Confirme la nueva contraseña">
+                    <div class="error-message" id="errorPassConfirmar">Las contraseñas no coinciden</div>
+                </div>
+            </div>
 
             <div id="confirmarError" style="color: red;"></div>
 
