@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ediciones :: Mis Eventos</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <!-- CSS -->
+	<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+	<!-- Topbar -->
+	<nav class="top-nav">
+  		<div class="container-fluid">
+    		<div class="top-nav-content">
+      			<!-- Botón Atrás -->
+      			<button onclick="history.back()" class="back-button">
+        			<i class="bi bi-arrow-left"></i>
+      			</button>
+      
+      			<!-- Logo -->
+      			<div class="logo">
+        			<img src="../src/images/logo.png" alt="Logo">
+      			</div>
+    		</div>
+  		</div>
+	</nav>
+
+    <!-- Cards -->
+	<div class="info-container">
+		<!-- Card Usuario -->
+		<div class="profile-card">
+  			<div class="profile-left">
+    			<div class="profile-avatar">
+      				<img src="../src/images/IMG-US01.jpg" alt="Usuario">
+    			</div>
+    			<p class="profile-nickname">nickname</p>
+  			</div>
+  
+  			<div class="profile-right">
+    			<div class="profile-info">
+      				<h2 class="profile-name">Nombre Apellido</h2>
+    			</div>
+    			<button class="logout-button" onclick="cerrarSesion()">
+      				<i class="bi bi-box-arrow-right"></i>
+      				Cerrar Sesión
+    			</button>
+  			</div>
+		</div>
+	
+	</div>
+
+    <!-- Lowbar -->
+    <nav class="bottom-nav">
+      	<div class="container-fluid">
+        	<div class="bottom-nav-content">
+				<!-- Botón Home -->
+				<a href="../listarEventos/listarEventos.html" class="nav-item">
+					<i class="bi bi-house-door-fill"></i>
+				</a>
+
+				<!-- Botón Perfil con imagen del usuario -->
+				<a href="../consultaUsr/consultaUsr.html" class="nav-item profile-link">
+					<div class="profile-pic">
+					<img src="../src/images/IMG-US01.jpg" alt="Perfil" />
+					</div>
+				</a>
+        	</div>
+      </div>
+    </nav>
+</body>
+</html>
