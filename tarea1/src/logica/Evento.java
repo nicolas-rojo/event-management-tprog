@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Set;
 import logica.datatypes.DataEvento;
 import logica.datatypes.DataEventoCompleto;
+import logica.datatypes.EstadoEvento;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ public class Evento {
 	private String sigla;
 	private LocalDate fechaAlta;
 	private String descripcion;
+	private EstadoEvento estado;
 	
 	private Map<String, EdicionEvento> ediciones;
 	private Set<Categoria> categorias;
@@ -26,7 +28,7 @@ public class Evento {
 		this.sigla = dataevento.getSigla();
 		this.fechaAlta = dataevento.getFechaAlta();
 		this.descripcion = dataevento.getDesc();
-		
+		this.estado = EstadoEvento.activo;
 		this.ediciones = new HashMap<>();
 		this.categorias = new HashSet<>();
 	}
@@ -47,6 +49,10 @@ public class Evento {
 		return this.descripcion;
 	}
 	
+	public EstadoEvento getEstado() {
+		return this.estado;
+	}
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -61,6 +67,10 @@ public class Evento {
 	
 	public void setDesc(String desc) {
 		this.descripcion = desc;
+	}
+	
+	public void setEstado(EstadoEvento estado) {
+		this.estado = estado;
 	}
 	
 	public List<String> getEdiciones(){
@@ -101,4 +111,5 @@ public class Evento {
 	public void agregarCategoria(Categoria cat) {
 		this.categorias.add(cat);
 	}
+	
 }
