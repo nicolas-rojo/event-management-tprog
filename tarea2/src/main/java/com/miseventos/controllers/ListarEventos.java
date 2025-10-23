@@ -50,14 +50,19 @@ public class ListarEventos extends HttpServlet {
 			request.setAttribute("categoriaSeleccionada", categoriaFiltro);
 			
 			// Obtener eventos filtrados o todos
-			List<DataEventoCompleto> lista;
+			List<DataEventoCompleto> listaAux;
 			if (categoriaFiltro != null && !categoriaFiltro.trim().isEmpty()) {
 				// Filtrar eventos por categoría
-				lista = IEV.getEventosConCategoriaNoFin(categoriaFiltro);
+				listaAux = IEV.getEventosConCategoria(categoriaFiltro);
 			} else {
 				// Mostrar todos los eventos
 				DataEventoCompleto[] aux = IEV.listarInfoEvento();
-				lista = new ArrayList<>(Arrays.asList(aux));
+				listaAux = new ArrayList<>(Arrays.asList(aux));
+			}
+			List<DataEventoCompleto> lista;
+			For () {
+				if (!IEV.eventoFinalizado(dCom.getNombre()))
+					lista.add(dCom);
 			}
 			
 			request.setAttribute("eventos", lista);
