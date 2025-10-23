@@ -29,6 +29,8 @@ public interface IEventos {
 		
 		public abstract List<DataEventoCompleto> getEventosConCategoria(String cat);
 		
+		public boolean eventoFinalizado(String evento);
+		
 		public abstract List<String> listarEdiciones(String eventoSeleccionado);
 		
 		public abstract List<String> listarTRegistros(String eventoSeleccionado, String edicionSeleccionada);
@@ -71,4 +73,6 @@ public interface IEventos {
 		public abstract DataPatrocinioCompleto obtenerDTOPatrocinioCompleto(String evento, String edicion, String codigo);
 		
 		public abstract Estado getEstado(String edicion, String evento);
+		
+		public abstract void darDeBaja(String evento);
 }

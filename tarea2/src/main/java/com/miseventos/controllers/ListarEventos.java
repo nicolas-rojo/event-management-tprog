@@ -50,14 +50,19 @@ public class ListarEventos extends HttpServlet {
 			request.setAttribute("categoriaSeleccionada", categoriaFiltro);
 			
 			// Obtener eventos filtrados o todos
-			List<DataEventoCompleto> lista;
+			List<DataEventoCompleto> listaAux;
 			if (categoriaFiltro != null && !categoriaFiltro.trim().isEmpty()) {
 				// Filtrar eventos por categoría
-				lista = IEV.getEventosConCategoria(categoriaFiltro);
+				listaAux = IEV.getEventosConCategoria(categoriaFiltro);
 			} else {
 				// Mostrar todos los eventos
 				DataEventoCompleto[] aux = IEV.listarInfoEvento();
-				lista = new ArrayList<>(Arrays.asList(aux));
+				listaAux = new ArrayList<>(Arrays.asList(aux));
+			}
+			List<DataEventoCompleto> lista = new ArrayList<>();
+			for (DataEventoCompleto dCom : listaAux) {
+				if (!IEV.eventoFinalizado(dCom.getNombre()))
+					lista.add(dCom);
 			}
 			
 			request.setAttribute("eventos", lista);
@@ -73,6 +78,15 @@ public class ListarEventos extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+	    String eventoABorrar = request.getParameter("eventoDarBaja");
+	    
+	    if (eventoABorrar != null && !eventoABorrar.isEmpty()) {
+	            IEV.darDeBaja(eventoABorrar); 
+	            request.setAttribute("mensaje", "Evento dado de baja correctamente.");
+
+	        }
+	    doGet(request, response);
+	    }
+	    
+	
 }
