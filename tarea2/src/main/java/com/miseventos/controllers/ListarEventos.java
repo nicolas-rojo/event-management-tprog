@@ -59,8 +59,8 @@ public class ListarEventos extends HttpServlet {
 				DataEventoCompleto[] aux = IEV.listarInfoEvento();
 				listaAux = new ArrayList<>(Arrays.asList(aux));
 			}
-			List<DataEventoCompleto> lista;
-			For () {
+			List<DataEventoCompleto> lista = new ArrayList<>();
+			for (DataEventoCompleto dCom : listaAux) {
 				if (!IEV.eventoFinalizado(dCom.getNombre()))
 					lista.add(dCom);
 			}
@@ -78,6 +78,15 @@ public class ListarEventos extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+	    String eventoABorrar = request.getParameter("eventoDarBaja");
+	    
+	    if (eventoABorrar != null && !eventoABorrar.isEmpty()) {
+	            IEV.darDeBaja(eventoABorrar); 
+	            request.setAttribute("mensaje", "Evento dado de baja correctamente.");
+
+	        }
+	    doGet(request, response);
+	    }
+	    
+	
 }

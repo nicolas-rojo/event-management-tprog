@@ -46,6 +46,28 @@ body {
     box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.3);
 }
 
+.btn-nuevaedicion:hover {
+    background-color: #3681c4;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-nuevaedicion {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4397db;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.boton-div {
+    display: flex;
+    width: 100%;
+}
+
 .imagenes {
     border-radius: 25px;
 }

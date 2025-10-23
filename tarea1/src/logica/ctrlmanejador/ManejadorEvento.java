@@ -36,20 +36,7 @@ public class ManejadorEvento {
     	Categoria cate = categorias.get(cat);
     	return cate.getEventos();
     }
-    
-    public Set<Evento> getEventosConCategoriaNoFin(String cat) {
-        Categoria cate = categorias.get(cat);
-        Set<Evento> eventosActivos = new HashSet<>();
-        Set<Evento> eventosCat = cate.getEventos();
-            for (Evento evento : eventosCat) {
-                if (evento.getEstado().equals(EstadoEvento.activo)) { 
-                    eventosActivos.add(evento);
-                    System.out.println("evento" + evento.getNombreEvento());
-                }
-            }       
-
-        return eventosActivos;
-    }
+     
     
     public void addEvento(Evento evento) {
         String nombre = evento.getNombreEvento();
