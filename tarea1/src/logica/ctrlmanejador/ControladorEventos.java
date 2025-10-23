@@ -85,6 +85,17 @@ public class ControladorEventos implements IEventos {
          return res;
     }
     
+    public List<DataEventoCompleto> getEventosConCategoriaNoFin(String cat){
+   	 List<DataEventoCompleto> res = new ArrayList<>();
+   	 ManejadorEvento mev = ManejadorEvento.getInstance();
+        Set<Evento> evt =  mev.getEventosConCategoriaNoFin(cat);
+        for (Evento evento : evt) {
+       	 DataEventoCompleto dtc = evento.getDTOEvento();
+       	 res.add(dtc);
+        }
+        return res;
+   }
+    
     public List<String> listarEventos(){
         ManejadorEvento mev = ManejadorEvento.getInstance();
         return mev.getEventos();

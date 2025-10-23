@@ -53,7 +53,7 @@ public class ListarEventos extends HttpServlet {
 			List<DataEventoCompleto> lista;
 			if (categoriaFiltro != null && !categoriaFiltro.trim().isEmpty()) {
 				// Filtrar eventos por categoría
-				lista = IEV.getEventosConCategoria(categoriaFiltro);
+				lista = IEV.getEventosConCategoriaNoFin(categoriaFiltro);
 			} else {
 				// Mostrar todos los eventos
 				DataEventoCompleto[] aux = IEV.listarInfoEvento();
