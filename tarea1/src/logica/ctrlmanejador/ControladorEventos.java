@@ -18,6 +18,7 @@ import logica.datatypes.DataEdicion;
 import logica.datatypes.DataEdicionWeb;
 import logica.datatypes.DataPatrocinioCompleto;
 import logica.datatypes.Estado;
+import logica.datatypes.EstadoEvento;
 
 import java.util.Set;
 import java.time.LocalDate;
@@ -73,7 +74,13 @@ public class ControladorEventos implements IEventos {
         }
         
     }
-
+    
+    public void darDeBaja(String evento) {
+    	ManejadorEvento mev = ManejadorEvento.getInstance();
+    	Evento evt = mev.getEvento(evento);
+    	evt.setEstado(EstadoEvento.finalizado);
+    	
+    }
     public List<DataEventoCompleto> getEventosConCategoria(String cat){
     	 List<DataEventoCompleto> res = new ArrayList<>();
     	 ManejadorEvento mev = ManejadorEvento.getInstance();
@@ -83,6 +90,16 @@ public class ControladorEventos implements IEventos {
         	 res.add(dtc);
          }
          return res;
+    }
+    
+    public boolean eventoFinalizado(String evento) {
+    	ManejadorEvento mev = ManejadorEvento.getInstance();
+    	Evento evt = mev.getEvento(evento);
+    	if (evt.getEstado() == EstadoEvento.finalizado) {
+    		return true;}
+    	else {
+    		return false;
+    		}
     }
     
     public List<String> listarEventos(){

@@ -3,8 +3,10 @@ package logica.ctrlmanejador;
 import java.util.Set;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import logica.Evento;
+import logica.datatypes.EstadoEvento;
 import logica.Categoria;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,6 +36,7 @@ public class ManejadorEvento {
     	Categoria cate = categorias.get(cat);
     	return cate.getEventos();
     }
+     
     
     public void addEvento(Evento evento) {
         String nombre = evento.getNombreEvento();
