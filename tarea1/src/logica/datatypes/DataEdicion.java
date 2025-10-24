@@ -10,8 +10,9 @@ public class DataEdicion {
 	private LocalDate fechaAlta;
 	private String ciudad;
 	private String pais;
+	private String videoUrl;
 		
-	public DataEdicion(String nombre, String sigla, LocalDate fechaIni, LocalDate fechaFin, LocalDate fechaAlta, String ciudad, String pais) {
+	public DataEdicion(String nombre, String sigla, LocalDate fechaIni, LocalDate fechaFin, LocalDate fechaAlta, String ciudad, String pais, String url) {
 		this.nombre = nombre;
 		this.sigla = sigla;
 		this.fechaIni = fechaIni;
@@ -19,6 +20,7 @@ public class DataEdicion {
 		this.fechaAlta = fechaAlta;
 		this.ciudad = ciudad;
 		this.pais = pais;
+		this.videoUrl = url;
 	}
 	
 	public String getNombre() {
@@ -47,5 +49,13 @@ public class DataEdicion {
 	
 	public String getPais() {
 		return this.pais;
+	}
+	
+	public String getUrl() {
+		return this.videoUrl;
+	}
+	
+	public void setUrl(String url) {
+		this.videoUrl = url;
 	}
 }

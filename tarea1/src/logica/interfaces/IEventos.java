@@ -6,6 +6,7 @@ import excepciones.CategoriaRepetidaException;
 import excepciones.EdicionRepetidaExcepcion;
 import excepciones.EventoRepetidoExcepcion;
 import excepciones.EventoSinCategoriaExcepcion;
+import excepciones.LinkInvalidoExcepcion;
 import excepciones.EventoNoExisteExcepcion;
 import excepciones.TipoDeRegistroRepetidoException;
 
@@ -35,7 +36,7 @@ public interface IEventos {
 		
 		public abstract List<String> listarTRegistros(String eventoSeleccionado, String edicionSeleccionada);
 		
-		public abstract void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion;
+		public abstract void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion, LinkInvalidoExcepcion;
 		
 		public abstract DataEventoCompleto[] listarInfoEvento() throws EventoNoExisteExcepcion;
 		
