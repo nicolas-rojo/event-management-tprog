@@ -148,6 +148,19 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 
 		<!-- Columna derecha -->
 		<div class="columna-derecha">
+			
+			<% if (dataEd.getUrl() != null && !dataEd.getUrl().isEmpty()) { %>
+			    <h2 class="texto-og">Video:</h2>
+			    <div class="contenedor-derecha-video">
+			        <iframe class="video-embed"
+			                src="<%= dataEd.getUrl() %>" 
+			                frameborder="0" 
+			                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+			                allowfullscreen>
+			        </iframe>
+			    </div>
+			    <% } %>
+		
 			<h2 class="texto-og">Organiza:</h2>
 
 			<a href='<%= request.getContextPath() %>/detalleUsuario?email=<%= java.net.URLEncoder.encode(dataOrg.getEmail(), "UTF-8") %>'

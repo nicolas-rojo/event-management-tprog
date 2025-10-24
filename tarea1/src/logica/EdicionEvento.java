@@ -33,6 +33,7 @@ public class EdicionEvento {
 		this.fechaAlta = dataEd.getFechaAlta();
 		this.ciudad = dataEd.getCiudad();
 		this.pais = dataEd.getPais();
+		this.videoUrl = dataEd.getUrl();
 		this.organizador = null;
 		this.tipoRegistros = new HashSet<>();
 		this.patrocinios = new HashSet<>();

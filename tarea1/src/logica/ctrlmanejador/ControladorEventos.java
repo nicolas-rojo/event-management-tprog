@@ -116,11 +116,10 @@ public class ControladorEventos implements IEventos {
     public void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion, LinkInvalidoExcepcion {
         ManejadorEvento mev = ManejadorEvento.getInstance();
         ManejadorUsuario musr = ManejadorUsuario.getInstance();
-        Organizador orga = (Organizador) musr.getUsuarioNickname(org);
-        List<String> eventos = mev.getEventos();
         
         //Me fijo que no existe una edicion con ese nombre en TODOS los eventos
         
+        List<String> eventos = mev.getEventos();
         for (String e : eventos) {
         	Evento evt = mev.getEvento(e);
         	List<String> ediciones = evt.getEdiciones();
@@ -130,12 +129,11 @@ public class ControladorEventos implements IEventos {
         		}
         	}
         }
-        Evento evt = mev.getEvento(evento);
-        EdicionEvento edev = evt.getEdicion(dataEdicion.getNombre());
-        
+//        EdicionEvento edev = evt.getEdicion(dataEdicion.getNombre());
         // Si tiene url, la convierto a url embebida.
+        
         String url = dataEdicion.getUrl();
-        if (url != null && !url.isEmpty()) {
+        if (url != null && !url.isEmpty() && !url.equals("")) {
         	if (url.contains("youtube.com/watch?v=") || url.contains("youtu.be/")) {
         		String videoId = "";
         		if (url.contains("youtube.com/watch?v=")) {
@@ -150,7 +148,9 @@ public class ControladorEventos implements IEventos {
         	}
         }
         
-        edev = new EdicionEvento(dataEdicion);
+        Organizador orga = (Organizador) musr.getUsuarioNickname(org);
+        Evento evt = mev.getEvento(evento);
+        EdicionEvento edev = new EdicionEvento(dataEdicion);
         evt.agregarEdicion(edev);
         orga.agregarEdicion(edev);
         edev.agregarOrganizador(orga);
