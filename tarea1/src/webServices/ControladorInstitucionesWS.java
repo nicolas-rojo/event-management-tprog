@@ -1,4 +1,4 @@
-package com.miseventos.webservices;
+package webServices;
 
 import javax.jws.WebService;
 
@@ -8,11 +8,11 @@ import logica.datatypes.*;
 import excepciones.*;
 
 @WebService(endpointInterface = "com.miseventos.webservices.IControladorInstitucionWS")
-public class ControladorInstitucionWS implements IControladorInstitucionWS {
+public class ControladorInstitucionesWS implements IControladorInstitucionesWS {
     
     private IInstituciones controlador;
     
-    public ControladorInstitucionWS() {
+    public void ControladorInstitucionWS() {
         Fabrica fabrica = Fabrica.getInstance();
         this.controlador = fabrica.getIControladorInstituciones();
     }

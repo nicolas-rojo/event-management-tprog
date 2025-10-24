@@ -1,4 +1,4 @@
-package com.miseventos.webservices;
+package webServices;
 
 import javax.jws.WebService;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.miseventos.webservices;
+package webServices;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -7,7 +7,7 @@ import logica.datatypes.*;
 import excepciones.*;
 
 @WebService
-public interface IControladorInstitucionWS {
+public interface IControladorInstitucionesWS {
     
     @WebMethod
     DataInstitucion[] listarInstituciones();

@@ -1,4 +1,4 @@
-package com.miseventos.webservices;
+package webServices;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;

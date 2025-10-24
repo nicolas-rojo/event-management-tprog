@@ -1,4 +1,4 @@
-package com.miseventos.webservices;
+package webServices;
 
 import jakarta.xml.ws.Endpoint;
 
@@ -9,27 +9,22 @@ import java.util.Properties;
 public class PublicadorWS {
     
     public static void main(String[] args) {
-        try {
-            Properties config = cargarConfiguracion();
-            String ip = config.getProperty("webservices.ip", "localhost");
-            int puerto = Integer.parseInt(config.getProperty("webservices.puerto", "8081"));
-            String urlBase = "http://" + ip + ":" + puerto + "/";       
-            Endpoint.publish(urlBase + "eventos", new ControladorEventoWS());
-            System.out.println("Debuggin: Servicio 'eventos' publicado");
-            
-            Endpoint.publish(urlBase + "usuarios", new ControladorUsuarioWS());
-            System.out.println("Debuggin:Servicio 'usuarios' publicado");
-            
-            Endpoint.publish(urlBase + "instituciones", new ControladorInstitucionWS());
-            System.out.println("Debuggin:Servicio 'instituciones' publicado");
-            System.out.println("\n");
-            System.out.println("Debuggin:Eventos:       " + urlBase + "eventos?wsdl");
-            System.out.println("Debuggin:Usuarios:      " + urlBase + "usuarios?wsdl");
-            System.out.println("Debuggin: Instituciones: " + urlBase + "instituciones?wsdl");          
-        } catch (IOException e) {
-            System.err.println("ERROR: " + e.getMessage());
-            e.printStackTrace();
-        }
+        Properties config = cargarConfiguracion();
+        String ip = config.getProperty("webservices.ip", "localhost");
+        int puerto = Integer.parseInt(config.getProperty("webservices.puerto", "8081"));
+        String urlBase = "http://" + ip + ":" + puerto + "/";       
+        Endpoint.publish(urlBase + "eventos", new ControladorEventoWS());
+        System.out.println("Debuggin: Servicio 'eventos' publicado");
+        
+        Endpoint.publish(urlBase + "usuarios", new ControladorUsuarioWS());
+        System.out.println("Debuggin:Servicio 'usuarios' publicado");
+        
+        Endpoint.publish(urlBase + "instituciones", new ControladorInstitucionesWS());
+        System.out.println("Debuggin:Servicio 'instituciones' publicado");
+        System.out.println("\n");
+        System.out.println("Debuggin:Eventos:       " + urlBase + "eventos?wsdl");
+        System.out.println("Debuggin:Usuarios:      " + urlBase + "usuarios?wsdl");
+        System.out.println("Debuggin: Instituciones: " + urlBase + "instituciones?wsdl");
     }
     
     private static Properties cargarConfiguracion() {
