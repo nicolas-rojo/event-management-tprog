@@ -57,15 +57,20 @@
 
 		<div class="registros-section">
     		<h2 class="section-title">Mis Registros a Eventos</h2>
-    		<a href="../consultaEdicion/consultaEdicion.html" class="registros-container">
+    		<div class="registros-container">
         		<div class="registro-card">
-            		<div class="registro-info">
-                		<h3 class="registro-evento-nombre">Maratón de Montevideo 2024</h3>
-                		<p class="registro-detalle">Tipo: Corredor 21K</p>
-                		<span class="registro-fecha-costo">Fecha: 30/07/2024 - Costo: $500</span>
-            		</div>
+            		<a href="../consultaEdicion/consultaEdicion.html" class="registro-link">
+                		<div class="registro-info">
+							<h3 class="registro-evento-nombre">Maratón de Montevideo 2024</h3>
+							<p class="registro-detalle">Tipo: Corredor 21K</p>
+							<span class="registro-fecha-costo">Fecha: 30/07/2024 - Costo: $500</span>
+                		</div>
+            		</a>
+					<button class="asistencia-button" onclick="mostrarModalAsistencia(event, 'Maratón de Montevideo 2024')">
+						<i class="bi bi-plus-circle"></i>
+					</button>
         		</div>
-    		</a>
+    		</div>
 		</div>
 	</div>
 
@@ -87,5 +92,26 @@
         	</div>
       </div>
     </nav>
+
+	<!-- POPUP Confirmacion -->
+	<div id="modalAsistencia" class="modal-overlay" onclick="cerrarModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Confirmar Asistencia</h3>
+                <button class="modal-close" onclick="cerrarModal()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Confirmas tu asistencia a <strong id="nombreEvento"></strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-button cancel" onclick="cerrarModal()">Cancelar</button>
+                <button class="modal-button confirm" onclick="confirmarAsistencia()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+	<script src="script.js"></script>
 </body>
 </html>
