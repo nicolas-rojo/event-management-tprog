@@ -1,0 +1,34 @@
+package com.miseventos.webservices;
+
+import javax.jws.WebService;
+
+import logica.Fabrica;
+import logica.interfaces.IInstituciones;
+import logica.datatypes.*;
+import excepciones.*;
+
+@WebService(endpointInterface = "com.miseventos.webservices.IControladorInstitucionWS")
+public class ControladorInstitucionWS implements IControladorInstitucionWS {
+    
+    private IInstituciones controlador;
+    
+    public ControladorInstitucionWS() {
+        Fabrica fabrica = Fabrica.getInstance();
+        this.controlador = fabrica.getIControladorInstituciones();
+    }
+    
+    @Override
+    public DataInstitucion[] listarInstituciones() {
+        return controlador.listarInstituciones();
+    }
+    
+    @Override
+    public void nuevaInstitucion(DataInstitucion dataIns) throws InstitucionRepetidaException {
+        controlador.nuevaInstitucion(dataIns);
+    }
+    
+    @Override
+    public void nuevoPatrocinio(DataPatrocinio dataP, String institucion, String evento, String edicion, String treg) throws PatrocinioRepetidoException {
+        controlador.nuevoPatrocinio(dataP, institucion, evento, edicion, treg);
+    }
+}
