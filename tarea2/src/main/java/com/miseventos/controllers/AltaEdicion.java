@@ -21,6 +21,7 @@ import logica.interfaces.IEventos;
 import logica.datatypes.DataEdicion;
 import logica.datatypes.DataUsuario;
 import excepciones.EdicionRepetidaExcepcion;
+import excepciones.LinkInvalidoExcepcion;
 
 @MultipartConfig
 @WebServlet("/AltaEdicion")
@@ -65,6 +66,7 @@ public class AltaEdicion extends HttpServlet {
 		String pais = request.getParameter("pais");
 		String fechaIniStr = request.getParameter("fechaIni");
 		String fechaFinStr = request.getParameter("fechaFin");
+		String videoUrl = request.getParameter("videoUrl");
 		DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
 
 		// Validación de campos
@@ -98,7 +100,7 @@ public class AltaEdicion extends HttpServlet {
 			String org = dataU.getNickname();
 			LocalDate fechaActual = LocalDate.now();
 
-			DataEdicion dataEd = new DataEdicion(nombre, sigla, fechaIni, fechaFin, fechaActual, ciudad, pais);
+			DataEdicion dataEd = new DataEdicion(nombre, sigla, fechaIni, fechaFin, fechaActual, ciudad, pais, videoUrl);
 			IEV.nuevaEdicion(dataEd, evento, org);
 			cargarImg(request, nombre);
 
@@ -109,6 +111,10 @@ public class AltaEdicion extends HttpServlet {
 			request.setAttribute("evento", evento);
 			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
 
+		} catch (LinkInvalidoExcepcion e) {
+			request.setAttribute("error", "El link ingresado no es un link de YouTube válido");
+			request.setAttribute("evento", evento);
+			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
 		} catch(Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "No se pudo dar de alta la edicion");
