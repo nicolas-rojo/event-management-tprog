@@ -61,6 +61,8 @@
         <div class="error-message" id="errorFechaFin">La fecha de fin es requerida</div>
 
         <input type="file" id="imagen" name="imagen" accept="image/*">
+        
+        <input type="text" id="videoUrl" name="videoUrl" placeholder="YouTube URL">
 
         <div id="confirmarError" style="color: red;"></div>
 

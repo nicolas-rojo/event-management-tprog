@@ -113,7 +113,6 @@ public class ConsultaEdicion extends HttpServlet {
 				}
 			}
 		}
-
 		request.setAttribute("dataEdicion", dataEd);
 		request.setAttribute("dataOrganizador", dataOrg);
 		request.setAttribute("dataTRegistros", dataTRegistros);
