@@ -1,6 +1,7 @@
 package com.miseventos.webservices;
 
-import javax.xml.ws.Endpoint;
+import jakarta.xml.ws.Endpoint;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
