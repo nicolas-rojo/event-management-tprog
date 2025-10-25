@@ -80,7 +80,30 @@
                     
                     <%if(usuario.getEmail().equals(loggedMail)){%>
 					    <a href="${pageContext.request.contextPath}/ModificarUsuario" class="boton-editar-perfil">✏️ Editar Perfil</a>
-					<%} %>
+					<%
+					} else {
+						if (usr != null) {
+	                		IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+							boolean esSeguidor = ICU.esSeguidor(usuario.getEmail(), loggedMail);
+							if (esSeguidor) {
+							%>
+								<form action="${pageContext.request.contextPath}/detalleUsuario" method="POST" style="display: inline;">
+						            <input type="hidden" name="accion" value="dejar_seguir">
+						            <input type="hidden" name="emailASeguir" value="<%= usuario.getEmail() %>">
+						            <button type="submit" class="boton-seguir siguiendo">- Dejar de seguir</button>
+						        </form>
+							<%
+							} else { %>
+								<form action="${pageContext.request.contextPath}/detalleUsuario" method="POST" style="display: inline;">
+						            <input type="hidden" name="accion" value="seguir">
+						            <input type="hidden" name="emailASeguir" value="<%= usuario.getEmail() %>">
+						            <button type="submit" class="boton-seguir">+ Seguir</button>
+					        	</form>
+				        	<%
+							}
+						}
+                	}
+					%>
                     <div class="detalles-usuario">
                         <div class="detalle-item">
                             <span class="icono">📧</span>

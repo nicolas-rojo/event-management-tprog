@@ -585,3 +585,37 @@ body.asistente .item {
     font-style: italic;
     padding: 40px 20px;
 }
+
+/* Botón seguir/dejar de seguir */
+.boton-seguir {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+    font-family: 'Outfit', sans-serif;
+}
+
+.boton-seguir:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+.boton-seguir.siguiendo {
+    background-color: #f44336;
+    box-shadow: 0 3px 10px rgba(244, 67, 54, 0.3);
+}
+
+.boton-seguir.siguiendo:hover {
+    background-color: #da190b;
+    box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+}
