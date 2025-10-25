@@ -58,5 +58,11 @@ public interface IUsuario {
     
     public abstract void modificarAsistenteConPassword(String email, String nuevoNombre, String nuevoApellido, String passActual, String passNueva) throws UsuarioNoExisteException, ContrasenaIncorrectaException;
 
-    public abstract void modificarOrganizadorConPassword(String email, String nuevoNombre, String descripcion, String url, String passActual, String passNueva) throws UsuarioNoExisteException, ContrasenaIncorrectaException;   
+    public abstract void modificarOrganizadorConPassword(String email, String nuevoNombre, String descripcion, String url, String passActual, String passNueva) throws UsuarioNoExisteException, ContrasenaIncorrectaException;
+    
+    public abstract void seguirUsuario(String seguidor, String aSeguir);
+    
+    public abstract List<String> getSeguidos(String usr);
+    
+    public abstract List<String> getSeguidores(String usr);
 }

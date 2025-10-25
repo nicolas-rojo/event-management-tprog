@@ -413,6 +413,26 @@ public class ControladorUsuario implements IUsuario {
 		orga.setUrl(url);
 		orga.setPass(passNueva);
 	}
+	
+	public void seguirUsuario(String seguidor, String aSeguir) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr1 = musr.getUsuarioNickname(seguidor);
+		Usuario usr2 = musr.getUsuarioNickname(aSeguir);
+		usr1.seguir(usr2);
+		usr2.nuevoSeguidor(usr1);
+	}
+	
+	public List<String> getSeguidos(String usrNick) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioNickname(usrNick);
+		return usr.getSeguidos();
+	}
+	
+	public List<String> getSeguidores(String usrNick) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioNickname(usrNick);
+		return usr.getSeguidores();
+	}
 }
 
 
