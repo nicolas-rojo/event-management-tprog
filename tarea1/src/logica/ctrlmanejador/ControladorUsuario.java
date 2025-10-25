@@ -439,6 +439,21 @@ public class ControladorUsuario implements IUsuario {
 		Usuario usr = musr.getUsuarioEmail(usrNick);
 		return usr.getSeguidores();
 	}
+	
+	public Boolean esSeguidor(String usuario, String seguidor) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioEmail(usuario);
+		Usuario usr2 = musr.getUsuarioEmail(seguidor);
+		return usr.esSeguidor(usr2.getNickname());
+	}
+	
+	public void dejarDeSeguir(String seguidor, String seguido) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioEmail(seguidor);
+		Usuario usr2 = musr.getUsuarioEmail(seguido);
+		usr.eliminarFollow(usr2.getNickname());
+		usr2.eliminarFollower(usr.getNickname());
+	}
 }
 
 

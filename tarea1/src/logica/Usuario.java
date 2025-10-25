@@ -76,5 +76,17 @@ public abstract class Usuario {
     public abstract boolean esAsistente();
     
     public abstract boolean esOrganizador();
+    
+    public boolean esSeguidor(String seguidor) {
+    	return (this.seguidores.containsKey(seguidor));
+    }
+    
+    public void eliminarFollow(String nick) {
+    	this.seguidos.remove(nick);
+    }
+
+    public void eliminarFollower(String nick) {
+    	this.seguidores.remove(nick);
+    }
 }
 	

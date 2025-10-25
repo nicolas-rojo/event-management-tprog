@@ -65,4 +65,8 @@ public interface IUsuario {
     public abstract List<String> getSeguidos(String usr);
     
     public abstract List<String> getSeguidores(String usr);
+    
+    public abstract Boolean esSeguidor(String usr, String seguidor);
+    
+    public abstract void dejarDeSeguir(String seguidor, String seguido);
 }
