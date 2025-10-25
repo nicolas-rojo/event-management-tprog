@@ -26,8 +26,7 @@ public class DetalleUsuario extends HttpServlet {
         IEV = Fabrica.getInstance().getIControladorEventos();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         String email = request.getParameter("email");
         
@@ -57,7 +56,11 @@ public class DetalleUsuario extends HttpServlet {
                 DataEdicionWeb[] ediciones = IEV.getEdicionesEventoOrganizadorWeb(organizador.getNickname());
                 request.setAttribute("ediciones", ediciones);
             }
-            
+            List<String> seguidos = ICU.getSeguidos(email);
+            List<String> seguidores = ICU.getSeguidores(email);
+            request.setAttribute("seguidos", seguidos);
+            request.setAttribute("seguidores", seguidores);
+    
             request.getRequestDispatcher("/WEB-INF/detalleUsuario.jsp").forward(request, response);
                    
         } catch (UsuarioNoExisteException e) {
@@ -72,6 +75,31 @@ public class DetalleUsuario extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+        
+        String accion = request.getParameter("accion");
+        String emailASeguir = request.getParameter("emailASeguir");
+        DataUsuario usr = (DataUsuario) request.getSession().getAttribute("datosUsr");
+        String loggedMail = usr.getEmail();     
+        
+        // Si hay una acción de seguir/dejar de seguir
+        if (accion != null && emailASeguir != null && loggedMail != null) {
+            try {
+                if ("seguir".equals(accion)) {
+                    ICU.seguirUsuario(loggedMail, emailASeguir);
+                } else if ("dejar_seguir".equals(accion)) {
+                    ICU.dejarDeSeguir(loggedMail, emailASeguir);
+                }
+                
+                response.sendRedirect(request.getContextPath() + "/detalleUsuario?email=" + emailASeguir);
+                return;
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+                request.setAttribute("error", "Error al intentar seguir. Intente nuevamente.");
+    	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+            }
+        }
+        
         doGet(request, response);
     }
 }

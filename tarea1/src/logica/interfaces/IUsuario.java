@@ -28,7 +28,7 @@ public interface IUsuario {
 
     public abstract DataUsuario[] getUsuarios() throws UsuarioNoExisteException;
     
-    public abstract DataAsistente getAsistente(String email) throws UsuarioNoExisteException;
+    public abstract DataAsistente getAsistente(String nickmail) throws UsuarioNoExisteException;
     
     public abstract DataOrganizador getOrganizador(String nickmail) throws UsuarioNoExisteException;
     
@@ -58,5 +58,15 @@ public interface IUsuario {
     
     public abstract void modificarAsistenteConPassword(String email, String nuevoNombre, String nuevoApellido, String passActual, String passNueva) throws UsuarioNoExisteException, ContrasenaIncorrectaException;
 
-    public abstract void modificarOrganizadorConPassword(String email, String nuevoNombre, String descripcion, String url, String passActual, String passNueva) throws UsuarioNoExisteException, ContrasenaIncorrectaException;   
+    public abstract void modificarOrganizadorConPassword(String email, String nuevoNombre, String descripcion, String url, String passActual, String passNueva) throws UsuarioNoExisteException, ContrasenaIncorrectaException;
+    
+    public abstract void seguirUsuario(String seguidor, String aSeguir);
+    
+    public abstract List<String> getSeguidos(String usr);
+    
+    public abstract List<String> getSeguidores(String usr);
+    
+    public abstract Boolean esSeguidor(String usr, String seguidor);
+    
+    public abstract void dejarDeSeguir(String seguidor, String seguido);
 }
