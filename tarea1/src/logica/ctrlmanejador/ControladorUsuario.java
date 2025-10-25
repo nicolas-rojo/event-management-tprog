@@ -413,6 +413,13 @@ public class ControladorUsuario implements IUsuario {
 		orga.setUrl(url);
 		orga.setPass(passNueva);
 	}
+	
+	public void setAsistencia(String edicion, String asistente) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Asistente usr = (Asistente) musr.getUsuarioNickname(asistente);
+		Registro registro = usr.getRegistro(edicion);
+		registro.setAsistencia(true);
+	}
 }
 
 
