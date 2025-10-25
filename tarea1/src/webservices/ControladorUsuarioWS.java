@@ -1,6 +1,6 @@
-package webServices;
+package webservices;
 
-import javax.jws.WebService;
+import jakarta.jws.WebService;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,7 +10,7 @@ import logica.interfaces.IEventos;
 import logica.datatypes.*;
 import excepciones.*;
 
-@WebService(endpointInterface = "com.miseventos.webservices.IControladorUsuarioWS")
+@WebService(endpointInterface = "webservices.IControladorUsuarioWS")
 public class ControladorUsuarioWS implements IControladorUsuarioWS {
     
     private IUsuario controladorUsuario;

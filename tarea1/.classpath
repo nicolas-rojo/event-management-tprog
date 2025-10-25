@@ -10,5 +10,29 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="jakarta.xml.ws-api-3.0.1.jar"/>
 	<classpathentry kind="lib" path="jakarta.jws-api-2.1.0.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/angus-activation.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/angus-mail.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/FastInfoset.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/gmbal-api-only.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/ha-api.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/jakarta.activation-api.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/jakarta.annotation-api.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/jakarta.mail-api.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/jakarta.xml.bind-api.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/jakarta.xml.soap-api.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/jakarta.xml.ws-api.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/jaxb-core.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/jaxb-impl.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/jaxb-jxc.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/jaxb-xjc.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/jaxws-rt.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/jaxws-tools.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/management-api.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/mimepull.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/saaj-impl.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/stax2-api.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/stax-ex.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/streambuffer.jar"/>
+	<classpathentry kind="lib" path="/tpgr07/tarea1/lib/woodstox-core.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

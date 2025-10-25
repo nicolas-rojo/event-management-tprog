@@ -1,14 +1,18 @@
-package webServices;
+package webservices;
 
-import javax.jws.WebMethod;
-import javax.jws.WebService;
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebService;
 import java.time.LocalDate;
+import jakarta.jws.soap.SOAPBinding;
+import jakarta.jws.soap.SOAPBinding.Style;
+import jakarta.jws.soap.SOAPBinding.ParameterStyle;
 import java.util.List;
 
 import logica.datatypes.*;
 import excepciones.*;
 
 @WebService
+@SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public interface IControladorUsuarioWS {
     
     @WebMethod
