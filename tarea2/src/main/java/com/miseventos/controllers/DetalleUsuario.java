@@ -57,7 +57,11 @@ public class DetalleUsuario extends HttpServlet {
                 DataEdicionWeb[] ediciones = IEV.getEdicionesEventoOrganizadorWeb(organizador.getNickname());
                 request.setAttribute("ediciones", ediciones);
             }
-            
+            List<String> seguidos = ICU.getSeguidos(email);
+            List<String> seguidores = ICU.getSeguidores(email);
+            request.setAttribute("seguidos", seguidos);
+            request.setAttribute("seguidores", seguidores);
+    
             request.getRequestDispatcher("/WEB-INF/detalleUsuario.jsp").forward(request, response);
                    
         } catch (UsuarioNoExisteException e) {

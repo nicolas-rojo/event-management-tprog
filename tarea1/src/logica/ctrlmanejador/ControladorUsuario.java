@@ -94,13 +94,19 @@ public class ControladorUsuario implements IUsuario {
         musr.addUsuario(orga);
     }
 
-    public DataAsistente getAsistente(String email) throws UsuarioNoExisteException{
+    public DataAsistente getAsistente(String nickmail) throws UsuarioNoExisteException{
     	ManejadorUsuario musr = ManejadorUsuario.getInstance();
-    	Asistente asist = (Asistente) musr.getUsuarioEmail(email);
+    	Asistente asist = (Asistente) musr.getUsuarioEmail(nickmail);
     	if (asist != null)
     		return new DataAsistente(asist.getNombre(), asist.getNickname(), asist.getEmail(), "", asist.getApellido(), asist.getFechaNac());
-    	else
-    		throw new UsuarioNoExisteException("No existe usuario con dicho email");
+    	else {
+    		asist = (Asistente) musr.getUsuarioNickname(nickmail);
+    		if (asist != null) {
+    			return new DataAsistente(asist.getNombre(), asist.getNickname(), asist.getEmail(), "", asist.getApellido(), asist.getFechaNac());    			
+    		} else {
+    			throw new UsuarioNoExisteException("No existe usuario con dicho email");    		    			
+    		}    		
+    	}
     }
     
     public DataOrganizador getOrganizador(String nickmail) throws UsuarioNoExisteException{
@@ -416,21 +422,21 @@ public class ControladorUsuario implements IUsuario {
 	
 	public void seguirUsuario(String seguidor, String aSeguir) {
 		ManejadorUsuario musr = ManejadorUsuario.getInstance();
-		Usuario usr1 = musr.getUsuarioNickname(seguidor);
-		Usuario usr2 = musr.getUsuarioNickname(aSeguir);
+		Usuario usr1 = musr.getUsuarioEmail(seguidor);
+		Usuario usr2 = musr.getUsuarioEmail(aSeguir);
 		usr1.seguir(usr2);
 		usr2.nuevoSeguidor(usr1);
 	}
 	
 	public List<String> getSeguidos(String usrNick) {
 		ManejadorUsuario musr = ManejadorUsuario.getInstance();
-		Usuario usr = musr.getUsuarioNickname(usrNick);
+		Usuario usr = musr.getUsuarioEmail(usrNick);
 		return usr.getSeguidos();
 	}
 	
 	public List<String> getSeguidores(String usrNick) {
 		ManejadorUsuario musr = ManejadorUsuario.getInstance();
-		Usuario usr = musr.getUsuarioNickname(usrNick);
+		Usuario usr = musr.getUsuarioEmail(usrNick);
 		return usr.getSeguidores();
 	}
 }

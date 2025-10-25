@@ -19,6 +19,8 @@
         String tipo = (String) request.getAttribute("tipo");
         DataUsuario usuario = (DataUsuario) request.getAttribute("usuario");
         String nombreUsuario = usuario != null ? usuario.getNombre() : "Usuario";
+        List<String> seguidos = (List<String>) request.getAttribute("seguidos");
+        List<String> seguidores = (List<String>) request.getAttribute("seguidores");
     %>
     <title><%= nombreUsuario %> - Detalle de <%= tipo %> :: Mis Eventos</title>
 
@@ -51,14 +53,31 @@
             
             <!-- Información principal del usuario -->
             <div class="contenedor-principal">
-                <div class="imagen-usuario">
-                    <img src="${pageContext.request.contextPath}/resources/images/USR-<%= nomNormal %>.png" 
-                         alt="<%= usuario.getNombre() %>" 
-                         onerror="this.style.display='none'; this.parentElement.innerHTML='Sin imagen'">
-                </div>
+            	<div class="contenedor-imagen-stats">
+	                <div class="imagen-usuario">
+	                    <img src="${pageContext.request.contextPath}/resources/images/USR-<%= nomNormal %>.png" 
+	                         alt="<%= usuario.getNombre() %>" 
+	                         onerror="this.style.display='none'; this.parentElement.innerHTML='Sin imagen'">
+	                </div>
+	                
+	                <div class="estadisticas-usuario">
+						<div class="estadistica-item" onclick="abrirModal('seguidores')">
+					        <div class="estadistica-numero"><%= seguidores != null ? seguidores.size() : 0 %></div>
+					        <div class="estadistica-label">Seguidores</div>
+					    </div>
+					    <div class="estadistica-item" onclick="abrirModal('seguidos')">
+					        <div class="estadistica-numero"><%= seguidos != null ? seguidos.size() : 0 %></div>
+					        <div class="estadistica-label">Seguidos</div>
+					    </div>
+					</div>            	
+            	</div>
+                
                 <div class="informacion-usuario">
                     <h1 class="nombre-usuario"><%= usuario.getNombre() %></h1>
                     <p class="nickname-usuario">@<%= usuario.getNickname() %></p>
+                    
+                    
+                    
                     <%if(usuario.getEmail().equals(loggedMail)){%>
 					    <a href="${pageContext.request.contextPath}/ModificarUsuario" class="boton-editar-perfil">✏️ Editar Perfil</a>
 					<%} %>
@@ -255,6 +274,92 @@
             %>
         </div>
     </div>
+    
+    <!-- POPUP Seguidores -->
+    <div id="modalSeguidores" class="modal-overlay" onclick="cerrarModal(event, 'modalSeguidores')">
+	    <div class="modal-contenido" onclick="event.stopPropagation()">
+	        <div class="modal-header">
+	            <h3>Seguidores</h3>
+	            <button class="modal-cerrar" onclick="cerrarModal(event, 'modalSeguidores')">&times;</button>
+	        </div>
+	        <div class="modal-body">
+	            <% 
+	            if (seguidores == null || seguidores.isEmpty()) { 
+	            %>
+	                <p class="modal-vacio">No hay seguidores aún</p>
+	            <% } else {
+                	IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+	            	String nickNorm;
+	                for (String nickname : seguidores) {
+	                	nickNorm = nombreUtils.normalizarNombre(nickname);
+	                	DataUsuario seg = null;
+	                	try {
+		                	seg = ICU.getAsistente(nickname);
+	                	} catch (Exception e) { }
+		                
+	                	if (seg == null) {
+		                	try {
+			                	seg = ICU.getOrganizador(nickname);	                		
+		                	} catch (Exception e) { }
+		                }	                		
+	                	%>
+	                    <div class="modal-usuario-item" onclick="window.location.href='${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(seg.getEmail(), "UTF-8") %>'">
+	                        <div class="modal-usuario-avatar">
+	                            <img src="${pageContext.request.contextPath}/resources/images/USR-<%= nickNorm %>.png" 
+			                         alt="<%= usuario.getNombre() %>" 
+			                         onerror="this.style.display='none'; this.parentElement.innerHTML='Sin imagen'">
+	                        </div>
+	                        <div class="modal-usuario-nickname">@<%= nickname %></div>
+	                    </div>
+	            <%  }
+	            } %>
+	        </div>
+	    </div>
+	</div>
+	
+	<!-- POPUP Seguidos -->
+	<div id="modalSeguidos" class="modal-overlay" onclick="cerrarModal(event, 'modalSeguidos')">
+	    <div class="modal-contenido" onclick="event.stopPropagation()">
+	        <div class="modal-header">
+	            <h3>Seguidos</h3>
+	            <button class="modal-cerrar" onclick="cerrarModal(event, 'modalSeguidos')">&times;</button>
+	        </div>
+	        <div class="modal-body">
+	            <% 
+	            if (seguidos == null || seguidos.isEmpty()) { 
+	            %>
+	                <p class="modal-vacio">No hay seguidos aún</p>
+	            <% } else {
+	            	IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+	            	String nickNorm;
+	                for (String nickname : seguidos) {
+	                	nickNorm = nombreUtils.normalizarNombre(nickname);
+	                	DataUsuario seg = null;
+	                	try {
+		                	seg = ICU.getAsistente(nickname);
+	                	} catch (Exception e) { }
+		                
+	                	if (seg == null) {
+		                	try {
+			                	seg = ICU.getOrganizador(nickname);	                		
+		                	} catch (Exception e) { }
+		                }	                		
+	                	%>
+	                    <div class="modal-usuario-item" onclick="window.location.href='${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(seg.getEmail(), "UTF-8") %>'">
+	                        <div class="modal-usuario-avatar">
+	                            <img src="${pageContext.request.contextPath}/resources/images/USR-<%= nickNorm %>.png" 
+			                         alt="<%= usuario.getNombre() %>" 
+			                         onerror="this.style.display='none'; this.parentElement.innerHTML='Sin imagen'">
+	                        </div>
+	                        <div class="modal-usuario-nickname">@<%= nickname %></div>
+	                    </div>
+	            <%  }
+	            } %>
+	        </div>
+	    </div>
+	</div>
+	
+	<script src="${pageContext.request.contextPath}/resources/scripts/detalleUsuario.js"></script>
 </body>
 
 </html>

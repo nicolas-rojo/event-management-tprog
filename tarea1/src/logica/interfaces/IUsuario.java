@@ -28,7 +28,7 @@ public interface IUsuario {
 
     public abstract DataUsuario[] getUsuarios() throws UsuarioNoExisteException;
     
-    public abstract DataAsistente getAsistente(String email) throws UsuarioNoExisteException;
+    public abstract DataAsistente getAsistente(String nickmail) throws UsuarioNoExisteException;
     
     public abstract DataOrganizador getOrganizador(String nickmail) throws UsuarioNoExisteException;
     
