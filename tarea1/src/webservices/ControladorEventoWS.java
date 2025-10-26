@@ -2,6 +2,7 @@ package webservices;
 
 import jakarta.jws.WebService;
 import java.util.List;
+import java.util.Arrays;
 
 import logica.Fabrica;
 import logica.interfaces.IEventos;
@@ -19,23 +20,23 @@ public class ControladorEventoWS implements IControladorEventoWS {
     }
     
     @Override
-    public void nuevoEvento(DataEvento dataEvento, List<String> cats) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion {
-        controlador.nuevoEvento(dataEvento, cats);
+    public void nuevoEvento(DataEvento dataEvento, String[] cats) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion {
+        controlador.nuevoEvento(dataEvento, Arrays.asList(cats));
     }
     
     @Override
-    public List<String> listarEventos() {
-        return controlador.listarEventos();
+    public String[] listarEventos() {
+        return controlador.listarEventos().toArray(new String[0]);
     }
     
     @Override
-    public List<String> listarCategorias() {
-        return controlador.listarCategorias();
+    public String[] listarCategorias() {
+        return controlador.listarCategorias().toArray(new String[0]);
     }
     
     @Override
-    public List<DataEventoCompleto> getEventosConCategoria(String cat) {
-        return controlador.getEventosConCategoria(cat);
+    public DataEventoCompleto[] getEventosConCategoria(String cat) {
+        return controlador.getEventosConCategoria(cat).toArray(new DataEventoCompleto[0]);
     }
     
     @Override
@@ -54,8 +55,8 @@ public class ControladorEventoWS implements IControladorEventoWS {
     }
     
     @Override
-    public List<String> listarEdiciones(String eventoSeleccionado) {
-        return controlador.listarEdiciones(eventoSeleccionado);
+    public String[] listarEdiciones(String eventoSeleccionado) {
+        return controlador.listarEdiciones(eventoSeleccionado).toArray(new String[0]);
     }
     
     @Override
@@ -64,18 +65,18 @@ public class ControladorEventoWS implements IControladorEventoWS {
     }
     
     @Override
-    public List<String> obtenerTipoRegistrosEdicion(String nombreEvento, String nombreEdicionEvento) {
-        return controlador.obtenerTipoRegistrosEdicion(nombreEvento, nombreEdicionEvento);
+    public String[] obtenerTipoRegistrosEdicion(String nombreEvento, String nombreEdicionEvento) {
+        return controlador.obtenerTipoRegistrosEdicion(nombreEvento, nombreEdicionEvento).toArray(new String[0]);
     }
     
     @Override
-    public List<DataPatrocinioCompleto> obtenerPatrociniosEdicion(String nombreEvento, String nombreEdicionEvento) {
-        return controlador.obtenerPatrociniosEdicion(nombreEvento, nombreEdicionEvento);
+    public DataPatrocinioCompleto[] obtenerPatrociniosEdicion(String nombreEvento, String nombreEdicionEvento) {
+        return controlador.obtenerPatrociniosEdicion(nombreEvento, nombreEdicionEvento).toArray(new DataPatrocinioCompleto[0]);
     }
     
     @Override
-    public List<String> obtenerRegistrosEdicion(String nombreEvento, String nombreEdicionEvento) {
-        return controlador.obtenerRegistrosEdicion(nombreEvento, nombreEdicionEvento);
+    public String[] obtenerRegistrosEdicion(String nombreEvento, String nombreEdicionEvento) {
+        return controlador.obtenerRegistrosEdicion(nombreEvento, nombreEdicionEvento).toArray(new String[0]);
     }
     
     @Override
@@ -89,8 +90,8 @@ public class ControladorEventoWS implements IControladorEventoWS {
     }
     
     @Override
-    public List<String> listarPatrocinios(String evento, String edicion) {
-        return controlador.listarPatrocinios(evento, edicion);
+    public String[] listarPatrocinios(String evento, String edicion) {
+        return controlador.listarPatrocinios(evento, edicion).toArray(new String[0]);
     }
     
     @Override

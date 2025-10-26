@@ -43,7 +43,7 @@ public interface IControladorUsuarioWS {
     String getTipoUsuario(String email) throws UsuarioNoExisteException;
     
     @WebMethod
-    List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado);
+    ParEdicionRegistro[] getRegistrosAsistente(String asistenteSeleccionado);
     
     @WebMethod
     void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException;
@@ -55,7 +55,7 @@ public interface IControladorUsuarioWS {
     ParEdicionRegistro estaRegistrado(String asistente, String edicion);
     
     @WebMethod
-    List<String> getUsuariosRegistrados(String edicion);
+    String[] getUsuariosRegistrados(String edicion);
     
     @WebMethod
     DataEdicion[] getEdicionesEventoOrganizador(String nickname);

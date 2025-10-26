@@ -68,8 +68,8 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
     }
     
     @Override
-    public List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado) {
-        return controladorUsuario.getRegistrosAsistente(asistenteSeleccionado);
+    public ParEdicionRegistro[] getRegistrosAsistente(String asistenteSeleccionado) {
+        return controladorUsuario.getRegistrosAsistente(asistenteSeleccionado).toArray(new ParEdicionRegistro[0]);
     }
     
     @Override
@@ -88,8 +88,8 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
     }
     
     @Override
-    public List<String> getUsuariosRegistrados(String edicion) {
-        return controladorUsuario.getUsuariosRegistrados(edicion);
+    public String[] getUsuariosRegistrados(String edicion) {
+        return controladorUsuario.getUsuariosRegistrados(edicion).toArray(new String[0]);
     }
     
     @Override
