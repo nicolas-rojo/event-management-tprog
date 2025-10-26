@@ -21,9 +21,8 @@ public class PublicadorWS {
     public Endpoint getEndpoint() {
         return endpoint;
     }
-}
-
-class Main {
+    
+    // AGREGAR ESTE MÉTODO MAIN DENTRO DE PublicadorWS
     public static void main(String[] args) {
         PublicadorWS p = new PublicadorWS();
         p.publicar();
@@ -32,5 +31,13 @@ class Main {
         System.out.println("  Eventos:       http://localhost:8081/eventos?wsdl");
         System.out.println("  Usuarios:      http://localhost:8081/usuarios?wsdl");
         System.out.println("  Instituciones: http://localhost:8081/instituciones?wsdl");
+        
+        // Mantener el servidor corriendo
+        System.out.println("\nServidor corriendo... Presiona Ctrl+C para detener.");
+        try {
+            Thread.sleep(Long.MAX_VALUE);
+        } catch (InterruptedException e) {
+            System.out.println("Servidor detenido.");
+        }
     }
 }
