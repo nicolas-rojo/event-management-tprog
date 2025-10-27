@@ -31,6 +31,5 @@ public class PublicadorWS {
         System.out.println("  Eventos:       http://localhost:8081/eventos?wsdl");
         System.out.println("  Usuarios:      http://localhost:8081/usuarios?wsdl");
         System.out.println("  Instituciones: http://localhost:8081/instituciones?wsdl");
-
     }
 }

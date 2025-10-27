@@ -26,26 +26,51 @@ import logica.interfaces.*;
 import logica.datatypes.*;
 import excepciones.*;
 
+import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.eventos.ControladorEventoWSService;
+import cliente.ws.eventos.StringArray;
+
 @WebServlet("/home")
 public class ListarEventos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IEventos IEV;
 	private IUsuario ICU;
+	private IControladorEventoWS IEV_WS;
     
     @Override
     public void init() throws ServletException {  
     	ICU = Fabrica.getInstance().getIControladorUsuario();
     	IEV = Fabrica.getInstance().getIControladorEventos();
     	ICU.cargarDatos();
+    	
+    	
+    	// Acá lo que añadí
+    	System.out.println("01");
+    	ControladorEventoWSService servicio = new ControladorEventoWSService();
+    	System.out.println("02");
+        IEV_WS = servicio.getControladorEventoWSPort();
+        System.out.println("03");
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// Obtener el parámetro de categoría si existe
+			System.out.println("05");
 			String categoriaFiltro = request.getParameter("categoria");
+			System.out.println("06");
 			
 			// Cargar todas las categorías para el filtro
-			List<String> categorias = IEV.listarCategorias();
+			
+			
+			
+			//esta línea es la nueva, estoy probando
+			System.out.println("07");
+			StringArray c = IEV_WS.listarCategorias();
+			System.out.println("08");
+			List<String> categorias = c.getItem();
+			System.out.println("09");
+			
+			//List<String> categorias = IEV.listarCategorias(); esta línea era antes de los web services
 			request.setAttribute("categorias", categorias);
 			request.setAttribute("categoriaSeleccionada", categoriaFiltro);
 			
