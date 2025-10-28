@@ -23,6 +23,11 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
     }
     
     @Override
+    public DataUsuario[] getUsuarios() throws UsuarioNoExisteException{
+    	return controladorUsuario.getUsuarios();
+    }
+    
+    @Override
     public void cargarDatos() {
 		controladorUsuario.cargarDatos();
     } 

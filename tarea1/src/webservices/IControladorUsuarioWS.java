@@ -18,6 +18,9 @@ public interface IControladorUsuarioWS {
 	@WebMethod
 	void cargarDatos();
 	
+	@WebMethod
+	DataUsuario[] getUsuarios() throws UsuarioNoExisteException;
+	
     @WebMethod
     void registrarAsistente(DataAsistente dataAsistente) throws UsuarioRepetidoException;
     
