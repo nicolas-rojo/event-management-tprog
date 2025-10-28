@@ -17,20 +17,25 @@ import java.time.LocalDate;
 import javax.imageio.ImageIO;
 
 import com.miseventos.utils.*;
-import logica.Fabrica;
-import logica.interfaces.*;
-import logica.datatypes.*;
+
+import cliente.ws.usuarios.ControladorUsuarioWSService;
+import cliente.ws.usuarios.IControladorUsuarioWS;
+import cliente.ws.usuarios.DataUsuario;
+import cliente.ws.usuarios.DataAsistente;
+import cliente.ws.usuarios.DataOrganizador;
 import excepciones.*;
 
 @WebServlet("/register")
 @MultipartConfig
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IUsuario ICU;
+	private IControladorUsuarioWS ICU_WS;
 	
 	@Override
     public void init() throws ServletException {  
-    	ICU = Fabrica.getInstance().getIControladorUsuario();
+    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+    	ICU_WS = servicio2.getControladorUsuarioWSPort();
+    	System.out.println("RegisterWS");
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,12 +54,26 @@ public class Register extends HttpServlet {
 			if ("organizador".equals(tipo)) {
                 String url = request.getParameter("url");
                 String desc = request.getParameter("desc");
-				ICU.registrarOrganizador(new DataOrganizador(nombre, nick, mail, pass, desc, url));
+                DataOrganizador dt = new DataOrganizador();
+                dt.setNombre(nombre);
+                dt.setEmail(mail);
+                dt.setNickname(nick);
+                dt.setPass(pass);
+                dt.setUrl(url);
+                dt.setDescripcion(desc);
+				ICU_WS.registrarOrganizador(dt);
 				session.setAttribute("tipoUsr", "organizador");
 			} else if ("asistente".equals(tipo)) {
 				String apellido = request.getParameter("apellido");
 				LocalDate fechaNac = LocalDate.parse(request.getParameter("fechaNac"));
-				ICU.registrarAsistente(new DataAsistente(nombre, nick, mail, pass, apellido, fechaNac));
+				DataAsistente dt = new DataAsistente();
+				dt.setApellido(apellido);
+				dt.setEmail(mail);
+				dt.setFechaNac(fechaNac.toString());
+				dt.setPass(pass);
+				dt.setNombre(nombre);
+				dt.setNickname(nick);
+				ICU_WS.registrarAsistente(dt);
 				session.setAttribute("tipoUsr", "asistente");
 			} else {
 				System.out.println(nombre + nick);
@@ -63,12 +82,17 @@ public class Register extends HttpServlet {
 				return;
 			}
 			cargarImg(request, nick);
-			DataUsuario datos = new DataUsuario(nombre, nick, mail, "");
+			
+			DataUsuario datos = new DataUsuario();
+			datos.setPass(pass);
+			datos.setEmail(mail);
+			datos.setNickname(nick);
+			datos.setNombre(nombre);
 			session.setAttribute("datosUsr", datos);
 			response.sendRedirect(request.getContextPath() + "/home");
-		} catch (UsuarioRepetidoException e) {
-			request.setAttribute("error", "Mail o Nickname en uso");
-			request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+		//} catch (UsuarioRepetidoException e) {
+		//	request.setAttribute("error", "Mail o Nickname en uso");
+		//	request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "Error al intentar registrar");
