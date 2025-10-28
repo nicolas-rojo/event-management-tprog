@@ -1,5 +1,5 @@
 
-package cliente.ws.instituciones;
+package cliente.ws.usuarios;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;

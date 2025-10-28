@@ -32,6 +32,8 @@ import cliente.ws.instituciones.*;
 import cliente.ws.eventos.StringArray;
 import cliente.ws.eventos.DataEventoCompletoArray;
 
+import cliente.ws.eventos.DataEventoCompleto;
+
 import excepciones.EventoNoExisteExcepcion;
 
 //import cliente.ws.eventos.DataEventoCompleto;
@@ -94,17 +96,14 @@ public class ListarEventos extends HttpServlet {
 				listaAux = aux.getItem();
 			}
 			
-			List<logica.datatypes.DataEventoCompleto> lista = new ArrayList<>();
-			for (logica.datatypes.DataEventoCompleto dCom : listaAux) {
-				if (!IEV.eventoFinalizado(dCom.getNombre()))
+			List<DataEventoCompleto> lista = new ArrayList<>();
+			for (DataEventoCompleto dCom : listaAux) {
+				if (!IEV_WS.eventoFinalizado(dCom.getNombre()))
 					lista.add(dCom);
 			}
 			
 			request.setAttribute("eventos", listaAux);
 			request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-		} catch (EventoNoExisteExcepcion e) {
-			request.setAttribute("error", "Error al cargar los datos");
-            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "No se pudieron listar los eventos");

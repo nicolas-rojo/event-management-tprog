@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.Arrays"%>
 <%@ page import="java.util.List"%>
-<%@ page import="logica.datatypes.*"%>
+<%@ page import="cliente.ws.eventos.DataEventoCompleto"%>
 <%@ page import="com.miseventos.utils.nombreUtils"%>
 
 <!DOCTYPE html>
