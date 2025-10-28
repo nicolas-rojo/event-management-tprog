@@ -44,49 +44,38 @@ import excepciones.EventoNoExisteExcepcion;
 public class ListarEventos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IEventos IEV;
-	private IUsuario ICU;
 	
 	private IControladorEventoWS IEV_WS;
 	private IControladorUsuarioWS ICU_WS;
     
     @Override
     public void init() throws ServletException {  
-    	ICU = Fabrica.getInstance().getIControladorUsuario();
     	IEV = Fabrica.getInstance().getIControladorEventos();
-    	ICU.cargarDatos();
-    	
     	
     	// Acá lo que añadí
-    	System.out.println("01");
     	ControladorEventoWSService servicio = new ControladorEventoWSService();
     	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-    	System.out.println("02");
         IEV_WS = servicio.getControladorEventoWSPort();
         ICU_WS = servicio2.getControladorUsuarioWSPort();
         ICU_WS.cargarDatos();
-        System.out.println("03");
+        System.out.println("ListarEventoWS");
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// Obtener el parámetro de categoría si existe
-			System.out.println("05");
 			String categoriaFiltro = request.getParameter("categoria");
-			System.out.println("06");
 			
 			//estas lineas son nuevas,  estoy probando
-			System.out.println("07");
 			StringArray c = IEV_WS.listarCategorias();
-			System.out.println("08");
 			List<String> categorias = c.getItem();
-			System.out.println("09");
 			
 			//List<String> categorias = IEV.listarCategorias(); esto era del servlet original
 			request.setAttribute("categorias", categorias);
 			request.setAttribute("categoriaSeleccionada", categoriaFiltro);
 			
 			// Obtener eventos filtrados o todos
-			List<cliente.ws.eventos.DataEventoCompleto> listaAux;
+			List<DataEventoCompleto> listaAux;
 			if (categoriaFiltro != null && !categoriaFiltro.trim().isEmpty()) {
 				// Filtrar eventos por categoría
 				listaAux = IEV_WS.getEventosConCategoria(categoriaFiltro).getItem();
