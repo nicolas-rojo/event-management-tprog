@@ -45,7 +45,7 @@ public class PatrocinioRepetidoException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: cliente.ws.instituciones.PatrocinioRepetidoException
+     *     returns fault bean: tarea2.cliente.ws.instituciones.PatrocinioRepetidoException
      */
     public PatrocinioRepetidoException getFaultInfo() {
         return faultInfo;

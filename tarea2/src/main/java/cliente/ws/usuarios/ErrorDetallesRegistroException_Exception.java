@@ -1,5 +1,5 @@
 
-package cliente.ws.instituciones;
+package cliente.ws.usuarios;
 
 import jakarta.xml.ws.WebFault;
 
@@ -10,8 +10,8 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "InstitucionRepetidaException", targetNamespace = "http://webservices/")
-public class InstitucionRepetidaException_Exception
+@WebFault(name = "ErrorDetallesRegistroException", targetNamespace = "http://webservices/")
+public class ErrorDetallesRegistroException_Exception
     extends Exception
 {
 
@@ -19,14 +19,14 @@ public class InstitucionRepetidaException_Exception
      * Java type that goes as soapenv:Fault detail element.
      * 
      */
-    private InstitucionRepetidaException faultInfo;
+    private ErrorDetallesRegistroException faultInfo;
 
     /**
      * 
      * @param faultInfo
      * @param message
      */
-    public InstitucionRepetidaException_Exception(String message, InstitucionRepetidaException faultInfo) {
+    public ErrorDetallesRegistroException_Exception(String message, ErrorDetallesRegistroException faultInfo) {
         super(message);
         this.faultInfo = faultInfo;
     }
@@ -37,7 +37,7 @@ public class InstitucionRepetidaException_Exception
      * @param faultInfo
      * @param message
      */
-    public InstitucionRepetidaException_Exception(String message, InstitucionRepetidaException faultInfo, Throwable cause) {
+    public ErrorDetallesRegistroException_Exception(String message, ErrorDetallesRegistroException faultInfo, Throwable cause) {
         super(message, cause);
         this.faultInfo = faultInfo;
     }
@@ -45,9 +45,9 @@ public class InstitucionRepetidaException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: tarea2.cliente.ws.instituciones.InstitucionRepetidaException
+     *     returns fault bean: cliente.ws.usuarios.ErrorDetallesRegistroException
      */
-    public InstitucionRepetidaException getFaultInfo() {
+    public ErrorDetallesRegistroException getFaultInfo() {
         return faultInfo;
     }
 

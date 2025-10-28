@@ -26,6 +26,7 @@ public class ObjectFactory {
 
     private final static QName _AsistenteYaRegistrado_QNAME = new QName("http://webservices/", "AsistenteYaRegistrado");
     private final static QName _ContrasenaIncorrectaException_QNAME = new QName("http://webservices/", "ContrasenaIncorrectaException");
+    private final static QName _ErrorDetallesRegistroException_QNAME = new QName("http://webservices/", "ErrorDetallesRegistroException");
     private final static QName _FechaRegistroInvalidaException_QNAME = new QName("http://webservices/", "FechaRegistroInvalidaException");
     private final static QName _NoHayCupoEdicionTRegistro_QNAME = new QName("http://webservices/", "NoHayCupoEdicionTRegistro");
     private final static QName _UsuarioNoExisteException_QNAME = new QName("http://webservices/", "UsuarioNoExisteException");
@@ -56,6 +57,16 @@ public class ObjectFactory {
      */
     public ContrasenaIncorrectaException createContrasenaIncorrectaException() {
         return new ContrasenaIncorrectaException();
+    }
+
+    /**
+     * Create an instance of {@link ErrorDetallesRegistroException }
+     * 
+     * @return
+     *     the new instance of {@link ErrorDetallesRegistroException }
+     */
+    public ErrorDetallesRegistroException createErrorDetallesRegistroException() {
+        return new ErrorDetallesRegistroException();
     }
 
     /**
@@ -169,6 +180,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DataDetalleRegistro }
+     * 
+     * @return
+     *     the new instance of {@link DataDetalleRegistro }
+     */
+    public DataDetalleRegistro createDataDetalleRegistro() {
+        return new DataDetalleRegistro();
+    }
+
+    /**
      * Create an instance of {@link DataEdicionWebArray }
      * 
      * @return
@@ -186,6 +207,16 @@ public class ObjectFactory {
      */
     public DataEdicionArray createDataEdicionArray() {
         return new DataEdicionArray();
+    }
+
+    /**
+     * Create an instance of {@link DataUsuarioArray }
+     * 
+     * @return
+     *     the new instance of {@link DataUsuarioArray }
+     */
+    public DataUsuarioArray createDataUsuarioArray() {
+        return new DataUsuarioArray();
     }
 
     /**
@@ -232,6 +263,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "ContrasenaIncorrectaException")
     public JAXBElement<ContrasenaIncorrectaException> createContrasenaIncorrectaException(ContrasenaIncorrectaException value) {
         return new JAXBElement<>(_ContrasenaIncorrectaException_QNAME, ContrasenaIncorrectaException.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ErrorDetallesRegistroException }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ErrorDetallesRegistroException }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "ErrorDetallesRegistroException")
+    public JAXBElement<ErrorDetallesRegistroException> createErrorDetallesRegistroException(ErrorDetallesRegistroException value) {
+        return new JAXBElement<>(_ErrorDetallesRegistroException_QNAME, ErrorDetallesRegistroException.class, null, value);
     }
 
     /**

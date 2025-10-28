@@ -16,6 +16,9 @@ import excepciones.*;
 public interface IControladorUsuarioWS {
     
 	@WebMethod
+    DataDetalleRegistro getDetallesRegistro(String asistenteSeleccionado, ParEdicionRegistro regEdicion)  throws ErrorDetallesRegistroException;
+	
+	@WebMethod
 	void cargarDatos();
 	
 	@WebMethod

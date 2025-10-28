@@ -23,6 +23,12 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
     }
     
     @Override
+    public DataDetalleRegistro getDetallesRegistro(String asistenteSeleccionado, ParEdicionRegistro regEdicion)  throws ErrorDetallesRegistroException{
+    	return controladorUsuario.getDetallesRegistro(asistenteSeleccionado, regEdicion);
+    }
+
+    
+    @Override
     public DataUsuario[] getUsuarios() throws UsuarioNoExisteException{
     	return controladorUsuario.getUsuarios();
     }

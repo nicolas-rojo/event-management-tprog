@@ -28,21 +28,6 @@ public interface IControladorInstitucionesWS {
     /**
      * 
      * @param arg0
-     * @throws InstitucionRepetidaException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorInstitucionesWS/nuevaInstitucionRequest", output = "http://webservices/IControladorInstitucionesWS/nuevaInstitucionResponse", fault = {
-        @FaultAction(className = InstitucionRepetidaException_Exception.class, value = "http://webservices/IControladorInstitucionesWS/nuevaInstitucion/Fault/InstitucionRepetidaException")
-    })
-    public void nuevaInstitucion(
-        @WebParam(name = "arg0", partName = "arg0")
-        DataInstitucion arg0)
-        throws InstitucionRepetidaException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
      * @param arg1
      * @param arg2
      * @param arg3
@@ -69,8 +54,23 @@ public interface IControladorInstitucionesWS {
 
     /**
      * 
+     * @param arg0
+     * @throws InstitucionRepetidaException_Exception
+     */
+    @WebMethod
+    @Action(input = "http://webservices/IControladorInstitucionesWS/nuevaInstitucionRequest", output = "http://webservices/IControladorInstitucionesWS/nuevaInstitucionResponse", fault = {
+        @FaultAction(className = InstitucionRepetidaException_Exception.class, value = "http://webservices/IControladorInstitucionesWS/nuevaInstitucion/Fault/InstitucionRepetidaException")
+    })
+    public void nuevaInstitucion(
+        @WebParam(name = "arg0", partName = "arg0")
+        DataInstitucion arg0)
+        throws InstitucionRepetidaException_Exception
+    ;
+
+    /**
+     * 
      * @return
-     *     returns cliente.ws.instituciones.DataInstitucionArray
+     *     returns tarea2.cliente.ws.instituciones.DataInstitucionArray
      */
     @WebMethod
     @WebResult(partName = "return")

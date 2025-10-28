@@ -14,6 +14,9 @@ import excepciones.*;
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public interface IControladorEventoWS {
 
+	@WebMethod
+	DataEdicionWeb[] getEdicionesEventoOrganizadorWeb(String nickname);
+	
     @WebMethod
     void nuevoEvento(DataEvento dataEvento, String[] cats) throws EventoRepetidoExcepcion, EventoSinCategoriaExcepcion;
     

@@ -11,12 +11,16 @@ import excepciones.*;
 
 @WebService(endpointInterface = "webservices.IControladorEventoWS")
 public class ControladorEventoWS implements IControladorEventoWS {
-    
     private IEventos controlador;
     
     public ControladorEventoWS() {
         Fabrica fabrica = Fabrica.getInstance();
         this.controlador = fabrica.getIControladorEventos();
+    }
+    
+    @Override
+    public DataEdicionWeb[] getEdicionesEventoOrganizadorWeb(String nickname) {
+    	return controlador.getEdicionesEventoOrganizadorWeb(nickname);
     }
     
     @Override

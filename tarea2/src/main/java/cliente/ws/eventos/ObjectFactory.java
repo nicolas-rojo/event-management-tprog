@@ -96,6 +96,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DataEdicionWeb }
+     * 
+     * @return
+     *     the new instance of {@link DataEdicionWeb }
+     */
+    public DataEdicionWeb createDataEdicionWeb() {
+        return new DataEdicionWeb();
+    }
+
+    /**
      * Create an instance of {@link DataEdicion }
      * 
      * @return
@@ -123,6 +133,16 @@ public class ObjectFactory {
      */
     public DataEventoCompletoArray createDataEventoCompletoArray() {
         return new DataEventoCompletoArray();
+    }
+
+    /**
+     * Create an instance of {@link DataEdicionWebArray }
+     * 
+     * @return
+     *     the new instance of {@link DataEdicionWebArray }
+     */
+    public DataEdicionWebArray createDataEdicionWebArray() {
+        return new DataEdicionWebArray();
     }
 
     /**
