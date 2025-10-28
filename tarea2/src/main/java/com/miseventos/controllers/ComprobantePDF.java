@@ -15,6 +15,16 @@ import logica.datatypes.*;
 import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
 
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
+
 @WebServlet("/ComprobantePDF")
 public class ComprobantePDF extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,48 +41,61 @@ public class ComprobantePDF extends HttpServlet {
 	
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Decirle al navegador que viene un PDF
-		response.setContentType("application/pdf");
-		
-		// Abrir en otra pestaña (inline) y ponerle nombre al archivo
-		response.setHeader("Content-Disposition", "inline; filename=\"comprobante.pdf\"");
-		response.setContentType("text/html;charset=UTF-8");
-		HttpSession session = request.getSession();
-		DataUsuario datosU = (DataUsuario) session.getAttribute("datosUsr");
+	    // Configurar response PARA PDF
+	    response.setContentType("application/pdf");
+	    
+	    HttpSession session = request.getSession();
+	    DataUsuario datosU = (DataUsuario) session.getAttribute("datosUsr");
 	    String asistente = datosU.getNombre();
 	    String apellido = null;
+	    String evento = request.getParameter("evento");
+	    String edicion = request.getParameter("edicion");
+	    String ciudad = request.getParameter("ciudad");
+	    String fecha = request.getParameter("fecha");
+	    
+	    response.setHeader("Content-Disposition", "attachment; filename=\"Comprobante_Asistencia_"+ edicion +".pdf\"");
+	    
 	    try {
-	    	apellido = ICU.getAsistente(datosU.getEmail()).getApellido();
-		} catch (UsuarioNoExisteException e) {
-			e.printStackTrace();
-		}
-		String evento = request.getParameter("evento");
-		String edicion = request.getParameter("edicion");
-		String ciudad = request.getParameter("ciudad");
-		String fecha = request.getParameter("fecha");
-		
-		System.out.println(asistente);
-		System.out.println(apellido);
-		System.out.println(evento);
-		System.out.println(edicion);
-		System.out.println(ciudad);
-		System.out.println(fecha);
-		
+	        apellido = ICU.getAsistente(datosU.getEmail()).getApellido();
+	    } catch (UsuarioNoExisteException e) {
+	        e.printStackTrace();
+	    }
+	    
 
-//	    try {
-//	        OutputStream out = response.getOutputStream();
-//	        Document document = new Document();
-//	        PdfWriter.getInstance(document, out);
-//	        document.open();
-//
-//	        document.add(new Paragraph("Comprobante de Asistencia"));
-//	        document.add(new Paragraph("Usuario: "));
-//
-//	        document.close();
-//	        out.close();
-//	    } catch (DocumentException e) {
-//	        e.printStackTrace();
-//	    }
+	    try {
+
+	        Document document = new Document();
+	        PdfWriter.getInstance(document, response.getOutputStream());
+	        
+	        document.open();
+	        
+	        document.add(new Paragraph("COMPROBANTE DE ASISTENCIA"));
+	        document.add(Chunk.NEWLINE);
+	        document.add(new Paragraph("Asistente: " + asistente + " " + (apellido != null ? apellido : "")));
+	        document.add(Chunk.NEWLINE);
+	        document.add(new Paragraph("Evento: " + evento));
+	        document.add(Chunk.NEWLINE);
+	        document.add(new Paragraph("Fecha del Registro: " + fecha));
+	        document.add(Chunk.NEWLINE);
+	        document.add(new Paragraph("Fecha de emisión: " + new java.util.Date()));
+	        document.add(Chunk.NEWLINE);
+	        document.add(Chunk.NEWLINE);
+	        document.add(Chunk.NEWLINE);
+	        document.add(new Paragraph("Se deja constancia de que " + asistente +" "+ apellido + " asistio a la edicion " + edicion + " en la ciudad de " + ciudad));
+	        Image img = Image.getInstance("C:/Users/facun/Desktop/logotransparente.png");
+            img.scaleToFit(400, 400);
+            float x = (document.getPageSize().getWidth() - img.getScaledWidth()) / 2;
+            float y = (document.getPageSize().getHeight() - img.getScaledHeight()) / 2;
+            img.setAbsolutePosition(x, y);
+            img.setAlignment(Image.ALIGN_CENTER);
+            document.add(img);
+	        
+	        document.close();
+	        
+	    } catch (DocumentException e) {
+	        e.printStackTrace();
+	        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error generando PDF");
+	    }
 	}
 
 
