@@ -23,6 +23,11 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
     }
     
     @Override
+    public void cargarDatos() {
+		controladorUsuario.cargarDatos();
+    } 
+    
+    @Override
     public void registrarAsistente(DataAsistente dataAsistente) throws UsuarioRepetidoException {
         controladorUsuario.registrarAsistente(dataAsistente);
     }

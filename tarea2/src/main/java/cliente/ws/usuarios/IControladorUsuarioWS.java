@@ -28,6 +28,177 @@ public interface IControladorUsuarioWS {
     /**
      * 
      * @param arg0
+     * @param arg1
+     * @return
+     *     returns cliente.ws.usuarios.DataUsuario
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/loginRequest", output = "http://webservices/IControladorUsuarioWS/loginResponse")
+    public DataUsuario login(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @throws UsuarioRepetidoException_Exception
+     */
+    @WebMethod
+    @Action(input = "http://webservices/IControladorUsuarioWS/registrarAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/registrarAsistenteResponse", fault = {
+        @FaultAction(className = UsuarioRepetidoException_Exception.class, value = "http://webservices/IControladorUsuarioWS/registrarAsistente/Fault/UsuarioRepetidoException")
+    })
+    public void registrarAsistente(
+        @WebParam(name = "arg0", partName = "arg0")
+        DataAsistente arg0)
+        throws UsuarioRepetidoException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns cliente.ws.usuarios.DataOrganizador
+     * @throws UsuarioNoExisteException_Exception
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/getOrganizadorRequest", output = "http://webservices/IControladorUsuarioWS/getOrganizadorResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/getOrganizador/Fault/UsuarioNoExisteException")
+    })
+    public DataOrganizador getOrganizador(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0)
+        throws UsuarioNoExisteException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @param arg2
+     * @throws UsuarioNoExisteException_Exception
+     */
+    @WebMethod
+    @Action(input = "http://webservices/IControladorUsuarioWS/modificarAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/modificarAsistenteResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarAsistente/Fault/UsuarioNoExisteException")
+    })
+    public void modificarAsistente(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2)
+        throws UsuarioNoExisteException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns cliente.ws.usuarios.DataAsistente
+     * @throws UsuarioNoExisteException_Exception
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/getAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/getAsistenteResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/getAsistente/Fault/UsuarioNoExisteException")
+    })
+    public DataAsistente getAsistente(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0)
+        throws UsuarioNoExisteException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.lang.String
+     * @throws UsuarioNoExisteException_Exception
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/getTipoUsuarioRequest", output = "http://webservices/IControladorUsuarioWS/getTipoUsuarioResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/getTipoUsuario/Fault/UsuarioNoExisteException")
+    })
+    public String getTipoUsuario(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0)
+        throws UsuarioNoExisteException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns cliente.ws.usuarios.ParEdicionRegistroArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/getRegistrosAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/getRegistrosAsistenteResponse")
+    public ParEdicionRegistroArray getRegistrosAsistente(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @throws UsuarioRepetidoException_Exception
+     */
+    @WebMethod
+    @Action(input = "http://webservices/IControladorUsuarioWS/registrarOrganizadorRequest", output = "http://webservices/IControladorUsuarioWS/registrarOrganizadorResponse", fault = {
+        @FaultAction(className = UsuarioRepetidoException_Exception.class, value = "http://webservices/IControladorUsuarioWS/registrarOrganizador/Fault/UsuarioRepetidoException")
+    })
+    public void registrarOrganizador(
+        @WebParam(name = "arg0", partName = "arg0")
+        DataOrganizador arg0)
+        throws UsuarioRepetidoException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns cliente.ws.usuarios.StringArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/getUsuariosRegistradosRequest", output = "http://webservices/IControladorUsuarioWS/getUsuariosRegistradosResponse")
+    public StringArray getUsuariosRegistrados(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @param arg2
+     * @param arg3
+     * @throws UsuarioNoExisteException_Exception
+     */
+    @WebMethod
+    @Action(input = "http://webservices/IControladorUsuarioWS/modificarOrganizadorRequest", output = "http://webservices/IControladorUsuarioWS/modificarOrganizadorResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarOrganizador/Fault/UsuarioNoExisteException")
+    })
+    public void modificarOrganizador(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2,
+        @WebParam(name = "arg3", partName = "arg3")
+        String arg3)
+        throws UsuarioNoExisteException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
      * @return
      *     returns cliente.ws.usuarios.DataEdicionArray
      */
@@ -50,35 +221,6 @@ public interface IControladorUsuarioWS {
     public DataEdicionWebArray getEdicionesEventoOrganizadorWeb(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @param arg2
-     * @param arg3
-     * @param arg4
-     * @throws ContrasenaIncorrectaException_Exception
-     * @throws UsuarioNoExisteException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPasswordRequest", output = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPasswordResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPassword/Fault/UsuarioNoExisteException"),
-        @FaultAction(className = ContrasenaIncorrectaException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPassword/Fault/ContrasenaIncorrectaException")
-    })
-    public void modificarAsistenteConPassword(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2,
-        @WebParam(name = "arg3", partName = "arg3")
-        String arg3,
-        @WebParam(name = "arg4", partName = "arg4")
-        String arg4)
-        throws ContrasenaIncorrectaException_Exception, UsuarioNoExisteException_Exception
-    ;
 
     /**
      * 
@@ -115,53 +257,38 @@ public interface IControladorUsuarioWS {
     /**
      * 
      * @param arg0
-     * @return
-     *     returns cliente.ws.usuarios.DataOrganizador
+     * @param arg1
+     * @param arg2
+     * @param arg3
+     * @param arg4
+     * @throws ContrasenaIncorrectaException_Exception
      * @throws UsuarioNoExisteException_Exception
      */
     @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getOrganizadorRequest", output = "http://webservices/IControladorUsuarioWS/getOrganizadorResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/getOrganizador/Fault/UsuarioNoExisteException")
+    @Action(input = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPasswordRequest", output = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPasswordResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPassword/Fault/UsuarioNoExisteException"),
+        @FaultAction(className = ContrasenaIncorrectaException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPassword/Fault/ContrasenaIncorrectaException")
     })
-    public DataOrganizador getOrganizador(
+    public void modificarAsistenteConPassword(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0)
-        throws UsuarioNoExisteException_Exception
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2,
+        @WebParam(name = "arg3", partName = "arg3")
+        String arg3,
+        @WebParam(name = "arg4", partName = "arg4")
+        String arg4)
+        throws ContrasenaIncorrectaException_Exception, UsuarioNoExisteException_Exception
     ;
 
     /**
      * 
-     * @param arg0
-     * @return
-     *     returns cliente.ws.usuarios.DataAsistente
-     * @throws UsuarioNoExisteException_Exception
      */
     @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/getAsistenteResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/getAsistente/Fault/UsuarioNoExisteException")
-    })
-    public DataAsistente getAsistente(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0)
-        throws UsuarioNoExisteException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
-     * @throws UsuarioRepetidoException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorUsuarioWS/registrarAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/registrarAsistenteResponse", fault = {
-        @FaultAction(className = UsuarioRepetidoException_Exception.class, value = "http://webservices/IControladorUsuarioWS/registrarAsistente/Fault/UsuarioRepetidoException")
-    })
-    public void registrarAsistente(
-        @WebParam(name = "arg0", partName = "arg0")
-        DataAsistente arg0)
-        throws UsuarioRepetidoException_Exception
-    ;
+    @Action(input = "http://webservices/IControladorUsuarioWS/cargarDatosRequest", output = "http://webservices/IControladorUsuarioWS/cargarDatosResponse")
+    public void cargarDatos();
 
     /**
      * 
@@ -178,45 +305,6 @@ public interface IControladorUsuarioWS {
         String arg0,
         @WebParam(name = "arg1", partName = "arg1")
         String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns java.lang.String
-     * @throws UsuarioNoExisteException_Exception
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getTipoUsuarioRequest", output = "http://webservices/IControladorUsuarioWS/getTipoUsuarioResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/getTipoUsuario/Fault/UsuarioNoExisteException")
-    })
-    public String getTipoUsuario(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0)
-        throws UsuarioNoExisteException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @param arg2
-     * @throws UsuarioNoExisteException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorUsuarioWS/modificarAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/modificarAsistenteResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarAsistente/Fault/UsuarioNoExisteException")
-    })
-    public void modificarAsistente(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2)
-        throws UsuarioNoExisteException_Exception
-    ;
 
     /**
      * 
@@ -248,86 +336,5 @@ public interface IControladorUsuarioWS {
         LocalDate arg4)
         throws AsistenteYaRegistrado_Exception, FechaRegistroInvalidaException_Exception, NoHayCupoEdicionTRegistro_Exception
     ;
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @return
-     *     returns cliente.ws.usuarios.DataUsuario
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/loginRequest", output = "http://webservices/IControladorUsuarioWS/loginResponse")
-    public DataUsuario login(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns cliente.ws.usuarios.ParEdicionRegistroArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getRegistrosAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/getRegistrosAsistenteResponse")
-    public ParEdicionRegistroArray getRegistrosAsistente(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @param arg2
-     * @param arg3
-     * @throws UsuarioNoExisteException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorUsuarioWS/modificarOrganizadorRequest", output = "http://webservices/IControladorUsuarioWS/modificarOrganizadorResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarOrganizador/Fault/UsuarioNoExisteException")
-    })
-    public void modificarOrganizador(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2,
-        @WebParam(name = "arg3", partName = "arg3")
-        String arg3)
-        throws UsuarioNoExisteException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
-     * @throws UsuarioRepetidoException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorUsuarioWS/registrarOrganizadorRequest", output = "http://webservices/IControladorUsuarioWS/registrarOrganizadorResponse", fault = {
-        @FaultAction(className = UsuarioRepetidoException_Exception.class, value = "http://webservices/IControladorUsuarioWS/registrarOrganizador/Fault/UsuarioRepetidoException")
-    })
-    public void registrarOrganizador(
-        @WebParam(name = "arg0", partName = "arg0")
-        DataOrganizador arg0)
-        throws UsuarioRepetidoException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns cliente.ws.usuarios.StringArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getUsuariosRegistradosRequest", output = "http://webservices/IControladorUsuarioWS/getUsuariosRegistradosResponse")
-    public StringArray getUsuariosRegistrados(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
 
 }

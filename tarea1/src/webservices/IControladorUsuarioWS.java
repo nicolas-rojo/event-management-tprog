@@ -15,6 +15,9 @@ import excepciones.*;
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public interface IControladorUsuarioWS {
     
+	@WebMethod
+	void cargarDatos();
+	
     @WebMethod
     void registrarAsistente(DataAsistente dataAsistente) throws UsuarioRepetidoException;
     
