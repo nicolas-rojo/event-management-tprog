@@ -30,6 +30,7 @@ import cliente.ws.eventos.*;
 import cliente.ws.usuarios.*;
 import cliente.ws.instituciones.*;
 import cliente.ws.eventos.StringArray;
+import cliente.ws.eventos.DataEventoCompletoArray;
 
 import excepciones.EventoNoExisteExcepcion;
 
@@ -83,22 +84,23 @@ public class ListarEventos extends HttpServlet {
 			request.setAttribute("categoriaSeleccionada", categoriaFiltro);
 			
 			// Obtener eventos filtrados o todos
-			List<logica.datatypes.DataEventoCompleto> listaAux;
+			List<cliente.ws.eventos.DataEventoCompleto> listaAux;
 			if (categoriaFiltro != null && !categoriaFiltro.trim().isEmpty()) {
 				// Filtrar eventos por categoría
-				listaAux = IEV.getEventosConCategoria(categoriaFiltro);
+				listaAux = IEV_WS.getEventosConCategoria(categoriaFiltro).getItem();
 			} else {
 				// Mostrar todos los eventos
-				logica.datatypes.DataEventoCompleto[] aux = IEV.listarInfoEvento();
-				listaAux = new ArrayList<>(Arrays.asList(aux));
+				DataEventoCompletoArray aux = IEV_WS.listarInfoEvento();
+				listaAux = aux.getItem();
 			}
+			
 			List<logica.datatypes.DataEventoCompleto> lista = new ArrayList<>();
 			for (logica.datatypes.DataEventoCompleto dCom : listaAux) {
 				if (!IEV.eventoFinalizado(dCom.getNombre()))
 					lista.add(dCom);
 			}
 			
-			request.setAttribute("eventos", lista);
+			request.setAttribute("eventos", listaAux);
 			request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		} catch (EventoNoExisteExcepcion e) {
 			request.setAttribute("error", "Error al cargar los datos");
