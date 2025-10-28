@@ -16,21 +16,22 @@ import javax.imageio.ImageIO;
 
 import com.miseventos.utils.nombreUtils;
 
-import logica.Fabrica;
-import logica.interfaces.IEventos;
-import logica.datatypes.DataEdicion;
-import logica.datatypes.DataUsuario;
-import excepciones.EdicionRepetidaExcepcion;
+import cliente.ws.eventos.ControladorEventoWSService;
+import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.usuarios.DataUsuario;
+import cliente.ws.eventos.DataEdicion;
 
 @MultipartConfig
 @WebServlet("/AltaEdicion")
 public class AltaEdicion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IEventos IEV;
+	private IControladorEventoWS IEV_WS;
 
 	@Override
 	public void init() throws ServletException {
-		IEV = Fabrica.getInstance().getIControladorEventos();
+		ControladorEventoWSService servicio = new ControladorEventoWSService();
+		IEV_WS = servicio.getControladorEventoWSPort();
+		System.out.println("AltaEdicionWS");
 	}
 
 	@Override
@@ -97,17 +98,23 @@ public class AltaEdicion extends HttpServlet {
 
 			String org = dataU.getNickname();
 			LocalDate fechaActual = LocalDate.now();
-
-			DataEdicion dataEd = new DataEdicion(nombre, sigla, fechaIni, fechaFin, fechaActual, ciudad, pais);
-			IEV.nuevaEdicion(dataEd, evento, org);
+			DataEdicion dt = new DataEdicion();
+			dt.setNombre(nombre);
+			dt.setSigla(sigla);
+			dt.setFechaFin(fechaFin.toString());
+			dt.setFechaIni(fechaIni.toString()); 
+			dt.setPais(pais);
+			dt.setCiudad(ciudad);
+			dt.setFechaAlta(fechaActual.toString());
+			IEV_WS.nuevaEdicion(dt, evento, org);
 			cargarImg(request, nombre);
 
 			response.sendRedirect(request.getContextPath() + "/home");
 
-		} catch (EdicionRepetidaExcepcion e) {
-			request.setAttribute("error", "Ya existe una edición con ese nombre.");
-			request.setAttribute("evento", evento);
-			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
+		//} catch (EdicionRepetidaExcepcion e) {
+		//	request.setAttribute("error", "Ya existe una edición con ese nombre.");
+		//	request.setAttribute("evento", evento);
+		//	request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
 
 		} catch(Exception e) {
 			e.printStackTrace();

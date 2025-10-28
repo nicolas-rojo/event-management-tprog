@@ -24,6 +24,7 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _EdicionRepetidaExcepcion_QNAME = new QName("http://webservices/", "EdicionRepetidaExcepcion");
     private final static QName _EventoNoExisteExcepcion_QNAME = new QName("http://webservices/", "EventoNoExisteExcepcion");
     private final static QName _EventoRepetidoExcepcion_QNAME = new QName("http://webservices/", "EventoRepetidoExcepcion");
     private final static QName _EventoSinCategoriaExcepcion_QNAME = new QName("http://webservices/", "EventoSinCategoriaExcepcion");
@@ -33,6 +34,16 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link EdicionRepetidaExcepcion }
+     * 
+     * @return
+     *     the new instance of {@link EdicionRepetidaExcepcion }
+     */
+    public EdicionRepetidaExcepcion createEdicionRepetidaExcepcion() {
+        return new EdicionRepetidaExcepcion();
     }
 
     /**
@@ -86,6 +97,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DataEdicion }
+     * 
+     * @return
+     *     the new instance of {@link DataEdicion }
+     */
+    public DataEdicion createDataEdicion() {
+        return new DataEdicion();
+    }
+
+    /**
      * Create an instance of {@link DataEventoCompleto }
      * 
      * @return
@@ -103,16 +124,6 @@ public class ObjectFactory {
      */
     public DataEdicionWeb createDataEdicionWeb() {
         return new DataEdicionWeb();
-    }
-
-    /**
-     * Create an instance of {@link DataEdicion }
-     * 
-     * @return
-     *     the new instance of {@link DataEdicion }
-     */
-    public DataEdicion createDataEdicion() {
-        return new DataEdicion();
     }
 
     /**
@@ -153,6 +164,19 @@ public class ObjectFactory {
      */
     public StringArray createStringArray() {
         return new StringArray();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link EdicionRepetidaExcepcion }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link EdicionRepetidaExcepcion }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "EdicionRepetidaExcepcion")
+    public JAXBElement<EdicionRepetidaExcepcion> createEdicionRepetidaExcepcion(EdicionRepetidaExcepcion value) {
+        return new JAXBElement<>(_EdicionRepetidaExcepcion_QNAME, EdicionRepetidaExcepcion.class, null, value);
     }
 
     /**
