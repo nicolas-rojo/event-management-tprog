@@ -19,6 +19,12 @@ public class ControladorEventoWS implements IControladorEventoWS {
     }
     
     @Override
+	public void nuevoTipoRegistro(DataTRegistro dataTRegistro, String evento, String edicion) throws TipoDeRegistroRepetidoException{
+    	controlador.nuevoTipoRegistro(dataTRegistro, evento, edicion);
+    }
+
+    
+    @Override
     public DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro) {
     	return controlador.getDataTRegistro(evento, edicion, tipoRegistro);
     }

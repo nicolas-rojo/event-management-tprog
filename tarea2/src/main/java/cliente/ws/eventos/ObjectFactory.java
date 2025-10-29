@@ -28,6 +28,7 @@ public class ObjectFactory {
     private final static QName _EventoNoExisteExcepcion_QNAME = new QName("http://webservices/", "EventoNoExisteExcepcion");
     private final static QName _EventoRepetidoExcepcion_QNAME = new QName("http://webservices/", "EventoRepetidoExcepcion");
     private final static QName _EventoSinCategoriaExcepcion_QNAME = new QName("http://webservices/", "EventoSinCategoriaExcepcion");
+    private final static QName _TipoDeRegistroRepetidoException_QNAME = new QName("http://webservices/", "TipoDeRegistroRepetidoException");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cliente.ws.eventos
@@ -74,6 +75,16 @@ public class ObjectFactory {
      */
     public EventoSinCategoriaExcepcion createEventoSinCategoriaExcepcion() {
         return new EventoSinCategoriaExcepcion();
+    }
+
+    /**
+     * Create an instance of {@link TipoDeRegistroRepetidoException }
+     * 
+     * @return
+     *     the new instance of {@link TipoDeRegistroRepetidoException }
+     */
+    public TipoDeRegistroRepetidoException createTipoDeRegistroRepetidoException() {
+        return new TipoDeRegistroRepetidoException();
     }
 
     /**
@@ -226,6 +237,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "EventoSinCategoriaExcepcion")
     public JAXBElement<EventoSinCategoriaExcepcion> createEventoSinCategoriaExcepcion(EventoSinCategoriaExcepcion value) {
         return new JAXBElement<>(_EventoSinCategoriaExcepcion_QNAME, EventoSinCategoriaExcepcion.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link TipoDeRegistroRepetidoException }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link TipoDeRegistroRepetidoException }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "TipoDeRegistroRepetidoException")
+    public JAXBElement<TipoDeRegistroRepetidoException> createTipoDeRegistroRepetidoException(TipoDeRegistroRepetidoException value) {
+        return new JAXBElement<>(_TipoDeRegistroRepetidoException_QNAME, TipoDeRegistroRepetidoException.class, null, value);
     }
 
 }

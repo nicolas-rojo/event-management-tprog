@@ -5,26 +5,26 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.annotation.MultipartConfig;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
-import logica.Fabrica;
-import logica.interfaces.*;
-import logica.datatypes.*;
-import excepciones.*;
+import cliente.ws.eventos.ControladorEventoWSService;
+import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.usuarios.ControladorUsuarioWSService;
+import cliente.ws.eventos.DataTRegistro;
+
 
 @WebServlet("/altaTReg")
 @MultipartConfig
 public class AltaTRegistro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IEventos IEV;
+	private IControladorEventoWS IEV_WS;
 	
 	@Override
 	public void init() throws ServletException {  
-    	IEV = Fabrica.getInstance().getIControladorEventos();
+    	ControladorEventoWSService servicio = new ControladorEventoWSService();
+        IEV_WS = servicio.getControladorEventoWSPort();
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,11 +43,16 @@ public class AltaTRegistro extends HttpServlet {
 
 		
 		try {
-			IEV.nuevoTipoRegistro(new DataTRegistro(nombre, descripcion,Float.parseFloat(costotr), Integer.parseInt(cupotr)), evento, edicion);
+			DataTRegistro d = new DataTRegistro();
+			d.setCosto(Float.parseFloat(costotr));
+			d.setCupo(Integer.parseInt(cupotr));
+			d.setDescripcion(descripcion);
+			d.setNombre(nombre);
+			IEV_WS.nuevoTipoRegistro(d, evento, edicion);
 			response.sendRedirect(request.getContextPath() + "/home");
-		}catch(TipoDeRegistroRepetidoException e) {
-			request.setAttribute("errorExiste", "Ya existe un tipo de registro con este nombre");
-			request.getRequestDispatcher("/WEB-INF/altaTRegistro.jsp").forward(request, response);
+		//}catch(TipoDeRegistroRepetidoException e) {
+		//	request.setAttribute("errorExiste", "Ya existe un tipo de registro con este nombre");
+		//	request.getRequestDispatcher("/WEB-INF/altaTRegistro.jsp").forward(request, response);
 		}catch (Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "No se pudo dar de alta el tipo de registro");
