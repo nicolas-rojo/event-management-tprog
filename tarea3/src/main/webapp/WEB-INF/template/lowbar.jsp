@@ -12,7 +12,7 @@
 	<div class="container-fluid">
     	<div class="bottom-nav-content">
       		<!-- Botón Home -->
-			<a href="index.html" class="nav-item">
+			<a href="${pageContext.request.contextPath}/home" class="nav-item">
 				<i class="bi bi-house-door-fill"></i>
 			</a>
 

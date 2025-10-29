@@ -2,7 +2,7 @@ body {
   background: linear-gradient(135deg, #74ebd5, #9face6);
   min-height: 100vh;
   margin: 0;
-  padding: 80px 0 80px 0; /* Espacio arriba y abajo para la navbar */
+  padding: 80px 0 80px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,14 +40,16 @@ body {
 .event-card-image {
   flex-shrink: 0;
   width: 200px;
-  min-height: 200px;
+  height: 200px;
   overflow: hidden;
+  background-color: #f5f5f5;
 }
 
 .event-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .event-card-content {
@@ -74,23 +76,22 @@ body {
   word-wrap: break-word;
 }
 
-/* Responsive: en pantallas angostas, imagen arriba y contenido abajo */
+/* Responsive */
 @media (max-width: 576px) {
   .event-card {
     flex-direction: column;
     max-width: 90%;
   }
-  
+
   .event-card-image {
     width: 100%;
     height: 240px;
-    min-height: 240px;
   }
-  
+
   .event-card-content {
     padding: 16px;
   }
-  
+
   .event-card-title {
     font-size: 1.3rem;
   }

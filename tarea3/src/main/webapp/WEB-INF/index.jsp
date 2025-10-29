@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ page import="logica.datatypes.*"%>
+<%@ page import="com.miseventos.utils.nombreUtils"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -20,7 +24,32 @@
     <jsp:include page="/WEB-INF/template/topbar.jsp" />
 
 	<!-- CARDS -->
-
+	<div class="events-container">
+		<%
+        List<DataEventoCompleto> eventos = (List<DataEventoCompleto>) request.getAttribute("eventos");
+        if (eventos != null) {
+            for (DataEventoCompleto evento : eventos) {
+                String nomNormal = nombreUtils.normalizarNombre(evento.getNombre());
+    	%>
+    			<a href="<%=request.getContextPath()%>/consultaEvento?evento=<%=java.net.URLEncoder.encode(evento.getNombre(), "UTF-8")%>" class="event-card">
+					<div class="event-card-image">
+						<img class="imagenes"
+                         	src="${pageContext.request.contextPath}/resources/images/EV-<%= nomNormal %>.png"
+                         	alt="logoEvento" width="120px" height="120px"
+                         	onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">
+					</div>
+			  
+					<div class="event-card-content">
+						<h3 class="event-card-title"><%= evento.getNombre() %></h3>
+						<p class="event-card-description"><%= evento.getDescripcion() %></p>
+					</div>
+				</a>
+    	<%
+            }
+        }
+    	%>
+	</div>
+	
     <!-- LOWBAR -->
     <jsp:include page="/WEB-INF/template/lowbar.jsp" />
 </body>

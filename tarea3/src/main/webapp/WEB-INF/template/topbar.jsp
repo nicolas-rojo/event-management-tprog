@@ -9,9 +9,9 @@
 		    </button>
       
 	        <!-- Logo -->
-	        <div class="logo">
+	        <a href="${pageContext.request.contextPath}/home" class="logo">
 	            <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="Logo">
-	        </div>
+	        </a>
         </div>
     </div>
 </nav>
