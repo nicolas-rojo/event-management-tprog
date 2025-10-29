@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/listarEdiciones")
-public class listarEdiciones extends HttpServlet {
+public class ListarEdiciones extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IEventos IEV;
 	    
