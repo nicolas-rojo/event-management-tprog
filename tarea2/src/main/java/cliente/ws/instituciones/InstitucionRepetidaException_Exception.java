@@ -45,7 +45,7 @@ public class InstitucionRepetidaException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: tarea2.cliente.ws.instituciones.InstitucionRepetidaException
+     *     returns fault bean: cliente.ws.instituciones.InstitucionRepetidaException
      */
     public InstitucionRepetidaException getFaultInfo() {
         return faultInfo;

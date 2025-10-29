@@ -15,6 +15,9 @@ import excepciones.*;
 public interface IControladorEventoWS {
 
 	@WebMethod
+	DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro);
+	
+	@WebMethod
 	void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion;
 	
 	@WebMethod

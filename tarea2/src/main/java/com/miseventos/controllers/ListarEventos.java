@@ -1,41 +1,18 @@
 package com.miseventos.controllers;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Arrays;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-import java.util.Set;
-import java.util.HashSet;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.HashMap;
-
-import excepciones.*;
-
 import cliente.ws.eventos.*;
 import cliente.ws.usuarios.*;
-import cliente.ws.instituciones.*;
 import cliente.ws.eventos.StringArray;
 import cliente.ws.eventos.DataEventoCompletoArray;
-
 import cliente.ws.eventos.DataEventoCompleto;
-
-import excepciones.EventoNoExisteExcepcion;
-
-//import cliente.ws.eventos.DataEventoCompleto;
-
-//import cliente.ws.eventos.EventoNoExisteExcepcion;
 
 @WebServlet("/home")
 public class ListarEventos extends HttpServlet {

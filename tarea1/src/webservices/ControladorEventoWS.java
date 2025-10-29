@@ -19,6 +19,11 @@ public class ControladorEventoWS implements IControladorEventoWS {
     }
     
     @Override
+    public DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro) {
+    	return controlador.getDataTRegistro(evento, edicion, tipoRegistro);
+    }
+    
+    @Override
     public void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion{
     	controlador.nuevaEdicion(dataEdicion, evento, org);
     }

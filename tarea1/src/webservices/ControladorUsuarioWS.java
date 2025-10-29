@@ -2,8 +2,6 @@ package webservices;
 
 import jakarta.jws.WebService;
 import java.time.LocalDate;
-import java.util.List;
-
 import logica.Fabrica;
 import logica.interfaces.IUsuario;
 import logica.interfaces.IEventos;
@@ -89,8 +87,8 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
     }
     
     @Override
-    public void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException {
-        controladorUsuario.nuevoRegistro(asistenteSeleccionado, evento, edicion, tipoReg, fecha);
+    public void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, String fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException {
+        controladorUsuario.nuevoRegistro(asistenteSeleccionado, evento, edicion, tipoReg, LocalDate.parse(fecha));
     }
     
     @Override
@@ -100,7 +98,11 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
     
     @Override
     public ParEdicionRegistro estaRegistrado(String asistente, String edicion) {
-        return controladorUsuario.estaRegistrado(asistente, edicion);
+    	ParEdicionRegistro reg = controladorUsuario.estaRegistrado(asistente, edicion);
+    	if (reg == null) {
+    		return new ParEdicionRegistro("", (LocalDate) null);
+    	}
+    	return reg;
     }
     
     @Override

@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.jws.soap.SOAPBinding.Style;
 import jakarta.jws.soap.SOAPBinding.ParameterStyle;
-import java.util.List;
 
 import logica.datatypes.*;
 import excepciones.*;
@@ -55,7 +54,7 @@ public interface IControladorUsuarioWS {
     ParEdicionRegistro[] getRegistrosAsistente(String asistenteSeleccionado);
     
     @WebMethod
-    void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException;
+    void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, String fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException;
     
     @WebMethod
     DataUsuario login(String nickmail, String pass);

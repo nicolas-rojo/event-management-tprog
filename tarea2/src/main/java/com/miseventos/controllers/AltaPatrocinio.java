@@ -3,8 +3,6 @@ package com.miseventos.controllers;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,22 +12,29 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.List;
 
-import logica.Fabrica;
-import logica.interfaces.IEventos;
-import logica.interfaces.IInstituciones;
-import logica.datatypes.*;
-import excepciones.PatrocinioRepetidoException;
+import cliente.ws.eventos.ControladorEventoWSService;
+import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.instituciones.ControladorInstitucionesWSService;
+import cliente.ws.instituciones.IControladorInstitucionesWS;
+import cliente.ws.instituciones.DataInstitucion;
+import cliente.ws.instituciones.Nivel;
+import cliente.ws.eventos.*;
+import cliente.ws.instituciones.*;
+
 
 @WebServlet("/AltaPatrocinio")
 public class AltaPatrocinio extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IEventos IEV;
-    private IInstituciones IInst;
-
+    private IControladorInstitucionesWS IInst_WS;
+    private IControladorEventoWS IEV_WS;
+    
     @Override
     public void init() throws ServletException {
-        IEV = Fabrica.getInstance().getIControladorEventos();
-        IInst = Fabrica.getInstance().getIControladorInstituciones();
+    	ControladorInstitucionesWSService servicio = new ControladorInstitucionesWSService();
+        IInst_WS = servicio.getControladorInstitucionesWSPort();
+        ControladorEventoWSService servicio2 = new ControladorEventoWSService();
+        IEV_WS = servicio2.getControladorEventoWSPort();
+        System.out.println("AltaPatrocinioWS");
     }
 
     @Override
@@ -57,11 +62,12 @@ public class AltaPatrocinio extends HttpServlet {
         
         try {
             // Cargar tipos de registro de la edición
-            List<String> tiposRegistro = IEV.listarTRegistros(evento, edicion);
+            List<String> tiposRegistro = IEV_WS.obtenerTipoRegistrosEdicion(evento, edicion).getItem();
             request.setAttribute("tiposRegistro", tiposRegistro);
             
             // Cargar instituciones
-            DataInstitucion[] instituciones = IInst.listarInstituciones();
+            List<DataInstitucion> i= IInst_WS.listarInstituciones().getItem();
+            DataInstitucion[] instituciones = i.toArray(new DataInstitucion[0]);
             request.setAttribute("instituciones", instituciones);
             
             // Cargar niveles de patrocinio
@@ -137,7 +143,7 @@ public class AltaPatrocinio extends HttpServlet {
             }
 
             // Validación del 20%
-            DataTRegistro dataTRegistro = IEV.getDataTRegistro(evento, edicion, tipoRegistro);
+            DataTRegistro dataTRegistro = IEV_WS.getDataTRegistro(evento, edicion, tipoRegistro);
             float costoTotalRegistros = cantidadCupos * dataTRegistro.getCosto();
 
             if (costoTotalRegistros > (0.2f * monto)) {
@@ -147,16 +153,15 @@ public class AltaPatrocinio extends HttpServlet {
             }
 
             // Crear el patrocinio
-            DataPatrocinio patrocinio = new DataPatrocinio(
-                LocalDate.now(), // Fecha actual
-                monto,
-                nivel,
-                codigo,
-                cantidadCupos
-            );
+            DataPatrocinio patrocinio = new DataPatrocinio();
+            patrocinio.setCod(codigo);
+            patrocinio.setCtdCupo(cantidadCupos);
+            patrocinio.setFecha(LocalDate.now().toString());
+            patrocinio.setMonto(monto);
+            patrocinio.setNivel(nivel);
 
             // Llamar al controlador
-            IInst.nuevoPatrocinio(patrocinio, institucion, evento, edicion, tipoRegistro);
+            IInst_WS.nuevoPatrocinio(patrocinio, institucion, evento, edicion, tipoRegistro);
 
             // Redirigir con mensaje de éxito
             session.setAttribute("mensaje", "El patrocinio se ha registrado exitosamente");
@@ -166,9 +171,9 @@ public class AltaPatrocinio extends HttpServlet {
             recargarFormularioConError(request, response, evento, edicion, 
                 "Error en los datos numéricos. Verifique el monto y cantidad de cupos.");
             
-        } catch (PatrocinioRepetidoException ex) {
-            recargarFormularioConError(request, response, evento, edicion, 
-                "Esta institución ya está patrocinando esta edición.");
+        //} catch (PatrocinioRepetidoException ex) { NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+        //    recargarFormularioConError(request, response, evento, edicion, 
+        //        "Esta institución ya está patrocinando esta edición.");
             
         } catch (Exception ex) {
             recargarFormularioConError(request, response, evento, edicion, 
@@ -181,10 +186,10 @@ public class AltaPatrocinio extends HttpServlet {
         
         // Recargar los datos para los combos
         try {
-            List<String> tiposRegistro = IEV.listarTRegistros(evento, edicion);
+            List<String> tiposRegistro = IEV_WS.obtenerTipoRegistrosEdicion(evento, edicion).getItem();
             request.setAttribute("tiposRegistro", tiposRegistro);
             
-            DataInstitucion[] instituciones = IInst.listarInstituciones();
+            DataInstitucion[] instituciones = (IInst_WS.listarInstituciones().getItem()).toArray(new DataInstitucion[0]);
             request.setAttribute("instituciones", instituciones);
             
             request.setAttribute("niveles", Nivel.values());

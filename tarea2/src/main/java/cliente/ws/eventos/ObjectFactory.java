@@ -97,6 +97,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DataTRegistro }
+     * 
+     * @return
+     *     the new instance of {@link DataTRegistro }
+     */
+    public DataTRegistro createDataTRegistro() {
+        return new DataTRegistro();
+    }
+
+    /**
      * Create an instance of {@link DataEdicion }
      * 
      * @return

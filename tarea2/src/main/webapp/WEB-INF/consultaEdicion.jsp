@@ -2,10 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.Arrays"%>
 <%@ page import="java.util.List"%>
-<%@ page import="logica.datatypes.*"%>
-<%@ page import="logica.Fabrica" %>
-<%@ page import="logica.interfaces.*" %>
 <%@ page import="com.miseventos.utils.nombreUtils" %>
+
+<%@ page import="cliente.ws.eventos.ControladorEventoWSService" %>
+<%@ page import="cliente.ws.eventos.IControladorEventoWS" %>
+<%@ page import="cliente.ws.usuarios.ControladorUsuarioWSService" %>
+<%@ page import="cliente.ws.usuarios.IControladorUsuarioWS" %>
+<%@ page import="cliente.ws.eventos.DataEdicion" %>
+<%@ page import="cliente.ws.usuarios.DataUsuario" %>
+<%@ page import="cliente.ws.usuarios.DataOrganizador" %>
+<%@ page import="cliente.ws.usuarios.DataDetalleRegistro" %>
+<%@ page import="cliente.ws.usuarios.DataAsistente" %>
+<%@ page import="cliente.ws.instituciones.DataPatrocinio" %>
+<%@ page import="cliente.ws.eventos.DataPatrocinioCompleto" %>
+<%@ page import="cliente.ws.eventos.DataTRegistro" %>
+<%@ page import="cliente.ws.usuarios.ParEdicionRegistro" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -83,7 +94,7 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 					<div class="informacion-TRegistro">
 						<h2 class="nombre-evento"><%=dataTR.getNombre()%></h2>
 						<div class="detalles-TRegistro">
-							<span class="descripcion-TRegistro"><%=dataTR.getDescr()%>.</span>
+							<span class="descripcion-TRegistro"><%=dataTR.getDescripcion()%>.</span>
 							<span class="costo-TRegistro">Costo: $<%=dataTR.getCosto()%>.</span>
 							<span class="Cupos-TRegistro"><%=dataTR.getCupo()%> cupos restantes.</span>
 							<%
@@ -176,15 +187,19 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 				<div class="informacion-TRegistro">
 					<div class="detalles-TRegistro">
 						<%
-                		IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
-						DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
-						Boolean registrado = (Boolean) request.getAttribute("registrado");
-						if (registrado != null && registrado) {
-							ParEdicionRegistro dataRegistro = (ParEdicionRegistro) request.getAttribute("dataRegistro");
-                        	DataDetalleRegistro detalleReg = ICU.getDetallesRegistro(dataU.getNickname(), dataRegistro);
+						// ✅ Obtener detalleRegistro del servlet (ya no llamamos al WS aquí)
+						DataDetalleRegistro detalleReg = (DataDetalleRegistro) request.getAttribute("detalleRegistro");
+						
+						if (detalleReg != null) {
 						%>
 						<div class="registro-item">
 							<span>Registrado el: <%= detalleReg.getFecha() %>, como: <%= detalleReg.getNombreTR() %></span>
+						</div>
+						<%
+						} else {
+						%>
+						<div class="registro-item">
+							<span>Registrado (detalles no disponibles)</span>
 						</div>
 						<%
 						}

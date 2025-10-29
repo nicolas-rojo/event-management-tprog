@@ -68,6 +68,7 @@ public class AltaEvento extends HttpServlet {
         DataEvento data = new DataEvento();
         data.setNombre(nombre.trim());
         data.setSigla(sigla.trim());
+        data.setFechaAlta(fechaActual.toString()); //Añadí esto...................
         //data.setFechaAlta(fechaActual);
         data.setDescripcion(descripcion.trim());
         

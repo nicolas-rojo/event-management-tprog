@@ -23,7 +23,7 @@ import cliente.ws.usuarios.IControladorUsuarioWS;
 import cliente.ws.usuarios.DataUsuario;
 import cliente.ws.usuarios.DataAsistente;
 import cliente.ws.usuarios.DataOrganizador;
-import excepciones.*;
+
 
 @WebServlet("/register")
 @MultipartConfig

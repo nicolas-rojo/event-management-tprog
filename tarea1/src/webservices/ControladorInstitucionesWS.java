@@ -12,7 +12,7 @@ public class ControladorInstitucionesWS implements IControladorInstitucionesWS {
     
     private IInstituciones controlador;
     
-    public void ControladorInstitucionWS() {
+    public ControladorInstitucionesWS() {
         Fabrica fabrica = Fabrica.getInstance();
         this.controlador = fabrica.getIControladorInstituciones();
     }
