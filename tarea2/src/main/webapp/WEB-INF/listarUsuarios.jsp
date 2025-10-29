@@ -66,7 +66,7 @@
                                     claseTipo = "tipo-organizador";
                                     claseTarjeta = "organizador";
                                 }
-                            } catch (Exception e) {// NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+                            } catch (Exception e) {
                                 // Mantener valores por defecto
                             }
                             
@@ -103,8 +103,9 @@
                                         );
                                     }
                                 }
-                            } catch (Exception e) { //NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-                                // Ignorar error
+                            } catch (Exception e) {
+                            	System.err.println("⚠️ Error obteniendo detalles adicionales para el usuario " + usuario.getEmail() + " (" + tipoUsuario + "): " + e.getMessage());
+                            	    e.printStackTrace();
                             }
                             
                             boolean esUsuarioActual = false;

@@ -8,6 +8,7 @@ import java.io.IOException;
 import cliente.ws.instituciones.ControladorInstitucionesWSService;
 import cliente.ws.instituciones.IControladorInstitucionesWS;
 import cliente.ws.instituciones.DataInstitucion;
+import cliente.ws.instituciones.InstitucionRepetidaException_Exception;
 
 
 @WebServlet("/AltaInstitucion")
@@ -65,9 +66,9 @@ public class AltaInstitucion extends HttpServlet {
             session.setAttribute("mensaje", "La Institución se ha creado con éxito");
             response.sendRedirect(request.getContextPath() + "/home");
 
-        //} catch (InstitucionRepetidaException e) {NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-        //    request.setAttribute("error", "Ya existe una institución con ese nombre.");
-        //    request.getRequestDispatcher("/WEB-INF/altaInstitucion.jsp").forward(request, response);
+        } catch (InstitucionRepetidaException_Exception e) {
+            request.setAttribute("error", "Ya existe una institución con ese nombre.");
+            request.getRequestDispatcher("/WEB-INF/altaInstitucion.jsp").forward(request, response);
 
         } catch (Exception e) {
 			e.printStackTrace();

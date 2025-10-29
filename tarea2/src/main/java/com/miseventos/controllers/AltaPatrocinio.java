@@ -171,9 +171,9 @@ public class AltaPatrocinio extends HttpServlet {
             recargarFormularioConError(request, response, evento, edicion, 
                 "Error en los datos numéricos. Verifique el monto y cantidad de cupos.");
             
-        //} catch (PatrocinioRepetidoException ex) { NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-        //    recargarFormularioConError(request, response, evento, edicion, 
-        //        "Esta institución ya está patrocinando esta edición.");
+        } catch (PatrocinioRepetidoException_Exception ex) {
+            recargarFormularioConError(request, response, evento, edicion, 
+                "Esta institución ya está patrocinando esta edición.");
             
         } catch (Exception ex) {
             recargarFormularioConError(request, response, evento, edicion, 

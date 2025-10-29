@@ -47,9 +47,9 @@ public class ModificarUsuario extends HttpServlet {
             
             request.getRequestDispatcher("/WEB-INF/modificarUsuario.jsp").forward(request, response);
                    
-        //} catch (UsuarioNoExisteException e) { NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-        //    request.setAttribute("error", "El usuario solicitado no existe.");
-        //    request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+        } catch (UsuarioNoExisteException_Exception e) {
+            request.setAttribute("error", "El usuario solicitado no existe.");
+            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "No se pudo cargar la información del usuario");
@@ -176,14 +176,7 @@ public class ModificarUsuario extends HttpServlet {
                 request.setAttribute("error", "El usuario no existe.");
                 request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
             }
-        //} catch (Exception e) {//NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-        //    request.setAttribute("error", "El usuario no existe.");
-        //    request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
-        //} catch (Exception e) {
-        //    e.printStackTrace();
-        //   request.setAttribute("error", "No se pudo modificar el usuario");
-        //    request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
-        }
+        } 
     }
     
     private void cargarDatosUsuario(HttpServletRequest request, String email, String tipoUsuario) throws Exception{
