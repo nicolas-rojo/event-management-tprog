@@ -26,7 +26,6 @@ public class ConsultaEdicion extends HttpServlet {
 	public void init() throws ServletException {
 		IEV = Fabrica.getInstance().getIControladorEventos();
 		ICU = Fabrica.getInstance().getIControladorUsuario();
-		ICU.cargarDatos();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

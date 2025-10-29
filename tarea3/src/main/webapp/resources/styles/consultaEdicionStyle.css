@@ -8,118 +8,6 @@ body {
   align-items: center;
 }
 
-/* LOWBAR */
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #ffffff;
-  border-top: 1px solid #dbdbdb;
-  z-index: 1000;
-  padding: 8px 0;
-}
-
-.bottom-nav-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 160px;
-  max-width: 100%;
-  padding: 0 20px;
-}
-
-.bottom-nav .nav-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #262626;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.bottom-nav .nav-item:hover {
-  transform: scale(1.1);
-}
-
-.bottom-nav .nav-item i {
-  font-size: 26px;
-}
-
-.bottom-nav .profile-pic {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid #262626;
-  transition: border-color 0.2s ease;
-}
-
-.bottom-nav .profile-link:hover .profile-pic {
-  border-color: #0095f6;
-}
-
-.bottom-nav .profile-pic img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* TOPBAR */
-.top-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: #ffffff;
-  border-bottom: 1px solid #dbdbdb;
-  z-index: 1000;
-  padding: 10px 0;
-}
-
-.top-nav-content {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 0 20px;
-}
-
-.back-button {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background-color: #f0f0f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #262626;
-}
-
-.back-button:hover {
-  background-color: #e0e0e0;
-  transform: scale(1.05);
-}
-
-.back-button i {
-  font-size: 20px;
-}
-
-.logo {
-  height: 40px;
-  display: flex;
-  align-items: center;
-}
-
-.logo img {
-  height: 100%;
-  width: auto;
-  object-fit: contain;
-}
-
 /* CARDS */
 
 .info-container {
@@ -140,7 +28,7 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   margin-bottom: 20px;
-  width: 100%;
+  width: 90%;
   max-width: 700px;
   text-decoration: none;
 }

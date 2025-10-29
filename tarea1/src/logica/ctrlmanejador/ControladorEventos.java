@@ -260,18 +260,15 @@ public class ControladorEventos implements IEventos {
         List<Patrocinio> patrocinios = edev.getPatrociniosLista();
         List<DataPatrocinioCompleto> result = new ArrayList<>();
         
-        for (Patrocinio p : patrocinios) {
-            String institucionNombre = p.getInstitucion() != null ? p.getInstitucion().getNombre() : "Sin institución";
-            String tipoRegistroNombre = p.getTipoRegistro() != null ? p.getTipoRegistro().getNombre() : "Sin tipo de registro";
-            
+        for (Patrocinio p : patrocinios) { 
             result.add(new DataPatrocinioCompleto(
                 p.getFecha(),
                 p.getMonto(),
                 p.getNivel(),
                 p.getCod(),
                 p.getCtdCupo(),
-                institucionNombre,
-                tipoRegistroNombre
+                p.getInstitucion().getNombre(),
+                p.getTipoRegistro().getNombre()
             ));
         }
         

@@ -361,7 +361,7 @@ public class ControladorUsuario implements IUsuario {
 			
 			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 8, 21), 20000 , Nivel.Oro, "TECHUDELAR", 4), "Facultad de Ingeniería", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "Estudiante");
 			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 8, 20), 10000, Nivel.Plata, "TECHANII", 1), "Agencia Nacional de Investigación e Innovación (ANII)", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "General");
-			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 3, 4), 25000, Nivel.Platino, "CORREANTEL", 10), "Antel", "Maratón de Montevideo", "Maratón de Montevideo 2025", "Corredor 10k");
+			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 3, 4), 25000, Nivel.Platino, "CORREANTEL", 10), "Antel", "Maratón de Montevideo", "Maratón de Montevideo 2025", "Corredor 10K");
 			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 5, 5), 15000, Nivel.Bronce, "EXPOCAT", 10), "Universidad Católica del Uruguay", "Expointer Uruguay", "Expointer Uruguay 2025", "General");
 			
 			ICU.nuevoRegistro("sofirod", "Montevideo Rock", "Montevideo Rock 2025", "VIP", LocalDate.of(2025, 5, 14));
