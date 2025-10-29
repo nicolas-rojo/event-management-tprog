@@ -13,6 +13,7 @@
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         
     <!-- CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/listarEventosStyle.css">
@@ -31,7 +32,7 @@
             for (DataEventoCompleto evento : eventos) {
                 String nomNormal = nombreUtils.normalizarNombre(evento.getNombre());
     	%>
-    			<a href="<%=request.getContextPath()%>/consultaEvento?evento=<%=java.net.URLEncoder.encode(evento.getNombre(), "UTF-8")%>" class="event-card">
+    			<a href="<%=request.getContextPath()%>/listarEdiciones?evento=<%=java.net.URLEncoder.encode(evento.getNombre(), "UTF-8")%>" class="event-card">
 					<div class="event-card-image">
 						<img class="imagenes"
                          	src="${pageContext.request.contextPath}/resources/images/EV-<%= nomNormal %>.png"

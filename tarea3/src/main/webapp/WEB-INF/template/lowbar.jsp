@@ -2,8 +2,6 @@
 <%@ page import="com.miseventos.utils.nombreUtils"%>
 <%@ page import="logica.datatypes.*" %>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
 <%
 	DataUsuario usr = (DataUsuario) session.getAttribute("datosUsr");
 %>
