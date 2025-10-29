@@ -9,20 +9,19 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import logica.Fabrica;
-import logica.interfaces.IUsuario;
-import logica.datatypes.*;
-import excepciones.UsuarioNoExisteException;
-import excepciones.ContrasenaIncorrectaException;
+import cliente.ws.usuarios.*;
 
 @WebServlet("/ModificarUsuario")
 public class ModificarUsuario extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IUsuario ICU;
+    private IControladorUsuarioWS ICU_WS;
 
     @Override
     public void init() throws ServletException {
-        ICU = Fabrica.getInstance().getIControladorUsuario();
+    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+        ICU_WS = servicio2.getControladorUsuarioWSPort();
+        
+        System.out.println("ModificarUsuarioWS");
     }
 
     @Override
@@ -33,24 +32,24 @@ public class ModificarUsuario extends HttpServlet {
         DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
         String email = dataU.getEmail();
         try {
-            String tipoUsuario = ICU.getTipoUsuario(email);
+            String tipoUsuario = ICU_WS.getTipoUsuario(email);
             
             if ("Asistente".equals(tipoUsuario)) {
-                DataAsistente asistente = ICU.getAsistente(email);
+                DataAsistente asistente = ICU_WS.getAsistente(email);
                 request.setAttribute("usuario", asistente);
                 request.setAttribute("tipo", "Asistente");
                 
             } else if ("Organizador".equals(tipoUsuario)) {
-                DataOrganizador organizador = ICU.getOrganizador(email);
+                DataOrganizador organizador = ICU_WS.getOrganizador(email);
                 request.setAttribute("usuario", organizador);
                 request.setAttribute("tipo", "Organizador");
             }
             
             request.getRequestDispatcher("/WEB-INF/modificarUsuario.jsp").forward(request, response);
                    
-        } catch (UsuarioNoExisteException e) {
-            request.setAttribute("error", "El usuario solicitado no existe.");
-            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+        //} catch (UsuarioNoExisteException e) { NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+        //    request.setAttribute("error", "El usuario solicitado no existe.");
+        //    request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "No se pudo cargar la información del usuario");
@@ -88,7 +87,7 @@ public class ModificarUsuario extends HttpServlet {
                     request.setAttribute("error", "Debe ingresar su contraseña actual para cambiarla.");
                     try {
                         cargarDatosUsuario(request, email, tipoUsuario);
-                    } catch (UsuarioNoExisteException e) {
+                    } catch (Exception e) { //NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
                         request.setAttribute("error", "El usuario no existe.");
                         request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
                         return;
@@ -101,7 +100,7 @@ public class ModificarUsuario extends HttpServlet {
                     request.setAttribute("error", "Debe ingresar la nueva contraseña.");
                     try {
                         cargarDatosUsuario(request, email, tipoUsuario);
-                    } catch (UsuarioNoExisteException e) {
+                    } catch (Exception e) {//NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
                         request.setAttribute("error", "El usuario no existe.");
                         request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
                         return;
@@ -114,7 +113,7 @@ public class ModificarUsuario extends HttpServlet {
                     request.setAttribute("error", "Debe confirmar la nueva contraseña.");
                     try {
                         cargarDatosUsuario(request, email, tipoUsuario);
-                    } catch (UsuarioNoExisteException e) {
+                    } catch (Exception e) {//NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
                         request.setAttribute("error", "El usuario no existe.");
                         request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
                         return;
@@ -128,7 +127,7 @@ public class ModificarUsuario extends HttpServlet {
                     request.setAttribute("error", "Las contraseñas nuevas no coinciden.");
                     try {
                         cargarDatosUsuario(request, email, tipoUsuario);
-                    } catch (UsuarioNoExisteException e) {
+                    } catch (Exception e) {//NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
                         request.setAttribute("error", "El usuario no existe.");
                         request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
                         return;
@@ -143,12 +142,12 @@ public class ModificarUsuario extends HttpServlet {
                 String nuevoApellido = request.getParameter("apellido");
                 
                 if (cambiarPassword) {
-                    ICU.modificarAsistenteConPassword(email, nuevoNombre, nuevoApellido, passActual, passNueva);
+                    ICU_WS.modificarAsistenteConPassword(email, nuevoNombre, nuevoApellido, passActual, passNueva);
                 } else {
-                    ICU.modificarAsistente(email, nuevoNombre, nuevoApellido);
+                    ICU_WS.modificarAsistente(email, nuevoNombre, nuevoApellido);
                 }
                 
-                DataAsistente asistenteActualizado = ICU.getAsistente(email);
+                DataAsistente asistenteActualizado = ICU_WS.getAsistente(email);
                 session.setAttribute("datosUsr", asistenteActualizado);
                 response.sendRedirect(request.getContextPath() + "/detalleUsuario?email=" + email);
 
@@ -158,44 +157,49 @@ public class ModificarUsuario extends HttpServlet {
                 String nuevaUrl = request.getParameter("url");
                 
                 if (cambiarPassword) {
-                    ICU.modificarOrganizadorConPassword(email, nuevoNombre, nuevaDescripcion, nuevaUrl, passActual, passNueva);
+                    ICU_WS.modificarOrganizadorConPassword(email, nuevoNombre, nuevaDescripcion, nuevaUrl, passActual, passNueva);
                 } else {
-                    ICU.modificarOrganizador(email, nuevoNombre, nuevaDescripcion, nuevaUrl);
+                    ICU_WS.modificarOrganizador(email, nuevoNombre, nuevaDescripcion, nuevaUrl);
                 }
                 
-                DataOrganizador organizadorActualizado = ICU.getOrganizador(email);
+                DataOrganizador organizadorActualizado = ICU_WS.getOrganizador(email);
                 session.setAttribute("datosUsr", organizadorActualizado);
                 response.sendRedirect(request.getContextPath() + "/detalleUsuario?email=" + email);
             }
             
-        } catch (ContrasenaIncorrectaException e) {
+        } catch (Exception e) {//NICOOOOOOOOOOOOOOOOOOO
             request.setAttribute("error", "La contraseña actual es incorrecta.");
             try {
                 cargarDatosUsuario(request, email, tipoUsuario);
                 request.getRequestDispatcher("/WEB-INF/modificarUsuario.jsp").forward(request, response);
-            } catch (UsuarioNoExisteException ex) {
+            } catch (Exception ex) {//NICOOOOOOOOOOOOOOOOOOOOOO
                 request.setAttribute("error", "El usuario no existe.");
                 request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
             }
-        } catch (UsuarioNoExisteException e) {
-            request.setAttribute("error", "El usuario no existe.");
-            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("error", "No se pudo modificar el usuario");
-            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+        //} catch (Exception e) {//NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+        //    request.setAttribute("error", "El usuario no existe.");
+        //    request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+        //} catch (Exception e) {
+        //    e.printStackTrace();
+        //   request.setAttribute("error", "No se pudo modificar el usuario");
+        //    request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
         }
     }
     
-    private void cargarDatosUsuario(HttpServletRequest request, String email, String tipoUsuario) throws UsuarioNoExisteException {
-        if ("Asistente".equals(tipoUsuario)) {
-            DataAsistente asistente = ICU.getAsistente(email);
-            request.setAttribute("usuario", asistente);
-            request.setAttribute("tipo", "Asistente");
-        } else if ("Organizador".equals(tipoUsuario)) {
-            DataOrganizador organizador = ICU.getOrganizador(email);
-            request.setAttribute("usuario", organizador);
-            request.setAttribute("tipo", "Organizador");
-        }
+    private void cargarDatosUsuario(HttpServletRequest request, String email, String tipoUsuario) throws Exception{
+    	try {
+		 if ("Asistente".equals(tipoUsuario)) {
+	            DataAsistente asistente = ICU_WS.getAsistente(email);
+	            request.setAttribute("usuario", asistente);
+	            request.setAttribute("tipo", "Asistente");
+	        } else if ("Organizador".equals(tipoUsuario)) {
+	            DataOrganizador organizador = ICU_WS.getOrganizador(email);
+	            request.setAttribute("usuario", organizador);
+	            request.setAttribute("tipo", "Organizador");
+	        }	
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+       
     }
 }

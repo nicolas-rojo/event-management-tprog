@@ -21,9 +21,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
 
-import logica.Fabrica;
-import logica.interfaces.*;
-import logica.datatypes.*;
 import excepciones.*;
 
 import cliente.ws.eventos.*;
@@ -43,15 +40,12 @@ import excepciones.EventoNoExisteExcepcion;
 @WebServlet("/home")
 public class ListarEventos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IEventos IEV;
 	
 	private IControladorEventoWS IEV_WS;
 	private IControladorUsuarioWS ICU_WS;
     
     @Override
     public void init() throws ServletException {  
-    	IEV = Fabrica.getInstance().getIControladorEventos();
-    	
     	// Acá lo que añadí
     	ControladorEventoWSService servicio = new ControladorEventoWSService();
     	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
@@ -104,7 +98,7 @@ public class ListarEventos extends HttpServlet {
 	    String eventoABorrar = request.getParameter("eventoDarBaja");
 	    
 	    if (eventoABorrar != null && !eventoABorrar.isEmpty()) {
-	            IEV.darDeBaja(eventoABorrar); 
+	            IEV_WS.darDeBaja(eventoABorrar); 
 	            request.setAttribute("mensaje", "Evento dado de baja correctamente.");
 
 	        }
