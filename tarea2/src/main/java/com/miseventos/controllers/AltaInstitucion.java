@@ -5,19 +5,23 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
 
-import logica.Fabrica;
-import logica.interfaces.IInstituciones;
-import logica.datatypes.DataInstitucion;
-import excepciones.InstitucionRepetidaException;
+import cliente.ws.instituciones.ControladorInstitucionesWSService;
+import cliente.ws.instituciones.IControladorInstitucionesWS;
+import cliente.ws.instituciones.DataInstitucion;
+import cliente.ws.instituciones.InstitucionRepetidaException_Exception;
+
 
 @WebServlet("/AltaInstitucion")
 public class AltaInstitucion extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IInstituciones IInst;
+    
+    private IControladorInstitucionesWS IInst_WS;
 
     @Override
     public void init() throws ServletException {
-        IInst = Fabrica.getInstance().getIControladorInstituciones();
+    	ControladorInstitucionesWSService servicio = new ControladorInstitucionesWSService();
+        IInst_WS = servicio.getControladorInstitucionesWSPort();
+        System.out.println("Alta Institucion");
     }
 
     @Override
@@ -50,16 +54,19 @@ public class AltaInstitucion extends HttpServlet {
 
         try {
             // Crear el objeto DataInstitucion (nombre, descripcion, sitioWeb)
-            DataInstitucion dataInst = new DataInstitucion(nombre, descripcion, sitioWeb);
+        	DataInstitucion dataInst = new DataInstitucion();
+        	dataInst.setDescripcion(descripcion);
+        	dataInst.setNombre(nombre);
+        	dataInst.setUrl(sitioWeb);
             
             // Llamar al controlador para crear la institución
-            IInst.nuevaInstitucion(dataInst);
+        	IInst_WS.nuevaInstitucion(dataInst);
 
             // Redirigir al home con mensaje de éxito
             session.setAttribute("mensaje", "La Institución se ha creado con éxito");
             response.sendRedirect(request.getContextPath() + "/home");
 
-        } catch (InstitucionRepetidaException e) {
+        } catch (InstitucionRepetidaException_Exception e) {
             request.setAttribute("error", "Ya existe una institución con ese nombre.");
             request.getRequestDispatcher("/WEB-INF/altaInstitucion.jsp").forward(request, response);
 

@@ -3,6 +3,7 @@ package cliente.ws.instituciones;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
 
@@ -17,10 +18,11 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="cod" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="fecha" type="{http://webservices/}localDate" minOccurs="0"/>
+ *         <element name="fecha" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="monto" type="{http://www.w3.org/2001/XMLSchema}float"/>
  *         <element name="nivel" type="{http://webservices/}nivel" minOccurs="0"/>
+ *         <element name="cod" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="ctdCupo" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -31,52 +33,31 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dataPatrocinio", propOrder = {
-    "cod",
     "fecha",
     "monto",
-    "nivel"
+    "nivel",
+    "cod",
+    "ctdCupo"
 })
 public class DataPatrocinio {
 
-    protected String cod;
-    protected LocalDate fecha;
+    protected String fecha;
     protected float monto;
     @XmlSchemaType(name = "string")
     protected Nivel nivel;
-
-    /**
-     * Obtiene el valor de la propiedad cod.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCod() {
-        return cod;
-    }
-
-    /**
-     * Define el valor de la propiedad cod.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCod(String value) {
-        this.cod = value;
-    }
+    @XmlElement(required = true)
+    protected String cod;
+    protected int ctdCupo;
 
     /**
      * Obtiene el valor de la propiedad fecha.
      * 
      * @return
      *     possible object is
-     *     {@link LocalDate }
+     *     {@link String }
      *     
      */
-    public LocalDate getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
@@ -85,10 +66,10 @@ public class DataPatrocinio {
      * 
      * @param value
      *     allowed object is
-     *     {@link LocalDate }
+     *     {@link String }
      *     
      */
-    public void setFecha(LocalDate value) {
+    public void setFecha(String value) {
         this.fecha = value;
     }
 
@@ -130,6 +111,46 @@ public class DataPatrocinio {
      */
     public void setNivel(Nivel value) {
         this.nivel = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad cod.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCod() {
+        return cod;
+    }
+
+    /**
+     * Define el valor de la propiedad cod.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCod(String value) {
+        this.cod = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad ctdCupo.
+     * 
+     */
+    public int getCtdCupo() {
+        return ctdCupo;
+    }
+
+    /**
+     * Define el valor de la propiedad ctdCupo.
+     * 
+     */
+    public void setCtdCupo(int value) {
+        this.ctdCupo = value;
     }
 
 }

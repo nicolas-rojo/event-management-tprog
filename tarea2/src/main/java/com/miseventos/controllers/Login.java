@@ -9,19 +9,21 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import logica.Fabrica;
-import logica.interfaces.*;
-import logica.datatypes.*;
+import cliente.ws.usuarios.ControladorUsuarioWSService;
+import cliente.ws.usuarios.IControladorUsuarioWS;
+import cliente.ws.usuarios.DataUsuario;
 import excepciones.*;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IUsuario ICU;
+	private IControladorUsuarioWS ICU_WS;
 	
 	@Override
     public void init() throws ServletException {  
-    	ICU = Fabrica.getInstance().getIControladorUsuario();
+    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+    	ICU_WS = servicio2.getControladorUsuarioWSPort();
+    	System.out.println("LoginWS");
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,11 +34,11 @@ public class Login extends HttpServlet {
 		String nickmail = request.getParameter("nickmail");
 		String pass = request.getParameter("clave");
 		try { 
-			DataUsuario res = ICU.login(nickmail, pass);
+			DataUsuario res = ICU_WS.login(nickmail, pass);
 			if (res != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("datosUsr", res);
-				String tipo = ICU.getTipoUsuario(res.getEmail());
+				String tipo = ICU_WS.getTipoUsuario(res.getEmail());
 				switch(tipo) {
 					case "Asistente": {
 						session.setAttribute("tipoUsr", "asistente");
@@ -58,9 +60,9 @@ public class Login extends HttpServlet {
 				request.setAttribute("error", "Usuario o Contraseña Incorrectos");
 				request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 			}
-		} catch (UsuarioNoExisteException e) {
-			request.setAttribute("error", "Usuario o Contraseña Incorrectos");
-			request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+		//} catch (UsuarioNoExisteException e) {
+		//	request.setAttribute("error", "Usuario o Contraseña Incorrectos");
+		//	request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "Error al intentar iniciar sesion");

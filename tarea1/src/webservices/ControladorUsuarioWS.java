@@ -2,8 +2,6 @@ package webservices;
 
 import jakarta.jws.WebService;
 import java.time.LocalDate;
-import java.util.List;
-
 import logica.Fabrica;
 import logica.interfaces.IUsuario;
 import logica.interfaces.IEventos;
@@ -21,6 +19,22 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
         this.controladorUsuario = fabrica.getIControladorUsuario();
         this.controladorEventos = fabrica.getIControladorEventos();
     }
+    
+    @Override
+    public DataDetalleRegistro getDetallesRegistro(String asistenteSeleccionado, ParEdicionRegistro regEdicion)  throws ErrorDetallesRegistroException{
+    	return controladorUsuario.getDetallesRegistro(asistenteSeleccionado, regEdicion);
+    }
+
+    
+    @Override
+    public DataUsuario[] getUsuarios() throws UsuarioNoExisteException{
+    	return controladorUsuario.getUsuarios();
+    }
+    
+    @Override
+    public void cargarDatos() {
+		controladorUsuario.cargarDatos();
+    } 
     
     @Override
     public void registrarAsistente(DataAsistente dataAsistente) throws UsuarioRepetidoException {
@@ -68,13 +82,13 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
     }
     
     @Override
-    public List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado) {
-        return controladorUsuario.getRegistrosAsistente(asistenteSeleccionado);
+    public ParEdicionRegistro[] getRegistrosAsistente(String asistenteSeleccionado) {
+        return controladorUsuario.getRegistrosAsistente(asistenteSeleccionado).toArray(new ParEdicionRegistro[0]);
     }
     
     @Override
-    public void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException {
-        controladorUsuario.nuevoRegistro(asistenteSeleccionado, evento, edicion, tipoReg, fecha);
+    public void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, String fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException {
+        controladorUsuario.nuevoRegistro(asistenteSeleccionado, evento, edicion, tipoReg, LocalDate.parse(fecha));
     }
     
     @Override
@@ -84,12 +98,16 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
     
     @Override
     public ParEdicionRegistro estaRegistrado(String asistente, String edicion) {
-        return controladorUsuario.estaRegistrado(asistente, edicion);
+    	ParEdicionRegistro reg = controladorUsuario.estaRegistrado(asistente, edicion);
+    	if (reg == null) {
+    		return new ParEdicionRegistro("", (LocalDate) null);
+    	}
+    	return reg;
     }
     
     @Override
-    public List<String> getUsuariosRegistrados(String edicion) {
-        return controladorUsuario.getUsuariosRegistrados(edicion);
+    public String[] getUsuariosRegistrados(String edicion) {
+        return controladorUsuario.getUsuariosRegistrados(edicion).toArray(new String[0]);
     }
     
     @Override

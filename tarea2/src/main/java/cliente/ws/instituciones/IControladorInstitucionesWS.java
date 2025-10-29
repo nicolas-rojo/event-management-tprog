@@ -27,18 +27,13 @@ public interface IControladorInstitucionesWS {
 
     /**
      * 
-     * @param arg0
-     * @throws InstitucionRepetidaException_Exception
+     * @return
+     *     returns cliente.ws.instituciones.DataInstitucionArray
      */
     @WebMethod
-    @Action(input = "http://webservices/IControladorInstitucionesWS/nuevaInstitucionRequest", output = "http://webservices/IControladorInstitucionesWS/nuevaInstitucionResponse", fault = {
-        @FaultAction(className = InstitucionRepetidaException_Exception.class, value = "http://webservices/IControladorInstitucionesWS/nuevaInstitucion/Fault/InstitucionRepetidaException")
-    })
-    public void nuevaInstitucion(
-        @WebParam(name = "arg0", partName = "arg0")
-        DataInstitucion arg0)
-        throws InstitucionRepetidaException_Exception
-    ;
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorInstitucionesWS/listarInstitucionesRequest", output = "http://webservices/IControladorInstitucionesWS/listarInstitucionesResponse")
+    public DataInstitucionArray listarInstituciones();
 
     /**
      * 
@@ -69,12 +64,17 @@ public interface IControladorInstitucionesWS {
 
     /**
      * 
-     * @return
-     *     returns cliente.ws.instituciones.DataInstitucionArray
+     * @param arg0
+     * @throws InstitucionRepetidaException_Exception
      */
     @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorInstitucionesWS/listarInstitucionesRequest", output = "http://webservices/IControladorInstitucionesWS/listarInstitucionesResponse")
-    public DataInstitucionArray listarInstituciones();
+    @Action(input = "http://webservices/IControladorInstitucionesWS/nuevaInstitucionRequest", output = "http://webservices/IControladorInstitucionesWS/nuevaInstitucionResponse", fault = {
+        @FaultAction(className = InstitucionRepetidaException_Exception.class, value = "http://webservices/IControladorInstitucionesWS/nuevaInstitucion/Fault/InstitucionRepetidaException")
+    })
+    public void nuevaInstitucion(
+        @WebParam(name = "arg0", partName = "arg0")
+        DataInstitucion arg0)
+        throws InstitucionRepetidaException_Exception
+    ;
 
 }

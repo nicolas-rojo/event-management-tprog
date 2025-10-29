@@ -3,6 +3,7 @@ package cliente.ws.usuarios;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -16,6 +17,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
+ *         <element name="nombreEdicion" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="fechaRegistro" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -25,8 +28,62 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "parEdicionRegistro")
+@XmlType(name = "parEdicionRegistro", propOrder = {
+    "nombreEdicion",
+    "fechaRegistro"
+})
 public class ParEdicionRegistro {
 
+    @XmlElement(required = true)
+    protected String nombreEdicion;
+    protected String fechaRegistro;
+
+    /**
+     * Obtiene el valor de la propiedad nombreEdicion.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getNombreEdicion() {
+        return nombreEdicion;
+    }
+
+    /**
+     * Define el valor de la propiedad nombreEdicion.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setNombreEdicion(String value) {
+        this.nombreEdicion = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad fechaRegistro.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    /**
+     * Define el valor de la propiedad fechaRegistro.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFechaRegistro(String value) {
+        this.fechaRegistro = value;
+    }
 
 }

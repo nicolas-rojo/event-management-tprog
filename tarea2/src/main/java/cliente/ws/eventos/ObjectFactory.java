@@ -24,15 +24,27 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _EdicionRepetidaExcepcion_QNAME = new QName("http://webservices/", "EdicionRepetidaExcepcion");
     private final static QName _EventoNoExisteExcepcion_QNAME = new QName("http://webservices/", "EventoNoExisteExcepcion");
     private final static QName _EventoRepetidoExcepcion_QNAME = new QName("http://webservices/", "EventoRepetidoExcepcion");
     private final static QName _EventoSinCategoriaExcepcion_QNAME = new QName("http://webservices/", "EventoSinCategoriaExcepcion");
+    private final static QName _TipoDeRegistroRepetidoException_QNAME = new QName("http://webservices/", "TipoDeRegistroRepetidoException");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cliente.ws.eventos
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link EdicionRepetidaExcepcion }
+     * 
+     * @return
+     *     the new instance of {@link EdicionRepetidaExcepcion }
+     */
+    public EdicionRepetidaExcepcion createEdicionRepetidaExcepcion() {
+        return new EdicionRepetidaExcepcion();
     }
 
     /**
@@ -66,6 +78,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link TipoDeRegistroRepetidoException }
+     * 
+     * @return
+     *     the new instance of {@link TipoDeRegistroRepetidoException }
+     */
+    public TipoDeRegistroRepetidoException createTipoDeRegistroRepetidoException() {
+        return new TipoDeRegistroRepetidoException();
+    }
+
+    /**
      * Create an instance of {@link DataPatrocinioCompleto }
      * 
      * @return
@@ -86,13 +108,13 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DataEventoCompleto }
+     * Create an instance of {@link DataTRegistro }
      * 
      * @return
-     *     the new instance of {@link DataEventoCompleto }
+     *     the new instance of {@link DataTRegistro }
      */
-    public DataEventoCompleto createDataEventoCompleto() {
-        return new DataEventoCompleto();
+    public DataTRegistro createDataTRegistro() {
+        return new DataTRegistro();
     }
 
     /**
@@ -103,6 +125,26 @@ public class ObjectFactory {
      */
     public DataEdicion createDataEdicion() {
         return new DataEdicion();
+    }
+
+    /**
+     * Create an instance of {@link DataEventoCompleto }
+     * 
+     * @return
+     *     the new instance of {@link DataEventoCompleto }
+     */
+    public DataEventoCompleto createDataEventoCompleto() {
+        return new DataEventoCompleto();
+    }
+
+    /**
+     * Create an instance of {@link DataEdicionWeb }
+     * 
+     * @return
+     *     the new instance of {@link DataEdicionWeb }
+     */
+    public DataEdicionWeb createDataEdicionWeb() {
+        return new DataEdicionWeb();
     }
 
     /**
@@ -126,6 +168,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DataEdicionWebArray }
+     * 
+     * @return
+     *     the new instance of {@link DataEdicionWebArray }
+     */
+    public DataEdicionWebArray createDataEdicionWebArray() {
+        return new DataEdicionWebArray();
+    }
+
+    /**
      * Create an instance of {@link StringArray }
      * 
      * @return
@@ -133,6 +185,19 @@ public class ObjectFactory {
      */
     public StringArray createStringArray() {
         return new StringArray();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link EdicionRepetidaExcepcion }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link EdicionRepetidaExcepcion }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "EdicionRepetidaExcepcion")
+    public JAXBElement<EdicionRepetidaExcepcion> createEdicionRepetidaExcepcion(EdicionRepetidaExcepcion value) {
+        return new JAXBElement<>(_EdicionRepetidaExcepcion_QNAME, EdicionRepetidaExcepcion.class, null, value);
     }
 
     /**
@@ -172,6 +237,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "EventoSinCategoriaExcepcion")
     public JAXBElement<EventoSinCategoriaExcepcion> createEventoSinCategoriaExcepcion(EventoSinCategoriaExcepcion value) {
         return new JAXBElement<>(_EventoSinCategoriaExcepcion_QNAME, EventoSinCategoriaExcepcion.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link TipoDeRegistroRepetidoException }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link TipoDeRegistroRepetidoException }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "TipoDeRegistroRepetidoException")
+    public JAXBElement<TipoDeRegistroRepetidoException> createTipoDeRegistroRepetidoException(TipoDeRegistroRepetidoException value) {
+        return new JAXBElement<>(_TipoDeRegistroRepetidoException_QNAME, TipoDeRegistroRepetidoException.class, null, value);
     }
 
 }

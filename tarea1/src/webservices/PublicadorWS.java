@@ -21,14 +21,13 @@ public class PublicadorWS {
     public Endpoint getEndpoint() {
         return endpoint;
     }
-}
-
-class Main {
+    
+    // AGREGAR ESTE MÉTODO MAIN DENTRO DE PublicadorWS
     public static void main(String[] args) {
         PublicadorWS p = new PublicadorWS();
         p.publicar();
         
-        System.out.println("\nServicios Web publicados:");
+        System.out.println("Links: ");
         System.out.println("  Eventos:       http://localhost:8081/eventos?wsdl");
         System.out.println("  Usuarios:      http://localhost:8081/usuarios?wsdl");
         System.out.println("  Instituciones: http://localhost:8081/instituciones?wsdl");

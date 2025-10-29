@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.jws.soap.SOAPBinding.Style;
 import jakarta.jws.soap.SOAPBinding.ParameterStyle;
-import java.util.List;
 
 import logica.datatypes.*;
 import excepciones.*;
@@ -15,6 +14,15 @@ import excepciones.*;
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public interface IControladorUsuarioWS {
     
+	@WebMethod
+    DataDetalleRegistro getDetallesRegistro(String asistenteSeleccionado, ParEdicionRegistro regEdicion)  throws ErrorDetallesRegistroException;
+	
+	@WebMethod
+	void cargarDatos();
+	
+	@WebMethod
+	DataUsuario[] getUsuarios() throws UsuarioNoExisteException;
+	
     @WebMethod
     void registrarAsistente(DataAsistente dataAsistente) throws UsuarioRepetidoException;
     
@@ -43,10 +51,10 @@ public interface IControladorUsuarioWS {
     String getTipoUsuario(String email) throws UsuarioNoExisteException;
     
     @WebMethod
-    List<ParEdicionRegistro> getRegistrosAsistente(String asistenteSeleccionado);
+    ParEdicionRegistro[] getRegistrosAsistente(String asistenteSeleccionado);
     
     @WebMethod
-    void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, LocalDate fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException;
+    void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, String fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException;
     
     @WebMethod
     DataUsuario login(String nickmail, String pass);
@@ -55,7 +63,7 @@ public interface IControladorUsuarioWS {
     ParEdicionRegistro estaRegistrado(String asistente, String edicion);
     
     @WebMethod
-    List<String> getUsuariosRegistrados(String edicion);
+    String[] getUsuariosRegistrados(String edicion);
     
     @WebMethod
     DataEdicion[] getEdicionesEventoOrganizador(String nickname);

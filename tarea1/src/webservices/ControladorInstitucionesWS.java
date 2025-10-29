@@ -7,12 +7,12 @@ import logica.interfaces.IInstituciones;
 import logica.datatypes.*;
 import excepciones.*;
 
-@WebService(endpointInterface = "webservices.IControladorInstitucionWS")
+@WebService(endpointInterface = "webservices.IControladorInstitucionesWS")
 public class ControladorInstitucionesWS implements IControladorInstitucionesWS {
     
     private IInstituciones controlador;
     
-    public void ControladorInstitucionWS() {
+    public ControladorInstitucionesWS() {
         Fabrica fabrica = Fabrica.getInstance();
         this.controlador = fabrica.getIControladorInstituciones();
     }
