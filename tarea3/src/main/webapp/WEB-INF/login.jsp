@@ -22,13 +22,26 @@
     <div class="container d-flex flex-column align-items-center justify-content-center vh-100">
         <div class="card shadow-sm p-4 w-100" style="max-width: 400px;">
             <h2 class="text-center mb-4">Iniciar Sesión</h2>
-            <form action="${pageContext.request.contextPath}/login" method="post">
-                <input type="text" class="form-control mb-3" id="usuario" name="nickmail" placeholder="Nickname / Mail" required>
-                <input type="password" class="form-control mb-3" id="clave" name="clave" placeholder="Contraseña" required>
-                <div id="confirmarError" class="text-danger mb-2"></div>
+            <form id="formLogin" action="${pageContext.request.contextPath}/login" method="post">
+                <input type="text" class="form-control mb-3" id="nickmail" name="nickmail" placeholder="Nickname / Mail">
+                <div class="error-message" id="errorNickmail">El nickname o mail es requerido</div>
+                
+                <input type="password" class="form-control mb-3" id="clave" name="clave" placeholder="Contraseña">
+                <div class="error-message" id="errorClave">La contraseña es requerida</div>
+                
+                <% 
+	            String error = (String) request.getAttribute("error");
+	            if (error != null) {
+	            %>
+	            	<div id="confirmarError" style = "color:red;"><%= error %></div>
+	            <%
+	            }
+	            %>
                 <button type="submit" class="btn btn-primary w-100">Entrar</button>
             </form>
         </div>
     </div>
+    
+    <script src="${pageContext.request.contextPath}/resources/scripts/loginScript.js"></script>
 </body>
 </html>

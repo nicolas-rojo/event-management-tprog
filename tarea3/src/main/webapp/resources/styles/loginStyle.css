@@ -45,3 +45,15 @@ button {
 button:hover {
   opacity: 0.9;
 }
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    display: none;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.input-error {
+    border-color: red !important;
+}
