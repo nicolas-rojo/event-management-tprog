@@ -454,6 +454,13 @@ public class ControladorUsuario implements IUsuario {
 		usr.eliminarFollow(usr2.getNickname());
 		usr2.eliminarFollower(usr.getNickname());
 	}
+
+	public void setAsistencia(String edicion, String asistente) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Asistente usr = (Asistente) musr.getUsuarioNickname(asistente);
+		Registro registro = usr.getRegistro(edicion);
+		registro.setAsistencia(true);
+	}
 }
 
 
