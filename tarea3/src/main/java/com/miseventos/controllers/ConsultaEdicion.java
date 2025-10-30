@@ -28,36 +28,22 @@ public class ConsultaEdicion extends HttpServlet {
 		ICU = Fabrica.getInstance().getIControladorUsuario();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-
+		
 		request.setAttribute("registrado", false);
+		
+		DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
+		String tipo = (String) session.getAttribute("tipoUsr");
 
 		String eventoSeleccionado = request.getParameter("evento");
 		String edicionSeleccionada = request.getParameter("edicion");
-
-		DataUsuario dataU = null;
-		String tipo = null;
-		String nickname = null;
-		String email = null;
-
-		if (session != null) {
-			dataU = (DataUsuario) session.getAttribute("datosUsr");
-			tipo = (String) session.getAttribute("tipoUsr");
-			if (dataU != null) {
-				nickname = dataU.getNickname();
-				email = dataU.getEmail();
-			}
-		}
-
 		if (eventoSeleccionado == null || edicionSeleccionada == null) {
 			request.setAttribute("error", "Faltan parámetros de evento o edición");
 			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 			return;
 		}
-
+		
 		String organizador = IEV.obtenerOrganizadorEdicion(eventoSeleccionado, edicionSeleccionada);
 		DataEdicion dataEd = IEV.obtenerEdicionEvento(eventoSeleccionado, edicionSeleccionada);
 		if (dataEd == null) {
@@ -65,7 +51,7 @@ public class ConsultaEdicion extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 			return;
 		}
-
+		
 		DataOrganizador dataOrg = null;
 		try {
 			dataOrg = ICU.getOrganizador(organizador);
@@ -79,11 +65,10 @@ public class ConsultaEdicion extends HttpServlet {
 	        request.setAttribute("error", "No se pudieron cargar los datos del organizador");
 	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		}
-
-		List<DataPatrocinioCompleto> dataPatrocinios = IEV.obtenerPatrociniosEdicion(eventoSeleccionado,
-				edicionSeleccionada);
+		
+		
+		List<DataPatrocinioCompleto> dataPatrocinios = IEV.obtenerPatrociniosEdicion(eventoSeleccionado, edicionSeleccionada);
 		List<String> TRegistros = IEV.obtenerTipoRegistrosEdicion(eventoSeleccionado, edicionSeleccionada);
-
 		List<DataTRegistro> dataTRegistros = new ArrayList<>();
 		if (TRegistros != null) {
 			for (String TRegistro : TRegistros) {
@@ -92,27 +77,18 @@ public class ConsultaEdicion extends HttpServlet {
 					dataTRegistros.add(data);
 			}
 		}
-
-		if (tipo != null && dataU != null) {
-			if ("asistente".equals(tipo)) {
-				ParEdicionRegistro registro = ICU.estaRegistrado(nickname, edicionSeleccionada);
-				if (registro != null) {
-					request.setAttribute("registrado", true);
-					request.setAttribute("dataRegistro", registro);
-				} else {
-				}
-			} else if ("organizador".equals(tipo)) {
-				if (dataU.getNickname().equals(organizador)) {
-					request.setAttribute("organizaEdicion", true);
-					List<String> dataRegistros = ICU.getUsuariosRegistrados(edicionSeleccionada);
-					request.setAttribute("dataRegistros", dataRegistros);
-				}
-			}
+		
+		ParEdicionRegistro registro = ICU.estaRegistrado(dataU.getNickname(), edicionSeleccionada);
+		if (registro != null) {
+			request.setAttribute("registrado", true);
+			request.setAttribute("dataRegistro", registro);
 		}
+		
 		request.setAttribute("dataEdicion", dataEd);
 		request.setAttribute("dataOrganizador", dataOrg);
 		request.setAttribute("dataTRegistros", dataTRegistros);
 		request.setAttribute("dataPatrocinios", dataPatrocinios);
 		request.getRequestDispatcher("/WEB-INF/consultaEdicion.jsp").forward(request, response);
+		
 	}
 }
