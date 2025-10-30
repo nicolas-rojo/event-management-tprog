@@ -59,6 +59,21 @@
 				<p class="event-card-description">SIG: <%=dataEd.getSigla()%></p>
 			</div>
 		</a>
+		
+		<% 
+		if (dataEd.getUrl() != null && !dataEd.getUrl().isEmpty()) { 
+		%>
+		    <div class="video-section">
+		        <h3 class="video-titulo">Video</h3>
+		        <div class="video-card">
+		            <div class="video-container">
+		                <iframe class="video-embed" src="<%= dataEd.getUrl() %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		            </div>
+		        </div>
+		    </div>
+		<% 
+		} 
+		%>
 
 		<!-- Mi Registro (Si Aplica) -->
 
