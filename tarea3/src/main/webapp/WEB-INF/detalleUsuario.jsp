@@ -76,9 +76,16 @@ List<ParEdicionRegistro> registros = (List<ParEdicionRegistro>) request.getAttri
 									<span class="registro-fecha-costo">Fecha: <%= DataReg.getFechaRegistro() %> - Costo: $<%= DataReg.getCosto() %></span>
 		                		</div>
 		            		</a>
-							<button class="asistencia-button" onclick="mostrarModalAsistencia(event, '<%= par.getNombreEdicion() %>')">
-								<i class="bi bi-plus-circle"></i>
-							</button>
+		            		
+		            		<%
+		            		if (!ICU.verificarAsistencia(DataReg.getNombreEdicion(), usr.getNickname())) {
+		            		%>
+								<button type="button" class="asistencia-button" onclick="mostrarModalAsistencia(event, '<%= par.getNombreEdicion() %>')">
+									<i class="bi bi-plus-circle"></i>
+								</button>
+		            		<%
+		            		}		            		
+		            		%>
 		        		</div>
 		        	<% 
 	    			}
@@ -98,28 +105,32 @@ List<ParEdicionRegistro> registros = (List<ParEdicionRegistro>) request.getAttri
     </div>
     
     <!-- POPUP Confirmacion -->
-	<div id="modalAsistencia" class="modal-overlay" onclick="cerrarModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="modal-header">
-                <h3>Confirmar Asistencia</h3>
-                <button class="modal-close" onclick="cerrarModal()">
-                    <i class="bi bi-x-lg"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>¿Confirmas tu asistencia a <strong id="nombreEvento"></strong>?</p>
-            </div>
-            <div class="modal-footer">
-                <button class="modal-button cancel" onclick="cerrarModal()">Cancelar</button>
-                <button class="modal-button confirm" onclick="confirmarAsistencia()">Confirmar</button>
-            </div>
-        </div>
-    </div>
+	<div id="modalAsistencia" class="modal-overlay">
+	    <div class="modal-content" onclick="event.stopPropagation()">
+	        <form id="formConfirmarAsistencia" action="<%= request.getContextPath() %>/detalleUsuario" method="post">
+	            <div class="modal-header">
+	                <h3>Confirmar Asistencia</h3>
+	                <button type="button" class="modal-close" onclick="cerrarModal()">
+	                    <i class="bi bi-x-lg"></i>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                <p>¿Confirmas tu asistencia a <strong id="nombreEvento"></strong>?</p>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="modal-button cancel" onclick="cerrarModal()">Cancelar</button>
+	                <button type="submit" class="modal-button confirm">Confirmar</button>
+	            </div>
+	            
+	            <input type="hidden" id="nombreEdicionInput" name="nombreEdicion" value="">
+	            <input type="hidden" name="nickname" value="<%= usr.getNickname() %>">
+	        </form>
+	    </div>
+	</div>
     
     <!-- LOWBAR -->
     <jsp:include page="/WEB-INF/template/lowbar.jsp" />
     
     <!-- SCRIPT -->
-    <script src="${pageContext.request.contextPath}/resources/scripts/detalleUsuarioScript.js"></script>
-</body>
+	<script src="${pageContext.request.contextPath}/resources/scripts/detalleUsuarioScript.js"></script></body>
 </html>

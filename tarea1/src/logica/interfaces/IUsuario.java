@@ -69,4 +69,8 @@ public interface IUsuario {
     public abstract Boolean esSeguidor(String usr, String seguidor);
     
     public abstract void dejarDeSeguir(String seguidor, String seguido);
+    
+    public abstract Boolean verificarAsistencia(String edicion, String usuario);
+    
+    public abstract void setAsistencia(String edicion, String usuario);
 }

@@ -53,7 +53,10 @@ public class DetalleUsuario extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String nombreEdicion = request.getParameter("nombreEdicion");
+		String nickname = request.getParameter("nickname");
+		ICU.setAsistencia(nombreEdicion, nickname);
+        response.sendRedirect(request.getContextPath() + "/detalleUsuario");
 	}
 
 }

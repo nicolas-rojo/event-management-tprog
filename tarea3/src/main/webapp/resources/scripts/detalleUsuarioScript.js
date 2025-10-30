@@ -1,19 +1,26 @@
+let edicionSeleccionada = '';
+
 function mostrarModalAsistencia(event, nombreEvento) {
-    event.stopPropagation(); // Evita que se active el link del card
+    event.stopPropagation();
+    event.preventDefault();
+    edicionSeleccionada = nombreEvento;
     document.getElementById('nombreEvento').textContent = nombreEvento;
+    document.getElementById('nombreEdicionInput').value = nombreEvento;
     document.getElementById('modalAsistencia').classList.add('active');
 }
 
 function cerrarModal() {
     document.getElementById('modalAsistencia').classList.remove('active');
+    edicionSeleccionada = '';
 }
 
-function confirmarAsistencia() {
-    const nombreEvento = document.getElementById('nombreEvento').textContent;
-    cerrarModal();
-}
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('modalAsistencia');
+    if (event.target === modal) {
+        cerrarModal();
+    }
+});
 
-// Cerrar modal con tecla Escape
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         cerrarModal();
