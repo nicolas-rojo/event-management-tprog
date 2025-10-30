@@ -1,6 +1,7 @@
 /* =========================================
    BARRA SUPERIOR
 ========================================= */
+
 .topbar {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -33,12 +34,62 @@
     justify-content: center;
 }
 
-.topbar-search input {
-    width: 60%;
-    padding: 8px;
+.topbar-search form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 80%;
+}
+
+.topbar-search input[type="text"] {
+    flex: 1;
+    padding: 8px 15px;
     border-radius: 20px;
     border: none;
     outline: none;
+    font-size: 14px;
+    min-width: 200px;
+}
+
+.topbar-search input[type="text"]:focus {
+    box-shadow: 0 0 0 2px #8cb4ff;
+}
+
+.topbar-search select {
+    padding: 8px 12px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+    min-width: 120px;
+    color: #333;
+}
+
+.topbar-search select:focus {
+    box-shadow: 0 0 0 2px #8cb4ff;
+}
+
+.topbar-search button {
+    padding: 8px 20px;
+    background-color: #8cb4ff;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.topbar-search button:hover {
+    background-color: #6a9aed;
+    transform: scale(1.02);
+}
+
+.topbar-search button:active {
+    transform: scale(0.98);
 }
 
 .topbar-right {
@@ -70,6 +121,7 @@
 /* =========================================
    BARRA LATERAL
 ========================================= */
+
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -97,9 +149,9 @@
 }
 
 .elementTitle {
-    display: flex; 
-    font-size: 25px; 
-    margin-left: 33px; 
+    display: flex;
+    font-size: 25px;
+    margin-left: 33px;
     border-left: none;
 }
 
@@ -113,12 +165,6 @@
     flex-direction: column;
 }
 
-
-
-
-
-
-
 /* =========================================
    FILTRO DE CATEGORIAS EN BARRA LATERAL
 ========================================= */
@@ -129,12 +175,11 @@
     margin-top: 20px;
 }
 
-
 .categorias-title {
     color: #f1eeee;
-    font-size: 25px; 
+    font-size: 25px;
     margin-left: 33px;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
     font-weight: bold;
     display: flex;
     padding: 12px 0;
@@ -142,20 +187,19 @@
 }
 
 .categorias-scroll-box {
-    
+
     max-height: 250px;
-    overflow-y: auto; 
-    
+    overflow-y: auto;
 
-    margin-left: 33px; 
 
-    width: calc(100% - 33px); 
-    
+    margin-left: 33px;
 
-    padding-right: 15px; 
+    width: calc(100% - 33px);
+
+
+    padding-right: 15px;
     box-sizing: border-box;
 }
-
 
 .categorias-scroll-box::-webkit-scrollbar {
     width: 8px;
@@ -166,24 +210,20 @@
     border-radius: 4px;
 }
 
-
-
 .categorias-scroll-box::-webkit-scrollbar-track {
-    background-color: #4b4a4acd; 
+    background-color: #4b4a4acd;
 }
-
 
 .categorias-box {
     display: flex;
     flex-direction: column;
 }
 
-
 .categoria-item {
     color: #f1eeee;
     font-size: auto;
 
-    padding: 8px 0; 
+    padding: 8px 0;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
@@ -193,7 +233,6 @@
 .categoria-item:hover {
     color: #8cb4ff;
 }
-
 
 .categoria-item.activa {
     font-weight: bold;
