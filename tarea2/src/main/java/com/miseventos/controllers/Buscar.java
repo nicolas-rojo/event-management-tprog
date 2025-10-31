@@ -66,8 +66,10 @@ public class Buscar extends HttpServlet {
 			resultados.addAll(edicionesFinal);
 			ordenarResultados(resultados, ordenar);
 			
+			request.setAttribute("query", query);
+			request.setAttribute("ordenamiento", ordenar);
 			request.setAttribute("resultados", resultados);
-			request.getRequestDispatcher("/WEB-INF/jsp/resultadosBusqueda.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/resBusqueda.jsp").forward(request, response);
 			
 		} catch (EventoNoExisteExcepcion e) {
 			request.setAttribute("error", "Error al cargar los datos");
