@@ -47,7 +47,7 @@ public class ConsultaEvento extends HttpServlet {
             if (nombresEdiciones != null) {
                 for (String nombreEdicion : nombresEdiciones) {
                     DataEdicion edicion = IEV.obtenerEdicionEvento(nombreEvento, nombreEdicion);
-                    if (edicion != null && IEV.getEstado(nombreEdicion, nombreEvento) ==Estado.Confirmado) {
+                    if (edicion != null && IEV.getEstado(nombreEdicion, nombreEvento) == Estado.Confirmado) {
                         ediciones.add(edicion);
                     }
                 }

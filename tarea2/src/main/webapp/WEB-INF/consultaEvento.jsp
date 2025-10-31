@@ -109,7 +109,7 @@
                                 <span class="siglas">SIGLA: <%= edicion.getSigla() %></span>
                                 <span class="pais"><%= edicion.getCiudad() %>, <%= edicion.getPais() %></span>
                                 <span class="fechas">Fecha Alta: <%= edicion.getFechaAlta() %></span>
-                                <span class="fechas">Desde: <%= edicion.getFechaAlta() %> - Hasta: <%= edicion.getFechaFin() %></span>
+                                <span class="fechas">Desde: <%= edicion.getFechaIni() %> - Hasta: <%= edicion.getFechaFin() %></span>
                             </div>
                         </div>
                     </div>

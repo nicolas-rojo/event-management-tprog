@@ -17,7 +17,21 @@
 	</div>
 
 	<div class="topbar-search">
-		<input type="text" placeholder="Buscar evento, edicion... 🔍">
+		<form id="searchForm" action="${pageContext.request.contextPath}/buscar" method="GET">
+			<input type="text" 
+				   id="searchInput"
+				   name="q" 
+				   placeholder="Buscar evento, edicion... 🔍"
+				   autocomplete="off">
+			
+			<select id="ordenarSelect" name="ordenar">
+				<option value="fecha">Más recientes</option>
+				<option value="alfabetico_asc">A-Z</option>
+				<option value="alfabetico_desc">Z-A</option>
+			</select>
+			
+			<button type="submit" id="searchButton">Buscar</button>
+		</form>
 	</div>
 	
 	<div class="topbar-right">
