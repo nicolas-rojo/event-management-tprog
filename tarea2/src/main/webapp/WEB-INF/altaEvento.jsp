@@ -22,13 +22,13 @@
     <div class="login-container">
         <h2>Nuevo Evento</h2>
         <form action="${pageContext.request.contextPath}/altaEvento" method="post" id="formEvento" enctype="multipart/form-data">
-            <input type="text" id="nombreEv" name="nombreEv" placeholder="Nombre">
+            <input type="text" id="nombreEv" name="nombreEv" placeholder="Nombre" value="<%= request.getAttribute("nombreEv") != null ? request.getAttribute("nombreEv") : "" %>">
             <div class="error-message" id="errorNombreEv">El nombre es requerido</div>
 
-            <textarea id="desc" name="desc" placeholder="Descripción"></textarea>
+            <textarea id="desc" name="desc" placeholder="Descripción"><%= request.getAttribute("desc") != null ? request.getAttribute("desc") : "" %></textarea>
             <div class="error-message" id="errorDesc">La descripción es requerida</div>
 
-            <input type="text" id="sigla" name="sigla" placeholder="Siglas">
+            <input type="text" id="sigla" name="sigla" placeholder="Siglas" value="<%= request.getAttribute("sigla") != null ? request.getAttribute("sigla") : "" %>">
             <div class="error-message" id="errorSigla">Las siglas son requeridas</div>
 
             <div class="form-group">

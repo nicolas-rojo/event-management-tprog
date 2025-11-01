@@ -93,6 +93,7 @@ public class AltaPatrocinio extends HttpServlet {
         String cantidadCuposStr = request.getParameter("cantidadCupos");
         String codigo = request.getParameter("codigo");
         
+        
         if (evento != null) {
             evento = URLDecoder.decode(evento, StandardCharsets.UTF_8);
         }
@@ -111,7 +112,7 @@ public class AltaPatrocinio extends HttpServlet {
             cantidadCuposStr == null || cantidadCuposStr.isBlank() ||
             codigo == null || codigo.isBlank()) {
             
-            recargarFormularioConError(request, response, evento, edicion, "No puede haber campos vacíos");
+            recargarFormularioConError(request, response, evento, edicion, tipoRegistro, institucion, nivelStr, montoStr, cantidadCuposStr, codigo,  "No puede haber campos vacíos");
             return;
         }
 
@@ -122,12 +123,12 @@ public class AltaPatrocinio extends HttpServlet {
 
             // Validaciones de negocio
             if (monto <= 0) {
-                recargarFormularioConError(request, response, evento, edicion, "El monto debe ser un valor positivo");
+                recargarFormularioConError(request, response, evento, edicion, tipoRegistro, institucion, nivelStr, montoStr, cantidadCuposStr, codigo, "El monto debe ser un valor positivo");
                 return;
             }
 
             if (cantidadCupos <= 0) {
-                recargarFormularioConError(request, response, evento, edicion, "La cantidad de cupos debe ser un valor positivo");
+                recargarFormularioConError(request, response, evento, edicion, tipoRegistro, institucion, nivelStr, montoStr, cantidadCuposStr, codigo, "La cantidad de cupos debe ser un valor positivo");
                 return;
             }
 
@@ -136,7 +137,7 @@ public class AltaPatrocinio extends HttpServlet {
             float costoTotalRegistros = cantidadCupos * dataTRegistro.getCosto();
 
             if (costoTotalRegistros > (0.2f * monto)) {
-                recargarFormularioConError(request, response, evento, edicion, 
+                recargarFormularioConError(request, response, evento, edicion, tipoRegistro, institucion, nivelStr, montoStr, cantidadCuposStr, codigo, 
                     "El costo de los registros gratuitos supera el 20% del aporte económico");
                 return;
             }
@@ -158,21 +159,21 @@ public class AltaPatrocinio extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/home");
 
         } catch (NumberFormatException ex) {
-            recargarFormularioConError(request, response, evento, edicion, 
+            recargarFormularioConError(request, response, evento, edicion, tipoRegistro, institucion, nivelStr, montoStr, cantidadCuposStr, codigo,
                 "Error en los datos numéricos. Verifique el monto y cantidad de cupos.");
             
         } catch (PatrocinioRepetidoException ex) {
-            recargarFormularioConError(request, response, evento, edicion, 
+            recargarFormularioConError(request, response, evento, edicion, tipoRegistro, institucion, nivelStr, montoStr, cantidadCuposStr, codigo, 
                 "Esta institución ya está patrocinando esta edición.");
             
         } catch (Exception ex) {
-            recargarFormularioConError(request, response, evento, edicion, 
+            recargarFormularioConError(request, response, evento, edicion, tipoRegistro, institucion, nivelStr, montoStr, cantidadCuposStr, codigo,
                 "Error al crear el patrocinio: " + ex.getMessage());
         }
     }
 
     private void recargarFormularioConError(HttpServletRequest request, HttpServletResponse response, 
-            String evento, String edicion, String error) throws ServletException, IOException {
+            String evento, String edicion, String tipoRegistro, String institucion, String nivelStr, String montoStr, String cantidadCuposStr, String codigo, String error) throws ServletException, IOException {
         
         // Recargar los datos para los combos
         try {
@@ -196,6 +197,14 @@ public class AltaPatrocinio extends HttpServlet {
 		}
         
         request.setAttribute("error", error);
+        
+        request.setAttribute("tipoRegistro", tipoRegistro);
+		request.setAttribute("institucion", institucion);
+		request.setAttribute("nivelStr", nivelStr);
+		request.setAttribute("monto", montoStr);
+		request.setAttribute("cantidadCupos", cantidadCuposStr);
+		request.setAttribute("codigo", codigo);
+        
         request.getRequestDispatcher("/WEB-INF/altaPatrocinio.jsp").forward(request, response);
     }
 }

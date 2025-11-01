@@ -61,10 +61,12 @@
 				<option value="">-- Seleccionar Tipo de Registro --</option>
 				<% 
 					List<String> tiposRegistro = (List<String>) request.getAttribute("tiposRegistro");
+					String tipoRegistroSeleccionado = (String) request.getAttribute("tipoRegistro");
 					if (tiposRegistro != null) {
 						for (String tr : tiposRegistro) {
+							
 				%>
-					<option value="<%= tr %>"><%= tr %></option>
+					 <option value="<%= tr %>" <%= tr.equals(tipoRegistroSeleccionado) ? "selected" : "" %>><%= tr %></option>
 				<% 
 						}
 					}
@@ -78,10 +80,12 @@
 				<option value="">-- Seleccionar Institución --</option>
 				<% 
 					DataInstitucion[] instituciones = (DataInstitucion[]) request.getAttribute("instituciones");
+					String institucionSeleccionada = (String) request.getAttribute("institucion");
 					if (instituciones != null) {
 						for (DataInstitucion inst : instituciones) {
+							String nombre = inst.getNombre();
 				%>
-					<option value="<%= inst.getNombre() %>"><%= inst.getNombre() %></option>
+					<option value="<%= nombre %>" <%= nombre.equals(institucionSeleccionada) ? "selected" : "" %>><%= nombre %></option>
 				<% 
 						}
 					}
@@ -95,10 +99,12 @@
 				<option value="">-- Seleccionar Nivel --</option>
 				<% 
 					Nivel[] niveles = (Nivel[]) request.getAttribute("niveles");
+					String nivelStr = (String) request.getAttribute("nivelStr");
 					if (niveles != null) {
 						for (Nivel nivel : niveles) {
+							String valor = nivel.toString();
 				%>
-					<option value="<%= nivel %>"><%= nivel %></option>
+					<option value="<%= valor %>" <%= valor.equals(nivelStr) ? "selected" : "" %>><%= valor %></option>
 				<% 
 						}
 					}
@@ -108,17 +114,17 @@
 
 			<!-- Aporte Económico -->
 			<label for="monto">Aporte Económico:</label>
-			<input type="number" id="monto" name="monto" step="0.01" min="0" placeholder="0.00">
+			<input type="number" id="monto" name="monto" step="0.01" min="0" placeholder="0.00" value="<%= request.getAttribute("monto") != null ? request.getAttribute("monto") : "" %>">
 			<div class="error-message" id="errorMonto">El monto es requerido y debe ser positivo</div>
 
 			<!-- Cantidad de Cupos -->
 			<label for="cantidadCupos">Cantidad de Cupos Gratuitos:</label>
-			<input type="number" id="cantidadCupos" name="cantidadCupos" min="0" placeholder="0">
+			<input type="number" id="cantidadCupos" name="cantidadCupos" min="0" placeholder="0" value="<%= request.getAttribute("cantidadCupos") != null ? request.getAttribute("cantidadCupos") : "" %>">
 			<div class="error-message" id="errorCantidadCupos">La cantidad de cupos es requerida y debe ser positiva</div>
 
 			<!-- Código de Patrocinio -->
 			<label for="codigo">Código de Patrocinio:</label>
-			<input type="text" id="codigo" name="codigo" placeholder="Código único">
+			<input type="text" id="codigo" name="codigo" placeholder="Código único" value="<%= request.getAttribute("codigo") != null ? request.getAttribute("codigo") : "" %>">
 			<div class="error-message" id="errorCodigo">El código es requerido</div>
 
 			<div id="confirmarError" class="confirm-error"></div>
