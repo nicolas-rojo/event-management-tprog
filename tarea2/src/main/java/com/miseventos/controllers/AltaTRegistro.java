@@ -47,6 +47,11 @@ public class AltaTRegistro extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/home");
 		}catch(TipoDeRegistroRepetidoException e) {
 			request.setAttribute("errorExiste", "Ya existe un tipo de registro con este nombre");
+			
+            request.setAttribute("descripcion", descripcion);
+            request.setAttribute("costo", costotr);
+            request.setAttribute("cupo", cupotr);
+            
 			request.getRequestDispatcher("/WEB-INF/altaTRegistro.jsp").forward(request, response);
 		}catch (Exception e) {
 			e.printStackTrace();

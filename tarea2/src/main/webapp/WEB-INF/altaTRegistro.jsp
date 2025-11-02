@@ -32,14 +32,14 @@
             	<div style="color: red; font-size: 12px;"><%= request.getAttribute("errorExiste") %></div>
             <% } %>
             
-            <textarea id="descripcion" name="descripcion" placeholder="Descripcion"></textarea>
+            <textarea id="descripcion" name="descripcion" placeholder="Descripcion"><%= request.getAttribute("descripcion") != null ? request.getAttribute("descripcion") : "" %></textarea>
             <div class="error-message" id="errorDescripcion">La descripcion es requerida</div>
             
-            <input type="number" id="costo" name="costo" placeholder="Costo" step="0.01">
+            <input type="number" id="costo" name="costo" placeholder="Costo" step="0.01" value="<%= request.getAttribute("costo") != null ? request.getAttribute("costo") : "" %>">
             <div class="error-message" id="errorCosto" style="color:red; font-size:12px; display:none;"></div>
 
             
-            <input type="number" id="cupo" name="cupo" placeholder="Cupo">
+            <input type="number" id="cupo" name="cupo" placeholder="Cupo" value="<%= request.getAttribute("cupo") != null ? request.getAttribute("cupo") : "" %>">
             <div class="error-message" id="errorCupo" style="color:red; font-size:12px; display:none;"></div>
             
             

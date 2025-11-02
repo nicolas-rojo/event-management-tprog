@@ -76,6 +76,15 @@ public class AltaEdicion extends HttpServlet {
 
 			request.setAttribute("error", "Todos los campos son requeridos");
 			request.setAttribute("evento", evento);
+			
+			request.setAttribute("nombreEd", nombre);
+			request.setAttribute("sigla", sigla);
+			request.setAttribute("ciudad", ciudad);
+			request.setAttribute("pais", pais);
+			request.setAttribute("fechaIni", fechaIniStr);
+			request.setAttribute("fechaFin", fechaFinStr);
+			request.setAttribute("videoUrl", videoUrl);
+			
 			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
 			return;
 		}
@@ -87,6 +96,15 @@ public class AltaEdicion extends HttpServlet {
 			if (fechaFin.isBefore(fechaIni)) {
 				request.setAttribute("error", "La fecha de fin no puede ser anterior a la de inicio");
 				request.setAttribute("evento", evento);
+				
+				request.setAttribute("nombreEd", nombre);
+				request.setAttribute("sigla", sigla);
+				request.setAttribute("ciudad", ciudad);
+				request.setAttribute("pais", pais);
+				request.setAttribute("fechaIni", fechaIniStr);
+				request.setAttribute("fechaFin", fechaFinStr);
+				request.setAttribute("videoUrl", videoUrl);
+				
 				request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
 				return;
 			}
@@ -109,11 +127,27 @@ public class AltaEdicion extends HttpServlet {
 		} catch (EdicionRepetidaExcepcion e) {
 			request.setAttribute("error", "Ya existe una edición con ese nombre.");
 			request.setAttribute("evento", evento);
+			
+			request.setAttribute("sigla", sigla);
+			request.setAttribute("ciudad", ciudad);
+			request.setAttribute("pais", pais);
+			request.setAttribute("fechaIni", fechaIniStr);
+			request.setAttribute("fechaFin", fechaFinStr);
+			request.setAttribute("videoUrl", videoUrl);
+			
 			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
 
 		} catch (LinkInvalidoExcepcion e) {
 			request.setAttribute("error", "El link ingresado no es un link de YouTube válido");
 			request.setAttribute("evento", evento);
+			
+			request.setAttribute("nombreEd", nombre);
+			request.setAttribute("sigla", sigla);
+			request.setAttribute("ciudad", ciudad);
+			request.setAttribute("pais", pais);
+			request.setAttribute("fechaIni", fechaIniStr);
+			request.setAttribute("fechaFin", fechaFinStr);
+			
 			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
 		} catch(Exception e) {
 			e.printStackTrace();
