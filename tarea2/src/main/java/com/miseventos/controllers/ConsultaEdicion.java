@@ -49,7 +49,7 @@ public class ConsultaEdicion extends HttpServlet {
 			if (dataU != null) {
 				nickname = dataU.getNickname();
 				email = dataU.getEmail();
-				ICU.setAsistencia(edicionSeleccionada, nickname); //Hardcodeo que si asisito aparezca para descargar el pdf
+				//ICU.setAsistencia(edicionSeleccionada, nickname); //Hardcodeo que si asisito aparezca para descargar el pdf
 			}
 			
 		}
