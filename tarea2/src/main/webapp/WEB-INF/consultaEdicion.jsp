@@ -192,7 +192,8 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
                 		IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
 						DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
 						Boolean registrado = (Boolean) request.getAttribute("registrado");
-						if (registrado != null && registrado) {
+						Boolean asistio = (Boolean) ICU.verificarAsistencia(dataEd.getNombre(), dataU.getNickname());
+						if (registrado != null && registrado && asistio) {
 							ParEdicionRegistro dataRegistro = (ParEdicionRegistro) request.getAttribute("dataRegistro");
                         	DataDetalleRegistro detalleReg = ICU.getDetallesRegistro(dataU.getNickname(), dataRegistro);
 						%>
