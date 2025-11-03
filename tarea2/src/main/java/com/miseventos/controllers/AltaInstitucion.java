@@ -68,7 +68,12 @@ public class AltaInstitucion extends HttpServlet {
 
         } catch (InstitucionRepetidaException_Exception e) {
             request.setAttribute("error", "Ya existe una institución con ese nombre.");
+            
+			request.setAttribute("sitioWeb", sitioWeb);
+			request.setAttribute("descripcion", descripcion);
+			
             request.getRequestDispatcher("/WEB-INF/altaInstitucion.jsp").forward(request, response);
+            
 
         } catch (Exception e) {
 			e.printStackTrace();

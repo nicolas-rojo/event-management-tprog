@@ -17,6 +17,7 @@ public class EdicionEvento {
 	private LocalDate fechaAlta;
 	private String ciudad;
 	private String pais;
+	private String videoUrl;
 	private Organizador organizador;
 	private Set<TipoRegistro> tipoRegistros;
 	private Set<Patrocinio> patrocinios;
@@ -32,6 +33,7 @@ public class EdicionEvento {
 		this.fechaAlta = dataEd.getFechaAlta();
 		this.ciudad = dataEd.getCiudad();
 		this.pais = dataEd.getPais();
+		this.videoUrl = dataEd.getUrl();
 		this.organizador = null;
 		this.tipoRegistros = new HashSet<>();
 		this.patrocinios = new HashSet<>();
@@ -56,7 +58,6 @@ public class EdicionEvento {
 	
 	public LocalDate getFechaAlta() {
 		return this.fechaAlta;
-	
 	}
 	
 	public String getCuidad() {
@@ -65,6 +66,10 @@ public class EdicionEvento {
 	
 	public String getPais() {
 		return this.pais;
+	}
+	
+	public String getUrl() {
+		return this.videoUrl;
 	}
 	
 	public Organizador getOrganizador() {
@@ -97,6 +102,10 @@ public class EdicionEvento {
 	
 	public void setFechaFin(LocalDate fecha) {
 		this.fechaFin = fecha;
+	}
+	
+	public void setVideoUrl(String url) {
+		this.videoUrl = url;
 	}
 	
 	public void setOrganizador(Organizador org) {

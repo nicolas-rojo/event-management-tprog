@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ediciones :: Mis Eventos</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <!-- CSS -->
+	<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+	<!-- Topbar -->
+	<nav class="top-nav">
+  		<div class="container-fluid">
+    		<div class="top-nav-content">
+      			<!-- Botón Atrás -->
+      			<button onclick="history.back()" class="back-button">
+        			<i class="bi bi-arrow-left"></i>
+      			</button>
+      
+      			<!-- Logo -->
+      			<a href="../listarEventos/listarEventos.html" class="logo">
+        			<img src="../src/images/logo.png" alt="Logo">
+				</a>
+    		</div>
+  		</div>
+	</nav>
+
+    <!-- Cards -->
+	<div class="info-container">
+		<!-- Card Usuario -->
+		<div class="profile-card">
+  			<div class="profile-left">
+    			<div class="profile-avatar">
+      				<img src="../src/images/IMG-US01.jpg" alt="Usuario">
+    			</div>
+    			<p class="profile-nickname">@nickname</p>
+  			</div>
+  
+  			<div class="profile-right">
+    			<div class="profile-info">
+      				<h2 class="profile-name">Nombre Apellido</h2>
+    			</div>
+    			<button class="logout-button" onclick="cerrarSesion()">
+      				<i class="bi bi-box-arrow-right"></i>
+      				Cerrar Sesión
+    			</button>
+  			</div>
+		</div>
+
+		<div class="registros-section">
+    		<h2 class="section-title">Mis Registros a Eventos</h2>
+    		<div class="registros-container">
+        		<div class="registro-card">
+            		<a href="../consultaEdicion/consultaEdicion.html" class="registro-link">
+                		<div class="registro-info">
+							<h3 class="registro-evento-nombre">Nombre Edición</h3>
+							<p class="registro-detalle">Tipo: </p>
+							<span class="registro-fecha-costo">Fecha: dd/mm/yyyy - Costo: $xxx</span>
+                		</div>
+            		</a>
+					<button class="asistencia-button" onclick="mostrarModalAsistencia(event, 'Nombre Edición')">
+						<i class="bi bi-plus-circle"></i>
+					</button>
+        		</div>
+    		</div>
+		</div>
+	</div>
+
+    <!-- Lowbar -->
+    <nav class="bottom-nav">
+      	<div class="container-fluid">
+        	<div class="bottom-nav-content">
+				<!-- Botón Home -->
+				<a href="../listarEventos/listarEventos.html" class="nav-item">
+					<i class="bi bi-house-door-fill"></i>
+				</a>
+
+				<!-- Botón Perfil con imagen del usuario -->
+				<a href="../consultaUsr/consultaUsr.html" class="nav-item profile-link">
+					<div class="profile-pic">
+					<img src="../src/images/IMG-US01.jpg" alt="Perfil" />
+					</div>
+				</a>
+        	</div>
+      </div>
+    </nav>
+
+	<!-- POPUP Confirmacion -->
+	<div id="modalAsistencia" class="modal-overlay" onclick="cerrarModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Confirmar Asistencia</h3>
+                <button class="modal-close" onclick="cerrarModal()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Confirmas tu asistencia a <strong id="nombreEvento"></strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-button cancel" onclick="cerrarModal()">Cancelar</button>
+                <button class="modal-button confirm" onclick="confirmarAsistencia()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+	<script src="script.js"></script>
+</body>
+</html>

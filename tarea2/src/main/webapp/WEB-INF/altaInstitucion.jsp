@@ -34,17 +34,16 @@
 		<form action="${pageContext.request.contextPath}/AltaInstitucion"
 			method="post" id="formInstitucion">
 
-			<input type="text" id="nombre" name="nombre" placeholder="Nombre">
+			<input type="text" id="nombre" name="nombre" placeholder="Nombre" value="<%= request.getAttribute("nombre") != null ? request.getAttribute("nombre") : "" %>">
 			<div class="error-message" id="errorNombre">El nombre es
 				requerido</div>
 
-			<input type="text" id="sitioWeb" name="sitioWeb" placeholder="Sitio Web">
+			<input type="text" id="sitioWeb" name="sitioWeb" placeholder="Sitio Web" value="<%= request.getAttribute("sitioWeb") != null ? request.getAttribute("sitioWeb") : "" %>">
 			<div class="error-message" id="errorSitioWeb">El sitio web es
 				requerido</div>
 
-			<textarea id="descripcion" name="descripcion" placeholder="Descripción"></textarea>
-			<div class="error-message" id="errorDescripcion">La descripción es
-				requerida</div>
+			<textarea id="descripcion" name="descripcion" placeholder="Descripción"><%= request.getAttribute("descripcion") != null ? request.getAttribute("descripcion") : "" %></textarea>
+			<div class="error-message" id="errorDescripcion">La descripción es requerida</div>
 
 			<div id="confirmarError" style="color: red;"></div>
 			

@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
 import excepciones.EdicionRepetidaExcepcion;
+import excepciones.LinkInvalidoExcepcion;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 
@@ -251,12 +253,12 @@ public class CrearEdicion extends JInternalFrame {
         if (checkFormulario()) {
             try {
                 
-                DataEdicion d = new DataEdicion(nombreEdicion, siglaEdicion, fechaIni, fechaFin, fechaAlta, paisEdicion, ciudadEdicion);
+                DataEdicion d = new DataEdicion(nombreEdicion, siglaEdicion, fechaIni, fechaFin, fechaAlta, paisEdicion, ciudadEdicion, "");
                 controlEvt.nuevaEdicion(d, eventoEdicion, nombreOrg);
                 JOptionPane.showMessageDialog(this, "Edicion registrada correctamente", "Alta de Ediciion", JOptionPane.INFORMATION_MESSAGE);
                 limpiarFormulario();
                 setVisible(false);
-            } catch (EdicionRepetidaExcepcion e) {
+            } catch (EdicionRepetidaExcepcion | LinkInvalidoExcepcion e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error al registrar edicion", JOptionPane.ERROR_MESSAGE);
             } 
         }

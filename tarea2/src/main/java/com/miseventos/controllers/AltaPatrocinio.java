@@ -1,5 +1,7 @@
 package com.miseventos.controllers;
 
+//FALTA ARREGLARRR
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -94,6 +96,7 @@ public class AltaPatrocinio extends HttpServlet {
         HttpSession session = request.getSession();
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
+        request.removeAttribute("error");
 
         String evento = request.getParameter("evento");
         String edicion = request.getParameter("edicion");
@@ -103,6 +106,7 @@ public class AltaPatrocinio extends HttpServlet {
         String montoStr = request.getParameter("monto");
         String cantidadCuposStr = request.getParameter("cantidadCupos");
         String codigo = request.getParameter("codigo");
+        
         
         if (evento != null) {
             evento = URLDecoder.decode(evento, StandardCharsets.UTF_8);
@@ -121,6 +125,13 @@ public class AltaPatrocinio extends HttpServlet {
             montoStr == null || montoStr.isBlank() ||
             cantidadCuposStr == null || cantidadCuposStr.isBlank() ||
             codigo == null || codigo.isBlank()) {
+        	
+        	request.setAttribute("tipoRegistro", tipoRegistro);
+    		request.setAttribute("institucion", institucion);
+    		request.setAttribute("nivelStr", nivelStr);
+    		request.setAttribute("monto", montoStr);
+    		request.setAttribute("cantidadCupos", cantidadCuposStr);
+    		request.setAttribute("codigo", codigo);
             
             recargarFormularioConError(request, response, evento, edicion, "No puede haber campos vacíos");
             return;
@@ -133,11 +144,21 @@ public class AltaPatrocinio extends HttpServlet {
 
             // Validaciones de negocio
             if (monto <= 0) {
+            	request.setAttribute("tipoRegistro", tipoRegistro);
+        		request.setAttribute("institucion", institucion);
+        		request.setAttribute("nivelStr", nivelStr);
+        		request.setAttribute("cantidadCupos", cantidadCuposStr);
+        		request.setAttribute("codigo", codigo);
                 recargarFormularioConError(request, response, evento, edicion, "El monto debe ser un valor positivo");
                 return;
             }
 
             if (cantidadCupos <= 0) {
+            	request.setAttribute("tipoRegistro", tipoRegistro);
+        		request.setAttribute("institucion", institucion);
+        		request.setAttribute("nivelStr", nivelStr);
+        		request.setAttribute("monto", montoStr);
+        		request.setAttribute("codigo", codigo);
                 recargarFormularioConError(request, response, evento, edicion, "La cantidad de cupos debe ser un valor positivo");
                 return;
             }
@@ -147,8 +168,14 @@ public class AltaPatrocinio extends HttpServlet {
             float costoTotalRegistros = cantidadCupos * dataTRegistro.getCosto();
 
             if (costoTotalRegistros > (0.2f * monto)) {
-                recargarFormularioConError(request, response, evento, edicion, 
-                    "El costo de los registros gratuitos supera el 20% del aporte económico");
+            	request.setAttribute("tipoRegistro", tipoRegistro);
+        		request.setAttribute("institucion", institucion);
+        		request.setAttribute("nivelStr", nivelStr);
+        		request.setAttribute("monto", montoStr);
+        		request.setAttribute("cantidadCupos", cantidadCuposStr);
+        		request.setAttribute("codigo", codigo);
+        		
+                recargarFormularioConError(request, response, evento, edicion,  "El costo de los registros gratuitos supera el 20% del aporte económico");
                 return;
             }
 
@@ -171,7 +198,18 @@ public class AltaPatrocinio extends HttpServlet {
             recargarFormularioConError(request, response, evento, edicion, 
                 "Error en los datos numéricos. Verifique el monto y cantidad de cupos.");
             
+//<<<<<<< HEAD
         } catch (PatrocinioRepetidoException_Exception ex) {
+//=======
+        } catch (PatrocinioRepetidoException ex) {
+        	
+        	request.setAttribute("tipoRegistro", tipoRegistro);
+    		request.setAttribute("nivelStr", nivelStr);
+    		request.setAttribute("monto", montoStr);
+    		request.setAttribute("cantidadCupos", cantidadCuposStr);
+    		request.setAttribute("codigo", codigo);
+    		
+//>>>>>>> origin/develop
             recargarFormularioConError(request, response, evento, edicion, 
                 "Esta institución ya está patrocinando esta edición.");
             

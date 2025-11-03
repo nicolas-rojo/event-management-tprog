@@ -353,7 +353,8 @@ public class TestInstituciones extends TestCase {
                 LocalDate.of(2026, 4, 10),
                 LocalDate.of(2025, 8, 1),
                 "Punta del Este",
-                "Uruguay"
+                "Uruguay",
+                ""
             );
             
             // Usar el organizador creado

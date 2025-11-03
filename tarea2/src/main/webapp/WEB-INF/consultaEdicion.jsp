@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!-- FALTA AREGLARRR -->
 <%@ page import="java.util.Arrays"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.miseventos.utils.nombreUtils" %>
@@ -159,6 +160,19 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 
 		<!-- Columna derecha -->
 		<div class="columna-derecha">
+			
+			<% if (dataEd.getUrl() != null && !dataEd.getUrl().isEmpty()) { %>
+			    <h2 class="texto-og">Video:</h2>
+			    <div class="contenedor-derecha-video">
+			        <iframe class="video-embed"
+			                src="<%= dataEd.getUrl() %>" 
+			                frameborder="0" 
+			                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+			                allowfullscreen>
+			        </iframe>
+			    </div>
+			    <% } %>
+		
 			<h2 class="texto-og">Organiza:</h2>
 
 			<a href='<%= request.getContextPath() %>/detalleUsuario?email=<%= java.net.URLEncoder.encode(dataOrg.getEmail(), "UTF-8") %>'
@@ -187,13 +201,32 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 				<div class="informacion-TRegistro">
 					<div class="detalles-TRegistro">
 						<%
+<!-- HEAD -->
 						// ✅ Obtener detalleRegistro del servlet (ya no llamamos al WS aquí)
 						DataDetalleRegistro detalleReg = (DataDetalleRegistro) request.getAttribute("detalleRegistro");
 						
 						if (detalleReg != null) {
+<!-- ======= -->
+                		IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+						DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
+						Boolean registrado = (Boolean) request.getAttribute("registrado");
+						Boolean asistio = (Boolean) ICU.verificarAsistencia(dataEd.getNombre(), dataU.getNickname());
+						if (registrado != null && registrado) {
+							ParEdicionRegistro dataRegistro = (ParEdicionRegistro) request.getAttribute("dataRegistro");
+                        	DataDetalleRegistro detalleReg = ICU.getDetallesRegistro(dataU.getNickname(), dataRegistro);
+<!-- >>>>>>> origin/develop -->
 						%>
 						<div class="registro-item">
 							<span>Registrado el: <%= detalleReg.getFecha() %>, como: <%= detalleReg.getNombreTR() %></span>
+							<% if (asistio){ %>
+								<button  id="descargar" class="Btn" onclick="window.location.href='<%= request.getContextPath() %>/ComprobantePDF?edicion=<%= dataEd.getNombre() %>&ciudad=<%= dataEd.getCiudad() %>&fecha=<%= detalleReg.getFecha() %>&evento=<%= request.getParameter("evento") %>'">
+								  <svg class="svgIcon" viewBox="0 0 384 512" height="10px" xmlns="http://www.w3.org/2000/svg">
+								    <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+								  </svg>
+								  <span class="icon2" height="10px"></span>
+								</button>
+							<% } %>
+							
 						</div>
 						<%
 						} else {

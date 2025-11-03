@@ -62,7 +62,9 @@ public class ConsultaEdicion extends HttpServlet {
 			if (dataU != null) {
 				nickname = dataU.getNickname();
 				email = dataU.getEmail();
+				//ICU.setAsistencia(edicionSeleccionada, nickname); //Hardcodeo que si asisito aparezca para descargar el pdf
 			}
+			
 		}
 
 		if (eventoSeleccionado == null || edicionSeleccionada == null) {
@@ -138,7 +140,6 @@ public class ConsultaEdicion extends HttpServlet {
 				}
 			}
 		}
-
 		request.setAttribute("dataEdicion", dataEd);
 		request.setAttribute("dataOrganizador", dataOrg);
 		request.setAttribute("dataTRegistros", dataTRegistros);

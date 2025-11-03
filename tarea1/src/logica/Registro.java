@@ -6,9 +6,11 @@ public class Registro {
 	private LocalDate fechaReg;
 	private EdicionEvento edi;
 	private TipoRegistro treg;
+	private boolean asistio;
 	
 	public Registro(LocalDate fecha) {
 		this.fechaReg = fecha;
+		this.asistio = false;
 	}
 	
 	public LocalDate getFecha() {
@@ -33,6 +35,14 @@ public class Registro {
 	
 	public float getCostoTR() {
 		return this.treg.getCosto();
+	}
+	
+	public boolean getAsistencia() {
+		return this.asistio;
+	}
+	
+	public void setAsistencia(boolean asistencia) {
+		this.asistio = asistencia;
 	}
 	
 	public boolean esEdicion(String edicion) {

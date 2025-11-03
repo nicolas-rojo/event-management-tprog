@@ -5,6 +5,7 @@ import excepciones.TipoDeRegistroRepetidoException;
 import excepciones.EventoRepetidoExcepcion;
 import excepciones.EventoSinCategoriaExcepcion;
 import excepciones.FechaRegistroInvalidaException;
+import excepciones.LinkInvalidoExcepcion;
 import excepciones.NoHayCupoEdicionTRegistro;
 import excepciones.AsistenteYaRegistrado;
 import excepciones.CategoriaRepetidaException;
@@ -112,14 +113,13 @@ public class ControladorEventos implements IEventos {
         return mev.getCategorias();
     }
     
-    public void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion {
+    public void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion, LinkInvalidoExcepcion {
         ManejadorEvento mev = ManejadorEvento.getInstance();
         ManejadorUsuario musr = ManejadorUsuario.getInstance();
-        Organizador orga = (Organizador) musr.getUsuarioNickname(org);
-        List<String> eventos = mev.getEventos();
         
         //Me fijo que no existe una edicion con ese nombre en TODOS los eventos
         
+        List<String> eventos = mev.getEventos();
         for (String e : eventos) {
         	Evento evt = mev.getEvento(e);
         	List<String> ediciones = evt.getEdiciones();
@@ -129,9 +129,28 @@ public class ControladorEventos implements IEventos {
         		}
         	}
         }
+//        EdicionEvento edev = evt.getEdicion(dataEdicion.getNombre());
+        // Si tiene url, la convierto a url embebida.
+        
+        String url = dataEdicion.getUrl();
+        if (url != null && !url.isEmpty() && !url.equals("")) {
+        	if (url.contains("youtube.com/watch?v=") || url.contains("youtu.be/")) {
+        		String videoId = "";
+        		if (url.contains("youtube.com/watch?v=")) {
+        			videoId = url.split("v=")[1].split("&")[0];
+        		} else if (url.contains("youtu.be/")) {
+        			videoId = url.split("youtu.be/")[1].split("\\?")[0];
+        		}
+        		String embedUrl = "https://www.youtube.com/embed/" + videoId;
+        		dataEdicion.setUrl(embedUrl);
+        	} else {
+    			throw new LinkInvalidoExcepcion("El link ingresado no es un link de YouTube válido");
+        	}
+        }
+        
+        Organizador orga = (Organizador) musr.getUsuarioNickname(org);
         Evento evt = mev.getEvento(evento);
-        EdicionEvento edev = evt.getEdicion(dataEdicion.getNombre()); 
-        edev = new EdicionEvento(dataEdicion);
+        EdicionEvento edev = new EdicionEvento(dataEdicion);
         evt.agregarEdicion(edev);
         orga.agregarEdicion(edev);
         edev.agregarOrganizador(orga);
@@ -218,8 +237,7 @@ public class ControladorEventos implements IEventos {
         if (evt == null) return null;
         EdicionEvento edi = evt.getEdicion(nombreEdicionEvento);
         if (edi == null) return null;
-        return new DataEdicion(edi.getNombre(), edi.getSigla(), edi.getFechaIni(), 
-                              edi.getFechaFin(), edi.getFechaAlta(), edi.getCuidad(), edi.getPais());
+        return new DataEdicion(edi.getNombre(), edi.getSigla(), edi.getFechaIni(), edi.getFechaFin(), edi.getFechaAlta(), edi.getCuidad(), edi.getPais(), edi.getUrl());
     }
     
     public List<String> obtenerTipoRegistrosEdicion(String nombreEvento, String nombreEdicionEvento) {
@@ -242,18 +260,15 @@ public class ControladorEventos implements IEventos {
         List<Patrocinio> patrocinios = edev.getPatrociniosLista();
         List<DataPatrocinioCompleto> result = new ArrayList<>();
         
-        for (Patrocinio p : patrocinios) {
-            String institucionNombre = p.getInstitucion() != null ? p.getInstitucion().getNombre() : "Sin institución";
-            String tipoRegistroNombre = p.getTipoRegistro() != null ? p.getTipoRegistro().getNombre() : "Sin tipo de registro";
-            
+        for (Patrocinio p : patrocinios) { 
             result.add(new DataPatrocinioCompleto(
                 p.getFecha(),
                 p.getMonto(),
                 p.getNivel(),
                 p.getCod(),
                 p.getCtdCupo(),
-                institucionNombre,
-                tipoRegistroNombre
+                p.getInstitucion().getNombre(),
+                p.getTipoRegistro().getNombre()
             ));
         }
         
@@ -289,8 +304,7 @@ public class ControladorEventos implements IEventos {
         EdicionEvento[] edev = org.getEdiciones();
         DataEdicion[] res = new DataEdicion[edev.length];
         for (int i = 0; i < edev.length; i++) {
-            res[i] = new DataEdicion(edev[i].getNombre(), edev[i].getSigla(), edev[i].getFechaIni(), edev[i].getFechaFin(), 
-                    edev[i].getFechaAlta(), edev[i].getCuidad(), edev[i].getPais());
+            res[i] = new DataEdicion(edev[i].getNombre(), edev[i].getSigla(), edev[i].getFechaIni(), edev[i].getFechaFin(), edev[i].getFechaAlta(), edev[i].getCuidad(), edev[i].getPais(), edev[i].getUrl());
         }
         return res;
     }

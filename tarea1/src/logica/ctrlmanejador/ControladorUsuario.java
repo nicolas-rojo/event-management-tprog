@@ -13,6 +13,7 @@ import excepciones.ErrorDetallesRegistroException;
 import excepciones.EventoRepetidoExcepcion;
 import excepciones.EventoSinCategoriaExcepcion;
 import excepciones.InstitucionRepetidaException;
+import excepciones.LinkInvalidoExcepcion;
 import excepciones.NoHayCupoEdicionTRegistro;
 import excepciones.PatrocinioRepetidoException;
 import excepciones.TipoDeRegistroRepetidoException;
@@ -93,13 +94,19 @@ public class ControladorUsuario implements IUsuario {
         musr.addUsuario(orga);
     }
 
-    public DataAsistente getAsistente(String email) throws UsuarioNoExisteException{
+    public DataAsistente getAsistente(String nickmail) throws UsuarioNoExisteException{
     	ManejadorUsuario musr = ManejadorUsuario.getInstance();
-    	Asistente asist = (Asistente) musr.getUsuarioEmail(email);
+    	Asistente asist = (Asistente) musr.getUsuarioEmail(nickmail);
     	if (asist != null)
     		return new DataAsistente(asist.getNombre(), asist.getNickname(), asist.getEmail(), "", asist.getApellido(), asist.getFechaNac());
-    	else
-    		throw new UsuarioNoExisteException("No existe usuario con dicho email");
+    	else {
+    		asist = (Asistente) musr.getUsuarioNickname(nickmail);
+    		if (asist != null) {
+    			return new DataAsistente(asist.getNombre(), asist.getNickname(), asist.getEmail(), "", asist.getApellido(), asist.getFechaNac());    			
+    		} else {
+    			throw new UsuarioNoExisteException("No existe usuario con dicho email");    		    			
+    		}    		
+    	}
     }
     
     public DataOrganizador getOrganizador(String nickmail) throws UsuarioNoExisteException{
@@ -297,17 +304,17 @@ public class ControladorUsuario implements IUsuario {
     		e.printStackTrace();
     	}
     	try {
-			IEV.nuevaEdicion(new DataEdicion("Montevideo Rock 2025", "MONROCK25", LocalDate.of(2025, 11, 20), LocalDate.of(2025, 11, 22), LocalDate.of(2025, 3, 12), "Montevideo", "Uruguay"), "Montevideo Rock", "imm");
-			IEV.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2025", "MARATON25", LocalDate.of(2025, 9, 14), LocalDate.of(2025, 9, 14), LocalDate.of(2025, 2, 5), "Montevideo", "Uruguay"), "Maratón de Montevideo", "imm");
-			IEV.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2024", "MARATON24", LocalDate.of(2024, 9, 14), LocalDate.of(2024, 9, 14), LocalDate.of(2024, 4, 21), "Montevideo", "Uruguay"), "Maratón de Montevideo", "imm");
-			IEV.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2022", "MARATON22", LocalDate.of(2022, 9, 14), LocalDate.of(2022, 9, 14), LocalDate.of(2022, 5, 21), "Montevideo", "Uruguay"), "Maratón de Montevideo", "imm");
-			IEV.nuevaEdicion(new DataEdicion("Montevideo Comics 2024", "COMICS24", LocalDate.of(2024, 7, 18), LocalDate.of(2024, 7, 21), LocalDate.of(2024, 6, 20), "Montevideo", "Uruguay"), "Montevideo Comics", "miseventos");
-			IEV.nuevaEdicion(new DataEdicion("Montevideo Comics 2025", "COMICS25", LocalDate.of(2025, 8, 4), LocalDate.of(2025, 8, 6), LocalDate.of(2025, 7, 4), "Montevideo", "Uruguay"), "Montevideo Comics", "miseventos");
-			IEV.nuevaEdicion(new DataEdicion("Expointer Uruguay 2025", "EXPOAGRO25", LocalDate.of(2025, 9, 11), LocalDate.of(2025, 9, 17), LocalDate.of(2025, 2, 1), "Durazno", "Uruguay"), "Expointer Uruguay", "miseventos");
-			IEV.nuevaEdicion(new DataEdicion("Tecnología Punta del Este 2026", "CONFTECH26", LocalDate.of(2026, 4, 6), LocalDate.of(2026, 4, 10), LocalDate.of(2025, 8, 1), "Punta del Este", "Uruguay"), "Conferencia de Tecnología", "udelar");
-			IEV.nuevaEdicion(new DataEdicion("Mobile World Congress 2025", "MWC", LocalDate.of(2025, 12, 12), LocalDate.of(2025, 12, 15), LocalDate.of(2025, 8, 21), "Barcelona", "España"), "Conferencia de Tecnología", "techcorp");
-			IEV.nuevaEdicion(new DataEdicion("Web Summit 2026", "WS26", LocalDate.of(2026, 1, 13), LocalDate.of(2026, 2, 1), LocalDate.of(2025, 6, 4), "Lisboa", "Portugal"), "Conferencia de Tecnología", "techcorp");
-			IEV.nuevaEdicion(new DataEdicion("Montevideo Fashion Week 2026", "MFW26", LocalDate.of(2026, 2, 16), LocalDate.of(2026, 2, 20), LocalDate.of(2025, 10, 2), "Nueva York", "Estados Unidos"), "Montevideo Fashion Week", "mec");
+			IEV.nuevaEdicion(new DataEdicion("Montevideo Rock 2025", "MONROCK25", LocalDate.of(2025, 11, 20), LocalDate.of(2025, 11, 22), LocalDate.of(2025, 3, 12), "Montevideo", "Uruguay", "https://www.youtube.com/watch?v=ykVR20Gc8ME"), "Montevideo Rock", "imm");
+			IEV.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2025", "MARATON25", LocalDate.of(2025, 9, 14), LocalDate.of(2025, 9, 14), LocalDate.of(2025, 2, 5), "Montevideo", "Uruguay", ""), "Maratón de Montevideo", "imm");
+			IEV.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2024", "MARATON24", LocalDate.of(2024, 9, 14), LocalDate.of(2024, 9, 14), LocalDate.of(2024, 4, 21), "Montevideo", "Uruguay", ""), "Maratón de Montevideo", "imm");
+			IEV.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2022", "MARATON22", LocalDate.of(2022, 9, 14), LocalDate.of(2022, 9, 14), LocalDate.of(2022, 5, 21), "Montevideo", "Uruguay", ""), "Maratón de Montevideo", "imm");
+			IEV.nuevaEdicion(new DataEdicion("Montevideo Comics 2024", "COMICS24", LocalDate.of(2024, 7, 18), LocalDate.of(2024, 7, 21), LocalDate.of(2024, 6, 20), "Montevideo", "Uruguay", ""), "Montevideo Comics", "miseventos");
+			IEV.nuevaEdicion(new DataEdicion("Montevideo Comics 2025", "COMICS25", LocalDate.of(2025, 8, 4), LocalDate.of(2025, 8, 6), LocalDate.of(2025, 7, 4), "Montevideo", "Uruguay", ""), "Montevideo Comics", "miseventos");
+			IEV.nuevaEdicion(new DataEdicion("Expointer Uruguay 2025", "EXPOAGRO25", LocalDate.of(2025, 9, 11), LocalDate.of(2025, 9, 17), LocalDate.of(2025, 2, 1), "Durazno", "Uruguay", ""), "Expointer Uruguay", "miseventos");
+			IEV.nuevaEdicion(new DataEdicion("Tecnología Punta del Este 2026", "CONFTECH26", LocalDate.of(2026, 4, 6), LocalDate.of(2026, 4, 10), LocalDate.of(2025, 8, 1), "Punta del Este", "Uruguay", ""), "Conferencia de Tecnología", "udelar");
+			IEV.nuevaEdicion(new DataEdicion("Mobile World Congress 2025", "MWC", LocalDate.of(2025, 12, 12), LocalDate.of(2025, 12, 15), LocalDate.of(2025, 8, 21), "Barcelona", "España", ""), "Conferencia de Tecnología", "techcorp");
+			IEV.nuevaEdicion(new DataEdicion("Web Summit 2026", "WS26", LocalDate.of(2026, 1, 13), LocalDate.of(2026, 2, 1), LocalDate.of(2025, 6, 4), "Lisboa", "Portugal", ""), "Conferencia de Tecnología", "techcorp");
+			IEV.nuevaEdicion(new DataEdicion("Montevideo Fashion Week 2026", "MFW26", LocalDate.of(2026, 2, 16), LocalDate.of(2026, 2, 20), LocalDate.of(2025, 10, 2), "Nueva York", "Estados Unidos", ""), "Montevideo Fashion Week", "mec");
 			
 			IEV.procesarEdicion("Montevideo Rock", "Montevideo Rock 2025", Estado.Confirmado);
 			IEV.procesarEdicion("Maratón de Montevideo", "Maratón de Montevideo 2025", Estado.Confirmado);
@@ -320,7 +327,7 @@ public class ControladorUsuario implements IUsuario {
 			IEV.procesarEdicion("Conferencia de Tecnología", "Mobile World Congress 2025", Estado.Confirmado);
 			IEV.procesarEdicion("Conferencia de Tecnología", "Web Summit 2026", Estado.Confirmado);
 			IEV.procesarEdicion("Montevideo Fashion Week", "Montevideo Fashion Week 2026", Estado.Ingresada);
-    	} catch (EdicionRepetidaExcepcion e) {
+    	} catch (EdicionRepetidaExcepcion | LinkInvalidoExcepcion e) {
 			e.printStackTrace();
 		}
 		try {
@@ -354,7 +361,7 @@ public class ControladorUsuario implements IUsuario {
 			
 			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 8, 21), 20000 , Nivel.Oro, "TECHUDELAR", 4), "Facultad de Ingeniería", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "Estudiante");
 			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 8, 20), 10000, Nivel.Plata, "TECHANII", 1), "Agencia Nacional de Investigación e Innovación (ANII)", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "General");
-			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 3, 4), 25000, Nivel.Platino, "CORREANTEL", 10), "Antel", "Maratón de Montevideo", "Maratón de Montevideo 2025", "Corredor 10k");
+			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 3, 4), 25000, Nivel.Platino, "CORREANTEL", 10), "Antel", "Maratón de Montevideo", "Maratón de Montevideo 2025", "Corredor 10K");
 			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 5, 5), 15000, Nivel.Bronce, "EXPOCAT", 10), "Universidad Católica del Uruguay", "Expointer Uruguay", "Expointer Uruguay 2025", "General");
 			
 			ICU.nuevoRegistro("sofirod", "Montevideo Rock", "Montevideo Rock 2025", "VIP", LocalDate.of(2025, 5, 14));
@@ -411,6 +418,55 @@ public class ControladorUsuario implements IUsuario {
 		orga.setDescripcion(descripcion);
 		orga.setUrl(url);
 		orga.setPass(passNueva);
+	}
+	
+	public void seguirUsuario(String seguidor, String aSeguir) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr1 = musr.getUsuarioEmail(seguidor);
+		Usuario usr2 = musr.getUsuarioEmail(aSeguir);
+		usr1.seguir(usr2);
+		usr2.nuevoSeguidor(usr1);
+	}
+	
+	public List<String> getSeguidos(String usrNick) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioEmail(usrNick);
+		return usr.getSeguidos();
+	}
+	
+	public List<String> getSeguidores(String usrNick) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioEmail(usrNick);
+		return usr.getSeguidores();
+	}
+	
+	public Boolean esSeguidor(String usuario, String seguidor) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioEmail(usuario);
+		Usuario usr2 = musr.getUsuarioEmail(seguidor);
+		return usr.esSeguidor(usr2.getNickname());
+	}
+	
+	public void dejarDeSeguir(String seguidor, String seguido) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioEmail(seguidor);
+		Usuario usr2 = musr.getUsuarioEmail(seguido);
+		usr.eliminarFollow(usr2.getNickname());
+		usr2.eliminarFollower(usr.getNickname());
+	}
+	
+	public Boolean verificarAsistencia(String edicion, String asistente) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Asistente usr = (Asistente) musr.getUsuarioNickname(asistente);
+		Registro registro = usr.getRegistro(edicion);
+		return (registro.getAsistencia());
+	}
+
+	public void setAsistencia(String edicion, String asistente) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Asistente usr = (Asistente) musr.getUsuarioNickname(asistente);
+		Registro registro = usr.getRegistro(edicion);
+		registro.setAsistencia(true);
 	}
 }
 

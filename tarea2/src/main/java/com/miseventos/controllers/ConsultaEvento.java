@@ -1,5 +1,7 @@
 package com.miseventos.controllers;
 
+//FALTA ARREGLARRR
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +52,13 @@ public class ConsultaEvento extends HttpServlet {
             
             if (nombresEdiciones != null) {
                 for (String nombreEdicion : nombresEdiciones) {
+//<<<<<<< HEAD
                     DataEdicion edicion = IEV_WS.obtenerEdicionEvento(nombreEvento, nombreEdicion);
                     if (edicion != null && IEV_WS.getEstado(nombreEdicion, nombreEvento) ==Estado.CONFIRMADO) {
+//=======
+                    DataEdicion edicion = IEV.obtenerEdicionEvento(nombreEvento, nombreEdicion);
+                    if (edicion != null && IEV.getEstado(nombreEdicion, nombreEvento) == Estado.Confirmado) {
+//>>>>>>> origin/develop
                         ediciones.add(edicion);
                     }
                 }

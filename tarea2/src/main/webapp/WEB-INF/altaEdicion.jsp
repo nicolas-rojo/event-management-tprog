@@ -40,27 +40,29 @@
     <form action="<%= request.getContextPath() %>/AltaEdicion" method="post" id="formEdicion" enctype="multipart/form-data">
         <input type="hidden" name="evento" value="<%= evento != null ? evento : "" %>">
 
-        <input type="text" id="nombreEd" name="nombreEd" placeholder="Nombre">
+        <input type="text" id="nombreEd" name="nombreEd" placeholder="Nombre" value="<%= request.getAttribute("nombreEd") != null ? request.getAttribute("nombreEd") : "" %>">
         <div class="error-message" id="errorNombreEd">El nombre es requerido</div>
 
-        <input type="text" id="sigla" name="sigla" placeholder="Siglas">
+        <input type="text" id="sigla" name="sigla" placeholder="Siglas" value="<%= request.getAttribute("sigla") != null ? request.getAttribute("sigla") : "" %>">
         <div class="error-message" id="errorSigla">La sigla es requerida</div>
 
-        <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad">
+        <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad" value="<%= request.getAttribute("ciudad") != null ? request.getAttribute("ciudad") : "" %>">
         <div class="error-message" id="errorCiudad">La ciudad es requerida</div>
 
-        <input type="text" id="pais" name="pais" placeholder="País">
+        <input type="text" id="pais" name="pais" placeholder="País" value="<%= request.getAttribute("pais") != null ? request.getAttribute("pais") : "" %>">
         <div class="error-message" id="errorPais">El país es requerido</div>
 
         <label for="fechaIni">Fecha de Inicio:</label>
-        <input type="date" id="fechaIni" name="fechaIni">
+        <input type="date" id="fechaIni" name="fechaIni" value="<%= request.getAttribute("fechaIni") != null ? request.getAttribute("fechaIni") : "" %>">
         <div class="error-message" id="errorFechaIni">La fecha de inicio es requerida</div>
 
         <label for="fechaFin">Fecha de Fin:</label>
-        <input type="date" id="fechaFin" name="fechaFin">
+        <input type="date" id="fechaFin" name="fechaFin" value="<%= request.getAttribute("fechaFin") != null ? request.getAttribute("fechaFin") : "" %>">
         <div class="error-message" id="errorFechaFin">La fecha de fin es requerida</div>
 
         <input type="file" id="imagen" name="imagen" accept="image/*">
+        
+        <input type="text" id="videoUrl" name="videoUrl" placeholder="YouTube URL" value="<%= request.getAttribute("videoUrl") != null ? request.getAttribute("videoUrl") : "" %>">
 
         <div id="confirmarError" style="color: red;"></div>
 

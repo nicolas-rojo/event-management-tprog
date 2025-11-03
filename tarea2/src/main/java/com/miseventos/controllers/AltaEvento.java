@@ -41,7 +41,7 @@ public class AltaEvento extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");        
+        response.setContentType("text/html;charset=UTF-8");
         String nombre = request.getParameter("nombreEv");
         String descripcion = request.getParameter("desc");
         String sigla = request.getParameter("sigla");
@@ -61,6 +61,12 @@ public class AltaEvento extends HttpServlet {
             sigla == null || sigla.trim().isEmpty()) {
             
             request.setAttribute("error", "Todos los campos son requeridos");
+            
+            request.setAttribute("nombreEv", nombre);
+            request.setAttribute("desc", descripcion);
+            request.setAttribute("sigla", sigla);
+            request.setAttribute("categoriasSeleccionadas", cats);
+            
             request.getRequestDispatcher("/WEB-INF/altaEvento.jsp").forward(request, response);
             return;
         }
@@ -82,6 +88,17 @@ public class AltaEvento extends HttpServlet {
         } catch(EventoRepetidoExcepcion_Exception | EventoSinCategoriaExcepcion_Exception e) {
             e.printStackTrace();
             request.setAttribute("error", e.getMessage());
+            
+            if (e instanceof EventoRepetidoExcepcion) {
+                request.setAttribute("nombreEv", "");
+            } else {
+                request.setAttribute("nombreEv", request.getParameter("nombreEv"));
+            }
+            
+            request.setAttribute("desc", descripcion);
+            request.setAttribute("sigla", sigla);
+            request.setAttribute("categoriasSeleccionadas", cats);
+            
             request.getRequestDispatcher("/WEB-INF/altaEvento.jsp").forward(request, response);
         } catch (Exception e) {
 			e.printStackTrace();

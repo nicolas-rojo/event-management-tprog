@@ -346,6 +346,7 @@ body.asistente .item {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 3px 10px rgba(67, 151, 219, 0.3);
+    text-decoration: none;
 }
 
 .boton-editar-perfil:hover {
@@ -404,4 +405,217 @@ body.asistente .item {
     transform: translateY(-2px);
     box-shadow: 0 5px 12px rgba(159, 172, 230, 0.4);
     text-decoration: none;
+}
+
+/* Estadísticas de seguidores/seguidos */
+.contenedor-imagen-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.estadisticas-usuario {
+    display: flex;
+    gap: 15px;
+}
+
+.estadistica-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 12px;
+}
+
+.estadistica-item:hover {
+    background-color: rgba(67, 151, 219, 0.1);
+    transform: translateY(-2px);
+}
+
+.estadistica-numero {
+    font-size: 20px;
+    font-weight: 700;
+    color: #4397db;
+}
+
+.estadistica-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #666;
+    margin-top: 2px;
+}
+
+/* Modal */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-contenido {
+    background-color: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { 
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 22px;
+    color: #4397db;
+    font-weight: 700;
+}
+
+.modal-cerrar {
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+}
+
+.modal-cerrar:hover {
+    color: #4397db;
+    background-color: rgba(67, 151, 219, 0.1);
+}
+
+.modal-body {
+    padding: 20px 25px;
+    overflow-y: auto;
+    max-height: calc(80vh - 80px);
+}
+
+.modal-usuario-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-usuario-item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+}
+
+.modal-usuario-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.modal-usuario-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    font-size: 20px;
+    font-weight: 600;
+    color: #666;
+}
+
+.modal-usuario-nickname {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.modal-vacio {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 40px 20px;
+}
+
+/* Botón seguir/dejar de seguir */
+.boton-seguir {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+    font-family: 'Outfit', sans-serif;
+}
+
+.boton-seguir:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+.boton-seguir.siguiendo {
+    background-color: #f44336;
+    box-shadow: 0 3px 10px rgba(244, 67, 54, 0.3);
+}
+
+.boton-seguir.siguiendo:hover {
+    background-color: #da190b;
+    box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
 }
