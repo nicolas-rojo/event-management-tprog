@@ -89,7 +89,7 @@ public class AltaEvento extends HttpServlet {
             e.printStackTrace();
             request.setAttribute("error", e.getMessage());
             
-            if (e instanceof EventoRepetidoExcepcion) {
+            if (e instanceof EventoRepetidoExcepcion_Exception) {
                 request.setAttribute("nombreEv", "");
             } else {
                 request.setAttribute("nombreEv", request.getParameter("nombreEv"));
