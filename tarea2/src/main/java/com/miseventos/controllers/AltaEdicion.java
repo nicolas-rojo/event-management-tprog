@@ -24,7 +24,9 @@ import cliente.ws.eventos.IControladorEventoWS;
 import cliente.ws.usuarios.DataUsuario;
 import cliente.ws.eventos.DataEdicion;
 import cliente.ws.eventos.EdicionRepetidaExcepcion;
+import cliente.ws.eventos.EdicionRepetidaExcepcion_Exception;
 import cliente.ws.eventos.LinkInvalidoExcepcion;
+import cliente.ws.eventos.LinkInvalidoExcepcion_Exception;
 
 @MultipartConfig
 @WebServlet("/AltaEdicion")
@@ -149,7 +151,7 @@ public class AltaEdicion extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/home");
 
 			
-		} catch (e instanceof EdicionRepetidaExcepcion) {
+		} catch ( EdicionRepetidaExcepcion_Exception e) {
 			request.setAttribute("error", "Ya existe una edición con ese nombre.");
 			request.setAttribute("evento", evento);
 			
@@ -162,7 +164,7 @@ public class AltaEdicion extends HttpServlet {
 			
 			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
 
-		} catch (LinkInvalidoExcepcion e) {
+		} catch (LinkInvalidoExcepcion_Exception e) {
 			request.setAttribute("error", "El link ingresado no es un link de YouTube válido");
 			request.setAttribute("evento", evento);
 			
