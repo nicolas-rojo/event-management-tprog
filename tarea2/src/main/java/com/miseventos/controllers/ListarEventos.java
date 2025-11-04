@@ -62,7 +62,7 @@ public class ListarEventos extends HttpServlet {
 					lista.add(dCom);
 			}
 			
-			request.setAttribute("eventos", listaAux);
+			request.setAttribute("eventos", lista);
 			request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,14 +73,13 @@ public class ListarEventos extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    String eventoABorrar = request.getParameter("eventoDarBaja");
+	    System.out.println(eventoABorrar);
 	    
 	    if (eventoABorrar != null && !eventoABorrar.isEmpty()) {
 	            IEV_WS.darDeBaja(eventoABorrar); 
 	            request.setAttribute("mensaje", "Evento dado de baja correctamente.");
-
 	        }
-	    doGet(request, response);
-	    }
 	    
-	
+	    response.sendRedirect(request.getContextPath() + "/home");
+	}
 }

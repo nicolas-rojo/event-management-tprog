@@ -45,7 +45,7 @@ public class EventoNoExisteExcepcion_Exception
     /**
      * 
      * @return
-     *     returns fault bean: cliente.ws.eventos.EventoNoExisteExcepcion
+     *     returns fault bean: cliente.ws.usuarios.EventoNoExisteExcepcion
      */
     public EventoNoExisteExcepcion getFaultInfo() {
         return faultInfo;

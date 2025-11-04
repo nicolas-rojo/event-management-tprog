@@ -45,7 +45,7 @@ public class EventoSinCategoriaExcepcion_Exception
     /**
      * 
      * @return
-     *     returns fault bean: cliente.ws.eventos.EventoSinCategoriaExcepcion
+     *     returns fault bean: cliente.ws.usuarios.EventoSinCategoriaExcepcion
      */
     public EventoSinCategoriaExcepcion getFaultInfo() {
         return faultInfo;

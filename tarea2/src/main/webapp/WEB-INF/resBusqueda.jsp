@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
-<%@ page import="logica.datatypes.*"%>
 <%@ page import="com.miseventos.utils.nombreUtils"%>
-<%@ page import="logica.Fabrica" %>
-<%@ page import="logica.interfaces.*" %>
+
+<%@ page import="cliente.ws.eventos.ControladorEventoWSService" %>
+<%@ page import="cliente.ws.eventos.IControladorEventoWS" %>
+<%@ page import="cliente.ws.usuarios.ControladorUsuarioWSService" %>
+<%@ page import="cliente.ws.usuarios.IControladorUsuarioWS" %>
+
+<%@ page import="cliente.ws.eventos.DataEventoCompleto" %>
+<%@ page import="cliente.ws.eventos.DataEdicion" %>
 
 <!DOCTYPE html>
 <html>
@@ -79,12 +84,14 @@
 			            </a>
     				<%
     				} else if (res instanceof DataEdicion) {
-                		IEventos IEV = Fabrica.getInstance().getIControladorEventos();
+    					IControladorEventoWS IEV_WS;
+                        ControladorEventoWSService servicio = new ControladorEventoWSService();
+                        IEV_WS = servicio.getControladorEventoWSPort();
 						
     					DataEdicion edicion = (DataEdicion) res;
     					String nomNormal = nombreUtils.normalizarNombre(edicion.getNombre());
     					
-    					String eventoEncoded = java.net.URLEncoder.encode(IEV.eventoTieneEdicion(edicion.getNombre()), "UTF-8");
+    					String eventoEncoded = java.net.URLEncoder.encode(IEV_WS.eventoTieneEdicion(edicion.getNombre()), "UTF-8");
                         String edicionEncoded = java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8");
     				%>
     					<a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="contenedor-link">

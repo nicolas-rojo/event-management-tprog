@@ -171,7 +171,7 @@ public class ControladorUsuario implements IUsuario {
         Usuario usr = musr.getUsuarioEmail(email);
         
         if (usr == null) {
-            throw new UsuarioNoExisteException("No existe usuario con email: " + email);
+        	usr = musr.getUsuarioNickname(email);
         }
         
         if (usr instanceof Asistente) {
@@ -179,7 +179,7 @@ public class ControladorUsuario implements IUsuario {
         } else if (usr instanceof Organizador) {
             return "Organizador";
         } else {
-            throw new UsuarioNoExisteException("Tipo de usuario desconocido para email: " + email);
+            throw new UsuarioNoExisteException("No existe usuario con email: " + email);
         }
     }
 	

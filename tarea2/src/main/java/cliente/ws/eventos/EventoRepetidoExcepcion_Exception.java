@@ -45,7 +45,7 @@ public class EventoRepetidoExcepcion_Exception
     /**
      * 
      * @return
-     *     returns fault bean: cliente.ws.eventos.EventoRepetidoExcepcion
+     *     returns fault bean: cliente.ws.usuarios.EventoRepetidoExcepcion
      */
     public EventoRepetidoExcepcion getFaultInfo() {
         return faultInfo;

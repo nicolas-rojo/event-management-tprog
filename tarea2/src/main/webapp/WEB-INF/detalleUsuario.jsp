@@ -336,16 +336,17 @@
 			        ICU_WS = servicio2.getControladorUsuarioWSPort();
 	            	String nickNorm;
 	                for (String nickname : seguidores) {
+	                	String tipoSeg = ICU_WS.getTipoUsuario(nickname);
 	                	nickNorm = nombreUtils.normalizarNombre(nickname);
 	                	DataUsuario seg = null;
-	                	try {
-		                	seg = ICU_WS.getAsistente(nickname);
-	                	} catch (Exception e) { }
-		                
-	                	if (seg == null) {
+	                	if ("Asistente".equals(tipoSeg)) {
+		                	try {
+		                		seg = ICU_WS.getAsistente(nickname);		                		
+		                	} catch (Exception e) {}
+	                	} else if ("Organizador".equals(tipoSeg)) {
 		                	try {
 			                	seg = ICU_WS.getOrganizador(nickname);	                		
-		                	} catch (Exception e) { }
+		                	} catch (Exception e) {}
 		                }	                		
 	                	%>
 	                    <div class="modal-usuario-item" onclick="window.location.href='${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(seg.getEmail(), "UTF-8") %>'">
@@ -380,16 +381,17 @@
 			        ICU_WS = servicio2.getControladorUsuarioWSPort();
 	            	String nickNorm;
 	                for (String nickname : seguidos) {
+	                	String tipoSeg = ICU_WS.getTipoUsuario(nickname);
 	                	nickNorm = nombreUtils.normalizarNombre(nickname);
 	                	DataUsuario seg = null;
-	                	try {
-		                	seg = ICU_WS.getAsistente(nickname);
-	                	} catch (Exception e) {System.out.println("KKKK");}
-		                
-	                	if (seg == null) {
+	                	if ("Asistente".equals(tipoSeg)) {
+		                	try {
+		                		seg = ICU_WS.getAsistente(nickname);		                		
+		                	} catch (Exception e) {}
+	                	} else if ("Organizador".equals(tipoSeg)) {
 		                	try {
 			                	seg = ICU_WS.getOrganizador(nickname);	                		
-		                	} catch (Exception e) {System.out.println("KKKK");}
+		                	} catch (Exception e) {}
 		                }	                		
 	                	%>
 	                    <div class="modal-usuario-item" onclick="window.location.href='${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(seg.getEmail(), "UTF-8") %>'">
