@@ -384,12 +384,12 @@
 	                	DataUsuario seg = null;
 	                	try {
 		                	seg = ICU_WS.getAsistente(nickname);
-	                	} catch (Exception e) { }
+	                	} catch (Exception e) {System.out.println("KKKK");}
 		                
 	                	if (seg == null) {
 		                	try {
 			                	seg = ICU_WS.getOrganizador(nickname);	                		
-		                	} catch (Exception e) { }
+		                	} catch (Exception e) {System.out.println("KKKK");}
 		                }	                		
 	                	%>
 	                    <div class="modal-usuario-item" onclick="window.location.href='${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(seg.getEmail(), "UTF-8") %>'">
