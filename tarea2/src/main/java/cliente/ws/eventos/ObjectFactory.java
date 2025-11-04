@@ -28,6 +28,7 @@ public class ObjectFactory {
     private final static QName _EventoNoExisteExcepcion_QNAME = new QName("http://webservices/", "EventoNoExisteExcepcion");
     private final static QName _EventoRepetidoExcepcion_QNAME = new QName("http://webservices/", "EventoRepetidoExcepcion");
     private final static QName _EventoSinCategoriaExcepcion_QNAME = new QName("http://webservices/", "EventoSinCategoriaExcepcion");
+    private final static QName _LinkInvalidoExcepcion_QNAME = new QName("http://webservices/", "LinkInvalidoExcepcion");
     private final static QName _TipoDeRegistroRepetidoException_QNAME = new QName("http://webservices/", "TipoDeRegistroRepetidoException");
 
     /**
@@ -75,6 +76,16 @@ public class ObjectFactory {
      */
     public EventoSinCategoriaExcepcion createEventoSinCategoriaExcepcion() {
         return new EventoSinCategoriaExcepcion();
+    }
+
+    /**
+     * Create an instance of {@link LinkInvalidoExcepcion }
+     * 
+     * @return
+     *     the new instance of {@link LinkInvalidoExcepcion }
+     */
+    public LinkInvalidoExcepcion createLinkInvalidoExcepcion() {
+        return new LinkInvalidoExcepcion();
     }
 
     /**
@@ -237,6 +248,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "EventoSinCategoriaExcepcion")
     public JAXBElement<EventoSinCategoriaExcepcion> createEventoSinCategoriaExcepcion(EventoSinCategoriaExcepcion value) {
         return new JAXBElement<>(_EventoSinCategoriaExcepcion_QNAME, EventoSinCategoriaExcepcion.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link LinkInvalidoExcepcion }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link LinkInvalidoExcepcion }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "LinkInvalidoExcepcion")
+    public JAXBElement<LinkInvalidoExcepcion> createLinkInvalidoExcepcion(LinkInvalidoExcepcion value) {
+        return new JAXBElement<>(_LinkInvalidoExcepcion_QNAME, LinkInvalidoExcepcion.class, null, value);
     }
 
     /**

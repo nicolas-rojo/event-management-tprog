@@ -23,8 +23,8 @@ import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.eventos.IControladorEventoWS;
 import cliente.ws.usuarios.DataUsuario;
 import cliente.ws.eventos.DataEdicion;
-import excepciones.EdicionRepetidaExcepcion;
-import excepciones.LinkInvalidoExcepcion;
+import cliente.ws.eventos.EdicionRepetidaExcepcion;
+import cliente.ws.eventos.LinkInvalidoExcepcion;
 
 @MultipartConfig
 @WebServlet("/AltaEdicion")
@@ -131,17 +131,25 @@ public class AltaEdicion extends HttpServlet {
 			dt.setCiudad(ciudad);
 			dt.setFechaAlta(fechaActual.toString());
 			IEV_WS.nuevaEdicion(dt, evento, org);
-//=======
 
-			/*DataEdicion dataEd = new DataEdicion(nombre, sigla, fechaIni, fechaFin, fechaActual, ciudad, pais, videoUrl);
-			IEV.nuevaEdicion(dataEd, evento, org);*/
-//>>>>>>> origin/develop
+
+			DataEdicion dataEd = new DataEdicion();
+			dataEd.setNombre(nombre);
+			dataEd.setSigla(sigla);
+			dataEd.setFechaIni(fechaIni.toString());
+			dataEd.setFechaFin(fechaFin.toString());
+			dataEd.setFechaAlta(fechaActual.toString());
+			dataEd.setCiudad(ciudad);
+			dataEd.setPais(pais);
+			dataEd.setVideoUrl(videoUrl);
+			IEV_WS.nuevaEdicion(dataEd, evento, org);
+
 			cargarImg(request, nombre);
 
 			response.sendRedirect(request.getContextPath() + "/home");
 
 			
-		} catch (EdicionRepetidaExcepcion e) {
+		} catch (e instanceof EdicionRepetidaExcepcion) {
 			request.setAttribute("error", "Ya existe una edición con ese nombre.");
 			request.setAttribute("evento", evento);
 			

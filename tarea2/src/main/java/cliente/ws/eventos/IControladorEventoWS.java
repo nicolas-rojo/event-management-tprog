@@ -30,6 +30,89 @@ public interface IControladorEventoWS {
      * @param arg0
      * @param arg1
      * @return
+     *     returns cliente.ws.eventos.DataEdicion
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorEventoWS/obtenerEdicionEventoRequest", output = "http://webservices/IControladorEventoWS/obtenerEdicionEventoResponse")
+    public DataEdicion obtenerEdicionEvento(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorEventoWS/obtenerOrganizadorEdicionRequest", output = "http://webservices/IControladorEventoWS/obtenerOrganizadorEdicionResponse")
+    public String obtenerOrganizadorEdicion(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @return
+     *     returns cliente.ws.eventos.DataPatrocinioCompletoArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorEventoWS/obtenerPatrociniosEdicionRequest", output = "http://webservices/IControladorEventoWS/obtenerPatrociniosEdicionResponse")
+    public DataPatrocinioCompletoArray obtenerPatrociniosEdicion(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @return
+     *     returns cliente.ws.eventos.StringArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorEventoWS/obtenerRegistrosEdicionRequest", output = "http://webservices/IControladorEventoWS/obtenerRegistrosEdicionResponse")
+    public StringArray obtenerRegistrosEdicion(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @param arg2
+     * @return
+     *     returns cliente.ws.eventos.DataPatrocinioCompleto
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorEventoWS/obtenerDTOPatrocinioCompletoRequest", output = "http://webservices/IControladorEventoWS/obtenerDTOPatrocinioCompletoResponse")
+    public DataPatrocinioCompleto obtenerDTOPatrocinioCompleto(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @return
      *     returns cliente.ws.eventos.StringArray
      */
     @WebMethod
@@ -40,19 +123,6 @@ public interface IControladorEventoWS {
         String arg0,
         @WebParam(name = "arg1", partName = "arg1")
         String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns cliente.ws.eventos.DataEdicionWebArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorEventoWS/getEdicionesEventoOrganizadorWebRequest", output = "http://webservices/IControladorEventoWS/getEdicionesEventoOrganizadorWebResponse")
-    public DataEdicionWebArray getEdicionesEventoOrganizadorWeb(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
 
     /**
      * 
@@ -73,29 +143,6 @@ public interface IControladorEventoWS {
     /**
      * 
      * @return
-     *     returns cliente.ws.eventos.StringArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorEventoWS/listarCategoriasRequest", output = "http://webservices/IControladorEventoWS/listarCategoriasResponse")
-    public StringArray listarCategorias();
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorEventoWS/eventoFinalizadoRequest", output = "http://webservices/IControladorEventoWS/eventoFinalizadoResponse")
-    public boolean eventoFinalizado(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
-
-    /**
-     * 
-     * @return
      *     returns cliente.ws.eventos.DataEventoCompletoArray
      * @throws EventoNoExisteExcepcion_Exception
      */
@@ -107,6 +154,46 @@ public interface IControladorEventoWS {
     public DataEventoCompletoArray listarInfoEvento()
         throws EventoNoExisteExcepcion_Exception
     ;
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @throws EventoRepetidoExcepcion_Exception
+     * @throws EventoSinCategoriaExcepcion_Exception
+     */
+    @WebMethod
+    @Action(input = "http://webservices/IControladorEventoWS/nuevoEventoRequest", output = "http://webservices/IControladorEventoWS/nuevoEventoResponse", fault = {
+        @FaultAction(className = EventoRepetidoExcepcion_Exception.class, value = "http://webservices/IControladorEventoWS/nuevoEvento/Fault/EventoRepetidoExcepcion"),
+        @FaultAction(className = EventoSinCategoriaExcepcion_Exception.class, value = "http://webservices/IControladorEventoWS/nuevoEvento/Fault/EventoSinCategoriaExcepcion")
+    })
+    public void nuevoEvento(
+        @WebParam(name = "arg0", partName = "arg0")
+        DataEvento arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        StringArray arg1)
+        throws EventoRepetidoExcepcion_Exception, EventoSinCategoriaExcepcion_Exception
+    ;
+
+    /**
+     * 
+     * @return
+     *     returns cliente.ws.eventos.StringArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorEventoWS/listarCategoriasRequest", output = "http://webservices/IControladorEventoWS/listarCategoriasResponse")
+    public StringArray listarCategorias();
+
+    /**
+     * 
+     * @return
+     *     returns cliente.ws.eventos.StringArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorEventoWS/listarEventosRequest", output = "http://webservices/IControladorEventoWS/listarEventosResponse")
+    public StringArray listarEventos();
 
     /**
      * 
@@ -145,37 +232,6 @@ public interface IControladorEventoWS {
     /**
      * 
      * @param arg0
-     * @param arg1
-     * @param arg2
-     * @throws EdicionRepetidaExcepcion_Exception
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorEventoWS/nuevaEdicionRequest", output = "http://webservices/IControladorEventoWS/nuevaEdicionResponse", fault = {
-        @FaultAction(className = EdicionRepetidaExcepcion_Exception.class, value = "http://webservices/IControladorEventoWS/nuevaEdicion/Fault/EdicionRepetidaExcepcion")
-    })
-    public void nuevaEdicion(
-        @WebParam(name = "arg0", partName = "arg0")
-        DataEdicion arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2)
-        throws EdicionRepetidaExcepcion_Exception
-    ;
-
-    /**
-     * 
-     * @return
-     *     returns cliente.ws.eventos.StringArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorEventoWS/listarEventosRequest", output = "http://webservices/IControladorEventoWS/listarEventosResponse")
-    public StringArray listarEventos();
-
-    /**
-     * 
-     * @param arg0
      * @return
      *     returns cliente.ws.eventos.StringArray
      */
@@ -185,26 +241,6 @@ public interface IControladorEventoWS {
     public StringArray listarEdiciones(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @throws EventoRepetidoExcepcion_Exception
-     * @throws EventoSinCategoriaExcepcion_Exception
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorEventoWS/nuevoEventoRequest", output = "http://webservices/IControladorEventoWS/nuevoEventoResponse", fault = {
-        @FaultAction(className = EventoRepetidoExcepcion_Exception.class, value = "http://webservices/IControladorEventoWS/nuevoEvento/Fault/EventoRepetidoExcepcion"),
-        @FaultAction(className = EventoSinCategoriaExcepcion_Exception.class, value = "http://webservices/IControladorEventoWS/nuevoEvento/Fault/EventoSinCategoriaExcepcion")
-    })
-    public void nuevoEvento(
-        @WebParam(name = "arg0", partName = "arg0")
-        DataEvento arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        StringArray arg1)
-        throws EventoRepetidoExcepcion_Exception, EventoSinCategoriaExcepcion_Exception
-    ;
 
     /**
      * 
@@ -228,89 +264,25 @@ public interface IControladorEventoWS {
     /**
      * 
      * @param arg0
-     * @return
-     *     returns cliente.ws.eventos.DataEventoCompletoArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorEventoWS/getEventosConCategoriaRequest", output = "http://webservices/IControladorEventoWS/getEventosConCategoriaResponse")
-    public DataEventoCompletoArray getEventosConCategoria(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
-
-    /**
-     * 
-     * @param arg0
      * @param arg1
-     * @return
-     *     returns cliente.ws.eventos.StringArray
+     * @param arg2
+     * @throws EdicionRepetidaExcepcion_Exception
+     * @throws LinkInvalidoExcepcion_Exception
      */
     @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorEventoWS/obtenerRegistrosEdicionRequest", output = "http://webservices/IControladorEventoWS/obtenerRegistrosEdicionResponse")
-    public StringArray obtenerRegistrosEdicion(
+    @Action(input = "http://webservices/IControladorEventoWS/nuevaEdicionRequest", output = "http://webservices/IControladorEventoWS/nuevaEdicionResponse", fault = {
+        @FaultAction(className = EdicionRepetidaExcepcion_Exception.class, value = "http://webservices/IControladorEventoWS/nuevaEdicion/Fault/EdicionRepetidaExcepcion"),
+        @FaultAction(className = LinkInvalidoExcepcion_Exception.class, value = "http://webservices/IControladorEventoWS/nuevaEdicion/Fault/LinkInvalidoExcepcion")
+    })
+    public void nuevaEdicion(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
+        DataEdicion arg0,
         @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorEventoWS/obtenerOrganizadorEdicionRequest", output = "http://webservices/IControladorEventoWS/obtenerOrganizadorEdicionResponse")
-    public String obtenerOrganizadorEdicion(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @return
-     *     returns cliente.ws.eventos.DataEdicion
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorEventoWS/obtenerEdicionEventoRequest", output = "http://webservices/IControladorEventoWS/obtenerEdicionEventoResponse")
-    public DataEdicion obtenerEdicionEvento(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @return
-     *     returns cliente.ws.eventos.DataPatrocinioCompletoArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorEventoWS/obtenerPatrociniosEdicionRequest", output = "http://webservices/IControladorEventoWS/obtenerPatrociniosEdicionResponse")
-    public DataPatrocinioCompletoArray obtenerPatrociniosEdicion(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorEventoWS/darDeBajaRequest", output = "http://webservices/IControladorEventoWS/darDeBajaResponse")
-    public void darDeBaja(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2)
+        throws EdicionRepetidaExcepcion_Exception, LinkInvalidoExcepcion_Exception
+    ;
 
     /**
      * 
@@ -331,20 +303,50 @@ public interface IControladorEventoWS {
     /**
      * 
      * @param arg0
-     * @param arg1
-     * @param arg2
+     */
+    @WebMethod
+    @Action(input = "http://webservices/IControladorEventoWS/darDeBajaRequest", output = "http://webservices/IControladorEventoWS/darDeBajaResponse")
+    public void darDeBaja(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
      * @return
-     *     returns cliente.ws.eventos.DataPatrocinioCompleto
+     *     returns cliente.ws.eventos.DataEdicionWebArray
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorEventoWS/obtenerDTOPatrocinioCompletoRequest", output = "http://webservices/IControladorEventoWS/obtenerDTOPatrocinioCompletoResponse")
-    public DataPatrocinioCompleto obtenerDTOPatrocinioCompleto(
+    @Action(input = "http://webservices/IControladorEventoWS/getEdicionesEventoOrganizadorWebRequest", output = "http://webservices/IControladorEventoWS/getEdicionesEventoOrganizadorWebResponse")
+    public DataEdicionWebArray getEdicionesEventoOrganizadorWeb(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2);
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns cliente.ws.eventos.DataEventoCompletoArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorEventoWS/getEventosConCategoriaRequest", output = "http://webservices/IControladorEventoWS/getEventosConCategoriaResponse")
+    public DataEventoCompletoArray getEventosConCategoria(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorEventoWS/eventoFinalizadoRequest", output = "http://webservices/IControladorEventoWS/eventoFinalizadoResponse")
+    public boolean eventoFinalizado(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
 
 }

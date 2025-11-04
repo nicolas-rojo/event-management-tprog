@@ -24,6 +24,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="fechaAlta" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="ciudad" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         <element name="pais" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="videoUrl" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -40,7 +41,8 @@ import jakarta.xml.bind.annotation.XmlType;
     "fechaFin",
     "fechaAlta",
     "ciudad",
-    "pais"
+    "pais",
+    "videoUrl"
 })
 public class DataEdicion {
 
@@ -55,6 +57,8 @@ public class DataEdicion {
     protected String ciudad;
     @XmlElement(required = true)
     protected String pais;
+    @XmlElement(required = true)
+    protected String videoUrl;
 
     /**
      * Obtiene el valor de la propiedad nombre.
@@ -222,6 +226,30 @@ public class DataEdicion {
      */
     public void setPais(String value) {
         this.pais = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad videoUrl.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    /**
+     * Define el valor de la propiedad videoUrl.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setVideoUrl(String value) {
+        this.videoUrl = value;
     }
 
 }

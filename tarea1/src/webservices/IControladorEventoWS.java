@@ -22,7 +22,7 @@ public interface IControladorEventoWS {
 	DataTRegistro getDataTRegistro(String evento, String edicion, String tipoRegistro);
 	
 	@WebMethod
-	void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion;
+	void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion, LinkInvalidoExcepcion;
 	
 	@WebMethod
 	DataEdicionWeb[] getEdicionesEventoOrganizadorWeb(String nickname);
