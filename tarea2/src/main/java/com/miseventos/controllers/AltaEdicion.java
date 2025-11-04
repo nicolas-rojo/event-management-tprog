@@ -1,6 +1,7 @@
 package com.miseventos.controllers;
 
-//FALTA ARREGLARRR
+//ARREGLADO
+//VIDEO
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -22,10 +23,6 @@ import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.eventos.IControladorEventoWS;
 import cliente.ws.usuarios.DataUsuario;
 import cliente.ws.eventos.DataEdicion;
-import logica.Fabrica;
-import logica.interfaces.IEventos;
-import logica.datatypes.DataEdicion;
-import logica.datatypes.DataUsuario;
 import excepciones.EdicionRepetidaExcepcion;
 import excepciones.LinkInvalidoExcepcion;
 
@@ -125,7 +122,6 @@ public class AltaEdicion extends HttpServlet {
 
 			String org = dataU.getNickname();
 			LocalDate fechaActual = LocalDate.now();
-//<<<<<<< HEAD
 			DataEdicion dt = new DataEdicion();
 			dt.setNombre(nombre);
 			dt.setSigla(sigla);
@@ -137,8 +133,8 @@ public class AltaEdicion extends HttpServlet {
 			IEV_WS.nuevaEdicion(dt, evento, org);
 //=======
 
-			DataEdicion dataEd = new DataEdicion(nombre, sigla, fechaIni, fechaFin, fechaActual, ciudad, pais, videoUrl);
-			IEV.nuevaEdicion(dataEd, evento, org);
+			/*DataEdicion dataEd = new DataEdicion(nombre, sigla, fechaIni, fechaFin, fechaActual, ciudad, pais, videoUrl);
+			IEV.nuevaEdicion(dataEd, evento, org);*/
 //>>>>>>> origin/develop
 			cargarImg(request, nombre);
 

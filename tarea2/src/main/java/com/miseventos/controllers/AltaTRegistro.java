@@ -1,6 +1,5 @@
 package com.miseventos.controllers;
-
-//FALTA ARREGLARRR
+//ARREGLADO
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -52,20 +51,12 @@ public class AltaTRegistro extends HttpServlet {
 			d.setNombre(nombre);
 			IEV_WS.nuevoTipoRegistro(d, evento, edicion);
 			response.sendRedirect(request.getContextPath() + "/home");
-//<<<<<<< HEAD
-		//}catch(TipoDeRegistroRepetidoException e) {
-		//	request.setAttribute("errorExiste", "Ya existe un tipo de registro con este nombre");
-		//	request.getRequestDispatcher("/WEB-INF/altaTRegistro.jsp").forward(request, response);
-//=======
 		}catch(TipoDeRegistroRepetidoException e) {
 			request.setAttribute("errorExiste", "Ya existe un tipo de registro con este nombre");
-			
             request.setAttribute("descripcion", descripcion);
             request.setAttribute("costo", costotr);
             request.setAttribute("cupo", cupotr);
-            
 			request.getRequestDispatcher("/WEB-INF/altaTRegistro.jsp").forward(request, response);
-//>>>>>>> origin/develop
 		}catch (Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "No se pudo dar de alta el tipo de registro");

@@ -1,6 +1,5 @@
 package com.miseventos.controllers;
-
-//FALTA ARREGLARRR
+//ARREGLADO
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -197,22 +196,9 @@ public class AltaPatrocinio extends HttpServlet {
         } catch (NumberFormatException ex) {
             recargarFormularioConError(request, response, evento, edicion, 
                 "Error en los datos numéricos. Verifique el monto y cantidad de cupos.");
-            
-//<<<<<<< HEAD
         } catch (PatrocinioRepetidoException_Exception ex) {
-//=======
-        } catch (PatrocinioRepetidoException ex) {
-        	
-        	request.setAttribute("tipoRegistro", tipoRegistro);
-    		request.setAttribute("nivelStr", nivelStr);
-    		request.setAttribute("monto", montoStr);
-    		request.setAttribute("cantidadCupos", cantidadCuposStr);
-    		request.setAttribute("codigo", codigo);
-    		
-//>>>>>>> origin/develop
             recargarFormularioConError(request, response, evento, edicion, 
                 "Esta institución ya está patrocinando esta edición.");
-            
         } catch (Exception ex) {
             recargarFormularioConError(request, response, evento, edicion, 
                 "Error al crear el patrocinio: " + ex.getMessage());
