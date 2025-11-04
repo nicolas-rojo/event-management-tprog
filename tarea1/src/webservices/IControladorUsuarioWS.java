@@ -59,7 +59,7 @@ public interface IControladorUsuarioWS {
     void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, String fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException;
     
     @WebMethod
-    DataUsuario login(String nickmail, String pass);
+    DataUsuario login(String nickmail, String pass) throws UsuarioNoExisteException;
     
     @WebMethod
     ParEdicionRegistro estaRegistrado(String asistente, String edicion);

@@ -93,7 +93,7 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
     }
     
     @Override
-    public DataUsuario login(String nickmail, String pass) {
+    public DataUsuario login(String nickmail, String pass) throws UsuarioNoExisteException {
         return controladorUsuario.login(nickmail, pass);
     }
     

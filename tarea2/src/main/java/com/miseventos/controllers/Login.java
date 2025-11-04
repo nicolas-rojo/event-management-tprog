@@ -11,8 +11,8 @@ import java.io.IOException;
 
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.IControladorUsuarioWS;
+import cliente.ws.usuarios.UsuarioNoExisteException_Exception;
 import cliente.ws.usuarios.DataUsuario;
-import excepciones.*;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
@@ -60,10 +60,11 @@ public class Login extends HttpServlet {
 				request.setAttribute("error", "Usuario o Contraseña Incorrectos");
 				request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 			}
-		//} catch (UsuarioNoExisteException e) {
-		//	request.setAttribute("error", "Usuario o Contraseña Incorrectos");
-		//	request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+		} catch (UsuarioNoExisteException_Exception e) {
+			request.setAttribute("error", "Usuario o Contraseña Incorrectos");
+			request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		} catch (Exception e) {
+			System.out.println(e.getClass().getName());
 			e.printStackTrace();
 	        request.setAttribute("error", "Error al intentar iniciar sesion");
 	        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);

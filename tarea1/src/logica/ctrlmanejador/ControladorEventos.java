@@ -79,8 +79,6 @@ public class ControladorEventos implements IEventos {
     public void darDeBaja(String evento) {
     	ManejadorEvento mev = ManejadorEvento.getInstance();
     	Evento evt = mev.getEvento(evento);
-    	System.out.println("Nombre Recibido: " + evento);
-    	System.out.println("Encontré?: " + evt.getNombreEvento());
     	evt.setEstado(EstadoEvento.finalizado);
     	
     }
