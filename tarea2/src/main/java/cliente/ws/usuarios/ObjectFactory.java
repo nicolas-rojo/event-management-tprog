@@ -29,8 +29,8 @@ public class ObjectFactory {
     private final static QName _ErrorDetallesRegistroException_QNAME = new QName("http://webservices/", "ErrorDetallesRegistroException");
     private final static QName _FechaRegistroInvalidaException_QNAME = new QName("http://webservices/", "FechaRegistroInvalidaException");
     private final static QName _NoHayCupoEdicionTRegistro_QNAME = new QName("http://webservices/", "NoHayCupoEdicionTRegistro");
-    private final static QName _UsuarioNoExisteException_QNAME = new QName("http://webservices/", "UsuarioNoExisteException");
     private final static QName _UsuarioRepetidoException_QNAME = new QName("http://webservices/", "UsuarioRepetidoException");
+    private final static QName _UsuarioNoExisteException_QNAME = new QName("http://excepciones/", "UsuarioNoExisteException");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cliente.ws.usuarios
@@ -90,16 +90,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link UsuarioNoExisteException }
-     * 
-     * @return
-     *     the new instance of {@link UsuarioNoExisteException }
-     */
-    public UsuarioNoExisteException createUsuarioNoExisteException() {
-        return new UsuarioNoExisteException();
-    }
-
-    /**
      * Create an instance of {@link UsuarioRepetidoException }
      * 
      * @return
@@ -117,6 +107,16 @@ public class ObjectFactory {
      */
     public DataEdicionWeb createDataEdicionWeb() {
         return new DataEdicionWeb();
+    }
+
+    /**
+     * Create an instance of {@link UsuarioNoExisteException }
+     * 
+     * @return
+     *     the new instance of {@link UsuarioNoExisteException }
+     */
+    public UsuarioNoExisteException createUsuarioNoExisteException() {
+        return new UsuarioNoExisteException();
     }
 
     /**
@@ -295,19 +295,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UsuarioNoExisteException }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link UsuarioNoExisteException }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "UsuarioNoExisteException")
-    public JAXBElement<UsuarioNoExisteException> createUsuarioNoExisteException(UsuarioNoExisteException value) {
-        return new JAXBElement<>(_UsuarioNoExisteException_QNAME, UsuarioNoExisteException.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link UsuarioRepetidoException }{@code >}
      * 
      * @param value
@@ -318,6 +305,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "UsuarioRepetidoException")
     public JAXBElement<UsuarioRepetidoException> createUsuarioRepetidoException(UsuarioRepetidoException value) {
         return new JAXBElement<>(_UsuarioRepetidoException_QNAME, UsuarioRepetidoException.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UsuarioNoExisteException }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link UsuarioNoExisteException }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://excepciones/", name = "UsuarioNoExisteException")
+    public JAXBElement<UsuarioNoExisteException> createUsuarioNoExisteException(UsuarioNoExisteException value) {
+        return new JAXBElement<>(_UsuarioNoExisteException_QNAME, UsuarioNoExisteException.class, null, value);
     }
 
 }

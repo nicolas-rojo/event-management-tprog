@@ -124,17 +124,6 @@ public class AltaEdicion extends HttpServlet {
 
 			String org = dataU.getNickname();
 			LocalDate fechaActual = LocalDate.now();
-			DataEdicion dt = new DataEdicion();
-			dt.setNombre(nombre);
-			dt.setSigla(sigla);
-			dt.setFechaFin(fechaFin.toString());
-			dt.setFechaIni(fechaIni.toString()); 
-			dt.setPais(pais);
-			dt.setCiudad(ciudad);
-			dt.setFechaAlta(fechaActual.toString());
-			IEV_WS.nuevaEdicion(dt, evento, org);
-
-
 			DataEdicion dataEd = new DataEdicion();
 			dataEd.setNombre(nombre);
 			dataEd.setSigla(sigla);

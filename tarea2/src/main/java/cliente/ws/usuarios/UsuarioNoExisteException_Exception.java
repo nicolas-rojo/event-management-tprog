@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "UsuarioNoExisteException", targetNamespace = "http://webservices/")
+@WebFault(name = "UsuarioNoExisteException", targetNamespace = "http://excepciones/")
 public class UsuarioNoExisteException_Exception
     extends Exception
 {
