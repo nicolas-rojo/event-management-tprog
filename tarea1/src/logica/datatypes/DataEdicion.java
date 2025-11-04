@@ -18,11 +18,10 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "fechaFin",
     "fechaAlta",
     "ciudad",
-    "pais"
+    "pais",
+    "videoUrl"
 })
-public class DataEdicion {
-//<<<<<<< HEAD
-    
+public class DataEdicion {    
     @XmlElement(required = true)
     protected String nombre;
     
@@ -47,12 +46,13 @@ public class DataEdicion {
     @XmlElement(required = true)
     protected String pais;
 
-    private String videoUrl;
+    @XmlElement(required = true)
+    protected String videoUrl;
     // Constructor vacío requerido por JAXB
     public DataEdicion() {}
 
     public DataEdicion(String nombre, String sigla, LocalDate fechaIni, LocalDate fechaFin, 
-                      LocalDate fechaAlta, String ciudad, String pais) {
+                      LocalDate fechaAlta, String ciudad, String pais, String url) {
         this.nombre = nombre;
         this.sigla = sigla;
         this.fechaIni = fechaIni;
@@ -60,6 +60,7 @@ public class DataEdicion {
         this.fechaAlta = fechaAlta;
         this.ciudad = ciudad;
         this.pais = pais;
+        this.videoUrl = url;
     }
 
     public String getNombre() {
@@ -118,8 +119,11 @@ public class DataEdicion {
         this.pais = pais;
     }
     
+    public String getUrl() {
+    	return this.videoUrl;
+    }
+    
 	public void setUrl(String url) {
 		this.videoUrl = url;
 	}
 }
-//>>>>>>> origin/develop

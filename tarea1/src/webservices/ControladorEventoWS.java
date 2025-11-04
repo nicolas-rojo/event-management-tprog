@@ -31,7 +31,8 @@ public class ControladorEventoWS implements IControladorEventoWS {
     
     @Override
     public void nuevaEdicion(DataEdicion dataEdicion, String evento, String org) throws EdicionRepetidaExcepcion{
-    	controlador.nuevaEdicion(dataEdicion, evento, org);
+    	try{controlador.nuevaEdicion(dataEdicion, evento, org);}
+    	catch (Exception e) {}
     }
     
     @Override
