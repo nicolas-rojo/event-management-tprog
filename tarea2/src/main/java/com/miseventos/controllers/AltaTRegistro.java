@@ -15,6 +15,8 @@ import cliente.ws.eventos.IControladorEventoWS;
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.eventos.DataTRegistro;
 
+import cliente.ws.eventos.TipoDeRegistroRepetidoException_Exception;
+
 
 @WebServlet("/altaTReg")
 @MultipartConfig
@@ -51,7 +53,7 @@ public class AltaTRegistro extends HttpServlet {
 			d.setNombre(nombre);
 			IEV_WS.nuevoTipoRegistro(d, evento, edicion);
 			response.sendRedirect(request.getContextPath() + "/home");
-		}catch(TipoDeRegistroRepetidoException e) {
+		}catch(TipoDeRegistroRepetidoException_Exception e) {
 			request.setAttribute("errorExiste", "Ya existe un tipo de registro con este nombre");
             request.setAttribute("descripcion", descripcion);
             request.setAttribute("costo", costotr);

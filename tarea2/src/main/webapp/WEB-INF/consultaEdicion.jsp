@@ -161,11 +161,11 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 		<!-- Columna derecha -->
 		<div class="columna-derecha">
 			
-			<% if (dataEd.getUrl() != null && !dataEd.getUrl().isEmpty()) { %>
+			<% if (dataEd.getVideoUrl() != null && !dataEd.getVideoUrl().isEmpty()) { %>
 			    <h2 class="texto-og">Video:</h2>
 			    <div class="contenedor-derecha-video">
 			        <iframe class="video-embed"
-			                src="<%= dataEd.getUrl() %>" 
+			                src="<%= dataEd.getVideoUrl() %>" 
 			                frameborder="0" 
 			                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
 			                allowfullscreen>
@@ -201,20 +201,17 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 				<div class="informacion-TRegistro">
 					<div class="detalles-TRegistro">
 						<%
-<!-- HEAD -->
-						// ✅ Obtener detalleRegistro del servlet (ya no llamamos al WS aquí)
-						DataDetalleRegistro detalleReg = (DataDetalleRegistro) request.getAttribute("detalleRegistro");
-						
-						if (detalleReg != null) {
-<!-- ======= -->
-                		IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+						//Pido el controlador (su interfaz)
+						IControladorUsuarioWS ICU_WS;
+				    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+				        ICU_WS = servicio2.getControladorUsuarioWSPort();
+				        
 						DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
 						Boolean registrado = (Boolean) request.getAttribute("registrado");
-						Boolean asistio = (Boolean) ICU.verificarAsistencia(dataEd.getNombre(), dataU.getNickname());
+						Boolean asistio = (Boolean) ICU_WS.verificarAsistencia(dataEd.getNombre(), dataU.getNickname());
 						if (registrado != null && registrado) {
 							ParEdicionRegistro dataRegistro = (ParEdicionRegistro) request.getAttribute("dataRegistro");
-                        	DataDetalleRegistro detalleReg = ICU.getDetallesRegistro(dataU.getNickname(), dataRegistro);
-<!-- >>>>>>> origin/develop -->
+                        	DataDetalleRegistro detalleReg = ICU_WS.getDetallesRegistro(dataU.getNickname(), dataRegistro);
 						%>
 						<div class="registro-item">
 							<span>Registrado el: <%= detalleReg.getFecha() %>, como: <%= detalleReg.getNombreTR() %></span>

@@ -3,6 +3,8 @@ package webservices;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import java.time.LocalDate;
+import java.util.List;
+
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.jws.soap.SOAPBinding.Style;
 import jakarta.jws.soap.SOAPBinding.ParameterStyle;
@@ -70,4 +72,27 @@ public interface IControladorUsuarioWS {
     
     @WebMethod
     DataEdicionWeb[] getEdicionesEventoOrganizadorWeb(String nickname);
+    
+    //Funciones nuevas para parte 3:
+    
+    @WebMethod
+    void seguirUsuario(String seguidor, String aSeguir);
+    
+    @WebMethod
+    String[] getSeguidos(String usr);
+    
+    @WebMethod
+    String[] getSeguidores(String usr);
+    
+    @WebMethod
+    Boolean esSeguidor(String usr, String seguidor);
+    
+    @WebMethod
+    void dejarDeSeguir(String seguidor, String seguido);
+    
+    @WebMethod
+    Boolean verificarAsistencia(String edicion, String usuario);
+    
+    @WebMethod
+    void setAsistencia(String edicion, String usuario);
 }

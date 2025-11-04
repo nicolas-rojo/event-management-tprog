@@ -1,5 +1,6 @@
 package webservices;
 
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import java.time.LocalDate;
 import logica.Fabrica;
@@ -118,5 +119,43 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
     @Override
     public DataEdicionWeb[] getEdicionesEventoOrganizadorWeb(String nickname) {
         return controladorEventos.getEdicionesEventoOrganizadorWeb(nickname);
+    }
+    
+    
+    // Funciones para la parte 3
+    
+    @Override
+    public void seguirUsuario(String seguidor, String aSeguir) {
+    	controladorUsuario.seguirUsuario(seguidor, aSeguir);
+    }
+    
+    @Override
+    public String[] getSeguidos(String usr) {
+    	return controladorUsuario.getSeguidos(usr).toArray(new String[0]);
+    }
+    
+    @Override
+    public String[] getSeguidores(String usr) {
+    	return controladorUsuario.getSeguidores(usr).toArray(new String[0]);
+    }
+    
+    @Override
+    public Boolean esSeguidor(String usr, String seguidor) {
+    	return controladorUsuario.esSeguidor(usr, seguidor);
+    }
+    
+    @Override
+    public void dejarDeSeguir(String seguidor, String seguido) {
+    	controladorUsuario.dejarDeSeguir(seguidor, seguido);
+    }
+    
+    @Override
+    public Boolean verificarAsistencia(String edicion, String usuario) {
+    	return controladorUsuario.verificarAsistencia(edicion, usuario);
+    }
+    
+    @Override
+    public void setAsistencia(String edicion, String usuario) {
+    	controladorUsuario.setAsistencia(edicion, usuario);
     }
 }

@@ -69,8 +69,9 @@ public class DetalleUsuario extends HttpServlet {
                 DataEdicionWeb[] ediciones = ediciones_aux.toArray(new DataEdicionWeb[0]);
                 request.setAttribute("ediciones", ediciones);
             }
-            List<String> seguidos = ICU.getSeguidos(email);
-            List<String> seguidores = ICU.getSeguidores(email);
+
+            List<String> seguidos = ICU_WS.getSeguidos(email).getItem();
+            List<String> seguidores = ICU_WS.getSeguidores(email).getItem();
             request.setAttribute("seguidos", seguidos);
             request.setAttribute("seguidores", seguidores);
     
@@ -98,9 +99,9 @@ public class DetalleUsuario extends HttpServlet {
         if (accion != null && emailASeguir != null && loggedMail != null) {
             try {
                 if ("seguir".equals(accion)) {
-                    ICU.seguirUsuario(loggedMail, emailASeguir);
+                    ICU_WS.seguirUsuario(loggedMail, emailASeguir);
                 } else if ("dejar_seguir".equals(accion)) {
-                    ICU.dejarDeSeguir(loggedMail, emailASeguir);
+                    ICU_WS.dejarDeSeguir(loggedMail, emailASeguir);
                 }
                 
                 response.sendRedirect(request.getContextPath() + "/detalleUsuario?email=" + emailASeguir);

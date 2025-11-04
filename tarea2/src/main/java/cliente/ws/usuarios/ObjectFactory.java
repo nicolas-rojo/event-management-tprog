@@ -120,16 +120,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DataEdicion }
-     * 
-     * @return
-     *     the new instance of {@link DataEdicion }
-     */
-    public DataEdicion createDataEdicion() {
-        return new DataEdicion();
-    }
-
-    /**
      * Create an instance of {@link DataOrganizador }
      * 
      * @return
@@ -180,6 +170,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DataEdicion }
+     * 
+     * @return
+     *     the new instance of {@link DataEdicion }
+     */
+    public DataEdicion createDataEdicion() {
+        return new DataEdicion();
+    }
+
+    /**
      * Create an instance of {@link DataEdicionWebArray }
      * 
      * @return
@@ -190,16 +190,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DataEdicionArray }
-     * 
-     * @return
-     *     the new instance of {@link DataEdicionArray }
-     */
-    public DataEdicionArray createDataEdicionArray() {
-        return new DataEdicionArray();
-    }
-
-    /**
      * Create an instance of {@link DataUsuarioArray }
      * 
      * @return
@@ -207,6 +197,16 @@ public class ObjectFactory {
      */
     public DataUsuarioArray createDataUsuarioArray() {
         return new DataUsuarioArray();
+    }
+
+    /**
+     * Create an instance of {@link DataEdicionArray }
+     * 
+     * @return
+     *     the new instance of {@link DataEdicionArray }
+     */
+    public DataEdicionArray createDataEdicionArray() {
+        return new DataEdicionArray();
     }
 
     /**

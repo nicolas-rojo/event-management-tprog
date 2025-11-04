@@ -94,8 +94,10 @@
 					<%
 					} else {
 						if (usr != null) {
-	                		IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
-							boolean esSeguidor = ICU.esSeguidor(usuario.getEmail(), loggedMail);
+							IControladorUsuarioWS ICU_WS;
+					    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+					        ICU_WS = servicio2.getControladorUsuarioWSPort();
+							boolean esSeguidor = ICU_WS.esSeguidor(usuario.getEmail(), loggedMail);
 							if (esSeguidor) {
 							%>
 								<form action="${pageContext.request.contextPath}/detalleUsuario" method="POST" style="display: inline;">
@@ -329,18 +331,20 @@
 	            %>
 	                <p class="modal-vacio">No hay seguidores aún</p>
 	            <% } else {
-                	IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+	            	IControladorUsuarioWS ICU_WS;
+			    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+			        ICU_WS = servicio2.getControladorUsuarioWSPort();
 	            	String nickNorm;
 	                for (String nickname : seguidores) {
 	                	nickNorm = nombreUtils.normalizarNombre(nickname);
 	                	DataUsuario seg = null;
 	                	try {
-		                	seg = ICU.getAsistente(nickname);
+		                	seg = ICU_WS.getAsistente(nickname);
 	                	} catch (Exception e) { }
 		                
 	                	if (seg == null) {
 		                	try {
-			                	seg = ICU.getOrganizador(nickname);	                		
+			                	seg = ICU_WS.getOrganizador(nickname);	                		
 		                	} catch (Exception e) { }
 		                }	                		
 	                	%>
@@ -371,18 +375,20 @@
 	            %>
 	                <p class="modal-vacio">No hay seguidos aún</p>
 	            <% } else {
-	            	IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+	            	IControladorUsuarioWS ICU_WS;
+			    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+			        ICU_WS = servicio2.getControladorUsuarioWSPort();
 	            	String nickNorm;
 	                for (String nickname : seguidos) {
 	                	nickNorm = nombreUtils.normalizarNombre(nickname);
 	                	DataUsuario seg = null;
 	                	try {
-		                	seg = ICU.getAsistente(nickname);
+		                	seg = ICU_WS.getAsistente(nickname);
 	                	} catch (Exception e) { }
 		                
 	                	if (seg == null) {
 		                	try {
-			                	seg = ICU.getOrganizador(nickname);	                		
+			                	seg = ICU_WS.getOrganizador(nickname);	                		
 		                	} catch (Exception e) { }
 		                }	                		
 	                	%>
