@@ -95,4 +95,10 @@ public interface IControladorUsuarioWS {
     
     @WebMethod
     void setAsistencia(String edicion, String usuario);
+    
+    @WebMethod
+    Boolean existeNickname(String nickname);
+    
+    @WebMethod
+    Boolean existeEmail(String email);
 }

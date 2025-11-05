@@ -59,3 +59,19 @@ button:hover {
 .input-error {
     border-color: red !important;
 }
+
+.emailExiste{
+	color: red;
+    font-size: 12px;
+    display: none;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.nicknameExiste{
+	color: red;
+    font-size: 12px;
+    display: none;
+    margin-bottom: 10px;
+    text-align: left;
+}

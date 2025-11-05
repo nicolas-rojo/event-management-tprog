@@ -73,4 +73,8 @@ public interface IUsuario {
     public abstract Boolean verificarAsistencia(String edicion, String usuario);
     
     public abstract void setAsistencia(String edicion, String usuario);
+    
+    public abstract Boolean existeNickname(String nickname);
+    
+    public abstract Boolean existeEmail(String email);
 }

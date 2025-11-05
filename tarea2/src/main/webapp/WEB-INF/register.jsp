@@ -36,10 +36,12 @@
             <input type="text" id="nombre" name="nombre" placeholder="Nombre">
             <div class="error-message" id="errorNombre">El nombre es requerido</div>
             
-            <input type="text" id="nickname" name="nick" placeholder="Nickname">
+            <input type="text" id="nickname" name="nick" placeholder="Nickname" onkeyup="validarDato('nickname')">
+            <div class="error-message" id="nicknameExiste"></div>
             <div class="error-message" id="errorNickname">El nickname es requerido</div>
             
-            <input type="email" id="mail" name="mail" placeholder="Email">
+            <input type="email" id="mail" name="mail" placeholder="Email" onkeyup="validarDato('mail')">
+            <div class="error-message" id="mailExiste"></div>
             <div class="error-message" id="errorMail">El mail es requerido</div>
             
             <input type="password" id="password" name="pass" placeholder="Contraseña">
@@ -79,7 +81,7 @@
             	}
             %>
             
-            <button type="submit">Registrarse</button>
+            <button type="submit" id = "Registrarse">Registrarse</button>
 			<button type="button" id="cancelarBtn" onclick="window.location.href='${pageContext.request.contextPath}/home'">Cancelar</button>
         </form>
     </div>

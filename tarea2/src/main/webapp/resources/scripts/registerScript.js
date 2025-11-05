@@ -36,6 +36,39 @@ document.addEventListener('DOMContentLoaded', () => {
 	actualizarCampos();
 });
 
+
+function validarDato(tipo) {
+    const valor = document.getElementById(tipo).value;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `verificacionajax?valor=${encodeURIComponent(valor)}&tipo=${tipo}`, true);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const respuesta = xhr.responseText.trim();
+            const mensaje = document.getElementById(tipo + "Existe");
+			const botonRegistrarse = document.getElementById('Registrarse');
+			
+			document.getElementById(tipo + 'Existe').style.display = 'none';
+			botonRegistrarse.style.opacity = '';
+			botonRegistrarse.style.cursor = '';
+            if (respuesta === "existe") {
+                mensaje.textContent = tipo === "mail" 
+                    ? "El email ya está registrado"
+                    : "El nombre de usuario ya está en uso";
+				document.getElementById(tipo + 'Existe').style.display = 'block';
+				botonRegistrarse.style.opacity = '0.5';
+				botonRegistrarse.style.cursor = 'not-allowed';
+				
+				
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+
 document.getElementById('form').addEventListener('submit', function(e) {
 	// Limpiar errores previos
 	document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
@@ -47,7 +80,6 @@ document.getElementById('form').addEventListener('submit', function(e) {
 	const nombre = document.getElementById('nombre');
 	if (!nombre.value.trim()) {
 		nombre.classList.add('input-error');
-		document.getElementById('errorNombre').style.display = 'block';
 		isValid = false;
 	}
 

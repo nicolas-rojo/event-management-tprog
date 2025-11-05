@@ -8,9 +8,9 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para dataDetalleRegistro complex type.
+ * <p>Java class for dataDetalleRegistro complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>{@code
  * <complexType name="dataDetalleRegistro">
@@ -52,7 +52,7 @@ public class DataDetalleRegistro {
     protected String fechaRegistro;
 
     /**
-     * Obtiene el valor de la propiedad nombreEdicion.
+     * Gets the value of the nombreEdicion property.
      * 
      * @return
      *     possible object is
@@ -64,7 +64,7 @@ public class DataDetalleRegistro {
     }
 
     /**
-     * Define el valor de la propiedad nombreEdicion.
+     * Sets the value of the nombreEdicion property.
      * 
      * @param value
      *     allowed object is
@@ -76,7 +76,7 @@ public class DataDetalleRegistro {
     }
 
     /**
-     * Obtiene el valor de la propiedad nombreTR.
+     * Gets the value of the nombreTR property.
      * 
      * @return
      *     possible object is
@@ -88,7 +88,7 @@ public class DataDetalleRegistro {
     }
 
     /**
-     * Define el valor de la propiedad nombreTR.
+     * Sets the value of the nombreTR property.
      * 
      * @param value
      *     allowed object is
@@ -100,7 +100,7 @@ public class DataDetalleRegistro {
     }
 
     /**
-     * Obtiene el valor de la propiedad tipoRegistro.
+     * Gets the value of the tipoRegistro property.
      * 
      * @return
      *     possible object is
@@ -112,7 +112,7 @@ public class DataDetalleRegistro {
     }
 
     /**
-     * Define el valor de la propiedad tipoRegistro.
+     * Sets the value of the tipoRegistro property.
      * 
      * @param value
      *     allowed object is
@@ -124,7 +124,7 @@ public class DataDetalleRegistro {
     }
 
     /**
-     * Obtiene el valor de la propiedad costo.
+     * Gets the value of the costo property.
      * 
      */
     public float getCosto() {
@@ -132,7 +132,7 @@ public class DataDetalleRegistro {
     }
 
     /**
-     * Define el valor de la propiedad costo.
+     * Sets the value of the costo property.
      * 
      */
     public void setCosto(float value) {
@@ -140,7 +140,7 @@ public class DataDetalleRegistro {
     }
 
     /**
-     * Obtiene el valor de la propiedad fecha.
+     * Gets the value of the fecha property.
      * 
      * @return
      *     possible object is
@@ -152,7 +152,7 @@ public class DataDetalleRegistro {
     }
 
     /**
-     * Define el valor de la propiedad fecha.
+     * Sets the value of the fecha property.
      * 
      * @param value
      *     allowed object is
@@ -164,7 +164,7 @@ public class DataDetalleRegistro {
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaRegistro.
+     * Gets the value of the fechaRegistro property.
      * 
      * @return
      *     possible object is
@@ -176,7 +176,7 @@ public class DataDetalleRegistro {
     }
 
     /**
-     * Define el valor de la propiedad fechaRegistro.
+     * Sets the value of the fechaRegistro property.
      * 
      * @param value
      *     allowed object is

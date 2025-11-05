@@ -29,15 +29,247 @@ public interface IControladorUsuarioWS {
      * 
      * @param arg0
      * @return
-     *     returns java.lang.String
+     *     returns cliente.ws.usuarios.StringArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/getUsuariosRegistradosRequest", output = "http://webservices/IControladorUsuarioWS/getUsuariosRegistradosResponse")
+    public StringArray getUsuariosRegistrados(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/verificarAsistenciaRequest", output = "http://webservices/IControladorUsuarioWS/verificarAsistenciaResponse")
+    public boolean verificarAsistencia(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns cliente.ws.usuarios.DataEdicionWebArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/getEdicionesEventoOrganizadorWebRequest", output = "http://webservices/IControladorUsuarioWS/getEdicionesEventoOrganizadorWebResponse")
+    public DataEdicionWebArray getEdicionesEventoOrganizadorWeb(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     */
+    @WebMethod
+    @Action(input = "http://webservices/IControladorUsuarioWS/dejarDeSeguirRequest", output = "http://webservices/IControladorUsuarioWS/dejarDeSeguirResponse")
+    public void dejarDeSeguir(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns cliente.ws.usuarios.StringArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/getSeguidoresRequest", output = "http://webservices/IControladorUsuarioWS/getSeguidoresResponse")
+    public StringArray getSeguidores(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/existeEmailRequest", output = "http://webservices/IControladorUsuarioWS/existeEmailResponse")
+    public boolean existeEmail(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns cliente.ws.usuarios.StringArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/getSeguidosRequest", output = "http://webservices/IControladorUsuarioWS/getSeguidosResponse")
+    public StringArray getSeguidos(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     */
+    @WebMethod
+    @Action(input = "http://webservices/IControladorUsuarioWS/setAsistenciaRequest", output = "http://webservices/IControladorUsuarioWS/setAsistenciaResponse")
+    public void setAsistencia(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @return
+     *     returns cliente.ws.usuarios.ParEdicionRegistro
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/estaRegistradoRequest", output = "http://webservices/IControladorUsuarioWS/estaRegistradoResponse")
+    public ParEdicionRegistro estaRegistrado(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @param arg2
+     * @param arg3
+     * @param arg4
+     * @throws AsistenteYaRegistrado_Exception
+     * @throws FechaRegistroInvalidaException_Exception
+     * @throws NoHayCupoEdicionTRegistro_Exception
+     */
+    @WebMethod
+    @Action(input = "http://webservices/IControladorUsuarioWS/nuevoRegistroRequest", output = "http://webservices/IControladorUsuarioWS/nuevoRegistroResponse", fault = {
+        @FaultAction(className = AsistenteYaRegistrado_Exception.class, value = "http://webservices/IControladorUsuarioWS/nuevoRegistro/Fault/AsistenteYaRegistrado"),
+        @FaultAction(className = NoHayCupoEdicionTRegistro_Exception.class, value = "http://webservices/IControladorUsuarioWS/nuevoRegistro/Fault/NoHayCupoEdicionTRegistro"),
+        @FaultAction(className = FechaRegistroInvalidaException_Exception.class, value = "http://webservices/IControladorUsuarioWS/nuevoRegistro/Fault/FechaRegistroInvalidaException")
+    })
+    public void nuevoRegistro(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2,
+        @WebParam(name = "arg3", partName = "arg3")
+        String arg3,
+        @WebParam(name = "arg4", partName = "arg4")
+        String arg4)
+        throws AsistenteYaRegistrado_Exception, FechaRegistroInvalidaException_Exception, NoHayCupoEdicionTRegistro_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/existeNicknameRequest", output = "http://webservices/IControladorUsuarioWS/existeNicknameResponse")
+    public boolean existeNickname(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     */
+    @WebMethod
+    @Action(input = "http://webservices/IControladorUsuarioWS/seguirUsuarioRequest", output = "http://webservices/IControladorUsuarioWS/seguirUsuarioResponse")
+    public void seguirUsuario(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @return
+     *     returns cliente.ws.usuarios.DataUsuario
      * @throws UsuarioNoExisteException_Exception
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getTipoUsuarioRequest", output = "http://webservices/IControladorUsuarioWS/getTipoUsuarioResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/getTipoUsuario/Fault/UsuarioNoExisteException")
+    @Action(input = "http://webservices/IControladorUsuarioWS/loginRequest", output = "http://webservices/IControladorUsuarioWS/loginResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/login/Fault/UsuarioNoExisteException")
     })
-    public String getTipoUsuario(
+    public DataUsuario login(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1)
+        throws UsuarioNoExisteException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/esSeguidorRequest", output = "http://webservices/IControladorUsuarioWS/esSeguidorResponse")
+    public boolean esSeguidor(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @return
+     *     returns cliente.ws.usuarios.DataUsuarioArray
+     * @throws UsuarioNoExisteException_Exception
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/getUsuariosRequest", output = "http://webservices/IControladorUsuarioWS/getUsuariosResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/getUsuarios/Fault/UsuarioNoExisteException")
+    })
+    public DataUsuarioArray getUsuarios()
+        throws UsuarioNoExisteException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns cliente.ws.usuarios.DataAsistente
+     * @throws UsuarioNoExisteException_Exception
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/getAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/getAsistenteResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/getAsistente/Fault/UsuarioNoExisteException")
+    })
+    public DataAsistente getAsistente(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0)
         throws UsuarioNoExisteException_Exception
@@ -64,39 +296,6 @@ public interface IControladorUsuarioWS {
     /**
      * 
      * @param arg0
-     * @return
-     *     returns cliente.ws.usuarios.DataAsistente
-     * @throws UsuarioNoExisteException_Exception
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/getAsistenteResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/getAsistente/Fault/UsuarioNoExisteException")
-    })
-    public DataAsistente getAsistente(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0)
-        throws UsuarioNoExisteException_Exception
-    ;
-
-    /**
-     * 
-     * @return
-     *     returns cliente.ws.usuarios.DataUsuarioArray
-     * @throws UsuarioNoExisteException_Exception
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getUsuariosRequest", output = "http://webservices/IControladorUsuarioWS/getUsuariosResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/getUsuarios/Fault/UsuarioNoExisteException")
-    })
-    public DataUsuarioArray getUsuarios()
-        throws UsuarioNoExisteException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
      * @throws UsuarioRepetidoException_Exception
      */
     @WebMethod
@@ -113,36 +312,38 @@ public interface IControladorUsuarioWS {
      * 
      * @param arg0
      * @return
-     *     returns cliente.ws.usuarios.ParEdicionRegistroArray
+     *     returns java.lang.String
+     * @throws UsuarioNoExisteException_Exception
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getRegistrosAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/getRegistrosAsistenteResponse")
-    public ParEdicionRegistroArray getRegistrosAsistente(
+    @Action(input = "http://webservices/IControladorUsuarioWS/getTipoUsuarioRequest", output = "http://webservices/IControladorUsuarioWS/getTipoUsuarioResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/getTipoUsuario/Fault/UsuarioNoExisteException")
+    })
+    public String getTipoUsuario(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+        String arg0)
+        throws UsuarioNoExisteException_Exception
+    ;
 
     /**
      * 
      * @param arg0
      * @param arg1
      * @param arg2
-     * @param arg3
      * @throws UsuarioNoExisteException_Exception
      */
     @WebMethod
-    @Action(input = "http://webservices/IControladorUsuarioWS/modificarOrganizadorRequest", output = "http://webservices/IControladorUsuarioWS/modificarOrganizadorResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarOrganizador/Fault/UsuarioNoExisteException")
+    @Action(input = "http://webservices/IControladorUsuarioWS/modificarAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/modificarAsistenteResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarAsistente/Fault/UsuarioNoExisteException")
     })
-    public void modificarOrganizador(
+    public void modificarAsistente(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0,
         @WebParam(name = "arg1", partName = "arg1")
         String arg1,
         @WebParam(name = "arg2", partName = "arg2")
-        String arg2,
-        @WebParam(name = "arg3", partName = "arg3")
-        String arg3)
+        String arg2)
         throws UsuarioNoExisteException_Exception
     ;
 
@@ -185,6 +386,43 @@ public interface IControladorUsuarioWS {
     /**
      * 
      * @param arg0
+     * @param arg1
+     * @param arg2
+     * @param arg3
+     * @throws UsuarioNoExisteException_Exception
+     */
+    @WebMethod
+    @Action(input = "http://webservices/IControladorUsuarioWS/modificarOrganizadorRequest", output = "http://webservices/IControladorUsuarioWS/modificarOrganizadorResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarOrganizador/Fault/UsuarioNoExisteException")
+    })
+    public void modificarOrganizador(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2,
+        @WebParam(name = "arg3", partName = "arg3")
+        String arg3)
+        throws UsuarioNoExisteException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns cliente.ws.usuarios.ParEdicionRegistroArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorUsuarioWS/getRegistrosAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/getRegistrosAsistenteResponse")
+    public ParEdicionRegistroArray getRegistrosAsistente(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
      * @return
      *     returns cliente.ws.usuarios.DataEdicionArray
      */
@@ -201,56 +439,6 @@ public interface IControladorUsuarioWS {
     @WebMethod
     @Action(input = "http://webservices/IControladorUsuarioWS/cargarDatosRequest", output = "http://webservices/IControladorUsuarioWS/cargarDatosResponse")
     public void cargarDatos();
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @param arg2
-     * @throws UsuarioNoExisteException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorUsuarioWS/modificarAsistenteRequest", output = "http://webservices/IControladorUsuarioWS/modificarAsistenteResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarAsistente/Fault/UsuarioNoExisteException")
-    })
-    public void modificarAsistente(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2)
-        throws UsuarioNoExisteException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @param arg2
-     * @param arg3
-     * @param arg4
-     * @throws ContrasenaIncorrectaException_Exception
-     * @throws UsuarioNoExisteException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPasswordRequest", output = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPasswordResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPassword/Fault/UsuarioNoExisteException"),
-        @FaultAction(className = ContrasenaIncorrectaException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPassword/Fault/ContrasenaIncorrectaException")
-    })
-    public void modificarAsistenteConPassword(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2,
-        @WebParam(name = "arg3", partName = "arg3")
-        String arg3,
-        @WebParam(name = "arg4", partName = "arg4")
-        String arg4)
-        throws ContrasenaIncorrectaException_Exception, UsuarioNoExisteException_Exception
-    ;
 
     /**
      * 
@@ -287,181 +475,19 @@ public interface IControladorUsuarioWS {
     /**
      * 
      * @param arg0
-     * @return
-     *     returns cliente.ws.usuarios.DataEdicionWebArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getEdicionesEventoOrganizadorWebRequest", output = "http://webservices/IControladorUsuarioWS/getEdicionesEventoOrganizadorWebResponse")
-    public DataEdicionWebArray getEdicionesEventoOrganizadorWeb(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/esSeguidorRequest", output = "http://webservices/IControladorUsuarioWS/esSeguidorResponse")
-    public boolean esSeguidor(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @return
-     *     returns cliente.ws.usuarios.DataUsuario
-     * @throws UsuarioNoExisteException_Exception
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/loginRequest", output = "http://webservices/IControladorUsuarioWS/loginResponse", fault = {
-        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/login/Fault/UsuarioNoExisteException")
-    })
-    public DataUsuario login(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1)
-        throws UsuarioNoExisteException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns cliente.ws.usuarios.StringArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getUsuariosRegistradosRequest", output = "http://webservices/IControladorUsuarioWS/getUsuariosRegistradosResponse")
-    public StringArray getUsuariosRegistrados(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/verificarAsistenciaRequest", output = "http://webservices/IControladorUsuarioWS/verificarAsistenciaResponse")
-    public boolean verificarAsistencia(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @return
-     *     returns cliente.ws.usuarios.ParEdicionRegistro
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/estaRegistradoRequest", output = "http://webservices/IControladorUsuarioWS/estaRegistradoResponse")
-    public ParEdicionRegistro estaRegistrado(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns cliente.ws.usuarios.StringArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getSeguidoresRequest", output = "http://webservices/IControladorUsuarioWS/getSeguidoresResponse")
-    public StringArray getSeguidores(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorUsuarioWS/seguirUsuarioRequest", output = "http://webservices/IControladorUsuarioWS/seguirUsuarioResponse")
-    public void seguirUsuario(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorUsuarioWS/setAsistenciaRequest", output = "http://webservices/IControladorUsuarioWS/setAsistenciaResponse")
-    public void setAsistencia(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns cliente.ws.usuarios.StringArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorUsuarioWS/getSeguidosRequest", output = "http://webservices/IControladorUsuarioWS/getSeguidosResponse")
-    public StringArray getSeguidos(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     */
-    @WebMethod
-    @Action(input = "http://webservices/IControladorUsuarioWS/dejarDeSeguirRequest", output = "http://webservices/IControladorUsuarioWS/dejarDeSeguirResponse")
-    public void dejarDeSeguir(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
      * @param arg1
      * @param arg2
      * @param arg3
      * @param arg4
-     * @throws AsistenteYaRegistrado_Exception
-     * @throws FechaRegistroInvalidaException_Exception
-     * @throws NoHayCupoEdicionTRegistro_Exception
+     * @throws ContrasenaIncorrectaException_Exception
+     * @throws UsuarioNoExisteException_Exception
      */
     @WebMethod
-    @Action(input = "http://webservices/IControladorUsuarioWS/nuevoRegistroRequest", output = "http://webservices/IControladorUsuarioWS/nuevoRegistroResponse", fault = {
-        @FaultAction(className = AsistenteYaRegistrado_Exception.class, value = "http://webservices/IControladorUsuarioWS/nuevoRegistro/Fault/AsistenteYaRegistrado"),
-        @FaultAction(className = NoHayCupoEdicionTRegistro_Exception.class, value = "http://webservices/IControladorUsuarioWS/nuevoRegistro/Fault/NoHayCupoEdicionTRegistro"),
-        @FaultAction(className = FechaRegistroInvalidaException_Exception.class, value = "http://webservices/IControladorUsuarioWS/nuevoRegistro/Fault/FechaRegistroInvalidaException")
+    @Action(input = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPasswordRequest", output = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPasswordResponse", fault = {
+        @FaultAction(className = UsuarioNoExisteException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPassword/Fault/UsuarioNoExisteException"),
+        @FaultAction(className = ContrasenaIncorrectaException_Exception.class, value = "http://webservices/IControladorUsuarioWS/modificarAsistenteConPassword/Fault/ContrasenaIncorrectaException")
     })
-    public void nuevoRegistro(
+    public void modificarAsistenteConPassword(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0,
         @WebParam(name = "arg1", partName = "arg1")
@@ -472,7 +498,7 @@ public interface IControladorUsuarioWS {
         String arg3,
         @WebParam(name = "arg4", partName = "arg4")
         String arg4)
-        throws AsistenteYaRegistrado_Exception, FechaRegistroInvalidaException_Exception, NoHayCupoEdicionTRegistro_Exception
+        throws ContrasenaIncorrectaException_Exception, UsuarioNoExisteException_Exception
     ;
 
 }
