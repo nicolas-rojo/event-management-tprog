@@ -1,4 +1,4 @@
-style {
+* {
     box-sizing: border-box;
 }
 
@@ -58,12 +58,14 @@ body {
     align-items: flex-start;
     gap: 20px;
     width: 100%;
+    max-width: 100%;
     padding: 25px;
     background-color: #f1eeee;
     border-radius: 30px;
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
     margin-bottom: 30px;
     transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 /* Estilo específico para organizador */
@@ -105,7 +107,6 @@ body.organizador .contenedor-principal {
     flex: 1;
     min-width: 0;
     position: relative;
-    /* Necesario para que el botón se posicione dentro */
 }
 
 .nombre-usuario {
@@ -168,6 +169,8 @@ body.organizador .contenedor-principal {
     padding: 25px;
     margin-bottom: 25px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .lista-items {
@@ -204,7 +207,6 @@ body.asistente .item {
     flex-direction: column;
     gap: 8px;
     position: relative;
-    /* Para que los botones se ubiquen dentro */
 }
 
 .nombre-evento {
@@ -371,17 +373,20 @@ body.asistente .item {
     font-size: 13px;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-width: 140px;
+    min-width: auto;
+    width: fit-content;
     font-family: 'Outfit', sans-serif;
+    text-align: center;
 }
 
 .boton-tipo-registro {
     background-color: #74ebd5;
     color: #2d5a4f;
     box-shadow: 0 3px 8px rgba(116, 235, 213, 0.3);
-    display: block;
-	width: fit-content;
+    display: inline-block;
+    width: auto;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .boton-tipo-registro:hover {
@@ -395,9 +400,10 @@ body.asistente .item {
     background-color: #9face6;
     color: #4a5d8f;
     box-shadow: 0 3px 8px rgba(159, 172, 230, 0.3);
-    display: block;
-	width: fit-content;
+    display: inline-block;
+    width: auto;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .boton-patrocinio:hover {

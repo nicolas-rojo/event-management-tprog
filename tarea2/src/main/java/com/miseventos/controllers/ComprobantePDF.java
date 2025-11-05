@@ -23,21 +23,21 @@ import cliente.ws.usuarios.DataUsuario;
 import cliente.ws.usuarios.IControladorUsuarioWS;
 import cliente.ws.usuarios.UsuarioNoExisteException_Exception;
 
+import cliente.ws.usuarios.ControladorUsuarioWSService;
+import cliente.ws.usuarios.DataUsuario;
+import cliente.ws.usuarios.IControladorUsuarioWS;
+import cliente.ws.usuarios.UsuarioNoExisteException_Exception;
 
 @WebServlet("/ComprobantePDF")
 public class ComprobantePDF extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IControladorEventoWS IEV_WS;
 	private IControladorUsuarioWS ICU_WS;
 	
 	
 	@Override
 	public void init() throws ServletException {
-		ControladorEventoWSService servicio = new ControladorEventoWSService();
-    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-        IEV_WS = servicio.getControladorEventoWSPort();
-        ICU_WS = servicio2.getControladorUsuarioWSPort();
-    	System.out.println("RegisterWS");
+    	ControladorUsuarioWSService servicio = new ControladorUsuarioWSService();
+        ICU_WS = servicio.getControladorUsuarioWSPort();
 	}
 	
 	
@@ -84,7 +84,8 @@ public class ComprobantePDF extends HttpServlet {
 	        document.add(Chunk.NEWLINE);
 	        document.add(Chunk.NEWLINE);
 	        document.add(new Paragraph("Se deja constancia de que " + asistente +" "+ apellido + " asistio a la edicion " + edicion + " en la ciudad de " + ciudad));
-	        Image img = Image.getInstance("C:/Users/facun/Desktop/logotransparente.png");
+	        String rutaImagen = getServletContext().getRealPath("/resources/images/logo.png");
+	        Image img = Image.getInstance(rutaImagen);
             img.scaleToFit(400, 400);
             float x = (document.getPageSize().getWidth() - img.getScaledWidth()) / 2;
             float y = (document.getPageSize().getHeight() - img.getScaledHeight()) / 2;

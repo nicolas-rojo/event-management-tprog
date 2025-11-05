@@ -1,27 +1,31 @@
 package com.miseventos.controllers;
 
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import logica.Fabrica;
-import logica.datatypes.DataEdicion;
-import logica.datatypes.Estado;
-import logica.interfaces.IEventos;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cliente.ws.eventos.Estado;
+import cliente.ws.eventos.ControladorEventoWSService;
+import cliente.ws.eventos.DataEdicion;
+import cliente.ws.eventos.IControladorEventoWS;
+
 @WebServlet("/listarEdiciones")
 public class ListarEdiciones extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IEventos IEV;
+	private IControladorEventoWS IEV_WS;
 	    
 	@Override
 	public void init() throws ServletException {  
-	    IEV = Fabrica.getInstance().getIControladorEventos();
+		ControladorEventoWSService servicio = new ControladorEventoWSService();
+		IEV_WS = servicio.getControladorEventoWSPort();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,13 +33,14 @@ public class ListarEdiciones extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String nombreEvento = request.getParameter("evento");
         
-        List<String> nombresEdiciones = IEV.listarEdiciones(nombreEvento);
+        List<String> nombresEdiciones = IEV_WS.listarEdiciones(nombreEvento).getItem();
+        
         List<DataEdicion> ediciones = new ArrayList<>();
         
         if (nombresEdiciones != null) {
             for (String nombreEdicion : nombresEdiciones) {
-                DataEdicion edicion = IEV.obtenerEdicionEvento(nombreEvento, nombreEdicion);
-                if (edicion != null && IEV.getEstado(nombreEdicion, nombreEvento) == Estado.Confirmado) {
+                DataEdicion edicion = IEV_WS.obtenerEdicionEvento(nombreEvento, nombreEdicion);
+                if (edicion != null && IEV_WS.getEstado(nombreEdicion, nombreEvento) == Estado.CONFIRMADO) {
                     ediciones.add(edicion);
                 }
             }

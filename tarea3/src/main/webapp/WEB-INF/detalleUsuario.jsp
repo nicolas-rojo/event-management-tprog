@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.miseventos.utils.nombreUtils"%>
-<%@ page import="logica.datatypes.*" %>
+<%@ page import= "cliente.ws.usuarios.*"%>
+<%@ page import= "cliente.ws.eventos.*"%>
 <%@ page import="java.util.List" %>
-<%@ page import="logica.Fabrica" %>
-<%@ page import="logica.interfaces.*" %>
 
 <!DOCTYPE html>
 <html>
@@ -63,13 +62,15 @@ List<ParEdicionRegistro> registros = (List<ParEdicionRegistro>) request.getAttri
     			<h2 class="section-title">Mis Registros a Eventos</h2>
     			<div class="registros-container">
 	    			<%
-	    			IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
-            		IEventos IEV= Fabrica.getInstance().getIControladorEventos();
+	    			ControladorUsuarioWSService servicio = new ControladorUsuarioWSService();
+	    			IControladorUsuarioWS ICU_WS = servicio.getControladorUsuarioWSPort();
+	    			ControladorEventoWSService servicio2 = new ControladorEventoWSService();
+            		IControladorEventoWS IEV_WS = servicio2.getControladorEventoWSPort();
 	    			for (ParEdicionRegistro par : registros) {
-                    	DataDetalleRegistro DataReg = ICU.getDetallesRegistro(usr.getNickname(), par);
+                    	DataDetalleRegistro DataReg = ICU_WS.getDetallesRegistro(usr.getNickname(), par);
 	    			%>
 		        		<div class="registro-card">
-		            		<a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= java.net.URLEncoder.encode(IEV.eventoTieneEdicion(par.getNombreEdicion()), "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(par.getNombreEdicion(),"UTF-8") %>" class="registro-link">
+		            		<a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= java.net.URLEncoder.encode(IEV_WS.eventoTieneEdicion(par.getNombreEdicion()), "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(par.getNombreEdicion(),"UTF-8") %>" class="registro-link">
 		                		<div class="registro-info">
 									<h3 class="registro-evento-nombre"><%= par.getNombreEdicion() %></h3>
 									<p class="registro-detalle">Tipo: <%= DataReg.getTipoRegistro() %> </p>
@@ -78,7 +79,7 @@ List<ParEdicionRegistro> registros = (List<ParEdicionRegistro>) request.getAttri
 		            		</a>
 		            		
 		            		<%
-		            		if (!ICU.verificarAsistencia(DataReg.getNombreEdicion(), usr.getNickname())) {
+		            		if (!ICU_WS.verificarAsistencia(DataReg.getNombreEdicion(), usr.getNickname())) {
 		            		%>
 								<button type="button" class="asistencia-button" onclick="mostrarModalAsistencia(event, '<%= par.getNombreEdicion() %>')">
 									<i class="bi bi-plus-circle"></i>
