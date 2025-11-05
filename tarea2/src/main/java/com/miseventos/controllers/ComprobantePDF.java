@@ -9,33 +9,28 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import excepciones.UsuarioNoExisteException;
-import logica.Fabrica;
-import logica.datatypes.*;
-import logica.interfaces.IEventos;
-import logica.interfaces.IUsuario;
-
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
+import cliente.ws.usuarios.ControladorUsuarioWSService;
+import cliente.ws.usuarios.DataUsuario;
+import cliente.ws.usuarios.IControladorUsuarioWS;
+import cliente.ws.usuarios.UsuarioNoExisteException_Exception;
 
 @WebServlet("/ComprobantePDF")
 public class ComprobantePDF extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IEventos IEV;
-	private IUsuario ICU;
+	private IControladorUsuarioWS ICU_WS;
 	
 	
 	@Override
 	public void init() throws ServletException {
-		IEV = Fabrica.getInstance().getIControladorEventos();
-		ICU = Fabrica.getInstance().getIControladorUsuario();
+    	ControladorUsuarioWSService servicio = new ControladorUsuarioWSService();
+        ICU_WS = servicio.getControladorUsuarioWSPort();
 	}
 	
 	
@@ -56,8 +51,8 @@ public class ComprobantePDF extends HttpServlet {
 	    response.setHeader("Content-Disposition", "attachment; filename=\"Comprobante_Asistencia_"+ edicion +".pdf\"");
 	    
 	    try {
-	        apellido = ICU.getAsistente(datosU.getEmail()).getApellido();
-	    } catch (UsuarioNoExisteException e) {
+	        apellido = ICU_WS.getAsistente(datosU.getEmail()).getApellido();
+	    } catch (UsuarioNoExisteException_Exception e) {
 	        e.printStackTrace();
 	    }
 	    
@@ -82,7 +77,8 @@ public class ComprobantePDF extends HttpServlet {
 	        document.add(Chunk.NEWLINE);
 	        document.add(Chunk.NEWLINE);
 	        document.add(new Paragraph("Se deja constancia de que " + asistente +" "+ apellido + " asistio a la edicion " + edicion + " en la ciudad de " + ciudad));
-	        Image img = Image.getInstance("C:/Users/facun/Desktop/logotransparente.png");
+	        String rutaImagen = getServletContext().getRealPath("/resources/images/logo.png");
+	        Image img = Image.getInstance(rutaImagen);
             img.scaleToFit(400, 400);
             float x = (document.getPageSize().getWidth() - img.getScaledWidth()) / 2;
             float y = (document.getPageSize().getHeight() - img.getScaledHeight()) / 2;
