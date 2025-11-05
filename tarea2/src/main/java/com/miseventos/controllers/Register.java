@@ -23,6 +23,7 @@ import cliente.ws.usuarios.IControladorUsuarioWS;
 import cliente.ws.usuarios.DataUsuario;
 import cliente.ws.usuarios.DataAsistente;
 import cliente.ws.usuarios.DataOrganizador;
+import cliente.ws.usuarios.UsuarioRepetidoException_Exception;
 
 
 @WebServlet("/register")
@@ -90,9 +91,9 @@ public class Register extends HttpServlet {
 			datos.setNombre(nombre);
 			session.setAttribute("datosUsr", datos);
 			response.sendRedirect(request.getContextPath() + "/home");
-		//} catch (UsuarioRepetidoException e) {
-		//	request.setAttribute("error", "Mail o Nickname en uso");
-		//	request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+		} catch (UsuarioRepetidoException_Exception e) {
+			request.setAttribute("error", "Mail o Nickname en uso");
+			request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "Error al intentar registrar");

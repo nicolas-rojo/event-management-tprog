@@ -24,6 +24,8 @@ import cliente.ws.eventos.EventoNoExisteExcepcion;
 import cliente.ws.eventos.IControladorEventoWS;
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.IControladorUsuarioWS;
+import cliente.ws.eventos.EventoNoExisteExcepcion_Exception;
+
 
 @WebServlet("/buscar")
 public class Buscar extends HttpServlet {
@@ -90,9 +92,9 @@ public class Buscar extends HttpServlet {
 			request.setAttribute("resultados", resultados);
 			request.getRequestDispatcher("/WEB-INF/resBusqueda.jsp").forward(request, response);
 			
-//		} catch (EventoNoExisteExcepcion e) {
-//			request.setAttribute("error", "Error al cargar los datos");
-//            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+		} catch (EventoNoExisteExcepcion_Exception e) {
+			request.setAttribute("error", "Error al cargar los datos");
+            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "No se pudieron listar los eventos");
