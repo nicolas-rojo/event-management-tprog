@@ -81,9 +81,9 @@ public class ConsultaEdicion extends HttpServlet {
 		}
 		
 		ParEdicionRegistro registro = ICU_WS.estaRegistrado(dataU.getNickname(), edicionSeleccionada);
-		if (registro != null) {
-			request.setAttribute("registrado", true);
-			request.setAttribute("dataRegistro", registro);
+		if (registro != null && registro.getNombreEdicion() != null && !registro.getNombreEdicion().isEmpty()) {
+		    request.setAttribute("registrado", true);
+		    request.setAttribute("dataRegistro", registro);
 		}
 		
 		request.setAttribute("dataEdicion", dataEd);
