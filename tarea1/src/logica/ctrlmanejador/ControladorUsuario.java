@@ -41,11 +41,76 @@ import logica.datatypes.Estado;
 import logica.datatypes.Nivel;
 import logica.datatypes.ParEdicionRegistro;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
 public class ControladorUsuario implements IUsuario {
 
     public ControladorUsuario() {
     }
 
+    //Hola soy agustin
+    public void pruebasPersistencia() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MisEventos-PU");
+        EntityManager em = emf.createEntityManager();
+        
+        try {
+            System.out.println("=== INICIANDO PRUEBAS DE PERSISTENCIA ===\n");
+            
+            // PRUEBA 1: Crear y persistir
+            System.out.println("1. Creando organizador...");
+            em.getTransaction().begin();
+            
+            Organizador org = new Organizador(
+                "Prueba Org",
+                "testorg",
+                "test@ejemplo.com",
+                "1234",
+                "Organización de prueba",
+                "https://test.com"
+            );
+            
+            em.persist(org);
+            em.getTransaction().commit();
+            System.out.println("   ✓ Organizador persistido\n");
+            
+            // PRUEBA 2: Recuperar por clave primaria
+            System.out.println("2. Recuperando organizador por nickname...");
+            Organizador recuperado = em.find(Organizador.class, "testorg");
+            if (recuperado != null) {
+                System.out.println("   ✓ Recuperado: " + recuperado.getNombre());
+                System.out.println("     Email: " + recuperado.getEmail());
+            } else {
+                System.out.println("   ✗ No se encontró el organizador");
+            }
+            
+            // PRUEBA 3: Listar todos los organizadores
+            System.out.println("\n3. Listando todos los organizadores en BD...");
+            List<Organizador> orgs = em.createQuery(
+                "SELECT o FROM Organizador o", Organizador.class
+            ).getResultList();
+            
+            System.out.println("   Total encontrados: " + orgs.size());
+            for (Organizador o : orgs) {
+                System.out.println("   - " + o.getNickname() + " (" + o.getNombre() + ")");
+            }
+            
+            System.out.println("\n=== PRUEBAS COMPLETADAS ===");
+            
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.err.println("✗ Error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+    
+    
     public void registrarAsistente(String nombre, String nickname, String email, String pass, String apellido, LocalDate fechaNac) throws UsuarioRepetidoException {
         ManejadorUsuario musr = ManejadorUsuario.getInstance();
         Usuario usr = musr.getUsuarioNickname(nickname);

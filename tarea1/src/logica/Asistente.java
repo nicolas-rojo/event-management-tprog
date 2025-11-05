@@ -3,30 +3,42 @@ package logica;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.persistence.*;
 
 import logica.datatypes.ParEdicionRegistro;
 import logica.datatypes.DataAsistente;
 import logica.datatypes.DataDetalleRegistro;
 
-public class Asistente extends Usuario{
-	private String apellido;
-	private LocalDate fechaNac;
-	
-	private List<Registro> regs;
-	
-	public Asistente(String nombre, String nickname, String email, String pass, String apellido, LocalDate fechaNac){
-		super(nombre, nickname, email, pass);
-        this.apellido = apellido;
-        this.fechaNac = fechaNac;
-        
+@Entity
+@Table(name = "asistentes")
+public class Asistente extends Usuario {
+    
+    @Column(nullable = false, length = 200)
+    private String apellido;
+    
+    @Column(name = "fecha_nacimiento", nullable = false)
+    private LocalDate fechaNac;
+    
+    @OneToMany(mappedBy = "asistente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Registro> regs;
+    
+    // Constructor sin parámetros requerido por JPA
+    public Asistente() {
+        super();
         this.regs = new ArrayList<>();
     }
-	
-	public Asistente(DataAsistente dataAsistente){
-		super(dataAsistente.getNombre(), dataAsistente.getNickname(), dataAsistente.getEmail(), dataAsistente.getPass());
+    
+    public Asistente(String nombre, String nickname, String email, String pass, String apellido, LocalDate fechaNac){
+        super(nombre, nickname, email, pass);
+        this.apellido = apellido;
+        this.fechaNac = fechaNac;
+        this.regs = new ArrayList<>();
+    }
+    
+    public Asistente(DataAsistente dataAsistente){
+        super(dataAsistente.getNombre(), dataAsistente.getNickname(), dataAsistente.getEmail(), dataAsistente.getPass());
         this.apellido = dataAsistente.getApellido();
         this.fechaNac = dataAsistente.getFechaNac();
-        
         this.regs = new ArrayList<>();
     }
 
@@ -48,51 +60,49 @@ public class Asistente extends Usuario{
     
     @Override
     public boolean esAsistente() {
-    	return true;
+        return true;
     }
     
     @Override
     public boolean esOrganizador() {
-    	return false;
+        return false;
     }
     
-    
-    
     public boolean estaRegistrado(String edicion) {
-    	for (Registro r : regs) {
-    		if (r.esEdicion(edicion))
-    			return true;
-    	}
-    	return false;
+        for (Registro r : regs) {
+            if (r.esEdicion(edicion))
+                return true;
+        }
+        return false;
     }
     
     public void agregarRegistro(Registro reg) {
-    	this.regs.add(reg);
+        this.regs.add(reg);
     }
     
     public List<ParEdicionRegistro> getEdicionesRegistros() {
-    	List<ParEdicionRegistro> res = new ArrayList<ParEdicionRegistro>();
-    	for (Registro r : regs) {
-    		res.add(new ParEdicionRegistro(r.getNombreEdicion(), r.getFecha()));
-    	}
-    	return res;
+        List<ParEdicionRegistro> res = new ArrayList<ParEdicionRegistro>();
+        for (Registro r : regs) {
+            res.add(new ParEdicionRegistro(r.getNombreEdicion(), r.getFecha()));
+        }
+        return res;
     }
     
     public DataDetalleRegistro getDetallesRegistro(ParEdicionRegistro regEdicion) {
-    	for (Registro r : regs) {
-    		if (r.getNombreEdicion().equals(regEdicion.getNombreEdicion()) && r.getFecha().equals(regEdicion.getFechaRegistro())) {
-    			return new DataDetalleRegistro(regEdicion.getNombreEdicion(), r.getNombreTR(), r.getCostoTR(), regEdicion.getFechaRegistro());
-    		}
-    	}
-    	return null;
+        for (Registro r : regs) {
+            if (r.getNombreEdicion().equals(regEdicion.getNombreEdicion()) && r.getFecha().equals(regEdicion.getFechaRegistro())) {
+                return new DataDetalleRegistro(regEdicion.getNombreEdicion(), r.getNombreTR(), r.getCostoTR(), regEdicion.getFechaRegistro());
+            }
+        }
+        return null;
     }
     
     public Registro getRegistro(String edicion) {
-    	for (Registro r : regs) {
-    		if (r.getNombreEdicion().equals(edicion)) {
-    			return r;
-    		}
-    	}
-    	return null;
+        for (Registro r : regs) {
+            if (r.getNombreEdicion().equals(edicion)) {
+                return r;
+            }
+        }
+        return null;
     }
 }

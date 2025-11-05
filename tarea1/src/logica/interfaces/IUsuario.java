@@ -17,7 +17,8 @@ import logica.datatypes.ParEdicionRegistro;
 import excepciones.ContrasenaIncorrectaException;
 
 public interface IUsuario {
-    
+	public abstract void pruebasPersistencia();
+	
 	public abstract void registrarAsistente(String nombre, String nickname, String email, String pass, String apellido, LocalDate fechaNac) throws UsuarioRepetidoException;
 	
 	public abstract void registrarAsistente(DataAsistente dataAsistente) throws UsuarioRepetidoException; //pass 

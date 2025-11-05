@@ -2,26 +2,41 @@ package logica;
 
 import java.util.HashMap;
 import java.util.Map;
+import jakarta.persistence.*;
 
 import logica.datatypes.DataOrganizador;
 
-public class Organizador extends Usuario{
-	private String descripcion;
-	private String url;
-	private Map<String, EdicionEvento> ediciones;
-	
-	public Organizador(String nombre, String nickname, String email, String pass, String descripcion, String url){
-		super(nombre, nickname, email, pass);
+@Entity
+@Table(name = "organizadores")
+public class Organizador extends Usuario {
+    
+    @Column(length = 1000)
+    private String descripcion;
+    
+    @Column(length = 500)
+    private String url;
+    
+    @Transient
+    private Map<String, EdicionEvento> ediciones;
+    
+    // Constructor sin parámetros requerido por JPA
+    public Organizador() {
+        super();
+        this.ediciones = new HashMap<>();
+    }
+    
+    public Organizador(String nombre, String nickname, String email, String pass, String descripcion, String url){
+        super(nombre, nickname, email, pass);
         this.descripcion = descripcion;
         this.url = url;
-        
-        ediciones = new HashMap<String, EdicionEvento>();
+        this.ediciones = new HashMap<>();
     }
-	
-	public Organizador(DataOrganizador dataOrg){
-		super(dataOrg.getNombre(), dataOrg.getNickname(), dataOrg.getEmail(), dataOrg.getPass());
+    
+    public Organizador(DataOrganizador dataOrg){
+        super(dataOrg.getNombre(), dataOrg.getNickname(), dataOrg.getEmail(), dataOrg.getPass());
         this.descripcion = dataOrg.getDescripcion();
         this.url = dataOrg.getUrl();
+        this.ediciones = new HashMap<>();
     }
 
     public String getDescripcion() {
@@ -58,15 +73,15 @@ public class Organizador extends Usuario{
     
     @Override
     public boolean esAsistente() {
-    	return false;
+        return false;
     }
     
     @Override
     public boolean esOrganizador() {
-    	return true;
+        return true;
     }
     
     public void agregarEdicion(EdicionEvento edicion) {
-    	this.ediciones.put(edicion.getNombre(), edicion);
+        this.ediciones.put(edicion.getNombre(), edicion);
     }
 }

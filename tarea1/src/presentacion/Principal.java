@@ -236,6 +236,28 @@ public class Principal {
         });
         menuSistema.add(menuPublicarWS);
         
+        //AgustinINICIO
+        JMenuItem menuPruebasPersistencia = new JMenuItem("Pruebas de Persistencia");
+        menuPruebasPersistencia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                try {
+                    ICU.pruebasPersistencia();
+                    JOptionPane.showMessageDialog(frmGestionDeUsuarios, 
+                        "Pruebas de persistencia ejecutadas correctamente.\n" +
+                        "Revisa la consola para ver los resultados.", 
+                        "Persistencia", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(frmGestionDeUsuarios, 
+                        "Error al ejecutar pruebas de persistencia:\n" + e.getMessage(), 
+                        "Error de Persistencia", 
+                        JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        menuSistema.add(menuPruebasPersistencia);
+        //AgustinFIN
         JMenu menuUsuarios = new JMenu("Usuarios");
         menuBar.add(menuUsuarios);
 
