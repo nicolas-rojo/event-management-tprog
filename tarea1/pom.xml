@@ -28,15 +28,9 @@
     <dependency>
         <groupId>org.eclipse.persistence</groupId>
         <artifactId>eclipselink</artifactId>
-        <version>3.0.2</version>
+        <version>4.0.2</version>
     </dependency>
     
-    <!-- HSQLDB -->
-    <dependency>
-        <groupId>org.hsqldb</groupId>
-        <artifactId>hsqldb</artifactId>
-        <version>2.7.1</version>
-    </dependency>
     <!-- Dependencias existentes -->
     <dependency>
         <groupId>jakarta.xml.ws</groupId>

@@ -51,12 +51,11 @@
 			<attribute name="owner.project.facets" value="jst.utility"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/hsqldb/hsqldb.jar"/>
-	<classpathentry kind="lib" path="lib/eclipselink/eclipselink.jar"/>
 	<classpathentry kind="lib" path="lib/eclipselink/jakarta.annotation-api.jar"/>
 	<classpathentry kind="lib" path="lib/eclipselink/jakarta.persistence-api.jar"/>
 	<classpathentry kind="lib" path="lib/eclipselink/org.eclipse.persistence.extension.jar"/>
 	<classpathentry kind="lib" path="lib/eclipselink/org.eclipse.persistence.jpa.modelgen.processor.jar"/>
 	<classpathentry kind="lib" path="lib/eclipselink/org.eclipse.persistence.jpars.jar"/>
+	<classpathentry kind="lib" path="lib/hsqldb.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
