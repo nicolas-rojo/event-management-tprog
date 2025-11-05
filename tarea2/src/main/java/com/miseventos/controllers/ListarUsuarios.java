@@ -12,6 +12,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import cliente.ws.usuarios.UsuarioNoExisteException_Exception;
+
 
 @WebServlet("/consultaUsuario")
 public class ListarUsuarios extends HttpServlet {
@@ -52,9 +54,9 @@ public class ListarUsuarios extends HttpServlet {
             
             request.getRequestDispatcher("/WEB-INF/listarUsuarios.jsp").forward(request, response);
                    
-        //} catch (UsuarioNoExisteException e) {
-        //    request.setAttribute("mensaje", "No hay usuarios registrados en el sistema.");
-        //    request.getRequestDispatcher("/WEB-INF/listarUsuarios.jsp").forward(request, response);
+        } catch (UsuarioNoExisteException_Exception e) {
+            request.setAttribute("mensaje", "No hay usuarios registrados en el sistema.");
+            request.getRequestDispatcher("/WEB-INF/listarUsuarios.jsp").forward(request, response);
         } catch (Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "Error al cargar los usuarios registrados del sistema");

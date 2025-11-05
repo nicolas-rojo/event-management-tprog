@@ -18,7 +18,7 @@ import cliente.ws.usuarios.DataAsistente;
 import cliente.ws.usuarios.DataOrganizador;
 import cliente.ws.usuarios.ParEdicionRegistro;
 import cliente.ws.eventos.DataEdicionWeb;
-import excepciones.*;
+import cliente.ws.usuarios.UsuarioNoExisteException_Exception;
 
 @WebServlet("/detalleUsuario")
 public class DetalleUsuario extends HttpServlet {
@@ -77,9 +77,9 @@ public class DetalleUsuario extends HttpServlet {
     
             request.getRequestDispatcher("/WEB-INF/detalleUsuario.jsp").forward(request, response);
                    
-        //} catch (UsuarioNoExisteException e) {
-        //    request.setAttribute("error", "El usuario solicitado no existe.");
-        //    request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+        } catch (UsuarioNoExisteException_Exception e) {
+            request.setAttribute("error", "El usuario solicitado no existe.");
+            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
         } catch (Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "No se pudo obtener la informacion del usuario");
