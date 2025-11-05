@@ -1,6 +1,7 @@
 package com.miseventos.controllers;
 
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,20 +10,22 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import logica.Fabrica;
-import logica.interfaces.*;
-import logica.datatypes.*;
-import excepciones.*;
+import cliente.ws.usuarios.ControladorUsuarioWSService;
+import cliente.ws.usuarios.IControladorUsuarioWS;
+import cliente.ws.usuarios.UsuarioNoExisteException_Exception;
+import cliente.ws.usuarios.DataUsuario;
+
+
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IUsuario ICU;
+	private IControladorUsuarioWS ICU_WS;
 	
 	@Override
     public void init() throws ServletException {  
-    	ICU = Fabrica.getInstance().getIControladorUsuario();
-    	ICU.cargarDatos();
+		ControladorUsuarioWSService servicio = new ControladorUsuarioWSService();
+		ICU_WS = servicio.getControladorUsuarioWSPort();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,9 +36,9 @@ public class Login extends HttpServlet {
 		String nickmail = request.getParameter("nickmail");
 		String pass = request.getParameter("clave");
 		try { 
-			DataUsuario res = ICU.login(nickmail, pass);
+			DataUsuario res = ICU_WS.login(nickmail, pass);
 			if (res != null) {
-				String tipo = ICU.getTipoUsuario(res.getEmail());
+				String tipo = ICU_WS.getTipoUsuario(res.getEmail());
 				if ("Organizador".equals(tipo)) {
 					request.setAttribute("error", "Uso exclusivo para Asistentes");
 					request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
@@ -52,7 +55,7 @@ public class Login extends HttpServlet {
 				request.setAttribute("error", "Usuario o Contraseña Incorrectos");
 				request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 			}
-		} catch (UsuarioNoExisteException e) {
+		} catch (UsuarioNoExisteException_Exception e) {
 			request.setAttribute("error", "Usuario o Contraseña Incorrectos");
 			request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		} catch (Exception e) {
