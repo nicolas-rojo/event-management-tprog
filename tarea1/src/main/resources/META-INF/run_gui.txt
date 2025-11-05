@@ -1,10 +1,8 @@
-java -cp .\lib\hsqldb\hsqldb.jar org.hsqldb.util.DatabaseManagerSwing
+java -cp .\lib\hsqldb\hsqldb-2.7.2-jdk8.jar org.hsqldb.util.DatabaseManagerSwing
 
 
 
 #Type: HSQL Database Engine Standlone
-#URL: jdbc:hsqldb:file:MisEventosDB
-#User: Grupo07
-
+#URL: jdbc:hsqldb:file:MisEventos-DB
 
 #DROP SCHEMA PUBLIC CASCADE
