@@ -87,7 +87,7 @@ public class ModificarUsuario extends HttpServlet {
                     request.setAttribute("error", "Debe ingresar su contraseña actual para cambiarla.");
                     try {
                         cargarDatosUsuario(request, email, tipoUsuario);
-                    } catch (Exception e) { //NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+                    } catch (UsuarioNoExisteException_Exception e) { 
                         request.setAttribute("error", "El usuario no existe.");
                         request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
                         return;
@@ -100,7 +100,7 @@ public class ModificarUsuario extends HttpServlet {
                     request.setAttribute("error", "Debe ingresar la nueva contraseña.");
                     try {
                         cargarDatosUsuario(request, email, tipoUsuario);
-                    } catch (Exception e) {//NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+                    } catch (UsuarioNoExisteException_Exception e) {
                         request.setAttribute("error", "El usuario no existe.");
                         request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
                         return;
@@ -113,7 +113,7 @@ public class ModificarUsuario extends HttpServlet {
                     request.setAttribute("error", "Debe confirmar la nueva contraseña.");
                     try {
                         cargarDatosUsuario(request, email, tipoUsuario);
-                    } catch (Exception e) {//NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+                    } catch (UsuarioNoExisteException_Exception e) {
                         request.setAttribute("error", "El usuario no existe.");
                         request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
                         return;
@@ -127,7 +127,7 @@ public class ModificarUsuario extends HttpServlet {
                     request.setAttribute("error", "Las contraseñas nuevas no coinciden.");
                     try {
                         cargarDatosUsuario(request, email, tipoUsuario);
-                    } catch (Exception e) {//NICOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+                    } catch (UsuarioNoExisteException_Exception e) {
                         request.setAttribute("error", "El usuario no existe.");
                         request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
                         return;
@@ -141,12 +141,24 @@ public class ModificarUsuario extends HttpServlet {
                 String nuevoNombre = request.getParameter("nombre");
                 String nuevoApellido = request.getParameter("apellido");
                 
-                if (cambiarPassword) {
-                    ICU_WS.modificarAsistenteConPassword(email, nuevoNombre, nuevoApellido, passActual, passNueva);
-                } else {
-                    ICU_WS.modificarAsistente(email, nuevoNombre, nuevoApellido);
+                try {
+                    if (cambiarPassword) {
+                        ICU_WS.modificarAsistenteConPassword(email, nuevoNombre, nuevoApellido, passActual, passNueva);
+                    } else {
+                        ICU_WS.modificarAsistente(email, nuevoNombre, nuevoApellido);
+                    }
+                } catch (ContrasenaIncorrectaException_Exception e) {
+                    request.setAttribute("error", "La contraseña actual es incorrecta.");
+                    try {
+                        cargarDatosUsuario(request, email, tipoUsuario);
+                        request.getRequestDispatcher("/WEB-INF/modificarUsuario.jsp").forward(request, response);
+                    } catch (Exception ex) {
+                        request.setAttribute("error", "El usuario no existe.");
+                        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+                    }
+                    return;
                 }
-                
+
                 DataAsistente asistenteActualizado = ICU_WS.getAsistente(email);
                 session.setAttribute("datosUsr", asistenteActualizado);
                 response.sendRedirect(request.getContextPath() + "/detalleUsuario?email=" + email);
@@ -156,28 +168,44 @@ public class ModificarUsuario extends HttpServlet {
                 String nuevaDescripcion = request.getParameter("descripcion");
                 String nuevaUrl = request.getParameter("url");
                 
-                if (cambiarPassword) {
-                    ICU_WS.modificarOrganizadorConPassword(email, nuevoNombre, nuevaDescripcion, nuevaUrl, passActual, passNueva);
-                } else {
-                    ICU_WS.modificarOrganizador(email, nuevoNombre, nuevaDescripcion, nuevaUrl);
+                try {
+                    if (cambiarPassword) {
+                        ICU_WS.modificarOrganizadorConPassword(email, nuevoNombre, nuevaDescripcion, nuevaUrl, passActual, passNueva);
+                    } else {
+                        ICU_WS.modificarOrganizador(email, nuevoNombre, nuevaDescripcion, nuevaUrl);
+                    }
+                } catch (ContrasenaIncorrectaException_Exception e) {
+                    request.setAttribute("error", "La contraseña actual es incorrecta.");
+                    try {
+                        cargarDatosUsuario(request, email, tipoUsuario);
+                        request.getRequestDispatcher("/WEB-INF/modificarUsuario.jsp").forward(request, response);
+                    } catch (Exception ex) {
+                        request.setAttribute("error", "El usuario no existe.");
+                        request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+                    }
+                    return;
                 }
-                
+
                 DataOrganizador organizadorActualizado = ICU_WS.getOrganizador(email);
                 session.setAttribute("datosUsr", organizadorActualizado);
                 response.sendRedirect(request.getContextPath() + "/detalleUsuario?email=" + email);
             }
             
-        } catch (Exception e) {//NICOOOOOOOOOOOOOOOOOOO
-            request.setAttribute("error", "La contraseña actual es incorrecta.");
+        } catch (Exception e) { //NICOOOOOOOOOOOOOOOOOOO
+            request.setAttribute("error", "Ocurrió un error inesperado.");
             try {
                 cargarDatosUsuario(request, email, tipoUsuario);
                 request.getRequestDispatcher("/WEB-INF/modificarUsuario.jsp").forward(request, response);
-            } catch (Exception ex) {//NICOOOOOOOOOOOOOOOOOOOOOO
+            } catch (UsuarioNoExisteException_Exception ex) {
                 request.setAttribute("error", "El usuario no existe.");
                 request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
-            }
-        } 
-    }
+
+            } catch (Exception ex) {
+                request.setAttribute("error", "Ocurrió un error inesperado.");
+                request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+            }}
+        }
+
     
     private void cargarDatosUsuario(HttpServletRequest request, String email, String tipoUsuario) throws Exception{
     	try {
