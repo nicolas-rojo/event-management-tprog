@@ -26,6 +26,7 @@ public class Login extends HttpServlet {
     public void init() throws ServletException {  
 		ControladorUsuarioWSService servicio = new ControladorUsuarioWSService();
 		ICU_WS = servicio.getControladorUsuarioWSPort();
+
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

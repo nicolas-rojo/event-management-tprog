@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.Arrays"%>
 <%@ page import="java.util.List"%>
-<%@ page import="logica.datatypes.*"%>
-<%@ page import="logica.Fabrica"%>
-<%@ page import="logica.interfaces.*"%>
+<%@ page import="cliente.ws.usuarios.*"%>
+<%@ page import="cliente.ws.eventos.*"%>
 <%@ page import="com.miseventos.utils.nombreUtils"%>
+<%@ page import="cliente.ws.eventos.DataEdicion"%>
 
 <%
 	DataEdicion dataEd = (DataEdicion) request.getAttribute("dataEdicion");
@@ -61,13 +61,13 @@
 		</a>
 		
 		<% 
-		if (dataEd.getUrl() != null && !dataEd.getUrl().isEmpty()) { 
+		if (dataEd.getVideoUrl() != null && !dataEd.getVideoUrl().isEmpty()) { 
 		%>
 		    <div class="video-section">
 		        <h3 class="video-titulo">Video</h3>
 		        <div class="video-card">
 		            <div class="video-container">
-		                <iframe class="video-embed" src="<%= dataEd.getUrl() %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		                <iframe class="video-embed" src="<%= dataEd.getVideoUrl() %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		            </div>
 		        </div>
 		    </div>
@@ -82,12 +82,13 @@
 		%>
 			<div class="mi-registro-section" id="miRegistro">
 			<%
-            IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+			ControladorUsuarioWSService servicio = new ControladorUsuarioWSService();
+			IControladorUsuarioWS ICU_WS = servicio.getControladorUsuarioWSPort();
 			DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
 			Boolean registrado = (Boolean) request.getAttribute("registrado");
 			if (registrado != null && registrado) {
 				ParEdicionRegistro dataRegistro = (ParEdicionRegistro) request.getAttribute("dataRegistro");
-            	DataDetalleRegistro detalleReg = ICU.getDetallesRegistro(dataU.getNickname(), dataRegistro);
+            	DataDetalleRegistro detalleReg = ICU_WS.getDetallesRegistro(dataU.getNickname(), dataRegistro);
 			%>
 			<h3 class="registro-titulo">Mi Registro</h3>
 			<div class="mi-registro-card">
@@ -123,7 +124,7 @@
 								<h4 class="tipo-nombre"><%=dataTR.getNombre()%></h4>
 								<span class="tipo-precio">$<%=dataTR.getCosto() %></span>
 							</div>
-							<p class="tipo-descripcion"><%=dataTR.getDescr() %></p>
+							<p class="tipo-descripcion"><%=dataTR.getDescripcion() %></p>
 							<div class="tipo-cupo">
 								<i class="bi bi-people-fill"></i> <span>Cupo: <%= dataTR.getCupo()%></span>
 							</div>
