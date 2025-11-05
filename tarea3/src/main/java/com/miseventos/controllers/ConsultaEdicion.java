@@ -9,23 +9,25 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.ArrayList;
 
-import logica.Fabrica;
-import logica.interfaces.*;
-import logica.datatypes.*;
-import excepciones.*;
+import cliente.ws.usuarios.*;
+import cliente.ws.eventos.*;
+import cliente.ws.eventos.DataEdicion;
+
+import java.util.ArrayList;
 
 @WebServlet("/consultaEdicion")
 public class ConsultaEdicion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IEventos IEV;
-	private IUsuario ICU;
+	private IControladorEventoWS IEV_WS;
+	private IControladorUsuarioWS ICU_WS;
 
 	@Override
 	public void init() throws ServletException {
-		IEV = Fabrica.getInstance().getIControladorEventos();
-		ICU = Fabrica.getInstance().getIControladorUsuario();
+		ControladorEventoWSService servicio = new ControladorEventoWSService();
+    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+        IEV_WS = servicio.getControladorEventoWSPort();
+        ICU_WS = servicio2.getControladorUsuarioWSPort();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,8 +46,8 @@ public class ConsultaEdicion extends HttpServlet {
 			return;
 		}
 		
-		String organizador = IEV.obtenerOrganizadorEdicion(eventoSeleccionado, edicionSeleccionada);
-		DataEdicion dataEd = IEV.obtenerEdicionEvento(eventoSeleccionado, edicionSeleccionada);
+		String organizador = IEV_WS.obtenerOrganizadorEdicion(eventoSeleccionado, edicionSeleccionada);
+		DataEdicion dataEd = IEV_WS.obtenerEdicionEvento(eventoSeleccionado, edicionSeleccionada);
 		if (dataEd == null) {
 			request.setAttribute("error", "No se encontró la edición del evento");
 			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
@@ -54,8 +56,8 @@ public class ConsultaEdicion extends HttpServlet {
 		
 		DataOrganizador dataOrg = null;
 		try {
-			dataOrg = ICU.getOrganizador(organizador);
-		} catch (UsuarioNoExisteException e) {
+			dataOrg = ICU_WS.getOrganizador(organizador);
+		} catch (UsuarioNoExisteException_Exception e) {
 			e.printStackTrace();
 			request.setAttribute("error", "Organizador no existente");
 			request.getRequestDispatcher("/WEB-INF/consultaEdicion.jsp").forward(request, response);
@@ -67,18 +69,18 @@ public class ConsultaEdicion extends HttpServlet {
 		}
 		
 		
-		List<DataPatrocinioCompleto> dataPatrocinios = IEV.obtenerPatrociniosEdicion(eventoSeleccionado, edicionSeleccionada);
-		List<String> TRegistros = IEV.obtenerTipoRegistrosEdicion(eventoSeleccionado, edicionSeleccionada);
+		List<DataPatrocinioCompleto> dataPatrocinios = IEV_WS.obtenerPatrociniosEdicion(eventoSeleccionado, edicionSeleccionada).getItem();
+		List<String> TRegistros = IEV_WS.obtenerTipoRegistrosEdicion(eventoSeleccionado, edicionSeleccionada).getItem();
 		List<DataTRegistro> dataTRegistros = new ArrayList<>();
 		if (TRegistros != null) {
 			for (String TRegistro : TRegistros) {
-				DataTRegistro data = IEV.getDataTRegistro(eventoSeleccionado, edicionSeleccionada, TRegistro);
+				DataTRegistro data = IEV_WS.getDataTRegistro(eventoSeleccionado, edicionSeleccionada, TRegistro);
 				if (data != null)
 					dataTRegistros.add(data);
 			}
 		}
 		
-		ParEdicionRegistro registro = ICU.estaRegistrado(dataU.getNickname(), edicionSeleccionada);
+		ParEdicionRegistro registro = ICU_WS.estaRegistrado(dataU.getNickname(), edicionSeleccionada);
 		if (registro != null) {
 			request.setAttribute("registrado", true);
 			request.setAttribute("dataRegistro", registro);
