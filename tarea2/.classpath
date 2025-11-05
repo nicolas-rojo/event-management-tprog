@@ -53,7 +53,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
 		<attributes>
-			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
@@ -63,5 +62,12 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/hsqldb/hsqldb.jar"/>
+	<classpathentry kind="lib" path="lib/eclipselink/eclipselink.jar"/>
+	<classpathentry kind="lib" path="lib/eclipselink/jakarta.annotation-api.jar"/>
+	<classpathentry kind="lib" path="lib/eclipselink/jakarta.persistence-api.jar"/>
+	<classpathentry kind="lib" path="lib/eclipselink/org.eclipse.persistence.extension.jar"/>
+	<classpathentry kind="lib" path="lib/eclipselink/org.eclipse.persistence.jpa.modelgen.processor.jar"/>
+	<classpathentry kind="lib" path="lib/eclipselink/org.eclipse.persistence.jpars.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

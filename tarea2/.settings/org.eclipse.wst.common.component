@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                                            
+                                                
+    
     
     
     
@@ -10,7 +11,8 @@
     
     
     <wb-module deploy-name="tarea2">
-                                                                        
+                                                                                
+        
         
         
         
@@ -19,7 +21,8 @@
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -30,7 +33,8 @@
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -41,7 +45,8 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-                                                                
+                                                                        
+        
         
         
         
@@ -49,14 +54,11 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-                
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
-                
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
         <dependent-module archiveName="tarea1-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/servidorcentral/servidorcentral">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -67,9 +69,11 @@
         
         
         <property name="java-output-path" value="/miseventos/build/classes"/>
-                
+                        
+        
         <property name="context-root" value="tarea2"/>
-                                                                                    
+                                                                                            
+    
     
     
     
@@ -80,7 +84,8 @@
     
     
     </wb-module>
-                                        
+                                            
+
 
 
 

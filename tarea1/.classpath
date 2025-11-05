@@ -56,6 +56,6 @@
 	<classpathentry kind="lib" path="lib/eclipselink/org.eclipse.persistence.extension.jar"/>
 	<classpathentry kind="lib" path="lib/eclipselink/org.eclipse.persistence.jpa.modelgen.processor.jar"/>
 	<classpathentry kind="lib" path="lib/eclipselink/org.eclipse.persistence.jpars.jar"/>
-	<classpathentry kind="lib" path="lib/hsqldb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Agustín/tpgr07/tarea1/lib/hsqldb/hsqldb-2.7.2-jdk8.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
