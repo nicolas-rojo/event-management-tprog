@@ -1,5 +1,8 @@
 package com.miseventos.controllers;
 
+//ARREGLADO
+//VIDEO
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,22 +19,26 @@ import javax.imageio.ImageIO;
 
 import com.miseventos.utils.nombreUtils;
 
-import logica.Fabrica;
-import logica.interfaces.IEventos;
-import logica.datatypes.DataEdicion;
-import logica.datatypes.DataUsuario;
-import excepciones.EdicionRepetidaExcepcion;
-import excepciones.LinkInvalidoExcepcion;
+import cliente.ws.eventos.ControladorEventoWSService;
+import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.usuarios.DataUsuario;
+import cliente.ws.eventos.DataEdicion;
+import cliente.ws.eventos.EdicionRepetidaExcepcion;
+import cliente.ws.eventos.EdicionRepetidaExcepcion_Exception;
+import cliente.ws.eventos.LinkInvalidoExcepcion;
+import cliente.ws.eventos.LinkInvalidoExcepcion_Exception;
 
 @MultipartConfig
 @WebServlet("/AltaEdicion")
 public class AltaEdicion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IEventos IEV;
+	private IControladorEventoWS IEV_WS;
 
 	@Override
 	public void init() throws ServletException {
-		IEV = Fabrica.getInstance().getIControladorEventos();
+		ControladorEventoWSService servicio = new ControladorEventoWSService();
+		IEV_WS = servicio.getControladorEventoWSPort();
+		System.out.println("AltaEdicionWS");
 	}
 
 	@Override
@@ -117,14 +124,23 @@ public class AltaEdicion extends HttpServlet {
 
 			String org = dataU.getNickname();
 			LocalDate fechaActual = LocalDate.now();
+			DataEdicion dataEd = new DataEdicion();
+			dataEd.setNombre(nombre);
+			dataEd.setSigla(sigla);
+			dataEd.setFechaIni(fechaIni.toString());
+			dataEd.setFechaFin(fechaFin.toString());
+			dataEd.setFechaAlta(fechaActual.toString());
+			dataEd.setCiudad(ciudad);
+			dataEd.setPais(pais);
+			dataEd.setVideoUrl(videoUrl);
+			IEV_WS.nuevaEdicion(dataEd, evento, org);
 
-			DataEdicion dataEd = new DataEdicion(nombre, sigla, fechaIni, fechaFin, fechaActual, ciudad, pais, videoUrl);
-			IEV.nuevaEdicion(dataEd, evento, org);
 			cargarImg(request, nombre);
 
 			response.sendRedirect(request.getContextPath() + "/home");
 
-		} catch (EdicionRepetidaExcepcion e) {
+			
+		} catch ( EdicionRepetidaExcepcion_Exception e) {
 			request.setAttribute("error", "Ya existe una edición con ese nombre.");
 			request.setAttribute("evento", evento);
 			
@@ -137,7 +153,7 @@ public class AltaEdicion extends HttpServlet {
 			
 			request.getRequestDispatcher("/WEB-INF/altaEdicion.jsp").forward(request, response);
 
-		} catch (LinkInvalidoExcepcion e) {
+		} catch (LinkInvalidoExcepcion_Exception e) {
 			request.setAttribute("error", "El link ingresado no es un link de YouTube válido");
 			request.setAttribute("evento", evento);
 			

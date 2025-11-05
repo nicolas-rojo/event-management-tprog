@@ -1,20 +1,37 @@
 package logica.datatypes;
 
-public class DataOrganizador extends DataUsuario{
-	private String descripcion;
-	private String url;
-	
-	public DataOrganizador(String nombre, String nickname, String email, String pass, String desc, String url) {
-		super(nombre, nickname, email, pass);
-		this.descripcion = desc;
-		this.url = url;
-	}
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
 
-	public String getDescripcion() {
-        return descripcion;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "dataOrganizador", propOrder = {
+    "descripcion",
+    "url"
+})
+public class DataOrganizador extends DataUsuario {
+
+    @XmlElement(required = true)
+    protected String descripcion;
+
+    @XmlElement
+    protected String url;
+
+    public DataOrganizador() {
+        super();
     }
-	
-	public String getUrl() {
-        return url;
+
+    public DataOrganizador(String nombre, String nickname, String email, String pass,
+                          String desc, String url) {
+        super(nombre, nickname, email, pass);
+        this.descripcion = desc;
+        this.url = url;
     }
+
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+
+    public String getUrl() { return url; }
+    public void setUrl(String url) { this.url = url; }
 }

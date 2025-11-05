@@ -19,22 +19,21 @@ import javax.imageio.ImageIO;
 import com.miseventos.utils.nombreUtils;
 
 import java.util.ArrayList;
-
-import logica.Fabrica;
-import logica.interfaces.*;
-import logica.datatypes.*;
-import excepciones.*;
 import java.util.Arrays;
+
+import cliente.ws.eventos.*;
 
 @WebServlet("/altaEvento")
 @MultipartConfig
 public class AltaEvento extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IEventos IEV;
+    private IControladorEventoWS IEV_WS;
     
     @Override
     public void init() throws ServletException {  
-        IEV = Fabrica.getInstance().getIControladorEventos();
+    	ControladorEventoWSService servicio = new ControladorEventoWSService();
+        IEV_WS = servicio.getControladorEventoWSPort();
+        System.out.println("AltaEventoWS");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,17 +71,25 @@ public class AltaEvento extends HttpServlet {
             return;
         }
         
-        DataEvento data = new DataEvento(nombre.trim(), sigla.trim(), fechaActual, descripcion.trim());
+        DataEvento data = new DataEvento();
+        data.setNombre(nombre.trim());
+        data.setSigla(sigla.trim());
+        data.setFechaAlta(fechaActual.toString()); //Añadí esto...................
+        //data.setFechaAlta(fechaActual);
+        data.setDescripcion(descripcion.trim());
+        
        
         try {
-            IEV.nuevoEvento(data, cats);
+        	StringArray categorias = new StringArray();
+        	categorias.getItem().addAll(cats);
+            IEV_WS.nuevoEvento(data, categorias);
             cargarImg(request, nombre);
             response.sendRedirect(request.getContextPath() + "/home");
-        } catch(EventoRepetidoExcepcion | EventoSinCategoriaExcepcion e) {
+        } catch(EventoRepetidoExcepcion_Exception | EventoSinCategoriaExcepcion_Exception e) {
             e.printStackTrace();
             request.setAttribute("error", e.getMessage());
             
-            if (e instanceof EventoRepetidoExcepcion) {
+            if (e instanceof EventoRepetidoExcepcion_Exception) {
                 request.setAttribute("nombreEv", "");
             } else {
                 request.setAttribute("nombreEv", request.getParameter("nombreEv"));

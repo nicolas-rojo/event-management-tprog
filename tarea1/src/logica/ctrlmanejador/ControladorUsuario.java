@@ -171,7 +171,7 @@ public class ControladorUsuario implements IUsuario {
         Usuario usr = musr.getUsuarioEmail(email);
         
         if (usr == null) {
-            throw new UsuarioNoExisteException("No existe usuario con email: " + email);
+        	usr = musr.getUsuarioNickname(email);
         }
         
         if (usr instanceof Asistente) {
@@ -179,7 +179,7 @@ public class ControladorUsuario implements IUsuario {
         } else if (usr instanceof Organizador) {
             return "Organizador";
         } else {
-            throw new UsuarioNoExisteException("Tipo de usuario desconocido para email: " + email);
+            throw new UsuarioNoExisteException("No existe usuario con email: " + email);
         }
     }
 	
@@ -229,20 +229,20 @@ public class ControladorUsuario implements IUsuario {
 		return res;
 	}
 	
-	public DataUsuario login(String nickmail, String pass) {
-		ManejadorUsuario musr = ManejadorUsuario.getInstance();
-		Usuario usr = musr.getUsuarioNickname(nickmail);
+	public DataUsuario login(String nickmail, String pass) throws UsuarioNoExisteException {
+	    ManejadorUsuario musr = ManejadorUsuario.getInstance();
+	    Usuario usr = musr.getUsuarioNickname(nickmail);
 
-		if (usr == null)
-			usr = musr.getUsuarioEmail(nickmail);
+	    if (usr == null)
+	        usr = musr.getUsuarioEmail(nickmail);
 
-		if (usr == null)
-			return null;
+	    if (usr == null)
+	        throw new UsuarioNoExisteException("Usuario no encontrado");
 
-		if (!usr.getPass().equals(pass))
-			return null;
+	    if (!usr.getPass().equals(pass))
+	        throw new UsuarioNoExisteException("Contraseña incorrecta");
 
-		return new DataUsuario(usr.getNombre(), usr.getNickname(), usr.getEmail(), "");
+	    return new DataUsuario(usr.getNombre(), usr.getNickname(), usr.getEmail(), "");
 	}
 	
 	public void cargarDatos() {

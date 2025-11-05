@@ -11,10 +11,13 @@ import jakarta.servlet.annotation.MultipartConfig;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import logica.Fabrica;
-import logica.interfaces.*;
-import logica.datatypes.*;
-import excepciones.*;
+import cliente.ws.eventos.ControladorEventoWSService;
+import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.usuarios.ControladorUsuarioWSService;
+import cliente.ws.usuarios.IControladorUsuarioWS;
+import cliente.ws.usuarios.DataUsuario;
+import cliente.ws.eventos.DataTRegistro;
+
 
 @WebServlet("/altaRegistro")
 @MultipartConfig
@@ -22,14 +25,16 @@ import excepciones.*;
 public class AltaRegistro extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private IUsuario ICU;
-	private IEventos IEV;
+	private IControladorEventoWS IEV_WS;
+	private IControladorUsuarioWS ICU_WS;
 	
 	@Override
     public void init() throws ServletException {  
-    	ICU = Fabrica.getInstance().getIControladorUsuario();
-    	IEV = Fabrica.getInstance().getIControladorEventos();
-    	
+
+    	ControladorEventoWSService servicio = new ControladorEventoWSService();
+    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+        IEV_WS = servicio.getControladorEventoWSPort();
+        ICU_WS = servicio2.getControladorUsuarioWSPort(); 	
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,7 +42,7 @@ public class AltaRegistro extends HttpServlet {
 		String edicion = request.getParameter("edicion");
 		String evento = request.getParameter("evento");
 		String treg = request.getParameter("treg");
-		DataTRegistro dataTR = IEV.getDataTRegistro(evento, edicion, treg);
+		DataTRegistro dataTR = IEV_WS.getDataTRegistro(evento, edicion, treg);
 		request.setAttribute("dataTR", dataTR);		
 		request.getRequestDispatcher("/WEB-INF/altaRegistro.jsp").forward(request, response);
 	}
@@ -49,26 +54,26 @@ public class AltaRegistro extends HttpServlet {
 	    String evento = request.getParameter("evento");
 	    String edicion = request.getParameter("edicion");
 	    String tiporegistro = request.getParameter("treg");
-	    LocalDate fecha = LocalDate.now();		
+	    LocalDate fecha = LocalDate.now();
 	    
 	    try {
-	        ICU.nuevoRegistro(asistente, evento, edicion, tiporegistro, fecha);
+	        ICU_WS.nuevoRegistro(asistente, evento, edicion, tiporegistro, fecha.toString());
 	        response.sendRedirect(request.getContextPath() + "/home");
-	    } catch(AsistenteYaRegistrado e) {
+	    } catch(cliente.ws.usuarios.AsistenteYaRegistrado_Exception e) {
 	        // Recuperar dataTR antes de reenviar
-	        DataTRegistro dataTR = IEV.getDataTRegistro(evento, edicion, tiporegistro);
+	       DataTRegistro dataTR = IEV_WS.getDataTRegistro(evento, edicion, tiporegistro);
 	        request.setAttribute("dataTR", dataTR);
 	        request.setAttribute("errorYaRegistrado", "Ya estás registrado a esta edición");
 	        request.getRequestDispatcher("/WEB-INF/altaRegistro.jsp").forward(request, response);
-	    } catch(NoHayCupoEdicionTRegistro e) {
+	    } catch(cliente.ws.usuarios.NoHayCupoEdicionTRegistro_Exception e) {
 	        // Recuperar dataTR antes de reenviar
-	        DataTRegistro dataTR = IEV.getDataTRegistro(evento, edicion, tiporegistro);
+	        DataTRegistro dataTR = IEV_WS.getDataTRegistro(evento, edicion, tiporegistro);
 	        request.setAttribute("dataTR", dataTR);
 	        request.setAttribute("errorCupo", "No hay cupos disponibles para esta edición");
 	        request.getRequestDispatcher("/WEB-INF/altaRegistro.jsp").forward(request, response);
-	    } catch(FechaRegistroInvalidaException e) {
+	    } catch(cliente.ws.usuarios.FechaRegistroInvalidaException_Exception e) {
 	        // Recuperar dataTR antes de reenviar
-	        DataTRegistro dataTR = IEV.getDataTRegistro(evento, edicion, tiporegistro);
+	        DataTRegistro dataTR = IEV_WS.getDataTRegistro(evento, edicion, tiporegistro);
 	        request.setAttribute("dataTR", dataTR);
 	        request.setAttribute("errorFecha", e.getMessage());
 	        request.getRequestDispatcher("/WEB-INF/altaRegistro.jsp").forward(request, response);

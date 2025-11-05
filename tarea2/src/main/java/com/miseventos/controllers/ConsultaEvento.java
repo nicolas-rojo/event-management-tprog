@@ -1,5 +1,7 @@
 package com.miseventos.controllers;
 
+//ARREGLADO
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,19 +12,21 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import logica.Fabrica;
-import logica.interfaces.*;
-import logica.datatypes.*;
-import excepciones.*;
+import cliente.ws.eventos.*;
+import cliente.ws.eventos.DataEventoCompleto;
+import cliente.ws.eventos.Estado;
 
 @WebServlet("/consultaEvento")
 public class ConsultaEvento extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IEventos IEV;
+    private IControladorEventoWS IEV_WS;
     
     @Override
     public void init() throws ServletException {  
-        IEV = Fabrica.getInstance().getIControladorEventos();
+        
+        ControladorEventoWSService servicio = new ControladorEventoWSService();
+        IEV_WS = servicio.getControladorEventoWSPort();
+        System.out.println("ConsultaEventoWS");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -31,23 +35,25 @@ public class ConsultaEvento extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String nombreEvento = request.getParameter("evento");
         try {
-            DataEventoCompleto[] todosEventos = IEV.listarInfoEvento();
+            DataEventoCompletoArray aux = IEV_WS.listarInfoEvento();
+            List<DataEventoCompleto> listaAux;
+            listaAux = aux.getItem();
             DataEventoCompleto eventoSeleccionado = null;
             
-            for (DataEventoCompleto evento : todosEventos) {
+            for (DataEventoCompleto evento : listaAux) {
                 if (evento.getNombre().equals(nombreEvento)) {
                     eventoSeleccionado = evento;
                     break;
                 }
             }
-            
-            List<String> nombresEdiciones = IEV.listarEdiciones(nombreEvento);
+            StringArray auxLista = IEV_WS.listarEdiciones(nombreEvento);
+            List<String> nombresEdiciones = auxLista.getItem();
             List<DataEdicion> ediciones = new ArrayList<>();
             
             if (nombresEdiciones != null) {
                 for (String nombreEdicion : nombresEdiciones) {
-                    DataEdicion edicion = IEV.obtenerEdicionEvento(nombreEvento, nombreEdicion);
-                    if (edicion != null && IEV.getEstado(nombreEdicion, nombreEvento) == Estado.Confirmado) {
+                    DataEdicion edicion = IEV_WS.obtenerEdicionEvento(nombreEvento, nombreEdicion);
+                    if (edicion != null && IEV_WS.getEstado(nombreEdicion, nombreEvento) ==Estado.CONFIRMADO) {
                         ediciones.add(edicion);
                     }
                 }
@@ -58,7 +64,7 @@ public class ConsultaEvento extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/consultaEvento.jsp").forward(request, response);
 
             
-        } catch (EventoNoExisteExcepcion e) {
+        } catch (EventoNoExisteExcepcion_Exception e) {
         	e.printStackTrace();
         } catch (Exception e) {
 			e.printStackTrace();

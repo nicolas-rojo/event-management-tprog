@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="logica.datatypes.DataInstitucion" %>
-<%@ page import="logica.datatypes.Nivel" %>
+<%@ page import="cliente.ws.instituciones.DataInstitucion" %>
+<%@ page import="cliente.ws.instituciones.Nivel" %>
 
 <!DOCTYPE html>
 <html lang="es">

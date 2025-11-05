@@ -1,0 +1,98 @@
+package webservices;
+
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebService;
+import java.time.LocalDate;
+import java.util.List;
+
+import jakarta.jws.soap.SOAPBinding;
+import jakarta.jws.soap.SOAPBinding.Style;
+import jakarta.jws.soap.SOAPBinding.ParameterStyle;
+
+import logica.datatypes.*;
+import excepciones.*;
+
+@WebService
+@SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
+public interface IControladorUsuarioWS {
+    
+	@WebMethod
+    DataDetalleRegistro getDetallesRegistro(String asistenteSeleccionado, ParEdicionRegistro regEdicion)  throws ErrorDetallesRegistroException;
+	
+	@WebMethod
+	void cargarDatos();
+	
+	@WebMethod
+	DataUsuario[] getUsuarios() throws UsuarioNoExisteException;
+	
+    @WebMethod
+    void registrarAsistente(DataAsistente dataAsistente) throws UsuarioRepetidoException;
+    
+    @WebMethod
+    void registrarOrganizador(DataOrganizador dataOrg) throws UsuarioRepetidoException;
+    
+    @WebMethod
+    DataAsistente getAsistente(String email) throws UsuarioNoExisteException;
+    
+    @WebMethod
+    DataOrganizador getOrganizador(String nickmail) throws UsuarioNoExisteException;
+    
+    @WebMethod
+    void modificarAsistente(String email, String nuevoNombre, String nuevoApellido) throws UsuarioNoExisteException;
+    
+    @WebMethod
+    void modificarOrganizador(String email, String nuevoNombre, String descripcion, String url) throws UsuarioNoExisteException;
+    
+    @WebMethod
+    void modificarAsistenteConPassword(String email, String nuevoNombre, String nuevoApellido, String passActual, String passNueva) throws UsuarioNoExisteException, ContrasenaIncorrectaException;
+    
+    @WebMethod
+    void modificarOrganizadorConPassword(String email, String nuevoNombre, String descripcion, String url, String passActual, String passNueva) throws UsuarioNoExisteException, ContrasenaIncorrectaException;
+    
+    @WebMethod
+    String getTipoUsuario(String email) throws UsuarioNoExisteException;
+    
+    @WebMethod
+    ParEdicionRegistro[] getRegistrosAsistente(String asistenteSeleccionado);
+    
+    @WebMethod
+    void nuevoRegistro(String asistenteSeleccionado, String evento, String edicion, String tipoReg, String fecha) throws AsistenteYaRegistrado, NoHayCupoEdicionTRegistro, FechaRegistroInvalidaException;
+    
+    @WebMethod
+    DataUsuario login(String nickmail, String pass) throws UsuarioNoExisteException;
+    
+    @WebMethod
+    ParEdicionRegistro estaRegistrado(String asistente, String edicion);
+    
+    @WebMethod
+    String[] getUsuariosRegistrados(String edicion);
+    
+    @WebMethod
+    DataEdicion[] getEdicionesEventoOrganizador(String nickname);
+    
+    @WebMethod
+    DataEdicionWeb[] getEdicionesEventoOrganizadorWeb(String nickname);
+    
+    //Funciones nuevas para parte 3:
+    
+    @WebMethod
+    void seguirUsuario(String seguidor, String aSeguir);
+    
+    @WebMethod
+    String[] getSeguidos(String usr);
+    
+    @WebMethod
+    String[] getSeguidores(String usr);
+    
+    @WebMethod
+    Boolean esSeguidor(String usr, String seguidor);
+    
+    @WebMethod
+    void dejarDeSeguir(String seguidor, String seguido);
+    
+    @WebMethod
+    Boolean verificarAsistencia(String edicion, String usuario);
+    
+    @WebMethod
+    void setAsistencia(String edicion, String usuario);
+}

@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="logica.datatypes.*" %>
 <%@ page import="excepciones.*" %>
-<%@ page import="logica.Fabrica" %>
-<%@ page import="logica.interfaces.IUsuario" %>
+<%@ page import="cliente.ws.usuarios.DataUsuario" %>
+<%@ page import="cliente.ws.usuarios.*" %>
 <%@ page import="com.miseventos.utils.nombreUtils" %>
 
 <!DOCTYPE html>
@@ -44,7 +43,9 @@
             <%
                 } else {
                     DataUsuario[] usuarios = (DataUsuario[]) request.getAttribute("usuarios");
-                    IUsuario controlUsr = Fabrica.getInstance().getIControladorUsuario();
+                    IControladorUsuarioWS ICU_WS;
+                    ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+                    ICU_WS = servicio2.getControladorUsuarioWSPort();
                     
                     if (usuarios != null && usuarios.length > 0) {
             %>
@@ -56,7 +57,7 @@
                             String claseTarjeta = "";
                             
                             try {
-                                tipoUsuario = controlUsr.getTipoUsuario(usuario.getEmail());
+                                tipoUsuario = ICU_WS.getTipoUsuario(usuario.getEmail());
                                 
                                 if ("Asistente".equals(tipoUsuario)) {
                                     claseTipo = "tipo-asistente";
@@ -65,7 +66,7 @@
                                     claseTipo = "tipo-organizador";
                                     claseTarjeta = "organizador";
                                 }
-                            } catch (UsuarioNoExisteException e) {
+                            } catch (Exception e) {
                                 // Mantener valores por defecto
                             }
                             
@@ -73,7 +74,7 @@
                             
                             try {
                                 if ("Asistente".equals(tipoUsuario)) {
-                                    DataAsistente asistente = controlUsr.getAsistente(usuario.getEmail());
+                                    DataAsistente asistente = ICU_WS.getAsistente(usuario.getEmail());
                                     detallesAdicionales = String.format(
                                         "<div class='detalle-item'>" +
                                         "<span class='icono'>🎂</span>" +
@@ -82,7 +83,7 @@
                                         asistente.getFechaNac()
                                     );
                                 } else if ("Organizador".equals(tipoUsuario)) {
-                                    DataOrganizador organizador = controlUsr.getOrganizador(usuario.getEmail());
+                                    DataOrganizador organizador = ICU_WS.getOrganizador(usuario.getEmail());
                                     if (organizador.getDescripcion() != null && !organizador.getDescripcion().isEmpty()) {
                                         detallesAdicionales = String.format(
                                             "<div class='detalle-item'>" +
@@ -102,8 +103,9 @@
                                         );
                                     }
                                 }
-                            } catch (UsuarioNoExisteException e) {
-                                // Ignorar error
+                            } catch (Exception e) {
+                            	System.err.println("⚠️ Error obteniendo detalles adicionales para el usuario " + usuario.getEmail() + " (" + tipoUsuario + "): " + e.getMessage());
+                            	    e.printStackTrace();
                             }
                             
                             boolean esUsuarioActual = false;

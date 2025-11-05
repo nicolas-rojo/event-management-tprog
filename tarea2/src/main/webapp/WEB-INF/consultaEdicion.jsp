@@ -1,11 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!-- FALTA AREGLARRR -->
 <%@ page import="java.util.Arrays"%>
 <%@ page import="java.util.List"%>
-<%@ page import="logica.datatypes.*"%>
-<%@ page import="logica.Fabrica" %>
-<%@ page import="logica.interfaces.*" %>
 <%@ page import="com.miseventos.utils.nombreUtils" %>
+
+<%@ page import="cliente.ws.eventos.ControladorEventoWSService" %>
+<%@ page import="cliente.ws.eventos.IControladorEventoWS" %>
+<%@ page import="cliente.ws.usuarios.ControladorUsuarioWSService" %>
+<%@ page import="cliente.ws.usuarios.IControladorUsuarioWS" %>
+<%@ page import="cliente.ws.eventos.DataEdicion" %>
+<%@ page import="cliente.ws.usuarios.DataUsuario" %>
+<%@ page import="cliente.ws.usuarios.DataOrganizador" %>
+<%@ page import="cliente.ws.usuarios.DataDetalleRegistro" %>
+<%@ page import="cliente.ws.usuarios.DataAsistente" %>
+<%@ page import="cliente.ws.instituciones.DataPatrocinio" %>
+<%@ page import="cliente.ws.eventos.DataPatrocinioCompleto" %>
+<%@ page import="cliente.ws.eventos.DataTRegistro" %>
+<%@ page import="cliente.ws.usuarios.ParEdicionRegistro" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -83,7 +95,7 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 					<div class="informacion-TRegistro">
 						<h2 class="nombre-evento"><%=dataTR.getNombre()%></h2>
 						<div class="detalles-TRegistro">
-							<span class="descripcion-TRegistro"><%=dataTR.getDescr()%>.</span>
+							<span class="descripcion-TRegistro"><%=dataTR.getDescripcion()%>.</span>
 							<span class="costo-TRegistro">Costo: $<%=dataTR.getCosto()%>.</span>
 							<span class="Cupos-TRegistro"><%=dataTR.getCupo()%> cupos restantes.</span>
 							<%
@@ -149,11 +161,11 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 		<!-- Columna derecha -->
 		<div class="columna-derecha">
 			
-			<% if (dataEd.getUrl() != null && !dataEd.getUrl().isEmpty()) { %>
+			<% if (dataEd.getVideoUrl() != null && !dataEd.getVideoUrl().isEmpty()) { %>
 			    <h2 class="texto-og">Video:</h2>
 			    <div class="contenedor-derecha-video">
 			        <iframe class="video-embed"
-			                src="<%= dataEd.getUrl() %>" 
+			                src="<%= dataEd.getVideoUrl() %>" 
 			                frameborder="0" 
 			                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
 			                allowfullscreen>
@@ -189,13 +201,17 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 				<div class="informacion-TRegistro">
 					<div class="detalles-TRegistro">
 						<%
-                		IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+						//Pido el controlador (su interfaz)
+						IControladorUsuarioWS ICU_WS;
+				    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+				        ICU_WS = servicio2.getControladorUsuarioWSPort();
+				        
 						DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
 						Boolean registrado = (Boolean) request.getAttribute("registrado");
-						Boolean asistio = (Boolean) ICU.verificarAsistencia(dataEd.getNombre(), dataU.getNickname());
+						Boolean asistio = (Boolean) ICU_WS.verificarAsistencia(dataEd.getNombre(), dataU.getNickname());
 						if (registrado != null && registrado) {
 							ParEdicionRegistro dataRegistro = (ParEdicionRegistro) request.getAttribute("dataRegistro");
-                        	DataDetalleRegistro detalleReg = ICU.getDetallesRegistro(dataU.getNickname(), dataRegistro);
+                        	DataDetalleRegistro detalleReg = ICU_WS.getDetallesRegistro(dataU.getNickname(), dataRegistro);
 						%>
 						<div class="registro-item">
 							<span>Registrado el: <%= detalleReg.getFecha() %>, como: <%= detalleReg.getNombreTR() %></span>
@@ -208,6 +224,12 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 								</button>
 							<% } %>
 							
+						</div>
+						<%
+						} else {
+						%>
+						<div class="registro-item">
+							<span>Registrado (detalles no disponibles)</span>
 						</div>
 						<%
 						}

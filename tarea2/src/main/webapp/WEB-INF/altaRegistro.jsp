@@ -1,4 +1,4 @@
-<%@ page import="logica.datatypes.*"%>
+<%@ page import="cliente.ws.eventos.DataTRegistro"%>
 <!DOCTYPE html>
 <html lang="es">
 

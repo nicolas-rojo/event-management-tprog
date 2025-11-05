@@ -1,8 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="logica.datatypes.*" %>
-<%@ page import="logica.Fabrica" %>
-<%@ page import="logica.interfaces.*" %>
+
+<%@ page import="cliente.ws.usuarios.DataUsuario" %>
+<%@ page import="cliente.ws.usuarios.DataAsistente" %>
+<%@ page import="cliente.ws.usuarios.DataOrganizador" %>
+<%@ page import="cliente.ws.usuarios.ParEdicionRegistro" %>
+<%@ page import="cliente.ws.usuarios.DataDetalleRegistro" %> <!--  Revisar el import este -->
+<%@ page import="cliente.ws.eventos.DataEdicionWeb" %> <!--  Revisar el import este -->
+<%@ page import="cliente.ws.usuarios.Estado" %>
+
+<%@ page import="cliente.ws.eventos.ControladorEventoWSService" %>
+<%@ page import="cliente.ws.eventos.IControladorEventoWS" %>
+<%@ page import="cliente.ws.usuarios.ControladorUsuarioWSService" %>
+<%@ page import="cliente.ws.usuarios.IControladorUsuarioWS" %>
+
 <%@ page import="com.miseventos.utils.nombreUtils" %>
 
 <!DOCTYPE html>
@@ -83,8 +94,10 @@
 					<%
 					} else {
 						if (usr != null) {
-	                		IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
-							boolean esSeguidor = ICU.esSeguidor(usuario.getEmail(), loggedMail);
+							IControladorUsuarioWS ICU_WS;
+					    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+					        ICU_WS = servicio2.getControladorUsuarioWSPort();
+							boolean esSeguidor = ICU_WS.esSeguidor(usuario.getEmail(), loggedMail);
 							if (esSeguidor) {
 							%>
 								<form action="${pageContext.request.contextPath}/detalleUsuario" method="POST" style="display: inline;">
@@ -165,15 +178,20 @@
                             %>
                                     <div class="lista-items">
                                     <%
-                                		IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
-                                		IEventos IEV= Fabrica.getInstance().getIControladorEventos();
+                                    IControladorUsuarioWS ICU_WS;
+                                    ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+                                    ICU_WS = servicio2.getControladorUsuarioWSPort();
+                                    
+                                    IControladorEventoWS IEV_WS;
+                                    ControladorEventoWSService servicio = new ControladorEventoWSService();
+                                    IEV_WS = servicio.getControladorEventoWSPort();
                                         for (ParEdicionRegistro registro : registros) {
-                                        	DataDetalleRegistro DataReg = ICU.getDetallesRegistro(usuario.getNickname(), registro);
+                                        	DataDetalleRegistro DataReg = ICU_WS.getDetallesRegistro(usuario.getNickname(), registro);
                                     %>
                                         <div class="item">
                                             <div class="info-registro">
                                             	<span class="nombre-evento">
-                                                    ✅ <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= java.net.URLEncoder.encode(IEV.eventoTieneEdicion(registro.getNombreEdicion()), "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(registro.getNombreEdicion(),"UTF-8") %>" 
+                                                    ✅ <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= java.net.URLEncoder.encode(IEV_WS.eventoTieneEdicion(registro.getNombreEdicion()), "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(registro.getNombreEdicion(),"UTF-8") %>" 
                                                     class = "nombre-evento-link"> 
                                                     <%= registro.getNombreEdicion() %> </a>
                                                 </span>
@@ -217,14 +235,16 @@
                         <h2 class="seccion-titulo">Ediciones de Eventos Organizadas</h2>
                         <div class="contenedor-secundario">
                             <%
-                            	IEventos IEV = Fabrica.getInstance().getIControladorEventos();
+	                            IControladorEventoWS IEV_WS;
+	                            ControladorEventoWSService servicio = new ControladorEventoWSService();
+	                            IEV_WS = servicio.getControladorEventoWSPort();
                                 if (ediciones != null && ediciones.length > 0) {
                             %>
                                     <div class="lista-items">
                                     <%
                                         for (DataEdicionWeb edicion : ediciones) {
-                                        	String evento = IEV.eventoTieneEdicion(edicion.getNombre());
-                                        	if(edicion.getEstado() == Estado.Confirmado){
+                                        	String evento = IEV_WS.eventoTieneEdicion(edicion.getNombre());
+                                        	if(edicion.getEstado() == cliente.ws.eventos.Estado.CONFIRMADO){
                                     %>
                                         <div class="item">
                                             <div class="info-evento">
@@ -242,7 +262,7 @@
                                                 <%
                                                 if(usuario.getEmail().equals(loggedMail)){
                                                 	String edicionEncoded = java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8");
-													String nombreEvento = IEV.eventoTieneEdicion(edicion.getNombre());
+													String nombreEvento = IEV_WS.eventoTieneEdicion(edicion.getNombre());
 													String eventoEncoded = java.net.URLEncoder.encode(nombreEvento, "UTF-8");
                                                 %>
 				                                    <div class="botones-evento">
@@ -311,19 +331,22 @@
 	            %>
 	                <p class="modal-vacio">No hay seguidores aún</p>
 	            <% } else {
-                	IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+	            	IControladorUsuarioWS ICU_WS;
+			    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+			        ICU_WS = servicio2.getControladorUsuarioWSPort();
 	            	String nickNorm;
 	                for (String nickname : seguidores) {
+	                	String tipoSeg = ICU_WS.getTipoUsuario(nickname);
 	                	nickNorm = nombreUtils.normalizarNombre(nickname);
 	                	DataUsuario seg = null;
-	                	try {
-		                	seg = ICU.getAsistente(nickname);
-	                	} catch (Exception e) { }
-		                
-	                	if (seg == null) {
+	                	if ("Asistente".equals(tipoSeg)) {
 		                	try {
-			                	seg = ICU.getOrganizador(nickname);	                		
-		                	} catch (Exception e) { }
+		                		seg = ICU_WS.getAsistente(nickname);		                		
+		                	} catch (Exception e) {}
+	                	} else if ("Organizador".equals(tipoSeg)) {
+		                	try {
+			                	seg = ICU_WS.getOrganizador(nickname);	                		
+		                	} catch (Exception e) {}
 		                }	                		
 	                	%>
 	                    <div class="modal-usuario-item" onclick="window.location.href='${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(seg.getEmail(), "UTF-8") %>'">
@@ -353,19 +376,22 @@
 	            %>
 	                <p class="modal-vacio">No hay seguidos aún</p>
 	            <% } else {
-	            	IUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+	            	IControladorUsuarioWS ICU_WS;
+			    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+			        ICU_WS = servicio2.getControladorUsuarioWSPort();
 	            	String nickNorm;
 	                for (String nickname : seguidos) {
+	                	String tipoSeg = ICU_WS.getTipoUsuario(nickname);
 	                	nickNorm = nombreUtils.normalizarNombre(nickname);
 	                	DataUsuario seg = null;
-	                	try {
-		                	seg = ICU.getAsistente(nickname);
-	                	} catch (Exception e) { }
-		                
-	                	if (seg == null) {
+	                	if ("Asistente".equals(tipoSeg)) {
 		                	try {
-			                	seg = ICU.getOrganizador(nickname);	                		
-		                	} catch (Exception e) { }
+		                		seg = ICU_WS.getAsistente(nickname);		                		
+		                	} catch (Exception e) {}
+	                	} else if ("Organizador".equals(tipoSeg)) {
+		                	try {
+			                	seg = ICU_WS.getOrganizador(nickname);	                		
+		                	} catch (Exception e) {}
 		                }	                		
 	                	%>
 	                    <div class="modal-usuario-item" onclick="window.location.href='${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(seg.getEmail(), "UTF-8") %>'">

@@ -50,7 +50,7 @@ public interface IUsuario {
     
     public abstract DataDetalleRegistro getDetallesRegistro(String asistenteSeleccionado, ParEdicionRegistro regEdicion)  throws ErrorDetallesRegistroException;
     
-    public abstract DataUsuario login(String nickmail, String pass);
+    public abstract DataUsuario login(String nickmail, String pass) throws UsuarioNoExisteException;
     
     public abstract void cargarDatos();
     

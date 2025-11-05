@@ -25,6 +25,7 @@ import logica.datatypes.Nivel;
 import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
 import logica.interfaces.IInstituciones;
+import webservices.PublicadorWS;
 
 
 import javax.swing.JMenu;
@@ -61,6 +62,7 @@ public class Principal {
     private CrearPatrocinio crePatrocinioInternalFrame;
     
     private boolean cond;
+    private boolean publicados;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -79,6 +81,7 @@ public class Principal {
         initialize();
         
         cond = false;
+        publicados = false;
         
         // Inicialización
         Fabrica fabrica = Fabrica.getInstance();
@@ -199,6 +202,39 @@ public class Principal {
             }
     	});
         menuSistema.add(menuCargarDatos);
+        
+        JMenuItem menuPublicarWS = new JMenuItem("Publicar WebServices");
+        menuPublicarWS.addActionListener(new ActionListener(){
+            public void actionPerformed (ActionEvent arg0) {
+                if (!publicados) {
+                    try {
+                        PublicadorWS publicador = new PublicadorWS();
+                        publicador.publicar();
+                        publicados = true;
+                        JOptionPane.showMessageDialog(frmGestionDeUsuarios, 
+                            "Los WebServices fueron publicados correctamente.\n" +
+                            "URLs:\n" +
+                            "  • http://localhost:8081/eventos?wsdl\n" +
+                            "  • http://localhost:8081/usuarios?wsdl\n" +
+                            "  • http://localhost:8081/instituciones?wsdl",
+                            "Publicador WebServices", 
+                            JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(frmGestionDeUsuarios, 
+                            "Error al publicar los WebServices:\n" + e.getMessage(), 
+                            "Error", 
+                            JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(frmGestionDeUsuarios, 
+                        "Los WebServices ya fueron publicados.", 
+                        "Publicador WebServices", 
+                        JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        menuSistema.add(menuPublicarWS);
         
         JMenu menuUsuarios = new JMenu("Usuarios");
         menuBar.add(menuUsuarios);

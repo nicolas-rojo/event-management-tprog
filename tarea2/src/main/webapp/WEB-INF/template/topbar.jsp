@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="logica.datatypes.*" %>
+<%@ page import="cliente.ws.usuarios.*" %>
 <%@ page import="com.miseventos.utils.nombreUtils" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/templateStyle.css">

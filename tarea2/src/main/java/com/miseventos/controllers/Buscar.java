@@ -14,21 +14,31 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.miseventos.utils.*;
-import logica.Fabrica;
-import logica.interfaces.*;
-import logica.datatypes.*;
-import excepciones.*;
+
+import cliente.ws.eventos.ControladorEventoWSService;
+import cliente.ws.eventos.DataEdicion;
+import cliente.ws.eventos.DataEventoCompleto;
+import cliente.ws.eventos.DataEventoCompletoArray;
+import cliente.ws.eventos.Estado;
+import cliente.ws.eventos.EventoNoExisteExcepcion;
+import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.usuarios.ControladorUsuarioWSService;
+import cliente.ws.usuarios.IControladorUsuarioWS;
 
 @WebServlet("/buscar")
 public class Buscar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IUsuario ICU;
-    private IEventos IEV;
+	private IControladorEventoWS IEV_WS;
+	private IControladorUsuarioWS ICU_WS;
     
     @Override
     public void init() throws ServletException {
-        ICU = Fabrica.getInstance().getIControladorUsuario();
-        IEV = Fabrica.getInstance().getIControladorEventos();
+    	ControladorEventoWSService servicio = new ControladorEventoWSService();
+    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
+        IEV_WS = servicio.getControladorEventoWSPort();
+        ICU_WS = servicio2.getControladorUsuarioWSPort();
+
+        System.out.println("ConsultaEventoWS");
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,21 +51,23 @@ public class Buscar extends HttpServlet {
 			ordenar = "fecha";
 		
 		try {
-			DataEventoCompleto[] aux = IEV.listarInfoEvento();
+			
+			DataEventoCompletoArray auxA = IEV_WS.listarInfoEvento();
+			DataEventoCompleto[] aux = auxA.getItem().toArray(new DataEventoCompleto[0]);
 			List<DataEventoCompleto> listaAux = new ArrayList<>(Arrays.asList(aux)); //Obtengo todos los eventos del sistema
 			List<DataEventoCompleto> eventosFinal = new ArrayList<>();
 			for (DataEventoCompleto dCom : listaAux) { 
-				if (!IEV.eventoFinalizado(dCom.getNombre()) && cumpleCriterio(dCom, query)) //Filtro los eventos no finalizados y que cumplan el criterio del query
+				if (!IEV_WS.eventoFinalizado(dCom.getNombre()) && cumpleCriterio(dCom, query)) //Filtro los eventos no finalizados y que cumplan el criterio del query
 					eventosFinal.add(dCom);
 			}
 			
             List<DataEdicion> edicionesFinal = new ArrayList<>();
 			for (DataEventoCompleto dEv : eventosFinal) {
-	            List<String> nombresEdiciones = IEV.listarEdiciones(dEv.getNombre());
+	            List<String> nombresEdiciones = IEV_WS.listarEdiciones(dEv.getNombre()).getItem();
 	            if (nombresEdiciones != null) {
 	            	for (String nombreEdicion : nombresEdiciones) {
-	                    DataEdicion edicion = IEV.obtenerEdicionEvento(dEv.getNombre(), nombreEdicion);
-	                    if (IEV.getEstado(nombreEdicion, dEv.getNombre()) == Estado.Confirmado && cumpleCriterio(edicion, query))
+	                    DataEdicion edicion = IEV_WS.obtenerEdicionEvento(dEv.getNombre(), nombreEdicion);
+	                    if (IEV_WS.getEstado(nombreEdicion, dEv.getNombre()) == Estado.CONFIRMADO && cumpleCriterio(edicion, query))
 	                        edicionesFinal.add(edicion);
 	                }
 	            }
@@ -66,14 +78,21 @@ public class Buscar extends HttpServlet {
 			resultados.addAll(edicionesFinal);
 			ordenarResultados(resultados, ordenar);
 			
+//			for (Object o : resultados) {
+//				if (o instanceof DataEventoCompleto)
+//					System.out.println(((DataEventoCompleto) o).getNombre());
+//				else
+//					System.out.println(((DataEdicion) o).getNombre());
+//			}
+			
 			request.setAttribute("query", query);
 			request.setAttribute("ordenamiento", ordenar);
 			request.setAttribute("resultados", resultados);
 			request.getRequestDispatcher("/WEB-INF/resBusqueda.jsp").forward(request, response);
 			
-		} catch (EventoNoExisteExcepcion e) {
-			request.setAttribute("error", "Error al cargar los datos");
-            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+//		} catch (EventoNoExisteExcepcion e) {
+//			request.setAttribute("error", "Error al cargar los datos");
+//            request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 	        request.setAttribute("error", "No se pudieron listar los eventos");
@@ -146,12 +165,15 @@ public class Buscar extends HttpServlet {
 	}
 	
 	private LocalDate getFecha(Object obj) {
-		if (obj instanceof DataEventoCompleto)
-			return ((DataEventoCompleto) obj).getFechaAlta();
-		else if (obj instanceof DataEdicion)
-			return ((DataEdicion) obj).getFechaAlta();
-		else
-			return LocalDate.MIN;
+	    String fechaStr = null;
+	    
+	    if (obj instanceof DataEventoCompleto) {
+	        fechaStr = ((DataEventoCompleto) obj).getFechaAlta();
+	    } else if (obj instanceof DataEdicion) {
+	        fechaStr = ((DataEdicion) obj).getFechaAlta();
+	    }
+	    
+	    return fechaStr != null ? LocalDate.parse(fechaStr) : LocalDate.MIN;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

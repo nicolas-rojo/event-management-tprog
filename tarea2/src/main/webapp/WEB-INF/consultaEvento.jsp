@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="logica.datatypes.*" %>
+<%@ page import="cliente.ws.eventos.DataEventoCompleto" %>
+<%@ page import="cliente.ws.eventos.DataEdicion" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="com.miseventos.utils.nombreUtils" %>
@@ -53,7 +54,7 @@
                         
                         <!-- Mostrar categorías -->
                         <% 
-                        Set<String> categorias = evento.getCategorias();
+                        List<String> categorias = evento.getCategorias();
                         if (categorias != null && !categorias.isEmpty()) {
                             int totalCategorias = categorias.size();
                             int contador = 0;
