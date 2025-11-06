@@ -80,6 +80,7 @@ document.getElementById('form').addEventListener('submit', function(e) {
 	const nombre = document.getElementById('nombre');
 	if (!nombre.value.trim()) {
 		nombre.classList.add('input-error');
+		document.getElementById('errorNombre').style.display = 'block';
 		isValid = false;
 	}
 
