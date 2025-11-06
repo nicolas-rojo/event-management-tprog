@@ -16,6 +16,13 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import cliente.ws.eventos.ControladorEventoWSService;
+import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.usuarios.ControladorUsuarioWSService;
+import cliente.ws.usuarios.DataUsuario;
+import cliente.ws.usuarios.IControladorUsuarioWS;
+import cliente.ws.usuarios.UsuarioNoExisteException_Exception;
+
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.DataUsuario;
 import cliente.ws.usuarios.IControladorUsuarioWS;

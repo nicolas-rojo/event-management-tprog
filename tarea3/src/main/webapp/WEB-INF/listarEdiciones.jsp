@@ -39,9 +39,9 @@
 				<a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="event-card">
 					<div class="event-card-image">
 						<img class="imagenes"
-                         	src="${pageContext.request.contextPath}/resources/images/ED-<%= nomNormal %>.png"
+                         	src="/tarea2/resources/images/ED-<%= nomNormal %>.png"
                          	alt="logoEvento" width="120px" height="120px"
-                         	onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">
+                         	onerror="this.onerror=null; this.src='/tarea2/resources/images/IMG-NO.png';">
 					</div>
 			  
 					<div class="event-card-content">

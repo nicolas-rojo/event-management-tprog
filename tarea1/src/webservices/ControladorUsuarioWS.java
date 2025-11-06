@@ -158,4 +158,14 @@ public class ControladorUsuarioWS implements IControladorUsuarioWS {
     public void setAsistencia(String edicion, String usuario) {
     	controladorUsuario.setAsistencia(edicion, usuario);
     }
+    
+    @Override
+    public Boolean existeNickname(String nickname) {
+    	return controladorUsuario.existeNickname(nickname);
+    }
+    
+    @Override
+    public Boolean existeEmail(String email) {
+    	return controladorUsuario.existeEmail(email);
+    }
 }

@@ -36,7 +36,7 @@ List<ParEdicionRegistro> registros = (List<ParEdicionRegistro>) request.getAttri
 		<div class="profile-card">
   			<div class="profile-left">
     			<div class="profile-avatar">
-      				<img src="${pageContext.request.contextPath}/resources/images/USR-<%= nombreUtils.normalizarNombre(usr.getNickname()) %>.png" 
+      				<img src="/tarea2/resources/images/USR-<%= nombreUtils.normalizarNombre(usr.getNickname()) %>.png" 
 						alt="logoUsr" 
 						onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/stockusr.png';">
     			</div>

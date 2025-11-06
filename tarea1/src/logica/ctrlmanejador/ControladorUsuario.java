@@ -468,6 +468,24 @@ public class ControladorUsuario implements IUsuario {
 		Registro registro = usr.getRegistro(edicion);
 		registro.setAsistencia(true);
 	}
+	
+	public Boolean existeNickname(String nickname) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioNickname(nickname);
+		if(usr == null) {
+			return false;
+		}
+		return true;
+	}
+	
+	public Boolean existeEmail(String email) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstance();
+		Usuario usr = musr.getUsuarioEmail(email);
+		if(usr == null) {
+			return false;
+		}
+		return true;
+	}
 }
 
 

@@ -10,7 +10,7 @@
       
 	        <!-- Logo -->
 	        <a href="${pageContext.request.contextPath}/home" class="logo">
-	            <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="Logo">
+	            <img src="/tarea2/resources/images/logo.png" alt="Logo">
 	        </a>
         </div>
     </div>
