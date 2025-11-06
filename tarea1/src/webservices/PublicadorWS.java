@@ -18,6 +18,17 @@ public class PublicadorWS {
         System.out.println("Servicio 'instituciones' publicado en http://localhost:8081/instituciones");
     }
     
+    public void despublicar() {
+        try {
+            if (endpoint != null && endpoint.isPublished()) {
+                endpoint.stop();
+                System.out.println("Servicios despublicados");
+            }
+        } catch (Exception e) {
+            System.err.println("Error al despublicar: " + e.getMessage());
+        }
+    }
+    
     public Endpoint getEndpoint() {
         return endpoint;
     }

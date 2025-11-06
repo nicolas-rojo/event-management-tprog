@@ -112,6 +112,7 @@ presentacion\ModificarUsuario$5.class
 presentacion\CrearPatrocinio$2.class
 logica\datatypes\DataDetalleRegistro.class
 webservices\ControladorInstitucionesWS.class
+presentacion\Principal$21.class
 presentacion\ProcesarEdicion.class
 excepciones\NoHayRegistrosAsistente.class
 presentacion\CrearEvento$cancelarEvento.class

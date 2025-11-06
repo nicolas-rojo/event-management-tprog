@@ -61,6 +61,7 @@ public class Principal {
     private ConsultaInstitucion consInstitucionInternalFrame;
     private CrearPatrocinio crePatrocinioInternalFrame;
     
+    private PublicadorWS publicador = null;    
     private boolean cond;
     private boolean publicados;
 
@@ -208,7 +209,7 @@ public class Principal {
             public void actionPerformed (ActionEvent arg0) {
                 if (!publicados) {
                     try {
-                        PublicadorWS publicador = new PublicadorWS();
+                    	publicador = new PublicadorWS();
                         publicador.publicar();
                         publicados = true;
                         JOptionPane.showMessageDialog(frmGestionDeUsuarios, 
@@ -419,5 +420,17 @@ public class Principal {
             }
         });
         menuInstituciones.add(menuItemConsultaPatrocinio);
+        
+        
+        frmGestionDeUsuarios.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                if (publicador != null) {
+                    publicador.despublicar();
+                }
+                System.exit(0);
+            }
+        });
+        frmGestionDeUsuarios.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 }
