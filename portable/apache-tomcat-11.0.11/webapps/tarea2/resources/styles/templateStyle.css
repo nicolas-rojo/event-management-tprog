@@ -1,0 +1,246 @@
+/* =========================================
+   BARRA SUPERIOR
+========================================= */
+
+.topbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    position: fixed;
+    align-items: center;
+
+    width: 100%;
+    padding: 10px 20px;
+    z-index: 1;
+
+    box-sizing: border-box;
+    background-color: #3b383884;
+    color: #f1eeee;
+}
+
+.topbar-logo {
+    justify-self: start;
+    /* background: white; */
+    margin-left: 25px;
+}
+
+.topbar-logo img {
+    height: 40px;
+}
+
+.topbar-search {
+    justify-self: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.topbar-search form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 80%;
+}
+
+.topbar-search input[type="text"] {
+    flex: 1;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    min-width: 200px;
+}
+
+.topbar-search input[type="text"]:focus {
+    box-shadow: 0 0 0 2px #8cb4ff;
+}
+
+.topbar-search select {
+    padding: 8px 12px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+    min-width: 120px;
+    color: #333;
+}
+
+.topbar-search select:focus {
+    box-shadow: 0 0 0 2px #8cb4ff;
+}
+
+.topbar-search button {
+    padding: 8px 20px;
+    background-color: #8cb4ff;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.topbar-search button:hover {
+    background-color: #6a9aed;
+    transform: scale(1.02);
+}
+
+.topbar-search button:active {
+    transform: scale(0.98);
+}
+
+.topbar-right {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+}
+
+.topbar-right a {
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #f1eeee;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.topbar-right a:hover {
+    text-decoration: underline;
+    color: #8cb4ff;
+}
+
+.topbar-right img {
+    height: 40px;
+    border-radius: 20px;
+}
+
+/* =========================================
+   BARRA LATERAL
+========================================= */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+
+    top: 100;
+    width: 260px;
+    height: 100vh;
+    padding-top: 100px;
+
+    background-color: #4b4a4acd;
+
+    align-items: start;
+}
+
+.element, .elementTitle {
+    color: #f1eeee;
+    font-size: auto;
+    padding: 12px 15px;
+    /* border-left: 2px solid #f1eeee; */
+    cursor: pointer;
+    margin-left: 25px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.elementTitle {
+    display: flex;
+    font-size: 25px;
+    margin-left: 33px;
+    border-left: none;
+}
+
+.element:hover, .elementTitle:hover {
+    color: #8cb4ff;
+    /* border-left: 2px solid #8cb4ff; */
+}
+
+.opc-asist {
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   FILTRO DE CATEGORIAS EN BARRA LATERAL
+========================================= */
+
+.categorias-sidebar {
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+.categorias-title {
+    color: #f1eeee;
+    font-size: 25px;
+    margin-left: 33px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: flex;
+    padding: 12px 0;
+    text-decoration: none;
+}
+
+.categorias-scroll-box {
+
+    max-height: 250px;
+    overflow-y: auto;
+
+
+    margin-left: 33px;
+
+    width: calc(100% - 33px);
+
+
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+
+.categorias-scroll-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.categorias-scroll-box::-webkit-scrollbar-thumb {
+    background-color: #6c6a6a;
+    border-radius: 4px;
+}
+
+.categorias-scroll-box::-webkit-scrollbar-track {
+    background-color: #4b4a4acd;
+}
+
+.categorias-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.categoria-item {
+    color: #f1eeee;
+    font-size: auto;
+
+    padding: 8px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-bottom: 2px;
+}
+
+.categoria-item:hover {
+    color: #8cb4ff;
+}
+
+.categoria-item.activa {
+    font-weight: bold;
+    color: #8cb4ff;
+    border-left: 4px solid #8cb4ff;
+    padding-left: 11px;
+}
+
+.categoria-item.activa:hover {
+    color: #8cb4ff;
+}
