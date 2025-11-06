@@ -52,6 +52,7 @@ function validarDato(tipo) {
 			document.getElementById(tipo + 'Existe').style.display = 'none';
 			botonRegistrarse.style.opacity = '';
 			botonRegistrarse.style.cursor = '';
+			botonRegistrarse.disabled = false;
             if (respuesta === "existe") {
                 mensaje.textContent = tipo === "mail" 
                     ? "El email ya está registrado"
@@ -59,8 +60,7 @@ function validarDato(tipo) {
 				document.getElementById(tipo + 'Existe').style.display = 'block';
 				botonRegistrarse.style.opacity = '0.5';
 				botonRegistrarse.style.cursor = 'not-allowed';
-				
-				
+				botonRegistrarse.disabled = true;
             }
         }
     };
