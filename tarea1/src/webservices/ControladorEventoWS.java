@@ -4,6 +4,7 @@ import jakarta.jws.WebService;
 import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -147,5 +148,18 @@ public class ControladorEventoWS implements IControladorEventoWS {
                 throw e;
         }
         return byteArray;
+    }
+    
+    @Override
+    public void uploadFile(String nombre, byte[] imagen) throws IOException {
+    	try {
+    		FileOutputStream fos = null;
+    		File dir = new File("images/");
+    		File arImg = new File("images/" + nombre + ".png");
+    		fos = new FileOutputStream(arImg);
+    		fos.write(imagen);    		
+    	} catch (IOException e) {
+    		throw e;
+    	}
     }
 }

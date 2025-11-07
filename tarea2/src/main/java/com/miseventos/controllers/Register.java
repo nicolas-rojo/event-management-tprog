@@ -10,6 +10,7 @@ import jakarta.servlet.http.Part;
 import jakarta.servlet.annotation.MultipartConfig;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -18,6 +19,8 @@ import javax.imageio.ImageIO;
 
 import com.miseventos.utils.*;
 
+import cliente.ws.eventos.ControladorEventoWSService;
+import cliente.ws.eventos.IControladorEventoWS;
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.IControladorUsuarioWS;
 import cliente.ws.usuarios.DataUsuario;
@@ -31,11 +34,14 @@ import cliente.ws.usuarios.UsuarioRepetidoException_Exception;
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IControladorUsuarioWS ICU_WS;
+	private IControladorEventoWS IEV_WS;
 	
 	@Override
     public void init() throws ServletException {  
     	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
     	ICU_WS = servicio2.getControladorUsuarioWSPort();
+    	ControladorEventoWSService servicio = new ControladorEventoWSService();
+        IEV_WS = servicio.getControladorEventoWSPort();
     	System.out.println("RegisterWS");
     }
 
@@ -107,13 +113,16 @@ public class Register extends HttpServlet {
 			return; //NO SE SUBIO NINGUNA IMAGEN
 		}
 		
-		String nomNorm = nombreUtils.normalizarNombre(nick);
-		
-		BufferedImage imagen = ImageIO.read(filePart.getInputStream());
-		String rutaRel = "/resources/images/USR-" + nomNorm + ".png";
-		String rutaAbs = getServletContext().getRealPath(rutaRel);
-		
-		File archivoDest = new File(rutaAbs);
-		ImageIO.write(imagen, "png", archivoDest);		
+		try {
+			BufferedImage imagen = ImageIO.read(filePart.getInputStream());
+			String nomNorm = "USR-" + nombreUtils.normalizarNombre(nick);
+			
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	        ImageIO.write(imagen, "png", baos);
+	        byte[] imageBytes = baos.toByteArray();
+	        baos.close();
+	        
+	        IEV_WS.uploadFile(nomNorm, imageBytes);
+		} catch (Exception e) {}	
 	}
 }

@@ -82,4 +82,7 @@ public interface IControladorEventoWS {
     
     @WebMethod
     byte[] getFile(String nombre) throws IOException;
+    
+    @WebMethod
+    void uploadFile(String nombre, byte[] imagen) throws IOException;
 }
