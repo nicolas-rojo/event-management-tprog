@@ -13,6 +13,7 @@ import cliente.ws.usuarios.*;
 import cliente.ws.eventos.StringArray;
 import cliente.ws.eventos.DataEventoCompletoArray;
 import cliente.ws.eventos.DataEventoCompleto;
+import com.miseventos.utils.fabricaWS;
 
 @WebServlet("/home")
 public class ListarEventos extends HttpServlet {
@@ -23,12 +24,15 @@ public class ListarEventos extends HttpServlet {
     
     @Override
     public void init() throws ServletException {  
-    	// Acá lo que añadí
-    	ControladorEventoWSService servicio = new ControladorEventoWSService();
-    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-        IEV_WS = servicio.getControladorEventoWSPort();
-        ICU_WS = servicio2.getControladorUsuarioWSPort();
-        ICU_WS.cargarDatos();
+        // Usar la fábrica para todos los servicios:
+        IEV_WS = fabricaWS.getControladorEventoWS();
+        ICU_WS = fabricaWS.getControladorUsuarioWS();
+        if (ICU_WS != null) {
+            ICU_WS.cargarDatos();
+        } else {
+            System.err.println("ERROR: No se pudo cargar el Controlador de Usuario.");
+        }
+
         System.out.println("ListarEventoWS");
     }
 

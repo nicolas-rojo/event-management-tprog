@@ -45,7 +45,7 @@ public class LinkInvalidoExcepcion_Exception
     /**
      * 
      * @return
-     *     returns fault bean: cliente.ws.usuarios.LinkInvalidoExcepcion
+     *     returns fault bean: cliente.ws.eventos.LinkInvalidoExcepcion
      */
     public LinkInvalidoExcepcion getFaultInfo() {
         return faultInfo;

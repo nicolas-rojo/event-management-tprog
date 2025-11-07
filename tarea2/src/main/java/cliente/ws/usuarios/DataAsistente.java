@@ -8,9 +8,9 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for dataAsistente complex type.
+ * <p>Clase Java para dataAsistente complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>{@code
  * <complexType name="dataAsistente">
@@ -41,7 +41,7 @@ public class DataAsistente
     protected String fechaNac;
 
     /**
-     * Gets the value of the apellido property.
+     * Obtiene el valor de la propiedad apellido.
      * 
      * @return
      *     possible object is
@@ -53,7 +53,7 @@ public class DataAsistente
     }
 
     /**
-     * Sets the value of the apellido property.
+     * Define el valor de la propiedad apellido.
      * 
      * @param value
      *     allowed object is
@@ -65,7 +65,7 @@ public class DataAsistente
     }
 
     /**
-     * Gets the value of the fechaNac property.
+     * Obtiene el valor de la propiedad fechaNac.
      * 
      * @return
      *     possible object is
@@ -77,7 +77,7 @@ public class DataAsistente
     }
 
     /**
-     * Sets the value of the fechaNac property.
+     * Define el valor de la propiedad fechaNac.
      * 
      * @param value
      *     allowed object is

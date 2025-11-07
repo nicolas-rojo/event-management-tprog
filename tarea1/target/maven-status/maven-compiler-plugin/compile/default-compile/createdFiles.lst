@@ -29,6 +29,7 @@ presentacion\Principal$10.class
 logica\datatypes\ResLogin.class
 presentacion\CrearUsuario$1.class
 presentacion\Principal$16.class
+logica\datatypes\LocalDateAdapter.class
 presentacion\ConsultaUsuario.class
 logica\EdicionEvento.class
 presentacion\ConsultaEdicionEvento$2.class
@@ -60,6 +61,7 @@ presentacion\Principal$15.class
 logica\ctrlmanejador\ControladorEventos.class
 logica\datatypes\EstadoEvento.class
 logica\ctrlmanejador\ManejadorEvento.class
+presentacion\Principal$20.class
 logica\datatypes\Estado.class
 presentacion\ProcesarEdicion$rechazarEdicion.class
 presentacion\ConsultaTipoRegistro.class
@@ -78,6 +80,7 @@ excepciones\CategoriaRepetidaException.class
 presentacion\ConsultaEvento$2.class
 logica\datatypes\DataTRegistro.class
 presentacion\ProcesarEdicion$cerrar.class
+logica\datatypes\LocalDateTimeAdapter.class
 webservices\IControladorEventoWS.class
 webservices\PublicadorWS.class
 presentacion\CrearEdicion$cancelarEdicion.class
@@ -157,4 +160,5 @@ presentacion\CrearInstitucion$2.class
 logica\interfaces\IInstituciones.class
 presentacion\RegistroEdicionEvento$1.class
 presentacion\ConsultaRegistro.class
+excepciones\LinkInvalidoExcepcion.class
 presentacion\Principal$2.class

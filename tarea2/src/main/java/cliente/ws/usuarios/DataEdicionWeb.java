@@ -9,9 +9,9 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for dataEdicionWeb complex type.
+ * <p>Clase Java para dataEdicionWeb complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>{@code
  * <complexType name="dataEdicionWeb">
@@ -62,7 +62,7 @@ public class DataEdicionWeb {
     protected Estado estado;
 
     /**
-     * Gets the value of the nombre property.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
@@ -74,7 +74,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Sets the value of the nombre property.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
@@ -86,7 +86,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Gets the value of the sigla property.
+     * Obtiene el valor de la propiedad sigla.
      * 
      * @return
      *     possible object is
@@ -98,7 +98,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Sets the value of the sigla property.
+     * Define el valor de la propiedad sigla.
      * 
      * @param value
      *     allowed object is
@@ -110,7 +110,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Gets the value of the fechaIni property.
+     * Obtiene el valor de la propiedad fechaIni.
      * 
      * @return
      *     possible object is
@@ -122,7 +122,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Sets the value of the fechaIni property.
+     * Define el valor de la propiedad fechaIni.
      * 
      * @param value
      *     allowed object is
@@ -134,7 +134,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Gets the value of the fechaFin property.
+     * Obtiene el valor de la propiedad fechaFin.
      * 
      * @return
      *     possible object is
@@ -146,7 +146,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Sets the value of the fechaFin property.
+     * Define el valor de la propiedad fechaFin.
      * 
      * @param value
      *     allowed object is
@@ -158,7 +158,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Gets the value of the fechaAlta property.
+     * Obtiene el valor de la propiedad fechaAlta.
      * 
      * @return
      *     possible object is
@@ -170,7 +170,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Sets the value of the fechaAlta property.
+     * Define el valor de la propiedad fechaAlta.
      * 
      * @param value
      *     allowed object is
@@ -182,7 +182,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Gets the value of the ciudad property.
+     * Obtiene el valor de la propiedad ciudad.
      * 
      * @return
      *     possible object is
@@ -194,7 +194,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Sets the value of the ciudad property.
+     * Define el valor de la propiedad ciudad.
      * 
      * @param value
      *     allowed object is
@@ -206,7 +206,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Gets the value of the pais property.
+     * Obtiene el valor de la propiedad pais.
      * 
      * @return
      *     possible object is
@@ -218,7 +218,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Sets the value of the pais property.
+     * Define el valor de la propiedad pais.
      * 
      * @param value
      *     allowed object is
@@ -230,7 +230,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Gets the value of the estado property.
+     * Obtiene el valor de la propiedad estado.
      * 
      * @return
      *     possible object is
@@ -242,7 +242,7 @@ public class DataEdicionWeb {
     }
 
     /**
-     * Sets the value of the estado property.
+     * Define el valor de la propiedad estado.
      * 
      * @param value
      *     allowed object is

@@ -45,7 +45,7 @@ public class TipoDeRegistroRepetidoException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: cliente.ws.usuarios.TipoDeRegistroRepetidoException
+     *     returns fault bean: cliente.ws.eventos.TipoDeRegistroRepetidoException
      */
     public TipoDeRegistroRepetidoException getFaultInfo() {
         return faultInfo;

@@ -212,7 +212,7 @@ public class Principal {
                         publicador.publicar();
                         publicados = true;
                         JOptionPane.showMessageDialog(frmGestionDeUsuarios, 
-                            "Los WebServices fueron publicados correctamente.\n" +
+                            "Los WebServices fueron publicados correctamente. Este print se debería cambiar porque es estático\n" +
                             "URLs:\n" +
                             "  • http://localhost:8081/eventos?wsdl\n" +
                             "  • http://localhost:8081/usuarios?wsdl\n" +

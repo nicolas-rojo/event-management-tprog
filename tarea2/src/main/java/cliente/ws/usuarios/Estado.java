@@ -7,9 +7,9 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for estado.
+ * <p>Clase Java para estado.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * <pre>{@code
  * <simpleType name="estado">
  *   <restriction base="{http://www.w3.org/2001/XMLSchema}string">
