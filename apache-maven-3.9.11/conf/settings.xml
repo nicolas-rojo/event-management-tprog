@@ -96,7 +96,7 @@ under the License.
       <host>proxy.fing.edu.uy</host>
       <port>3128</port>
     </proxy>
-  </proxies>
+  </proxies>
 
   <!-- servers
    | This is a list of authentication profiles, keyed by the server-id used within the system.
