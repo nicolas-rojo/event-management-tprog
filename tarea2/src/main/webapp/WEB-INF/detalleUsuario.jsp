@@ -9,12 +9,16 @@
 <%@ page import="cliente.ws.eventos.DataEdicionWeb" %> <!--  Revisar el import este -->
 <%@ page import="cliente.ws.usuarios.Estado" %>
 
+
+
 <%@ page import="cliente.ws.eventos.ControladorEventoWSService" %>
 <%@ page import="cliente.ws.eventos.IControladorEventoWS" %>
 <%@ page import="cliente.ws.usuarios.ControladorUsuarioWSService" %>
 <%@ page import="cliente.ws.usuarios.IControladorUsuarioWS" %>
 
 <%@ page import="com.miseventos.utils.nombreUtils" %>
+
+<%@ page import="com.miseventos.utils.fabricaWS" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -95,8 +99,7 @@
 					} else {
 						if (usr != null) {
 							IControladorUsuarioWS ICU_WS;
-					    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-					        ICU_WS = servicio2.getControladorUsuarioWSPort();
+							ICU_WS = fabricaWS.getControladorUsuarioWS();
 							boolean esSeguidor = ICU_WS.esSeguidor(usuario.getEmail(), loggedMail);
 							if (esSeguidor) {
 							%>
@@ -179,12 +182,10 @@
                                     <div class="lista-items">
                                     <%
                                     IControladorUsuarioWS ICU_WS;
-                                    ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-                                    ICU_WS = servicio2.getControladorUsuarioWSPort();
+                                    ICU_WS = fabricaWS.getControladorUsuarioWS();
                                     
                                     IControladorEventoWS IEV_WS;
-                                    ControladorEventoWSService servicio = new ControladorEventoWSService();
-                                    IEV_WS = servicio.getControladorEventoWSPort();
+                                    IEV_WS = fabricaWS.getControladorEventoWS();
                                         for (ParEdicionRegistro registro : registros) {
                                         	DataDetalleRegistro DataReg = ICU_WS.getDetallesRegistro(usuario.getNickname(), registro);
                                     %>
@@ -236,8 +237,7 @@
                         <div class="contenedor-secundario">
                             <%
 	                            IControladorEventoWS IEV_WS;
-	                            ControladorEventoWSService servicio = new ControladorEventoWSService();
-	                            IEV_WS = servicio.getControladorEventoWSPort();
+                            	IEV_WS = fabricaWS.getControladorEventoWS();
                                 if (ediciones != null && ediciones.length > 0) {
                             %>
                                     <div class="lista-items">
@@ -332,8 +332,7 @@
 	                <p class="modal-vacio">No hay seguidores aún</p>
 	            <% } else {
 	            	IControladorUsuarioWS ICU_WS;
-			    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-			        ICU_WS = servicio2.getControladorUsuarioWSPort();
+	            	ICU_WS = fabricaWS.getControladorUsuarioWS();
 	            	String nickNorm;
 	                for (String nickname : seguidores) {
 	                	String tipoSeg = ICU_WS.getTipoUsuario(nickname);
@@ -377,8 +376,7 @@
 	                <p class="modal-vacio">No hay seguidos aún</p>
 	            <% } else {
 	            	IControladorUsuarioWS ICU_WS;
-			    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-			        ICU_WS = servicio2.getControladorUsuarioWSPort();
+	            	ICU_WS = fabricaWS.getControladorUsuarioWS();
 	            	String nickNorm;
 	                for (String nickname : seguidos) {
 	                	String tipoSeg = ICU_WS.getTipoUsuario(nickname);

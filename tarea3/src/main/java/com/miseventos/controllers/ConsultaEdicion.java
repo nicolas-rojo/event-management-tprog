@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import com.miseventos.utils.fabricaWS;
+
 import cliente.ws.usuarios.*;
 import cliente.ws.eventos.*;
 import cliente.ws.eventos.DataEdicion;
@@ -24,10 +26,8 @@ public class ConsultaEdicion extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		ControladorEventoWSService servicio = new ControladorEventoWSService();
-    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-        IEV_WS = servicio.getControladorEventoWSPort();
-        ICU_WS = servicio2.getControladorUsuarioWSPort();
+		IEV_WS = fabricaWS.getControladorEventoWS();
+        ICU_WS = fabricaWS.getControladorUsuarioWS();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

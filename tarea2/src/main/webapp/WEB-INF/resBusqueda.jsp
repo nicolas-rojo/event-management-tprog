@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.miseventos.utils.nombreUtils"%>
+<%@ page import="com.miseventos.utils.fabricaWS" %>
 
 <%@ page import="cliente.ws.eventos.ControladorEventoWSService" %>
 <%@ page import="cliente.ws.eventos.IControladorEventoWS" %>
@@ -85,8 +86,7 @@
     				<%
     				} else if (res instanceof DataEdicion) {
     					IControladorEventoWS IEV_WS;
-                        ControladorEventoWSService servicio = new ControladorEventoWSService();
-                        IEV_WS = servicio.getControladorEventoWSPort();
+    					IEV_WS = fabricaWS.getControladorEventoWS();
 						
     					DataEdicion edicion = (DataEdicion) res;
     					String nomNormal = nombreUtils.normalizarNombre(edicion.getNombre());

@@ -15,6 +15,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.miseventos.utils.fabricaWS;
 
 import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.eventos.IControladorEventoWS;
@@ -36,8 +37,7 @@ public class ComprobantePDF extends HttpServlet {
 	
 	@Override
 	public void init() throws ServletException {
-    	ControladorUsuarioWSService servicio = new ControladorUsuarioWSService();
-        ICU_WS = servicio.getControladorUsuarioWSPort();
+		ICU_WS = fabricaWS.getControladorUsuarioWS();
 	}
 	
 	

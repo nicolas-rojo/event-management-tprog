@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+import com.miseventos.utils.fabricaWS;
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.IControladorUsuarioWS;
 
@@ -20,8 +20,7 @@ public class VerificacionAJAX extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-		ICU_WS = servicio2.getControladorUsuarioWSPort();
+		ICU_WS = fabricaWS.getControladorUsuarioWS();
 		System.out.println("VerificacionAJAX");
 	}   
 	

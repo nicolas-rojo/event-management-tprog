@@ -4,6 +4,7 @@
 <%@ page import="java.util.Arrays"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.miseventos.utils.nombreUtils" %>
+<%@ page import="com.miseventos.utils.fabricaWS" %>
 
 <%@ page import="cliente.ws.eventos.ControladorEventoWSService" %>
 <%@ page import="cliente.ws.eventos.IControladorEventoWS" %>
@@ -203,8 +204,7 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 						<%
 						//Pido el controlador (su interfaz)
 						IControladorUsuarioWS ICU_WS;
-				    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-				        ICU_WS = servicio2.getControladorUsuarioWSPort();
+						ICU_WS = fabricaWS.getControladorUsuarioWS();
 				        
 						DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
 						Boolean registrado = (Boolean) request.getAttribute("registrado");

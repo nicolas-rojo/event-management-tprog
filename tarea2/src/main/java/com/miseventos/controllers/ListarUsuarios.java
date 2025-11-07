@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import cliente.ws.usuarios.UsuarioNoExisteException_Exception;
 
-
+import com.miseventos.utils.fabricaWS;
 @WebServlet("/consultaUsuario")
 public class ListarUsuarios extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -22,8 +22,7 @@ public class ListarUsuarios extends HttpServlet {
     
     @Override
     public void init() throws ServletException {      
-    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-        ICU_WS = servicio2.getControladorUsuarioWSPort();
+    	ICU_WS = fabricaWS.getControladorUsuarioWS();
         System.out.println("ListarUsuariosWS");
     }
 

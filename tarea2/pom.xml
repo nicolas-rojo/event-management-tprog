@@ -28,13 +28,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
         <version>4.0.1</version>
     </dependency>
 	
-	<!-- JAR de lógica de Tarea 1 -->
-    <dependency>
-        <groupId>com.tarea1</groupId>
-        <artifactId>tarea1</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </dependency>
-	
     <!-- Jakarta XML Bind -->
     <dependency>
         <groupId>jakarta.xml.bind</groupId>

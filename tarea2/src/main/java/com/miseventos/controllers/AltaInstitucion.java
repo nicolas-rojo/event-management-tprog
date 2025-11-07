@@ -10,6 +10,7 @@ import cliente.ws.instituciones.IControladorInstitucionesWS;
 import cliente.ws.instituciones.DataInstitucion;
 import cliente.ws.instituciones.InstitucionRepetidaException_Exception;
 
+import com.miseventos.utils.fabricaWS;
 
 @WebServlet("/AltaInstitucion")
 public class AltaInstitucion extends HttpServlet {
@@ -19,8 +20,7 @@ public class AltaInstitucion extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-    	ControladorInstitucionesWSService servicio = new ControladorInstitucionesWSService();
-        IInst_WS = servicio.getControladorInstitucionesWSPort();
+    	IInst_WS = fabricaWS.getControladorInstitucionesWS();
         System.out.println("Alta Institucion");
     }
 

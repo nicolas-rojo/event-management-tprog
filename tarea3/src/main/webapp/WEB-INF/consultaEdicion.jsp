@@ -6,6 +6,7 @@
 <%@ page import="cliente.ws.eventos.*"%>
 <%@ page import="com.miseventos.utils.nombreUtils"%>
 <%@ page import="cliente.ws.eventos.DataEdicion"%>
+<%@ page import="com.miseventos.utils.fabricaWS" %>
 
 <%
 	DataEdicion dataEd = (DataEdicion) request.getAttribute("dataEdicion");
@@ -82,8 +83,8 @@
 		%>
 			<div class="mi-registro-section" id="miRegistro">
 			<%
-			ControladorUsuarioWSService servicio = new ControladorUsuarioWSService();
-			IControladorUsuarioWS ICU_WS = servicio.getControladorUsuarioWSPort();
+			
+			IControladorUsuarioWS ICU_WS = fabricaWS.getControladorUsuarioWS();
 			DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
 			Boolean registrado = (Boolean) request.getAttribute("registrado");
 			if (registrado != null && registrado) {

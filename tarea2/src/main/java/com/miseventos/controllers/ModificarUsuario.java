@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
+import com.miseventos.utils.fabricaWS;
 import java.io.IOException;
 
 import cliente.ws.usuarios.*;
@@ -18,8 +18,7 @@ public class ModificarUsuario extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-        ICU_WS = servicio2.getControladorUsuarioWSPort();
+    	ICU_WS = fabricaWS.getControladorUsuarioWS();
         
         System.out.println("ModificarUsuarioWS");
     }

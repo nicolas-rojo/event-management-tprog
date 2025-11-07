@@ -18,6 +18,8 @@ import java.time.LocalDate;
 
 import javax.imageio.ImageIO;
 
+import com.miseventos.utils.fabricaWS;
+
 import com.miseventos.utils.nombreUtils;
 
 import cliente.ws.eventos.ControladorEventoWSService;
@@ -37,8 +39,7 @@ public class AltaEdicion extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		ControladorEventoWSService servicio = new ControladorEventoWSService();
-		IEV_WS = servicio.getControladorEventoWSPort();
+		IEV_WS = fabricaWS.getControladorEventoWS();
 		System.out.println("AltaEdicionWS");
 	}
 

@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.annotation.MultipartConfig;
 
 import java.io.IOException;
+import com.miseventos.utils.fabricaWS;
 
 import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.eventos.IControladorEventoWS;
@@ -26,8 +27,7 @@ public class AltaTRegistro extends HttpServlet {
 	
 	@Override
 	public void init() throws ServletException {  
-    	ControladorEventoWSService servicio = new ControladorEventoWSService();
-        IEV_WS = servicio.getControladorEventoWSPort();
+		IEV_WS = fabricaWS.getControladorEventoWS();
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

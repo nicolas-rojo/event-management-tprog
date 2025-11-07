@@ -22,6 +22,7 @@ import cliente.ws.instituciones.Nivel;
 import cliente.ws.eventos.*;
 import cliente.ws.instituciones.*;
 
+import com.miseventos.utils.fabricaWS;
 
 @WebServlet("/AltaPatrocinio")
 public class AltaPatrocinio extends HttpServlet {
@@ -31,10 +32,8 @@ public class AltaPatrocinio extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-    	ControladorInstitucionesWSService servicio = new ControladorInstitucionesWSService();
-        IInst_WS = servicio.getControladorInstitucionesWSPort();
-        ControladorEventoWSService servicio2 = new ControladorEventoWSService();
-        IEV_WS = servicio2.getControladorEventoWSPort();
+    	IEV_WS = fabricaWS.getControladorEventoWS();
+    	IInst_WS = fabricaWS.getControladorInstitucionesWS();
         System.out.println("AltaPatrocinioWS");
     }
 

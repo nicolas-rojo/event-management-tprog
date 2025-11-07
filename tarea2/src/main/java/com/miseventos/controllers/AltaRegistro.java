@@ -18,6 +18,7 @@ import cliente.ws.usuarios.IControladorUsuarioWS;
 import cliente.ws.usuarios.DataUsuario;
 import cliente.ws.eventos.DataTRegistro;
 
+import com.miseventos.utils.fabricaWS;
 
 @WebServlet("/altaRegistro")
 @MultipartConfig
@@ -30,11 +31,8 @@ public class AltaRegistro extends HttpServlet {
 	
 	@Override
     public void init() throws ServletException {  
-
-    	ControladorEventoWSService servicio = new ControladorEventoWSService();
-    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-        IEV_WS = servicio.getControladorEventoWSPort();
-        ICU_WS = servicio2.getControladorUsuarioWSPort(); 	
+		IEV_WS = fabricaWS.getControladorEventoWS();
+		ICU_WS = fabricaWS.getControladorUsuarioWS();
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
