@@ -6,7 +6,6 @@ import java.net.URL;
 import java.net.MalformedURLException;
 import java.util.Properties;
 
-// Asegúrese que estos imports coincidan con el paquete de sus clases generadas por wsimport
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.IControladorUsuarioWS;
 import cliente.ws.eventos.ControladorEventoWSService;
