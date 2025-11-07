@@ -66,7 +66,7 @@
             <div class="contenedor-principal">
             	<div class="contenedor-imagen-stats">
 	                <div class="imagen-usuario">
-	                    <img src="${pageContext.request.contextPath}/resources/images/USR-<%= nomNormal %>.png" 
+	                    <img src="<%=request.getContextPath()%>/imagenes?id=USR-<%= nomNormal %>"
 	                         alt="<%= usuario.getNombre() %>" 
 	                         onerror="this.style.display='none'; this.parentElement.innerHTML='Sin imagen'">
 	                </div>
@@ -351,7 +351,7 @@
 	                	%>
 	                    <div class="modal-usuario-item" onclick="window.location.href='${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(seg.getEmail(), "UTF-8") %>'">
 	                        <div class="modal-usuario-avatar">
-	                            <img src="${pageContext.request.contextPath}/resources/images/USR-<%= nickNorm %>.png" 
+	                            <img src="<%=request.getContextPath()%>/imagenes?id=USR-<%= nickNorm %>"
 			                         alt="<%= usuario.getNombre() %>" 
 			                         onerror="this.style.display='none'; this.parentElement.innerHTML='Sin imagen'">
 	                        </div>
@@ -396,7 +396,7 @@
 	                	%>
 	                    <div class="modal-usuario-item" onclick="window.location.href='${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(seg.getEmail(), "UTF-8") %>'">
 	                        <div class="modal-usuario-avatar">
-	                            <img src="${pageContext.request.contextPath}/resources/images/USR-<%= nickNorm %>.png" 
+	                            <img src="<%=request.getContextPath()%>/imagenes?id=USR-<%= nickNorm %>"
 			                         alt="<%= usuario.getNombre() %>" 
 			                         onerror="this.style.display='none'; this.parentElement.innerHTML='Sin imagen'">
 	                        </div>

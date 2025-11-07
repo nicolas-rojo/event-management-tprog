@@ -5,6 +5,8 @@ import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.jws.soap.SOAPBinding.Style;
 import jakarta.jws.soap.SOAPBinding.ParameterStyle;
+
+import java.io.IOException;
 import java.util.List;
 
 import logica.datatypes.*;
@@ -77,4 +79,7 @@ public interface IControladorEventoWS {
     
     @WebMethod
     String eventoTieneEdicion(String edicion);
+    
+    @WebMethod
+    byte[] getFile(String nombre) throws IOException;
 }
