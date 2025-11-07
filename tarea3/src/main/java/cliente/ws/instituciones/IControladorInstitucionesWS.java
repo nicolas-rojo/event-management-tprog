@@ -27,16 +27,6 @@ public interface IControladorInstitucionesWS {
 
     /**
      * 
-     * @return
-     *     returns cliente.ws.instituciones.DataInstitucionArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://webservices/IControladorInstitucionesWS/listarInstitucionesRequest", output = "http://webservices/IControladorInstitucionesWS/listarInstitucionesResponse")
-    public DataInstitucionArray listarInstituciones();
-
-    /**
-     * 
      * @param arg0
      * @param arg1
      * @param arg2
@@ -76,5 +66,15 @@ public interface IControladorInstitucionesWS {
         DataInstitucion arg0)
         throws InstitucionRepetidaException_Exception
     ;
+
+    /**
+     * 
+     * @return
+     *     returns cliente.ws.instituciones.DataInstitucionArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webservices/IControladorInstitucionesWS/listarInstitucionesRequest", output = "http://webservices/IControladorInstitucionesWS/listarInstitucionesResponse")
+    public DataInstitucionArray listarInstituciones();
 
 }

@@ -17,7 +17,7 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 3.0
  * 
  */
-@WebServiceClient(name = "ControladorEventoWSService", targetNamespace = "http://webservices/", wsdlLocation = "http://localhost:8081/eventos?wsdl")
+@WebServiceClient(name = "ControladorEventoWSService", targetNamespace = "http://webservices/", wsdlLocation = "http://localhost:7373/eventos?wsdl")
 public class ControladorEventoWSService
     extends Service
 {
@@ -30,7 +30,7 @@ public class ControladorEventoWSService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8081/eventos?wsdl");
+            url = new URL("http://localhost:7373/eventos?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

@@ -45,7 +45,7 @@ public class IOException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: cliente.ws.usuarios.IOException
+     *     returns fault bean: cliente.ws.eventos.IOException
      */
     public IOException getFaultInfo() {
         return faultInfo;
