@@ -36,7 +36,7 @@
     			<a href="<%=request.getContextPath()%>/listarEdiciones?evento=<%=java.net.URLEncoder.encode(evento.getNombre(), "UTF-8")%>" class="event-card">
 					<div class="event-card-image">
 						<img class="imagenes"
-                         	src="${pageContext.request.contextPath}/resources/images/EV-<%= nomNormal %>.png"
+                         	src="<%=request.getContextPath()%>/imagenes?id=EV-<%= nomNormal %>"
                          	alt="logoEvento" width="120px" height="120px"
                          	onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">
 					</div>
