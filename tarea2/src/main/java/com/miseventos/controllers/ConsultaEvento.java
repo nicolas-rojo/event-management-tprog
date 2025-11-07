@@ -11,7 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import com.miseventos.utils.fabricaWS;
 import cliente.ws.eventos.*;
 import cliente.ws.eventos.DataEventoCompleto;
 import cliente.ws.eventos.Estado;
@@ -24,8 +24,7 @@ public class ConsultaEvento extends HttpServlet {
     @Override
     public void init() throws ServletException {  
         
-        ControladorEventoWSService servicio = new ControladorEventoWSService();
-        IEV_WS = servicio.getControladorEventoWSPort();
+    	IEV_WS = fabricaWS.getControladorEventoWS();
         System.out.println("ConsultaEventoWS");
     }
 

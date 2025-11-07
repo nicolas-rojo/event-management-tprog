@@ -21,7 +21,7 @@ import cliente.ws.usuarios.DataDetalleRegistro;
 import cliente.ws.eventos.DataPatrocinioCompleto;
 import cliente.ws.eventos.DataTRegistro;
 import cliente.ws.usuarios.ParEdicionRegistro;
-
+import com.miseventos.utils.fabricaWS;
 import java.util.ArrayList;
 
 
@@ -33,10 +33,8 @@ public class ConsultaEdicion extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		ControladorEventoWSService servicio = new ControladorEventoWSService();
-    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-        IEV_WS = servicio.getControladorEventoWSPort();
-        ICU_WS = servicio2.getControladorUsuarioWSPort();
+		IEV_WS = fabricaWS.getControladorEventoWS();
+		ICU_WS = fabricaWS.getControladorUsuarioWS();
 
         System.out.println("ConsultaEventoWS");
 	}

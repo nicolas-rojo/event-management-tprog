@@ -21,6 +21,8 @@ import com.miseventos.utils.nombreUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.miseventos.utils.fabricaWS;
+
 import cliente.ws.eventos.*;
 
 @WebServlet("/altaEvento")
@@ -31,8 +33,7 @@ public class AltaEvento extends HttpServlet {
     
     @Override
     public void init() throws ServletException {  
-    	ControladorEventoWSService servicio = new ControladorEventoWSService();
-        IEV_WS = servicio.getControladorEventoWSPort();
+    	IEV_WS = fabricaWS.getControladorEventoWS();
         System.out.println("AltaEventoWS");
     }
 

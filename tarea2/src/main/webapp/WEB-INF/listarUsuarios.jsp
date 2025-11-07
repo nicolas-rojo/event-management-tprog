@@ -3,6 +3,7 @@
 <%@ page import="cliente.ws.usuarios.DataUsuario" %>
 <%@ page import="cliente.ws.usuarios.*" %>
 <%@ page import="com.miseventos.utils.nombreUtils" %>
+<%@ page import="com.miseventos.utils.fabricaWS" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -44,8 +45,7 @@
                 } else {
                     DataUsuario[] usuarios = (DataUsuario[]) request.getAttribute("usuarios");
                     IControladorUsuarioWS ICU_WS;
-                    ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-                    ICU_WS = servicio2.getControladorUsuarioWSPort();
+                    ICU_WS = fabricaWS.getControladorUsuarioWS();
                     
                     if (usuarios != null && usuarios.length > 0) {
             %>

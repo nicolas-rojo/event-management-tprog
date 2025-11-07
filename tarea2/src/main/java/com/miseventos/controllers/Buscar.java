@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import com.miseventos.utils.fabricaWS;
 
 import com.miseventos.utils.*;
 
@@ -35,11 +36,8 @@ public class Buscar extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-    	ControladorEventoWSService servicio = new ControladorEventoWSService();
-    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-        IEV_WS = servicio.getControladorEventoWSPort();
-        ICU_WS = servicio2.getControladorUsuarioWSPort();
-
+    	IEV_WS = fabricaWS.getControladorEventoWS();
+    	ICU_WS = fabricaWS.getControladorUsuarioWS();
         System.out.println("ConsultaEventoWS");
     }
 

@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-
+import com.miseventos.utils.fabricaWS;
 @WebServlet("/logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;

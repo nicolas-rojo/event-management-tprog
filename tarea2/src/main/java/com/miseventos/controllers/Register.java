@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import jakarta.servlet.annotation.MultipartConfig;
-
+import com.miseventos.utils.fabricaWS;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -34,8 +34,7 @@ public class Register extends HttpServlet {
 	
 	@Override
     public void init() throws ServletException {  
-    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-    	ICU_WS = servicio2.getControladorUsuarioWSPort();
+		ICU_WS = fabricaWS.getControladorUsuarioWS();
     	System.out.println("RegisterWS");
     }
 

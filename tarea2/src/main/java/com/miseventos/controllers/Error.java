@@ -9,7 +9,7 @@ import jakarta.servlet.annotation.MultipartConfig;
 
 import java.io.IOException;
 
-
+import com.miseventos.utils.fabricaWS;
 
 @WebServlet("/error")
 @MultipartConfig
