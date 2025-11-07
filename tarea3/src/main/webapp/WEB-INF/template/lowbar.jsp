@@ -18,7 +18,8 @@
       		<!-- Botón Perfil con imagen del usuario -->
       		<a href="${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(usr.getEmail(), "UTF-8") %>" class="nav-item profile-link">
 				<div class="profile-pic">
-					<img src="/tarea2/resources/images/USR-<%= nombreUtils.normalizarNombre(usr.getNickname()) %>.png" 
+					<img
+						src="<%=request.getContextPath()%>/imagenes?id=USR-<%= nombreUtils.normalizarNombre(usr.getNickname()) %>"
 						alt="logoUsr" 
 						onerror="this.onerror=null; this.src='/tarea2/resources/images/stockusr.png';">
 				</div>

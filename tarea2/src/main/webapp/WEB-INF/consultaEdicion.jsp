@@ -68,7 +68,7 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 		<div class="columna-central">
 			<div class="contenedor-principal">
 				<img class="imagenes"
-					src="${pageContext.request.contextPath}/resources/images/ED-<%= nomNormal %>.png"										
+					src="<%=request.getContextPath()%>/imagenes?id=ED-<%= nomNormal %>"										
 					alt="logoEdición" 
 					width="150px" height="150px"
 					onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">					
@@ -179,7 +179,7 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
                class="link-sin-estilo">
 				<div class="contenedor-derecha">
 					<img class="imagenes"
-						src="<%= request.getContextPath() %>/resources/images/USR-<%= nomNormal1 %>.png"										
+						src="<%=request.getContextPath()%>/imagenes?id=USR-<%= nomNormal1 %>"										
 					alt="logoEdición" 
 					width="120px" height="120x"
 					onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">

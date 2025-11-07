@@ -1,5 +1,5 @@
 
-package cliente.ws.instituciones;
+package cliente.ws.eventos;
 
 import jakarta.xml.ws.WebFault;
 
@@ -10,8 +10,8 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "InstitucionRepetidaException", targetNamespace = "http://webservices/")
-public class InstitucionRepetidaException_Exception
+@WebFault(name = "IOException", targetNamespace = "http://webservices/")
+public class IOException_Exception
     extends Exception
 {
 
@@ -19,14 +19,14 @@ public class InstitucionRepetidaException_Exception
      * Java type that goes as soapenv:Fault detail element.
      * 
      */
-    private InstitucionRepetidaException faultInfo;
+    private IOException faultInfo;
 
     /**
      * 
      * @param faultInfo
      * @param message
      */
-    public InstitucionRepetidaException_Exception(String message, InstitucionRepetidaException faultInfo) {
+    public IOException_Exception(String message, IOException faultInfo) {
         super(message);
         this.faultInfo = faultInfo;
     }
@@ -37,7 +37,7 @@ public class InstitucionRepetidaException_Exception
      * @param faultInfo
      * @param message
      */
-    public InstitucionRepetidaException_Exception(String message, InstitucionRepetidaException faultInfo, Throwable cause) {
+    public IOException_Exception(String message, IOException faultInfo, Throwable cause) {
         super(message, cause);
         this.faultInfo = faultInfo;
     }
@@ -45,9 +45,9 @@ public class InstitucionRepetidaException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: cliente.ws.instituciones.InstitucionRepetidaException
+     *     returns fault bean: cliente.ws.usuarios.IOException
      */
-    public InstitucionRepetidaException getFaultInfo() {
+    public IOException getFaultInfo() {
         return faultInfo;
     }
 

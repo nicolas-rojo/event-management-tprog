@@ -59,7 +59,7 @@
 			                <div class="contenedor">
 			                	<span class="badge badge-evento">Evento</span>
 			                    <img class="imagenes"
-			                         src="${pageContext.request.contextPath}/resources/images/EV-<%= nomNormal %>.png"
+			                         src="<%=request.getContextPath()%>/imagenes?id=EV-<%= nomNormal %>"
 			                         alt="logoEvento" width="120px" height="120px"
 			                         onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">
 			                    
@@ -98,7 +98,7 @@
 		                    <div class="contenedor">
 		                    	<span class="badge badge-evento">Edición</span>
 		                        <img class="imagenes" 
-										src="${pageContext.request.contextPath}/resources/images/ED-<%= nomNormal %>.png" 
+										src="<%=request.getContextPath()%>/imagenes?id=ED-<%= nomNormal %>"
 										alt="logoEvento" 
 										width="120px" height="120px"
 										onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">

@@ -130,7 +130,7 @@
 							    %>
 							    
 							    <div class="imagen-usuario">
-							        <img src="${pageContext.request.contextPath}/resources/images/USR-<%= nomNormal %>.png" 
+							        <img src="<%=request.getContextPath()%>/imagenes?id=USR-<%= nomNormal %>"
 							             alt="<%= usuario.getNombre() %>" 
 							             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 							        <div class="sin-imagen" style="display:none;">Sin imagen</div>

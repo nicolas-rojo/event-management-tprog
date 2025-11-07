@@ -45,7 +45,7 @@
 	<div class="info-container">
 		<a href="" class="event-card">
 			<div class="event-card-image">
-				<img src="/tarea2/resources/images/ED-<%= nomNormal %>.png"
+				<img src="<%=request.getContextPath()%>/imagenes?id=ED-<%= nomNormal %>"
 					alt="logoEdición" width="150px" height="150px"
 					onerror="this.onerror=null; this.src='/tarea2/resources/images/IMG-NO.png';">
 			</div>
@@ -144,7 +144,7 @@
 
 			<div class="organizador-card">
 				<div class="organizador-avatar">
-					<img src="/tarea2/resources/images/USR-<%=nomNormal1%>.png"
+					<img src="<%=request.getContextPath()%>/imagenes?id=USR-<%= nomNormal1 %>"
 						alt="logoEdición" width="120px" height="120px"
 						onerror="this.onerror=null; this.src='/tarea2/resources/images/IMG-NO.png';">
 				</div>
