@@ -14,7 +14,7 @@ import cliente.ws.eventos.StringArray;
 import cliente.ws.eventos.DataEventoCompletoArray;
 import cliente.ws.eventos.DataEventoCompleto;
 import com.miseventos.utils.fabricaWS;
-import com.miseventos.utils.fabricaWS;
+
 @WebServlet("/home")
 public class ListarEventos extends HttpServlet {
 	private static final long serialVersionUID = 1L;

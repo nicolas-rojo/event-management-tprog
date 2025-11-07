@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import com.miseventos.utils.fabricaWS;
+
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.IControladorUsuarioWS;
 import cliente.ws.usuarios.UsuarioNoExisteException_Exception;
@@ -24,9 +26,7 @@ public class Login extends HttpServlet {
 	
 	@Override
     public void init() throws ServletException {  
-		ControladorUsuarioWSService servicio = new ControladorUsuarioWSService();
-		ICU_WS = servicio.getControladorUsuarioWSPort();
-
+        ICU_WS = fabricaWS.getControladorUsuarioWS();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

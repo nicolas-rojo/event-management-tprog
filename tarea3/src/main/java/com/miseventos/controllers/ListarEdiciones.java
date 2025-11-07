@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.miseventos.utils.fabricaWS;
+
 import cliente.ws.eventos.Estado;
 import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.eventos.DataEdicion;
@@ -24,8 +26,7 @@ public class ListarEdiciones extends HttpServlet {
 	    
 	@Override
 	public void init() throws ServletException {  
-		ControladorEventoWSService servicio = new ControladorEventoWSService();
-		IEV_WS = servicio.getControladorEventoWSPort();
+		IEV_WS = fabricaWS.getControladorEventoWS();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

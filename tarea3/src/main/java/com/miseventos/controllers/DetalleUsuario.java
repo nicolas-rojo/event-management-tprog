@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import com.miseventos.utils.fabricaWS;
+
 import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.eventos.IControladorEventoWS;
 import cliente.ws.usuarios.ControladorUsuarioWSService;
@@ -21,6 +23,7 @@ import cliente.ws.usuarios.UsuarioNoExisteException_Exception;
 
 import cliente.ws.usuarios.DataUsuario;
 
+
 @WebServlet("/detalleUsuario")
 public class DetalleUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,10 +32,8 @@ public class DetalleUsuario extends HttpServlet {
 	
     @Override
     public void init() throws ServletException {
-    	ControladorEventoWSService servicio = new ControladorEventoWSService();
-    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService();
-        IEV_WS = servicio.getControladorEventoWSPort();
-        ICU_WS = servicio2.getControladorUsuarioWSPort();
+    	IEV_WS = fabricaWS.getControladorEventoWS();
+        ICU_WS = fabricaWS.getControladorUsuarioWS();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.miseventos.utils.fabricaWS;
+
 import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.eventos.DataEventoCompleto;
 import cliente.ws.eventos.DataEventoCompletoArray;
@@ -25,8 +27,7 @@ public class ListarEventos extends HttpServlet {
        
 	@Override
     public void init() throws ServletException {  
-		ControladorEventoWSService servicio = new ControladorEventoWSService();
-        IEV_WS = servicio.getControladorEventoWSPort();
+		IEV_WS = fabricaWS.getControladorEventoWS();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

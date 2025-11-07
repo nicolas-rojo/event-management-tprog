@@ -3,6 +3,7 @@
 <%@ page import= "cliente.ws.usuarios.*"%>
 <%@ page import= "cliente.ws.eventos.*"%>
 <%@ page import="java.util.List" %>
+<%@ page import="com.miseventos.utils.fabricaWS" %>
 
 <!DOCTYPE html>
 <html>
@@ -62,10 +63,8 @@ List<ParEdicionRegistro> registros = (List<ParEdicionRegistro>) request.getAttri
     			<h2 class="section-title">Mis Registros a Eventos</h2>
     			<div class="registros-container">
 	    			<%
-	    			ControladorUsuarioWSService servicio = new ControladorUsuarioWSService();
-	    			IControladorUsuarioWS ICU_WS = servicio.getControladorUsuarioWSPort();
-	    			ControladorEventoWSService servicio2 = new ControladorEventoWSService();
-            		IControladorEventoWS IEV_WS = servicio2.getControladorEventoWSPort();
+	    			IControladorEventoWS IEV_WS = fabricaWS.getControladorEventoWS();
+	    			IControladorUsuarioWS ICU_WS = fabricaWS.getControladorUsuarioWS();
 	    			for (ParEdicionRegistro par : registros) {
                     	DataDetalleRegistro DataReg = ICU_WS.getDetallesRegistro(usr.getNickname(), par);
 	    			%>
