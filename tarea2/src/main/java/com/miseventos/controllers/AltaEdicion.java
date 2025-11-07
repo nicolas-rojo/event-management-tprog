@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -179,13 +180,16 @@ public class AltaEdicion extends HttpServlet {
 			return; //NO SE SUBIO NINGUNA IMAGEN
 		}
 		
-		String nomNorm = nombreUtils.normalizarNombre(nick);
-		
-		BufferedImage imagen = ImageIO.read(filePart.getInputStream());
-		String rutaRel = "/resources/images/ED-" + nomNorm + ".png";
-		String rutaAbs = getServletContext().getRealPath(rutaRel);
-		
-		File archivoDest = new File(rutaAbs);
-		ImageIO.write(imagen, "png", archivoDest);		
+		try {
+			BufferedImage imagen = ImageIO.read(filePart.getInputStream());
+			String nomNorm = "ED-" + nombreUtils.normalizarNombre(nick);
+			
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	        ImageIO.write(imagen, "png", baos);
+	        byte[] imageBytes = baos.toByteArray();
+	        baos.close();
+	        
+	        IEV_WS.uploadFile(nomNorm, imageBytes);
+		} catch (Exception e) {}	
 	}
 }

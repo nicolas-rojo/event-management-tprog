@@ -41,7 +41,7 @@
             <div class="contenedor-principal">
             	<% String nomNormalEv = nombreUtils.normalizarNombre(evento.getNombre()); %>
             	<img class="imagenes" 
-					src="${pageContext.request.contextPath}/resources/images/EV-<%= nomNormalEv %>.png" 
+					src="<%=request.getContextPath()%>/imagenes?id=EV-<%= nomNormalEv %>"
 					alt="logoEvento" 
 					width="150px" height="150px"
 					onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">
@@ -100,7 +100,7 @@
                 <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="contenedor-link">
                     <div class="contenedor">
                         <img class="imagenes" 
-								src="${pageContext.request.contextPath}/resources/images/ED-<%= nomNormal %>.png" 
+								src="<%=request.getContextPath()%>/imagenes?id=ED-<%= nomNormal %>"
 								alt="logoEvento" 
 								width="120px" height="120px"
 								onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/IMG-NO.png';">

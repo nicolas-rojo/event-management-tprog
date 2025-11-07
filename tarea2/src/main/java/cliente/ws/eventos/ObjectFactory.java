@@ -28,6 +28,7 @@ public class ObjectFactory {
     private final static QName _EventoNoExisteExcepcion_QNAME = new QName("http://webservices/", "EventoNoExisteExcepcion");
     private final static QName _EventoRepetidoExcepcion_QNAME = new QName("http://webservices/", "EventoRepetidoExcepcion");
     private final static QName _EventoSinCategoriaExcepcion_QNAME = new QName("http://webservices/", "EventoSinCategoriaExcepcion");
+    private final static QName _IOException_QNAME = new QName("http://webservices/", "IOException");
     private final static QName _LinkInvalidoExcepcion_QNAME = new QName("http://webservices/", "LinkInvalidoExcepcion");
     private final static QName _TipoDeRegistroRepetidoException_QNAME = new QName("http://webservices/", "TipoDeRegistroRepetidoException");
 
@@ -76,6 +77,16 @@ public class ObjectFactory {
      */
     public EventoSinCategoriaExcepcion createEventoSinCategoriaExcepcion() {
         return new EventoSinCategoriaExcepcion();
+    }
+
+    /**
+     * Create an instance of {@link IOException }
+     * 
+     * @return
+     *     the new instance of {@link IOException }
+     */
+    public IOException createIOException() {
+        return new IOException();
     }
 
     /**
@@ -248,6 +259,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "EventoSinCategoriaExcepcion")
     public JAXBElement<EventoSinCategoriaExcepcion> createEventoSinCategoriaExcepcion(EventoSinCategoriaExcepcion value) {
         return new JAXBElement<>(_EventoSinCategoriaExcepcion_QNAME, EventoSinCategoriaExcepcion.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link IOException }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link IOException }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "IOException")
+    public JAXBElement<IOException> createIOException(IOException value) {
+        return new JAXBElement<>(_IOException_QNAME, IOException.class, null, value);
     }
 
     /**

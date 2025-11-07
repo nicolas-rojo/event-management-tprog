@@ -49,7 +49,7 @@
 			
 			<a href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a> <!-- REF AL SERVLET DE LOGOUT -->
 			<a href="${pageContext.request.contextPath}/detalleUsuario?email=<%= java.net.URLEncoder.encode(datosU.getEmail(), "UTF-8") %>"> <!-- REF A LA CONSULTA DEL PERFIL DEL USUARIO ACTUAL -->
-				<img src="${pageContext.request.contextPath}/resources/images/USR-<%= nickNormal %>.png" 
+				<img src="<%=request.getContextPath()%>/imagenes?id=USR-<%= nickNormal %>"
 					alt="logoUsr" 
 					onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/images/stockusr.png';"> <!-- IMG DEL USUARIO ACTUAL -->
 			</a>
