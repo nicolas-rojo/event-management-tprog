@@ -7,32 +7,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import excepciones.AsistenteYaRegistrado;
-import excepciones.CategoriaRepetidaException;
-import excepciones.EdicionRepetidaExcepcion;
-import excepciones.EventoRepetidoExcepcion;
-import excepciones.EventoSinCategoriaExcepcion;
-import excepciones.InstitucionRepetidaException;
-import excepciones.NoHayCupoEdicionTRegistro;
-import excepciones.TipoDeRegistroRepetidoException;
-import excepciones.UsuarioRepetidoException;
-import excepciones.PatrocinioRepetidoException;
 import logica.Fabrica;
-
-import logica.datatypes.*;
-import logica.datatypes.Nivel;
 
 import logica.interfaces.IEventos;
 import logica.interfaces.IUsuario;
 import logica.interfaces.IInstituciones;
 import webservices.PublicadorWS;
 
-
 import javax.swing.JMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.util.Arrays;
 
 
 public class Principal {
@@ -189,19 +173,6 @@ public class Principal {
             }
         });
         menuSistema.add(menuSalir);
-
-        JMenuItem menuCargarDatos = new JMenuItem("Cargar Datos");
-        menuCargarDatos.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            	if(!cond) {
-            		ICU.cargarDatos();
-            		cond = true;
-            	}else {
-            		JOptionPane.showMessageDialog(frmGestionDeUsuarios, "Los datos ya fueron cargados", "Gestion de Usuarios", JOptionPane.ERROR_MESSAGE);
-            	}
-            }
-    	});
-        menuSistema.add(menuCargarDatos);
         
         JMenuItem menuPublicarWS = new JMenuItem("Publicar WebServices");
         menuPublicarWS.addActionListener(new ActionListener(){
@@ -210,6 +181,7 @@ public class Principal {
                     try {
                         PublicadorWS publicador = new PublicadorWS();
                         publicador.publicar();
+                        ICU.cargarDatos();
                         publicados = true;
                         JOptionPane.showMessageDialog(frmGestionDeUsuarios, 
                             "Los WebServices fueron publicados correctamente. Este print se debería cambiar porque es estático\n" +
