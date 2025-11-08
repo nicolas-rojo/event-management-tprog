@@ -7,12 +7,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
-
+import java.io.InputStream;
+import java.io.IOException;
+import java.net.URL; 
+import java.net.MalformedURLException;
+import java.util.Properties;
 import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.eventos.IControladorEventoWS;
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.IControladorUsuarioWS;
-
+import com.miseventos.utils.fabricaWS;
 @WebServlet("/imagenes")
 public class Imagenes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,9 +24,14 @@ public class Imagenes extends HttpServlet {
 
 	@Override
     public void init() throws ServletException {  
-    	// Acá lo que añadí
-    	ControladorEventoWSService servicio = new ControladorEventoWSService();
-        IEV_WS = servicio.getControladorEventoWSPort();
+		String ev = fabricaWS.getURLControladorEvento();
+    	try{
+    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+    		IEV_WS = servicio.getControladorEventoWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

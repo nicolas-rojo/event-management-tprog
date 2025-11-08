@@ -4,6 +4,8 @@
 <%@ page import= "cliente.ws.eventos.*"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.miseventos.utils.fabricaWS" %>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.io.IOException" %>
 
 <!DOCTYPE html>
 <html>
@@ -63,8 +65,20 @@ List<ParEdicionRegistro> registros = (List<ParEdicionRegistro>) request.getAttri
     			<h2 class="section-title">Mis Registros a Eventos</h2>
     			<div class="registros-container">
 	    			<%
-	    			IControladorEventoWS IEV_WS = fabricaWS.getControladorEventoWS();
-	    			IControladorUsuarioWS ICU_WS = fabricaWS.getControladorUsuarioWS();
+	    			IControladorEventoWS IEV_WS = null;
+	    			IControladorUsuarioWS ICU_WS = null;
+	    			
+	    			String ev = fabricaWS.getURLControladorEvento();
+	    	    	String usr2 = fabricaWS.getURLControladorUsuario();
+	    	    	try{
+	    	    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+	    	    		IEV_WS = servicio.getControladorEventoWSPort();
+	    	        	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr2));
+	    	            ICU_WS = servicio2.getControladorUsuarioWSPort();
+	    	    	}
+	    	    	catch (Exception e) {
+	    	    		e.printStackTrace();
+	    	    	}
 	    			for (ParEdicionRegistro par : registros) {
                     	DataDetalleRegistro DataReg = ICU_WS.getDetallesRegistro(usr.getNickname(), par);
 	    			%>

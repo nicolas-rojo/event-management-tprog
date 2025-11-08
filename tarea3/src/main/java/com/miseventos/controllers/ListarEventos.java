@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.io.InputStream;
+import java.io.IOException;
+import java.net.URL; 
+import java.net.MalformedURLException;
+import java.util.Properties;
 import com.miseventos.utils.fabricaWS;
 
 import cliente.ws.eventos.ControladorEventoWSService;
@@ -27,7 +31,14 @@ public class ListarEventos extends HttpServlet {
        
 	@Override
     public void init() throws ServletException {  
-		IEV_WS = fabricaWS.getControladorEventoWS();
+		String ev = fabricaWS.getURLControladorEvento();
+    	try{
+    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+    		IEV_WS = servicio.getControladorEventoWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

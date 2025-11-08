@@ -45,6 +45,24 @@ public class fabricaWS {
         }
     }
 
+    public static String getURLControladorUsuario() {
+    	loadProperties();
+    	String urlWsdl = properties.getProperty("URLControladorUsuario");
+    	return urlWsdl;
+    }
+    
+    public static String getURLControladorEvento() {
+    	loadProperties();
+    	String urlWsdl = properties.getProperty("URLControladorEvento");
+    	return urlWsdl;
+    }
+    
+    public static String getURLControladorInstituciones() {
+    	loadProperties();
+    	String urlWsdl = properties.getProperty("URLControladorInstituciones");
+    	return urlWsdl;
+    }
+    
     public static IControladorUsuarioWS getControladorUsuarioWS() {
         if (controladorUsuarioWS == null) {
             loadProperties();

@@ -6,7 +6,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
+import java.io.InputStream;
+import java.io.IOException;
+import java.net.URL; 
+import java.net.MalformedURLException;
+import java.util.Properties;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,8 +30,17 @@ public class ConsultaEdicion extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		IEV_WS = fabricaWS.getControladorEventoWS();
-        ICU_WS = fabricaWS.getControladorUsuarioWS();
+		String ev = fabricaWS.getURLControladorEvento();
+    	String usr = fabricaWS.getURLControladorUsuario();
+    	try{
+    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+    		IEV_WS = servicio.getControladorEventoWSPort();
+        	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr));
+            ICU_WS = servicio2.getControladorUsuarioWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

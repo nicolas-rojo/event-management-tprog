@@ -3,6 +3,8 @@
 <%@ page import= "cliente.ws.usuarios.*"%>
 <%@ page import= "cliente.ws.eventos.*"%>
 <%@ page import="com.miseventos.utils.nombreUtils"%>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.io.IOException" %>
 
 <!DOCTYPE html>
 

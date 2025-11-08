@@ -7,6 +7,8 @@
 <%@ page import="com.miseventos.utils.nombreUtils"%>
 <%@ page import="cliente.ws.eventos.DataEdicion"%>
 <%@ page import="com.miseventos.utils.fabricaWS" %>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.io.IOException" %>
 
 <%
 	DataEdicion dataEd = (DataEdicion) request.getAttribute("dataEdicion");
@@ -84,7 +86,16 @@
 			<div class="mi-registro-section" id="miRegistro">
 			<%
 			
-			IControladorUsuarioWS ICU_WS = fabricaWS.getControladorUsuarioWS();
+			IControladorUsuarioWS ICU_WS = null;
+	    	String usr = fabricaWS.getURLControladorUsuario();
+	    	try{
+	        	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr));
+	            ICU_WS = servicio2.getControladorUsuarioWSPort();
+	    	}
+	    	catch (Exception e) {
+	    		e.printStackTrace();
+	    	}
+			
 			DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
 			Boolean registrado = (Boolean) request.getAttribute("registrado");
 			if (registrado != null && registrado) {

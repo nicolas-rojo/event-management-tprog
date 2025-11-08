@@ -17,7 +17,11 @@ import cliente.ws.usuarios.IControladorUsuarioWS;
 import cliente.ws.usuarios.UsuarioNoExisteException_Exception;
 import cliente.ws.usuarios.DataUsuario;
 
-
+import java.io.InputStream;
+import java.io.IOException;
+import java.net.URL; 
+import java.net.MalformedURLException;
+import java.util.Properties;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
@@ -26,7 +30,14 @@ public class Login extends HttpServlet {
 	
 	@Override
     public void init() throws ServletException {  
-        ICU_WS = fabricaWS.getControladorUsuarioWS();
+    	String usr = fabricaWS.getURLControladorUsuario();
+    	try{
+        	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr));
+            ICU_WS = servicio2.getControladorUsuarioWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

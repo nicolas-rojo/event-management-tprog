@@ -4,6 +4,8 @@
 <%@ page import= "cliente.ws.eventos.DataEdicion"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.miseventos.utils.nombreUtils"%>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.io.IOException" %>
 
 <!DOCTYPE html>
 <html>
