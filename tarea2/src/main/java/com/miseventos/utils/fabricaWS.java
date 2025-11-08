@@ -34,7 +34,6 @@ public class fabricaWS {
             try (InputStream input = fabricaWS.class.getClassLoader().getResourceAsStream(CONFIG_FILE)) {
                 if (input == null) {
                     System.err.println("ERROR CRÍTICO: No se pudo encontrar el archivo " + CONFIG_FILE + " en el classpath. Revise que esté en src/main/resources.");
-                    // Podría lanzar una RuntimeException si es crítico para detener la aplicación
                 } else {
                     properties.load(input);
                     System.out.println("INFO: Propiedades de WebServices cargadas correctamente.");
@@ -45,7 +44,24 @@ public class fabricaWS {
             }
         }
     }
-
+    public static String getURLControladorUsuario() {
+    	loadProperties();
+    	String urlWsdl = properties.getProperty("URLControladorUsuario");
+    	return urlWsdl;
+    }
+    
+    public static String getURLControladorEvento() {
+    	loadProperties();
+    	String urlWsdl = properties.getProperty("URLControladorEvento");
+    	return urlWsdl;
+    }
+    
+    public static String getURLControladorInstituciones() {
+    	loadProperties();
+    	String urlWsdl = properties.getProperty("URLControladorInstituciones");
+    	return urlWsdl;
+    }
+    
     public static IControladorUsuarioWS getControladorUsuarioWS() {
         if (controladorUsuarioWS == null) {
             loadProperties();

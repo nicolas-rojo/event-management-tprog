@@ -10,10 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import cliente.ws.eventos.*;
 import cliente.ws.usuarios.*;
+import cliente.ws.instituciones.*;
 import cliente.ws.eventos.StringArray;
 import cliente.ws.eventos.DataEventoCompletoArray;
 import cliente.ws.eventos.DataEventoCompleto;
 import com.miseventos.utils.fabricaWS;
+
+import java.io.InputStream;
+import java.io.IOException;
+import java.net.URL; 
+import java.net.MalformedURLException;
+import java.util.Properties;
 
 @WebServlet("/home")
 public class ListarEventos extends HttpServlet {
@@ -21,18 +28,28 @@ public class ListarEventos extends HttpServlet {
 	
 	private IControladorEventoWS IEV_WS;
 	private IControladorUsuarioWS ICU_WS;
+	private IControladorInstitucionesWS IInst_WS;
     
     @Override
-    public void init() throws ServletException {  
+    public void init() throws ServletException { 
+    	String s = fabricaWS.getURLControladorEvento();
+    	String t = fabricaWS.getURLControladorUsuario();
+    	String i = fabricaWS.getURLControladorInstituciones();
+    	try{
+    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(s));
+    		IEV_WS = servicio.getControladorEventoWSPort();
+        	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(t));
+            ICU_WS = servicio2.getControladorUsuarioWSPort();
+            ControladorInstitucionesWSService servicio3 = new ControladorInstitucionesWSService(new URL(i));
+            IInst_WS = servicio3.getControladorInstitucionesWSPort();
+    		ICU_WS.cargarDatos();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
         // Usar la fábrica para todos los servicios:
-        IEV_WS = fabricaWS.getControladorEventoWS();
-        ICU_WS = fabricaWS.getControladorUsuarioWS();
-        if (ICU_WS != null) {
-            ICU_WS.cargarDatos();
-        } else {
-            System.err.println("ERROR: No se pudo cargar el Controlador de Usuario.");
-        }
-
+        //IEV_WS = fabricaWS.getControladorEventoWS();
+        //ICU_WS = fabricaWS.getControladorUsuarioWS();
         System.out.println("ListarEventoWS");
     }
 

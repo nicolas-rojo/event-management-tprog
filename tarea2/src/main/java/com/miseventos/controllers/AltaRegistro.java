@@ -9,10 +9,12 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.annotation.MultipartConfig;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 
 import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.instituciones.ControladorInstitucionesWSService;
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.IControladorUsuarioWS;
 import cliente.ws.usuarios.DataUsuario;
@@ -31,8 +33,17 @@ public class AltaRegistro extends HttpServlet {
 	
 	@Override
     public void init() throws ServletException {  
-		IEV_WS = fabricaWS.getControladorEventoWS();
-		ICU_WS = fabricaWS.getControladorUsuarioWS();
+		String ev = fabricaWS.getURLControladorEvento();
+    	String usr = fabricaWS.getURLControladorUsuario();
+    	try{
+    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+    		IEV_WS = servicio.getControladorEventoWSPort();
+        	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr));
+            ICU_WS = servicio2.getControladorUsuarioWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

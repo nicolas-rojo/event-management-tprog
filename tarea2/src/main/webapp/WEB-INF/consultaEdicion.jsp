@@ -5,7 +5,8 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.miseventos.utils.nombreUtils" %>
 <%@ page import="com.miseventos.utils.fabricaWS" %>
-
+<%@ page import="java.net.URL" %>
+<%@ page import="java.io.IOException" %>
 <%@ page import="cliente.ws.eventos.ControladorEventoWSService" %>
 <%@ page import="cliente.ws.eventos.IControladorEventoWS" %>
 <%@ page import="cliente.ws.usuarios.ControladorUsuarioWSService" %>
@@ -197,47 +198,62 @@ List<DataPatrocinioCompleto> dataPatrocinios = (List<DataPatrocinioCompleto>) re
 			if ("asistente".equals(session.getAttribute("tipoUsr")) && (request.getAttribute("registrado").equals(true))) {
 			%>
 			<h2 class="texto-registro" id="registro-titulo">Registro:</h2>
-
+			
 			<div class="contenedor-derecha-alt" id="registro-detalle" style="display: flex;">
-				<div class="informacion-TRegistro">
-					<div class="detalles-TRegistro">
-						<%
-						//Pido el controlador (su interfaz)
-						IControladorUsuarioWS ICU_WS;
-						ICU_WS = fabricaWS.getControladorUsuarioWS();
-				        
-						DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
-						Boolean registrado = (Boolean) request.getAttribute("registrado");
-						Boolean asistio = (Boolean) ICU_WS.verificarAsistencia(dataEd.getNombre(), dataU.getNickname());
-						if (registrado != null && registrado) {
-							ParEdicionRegistro dataRegistro = (ParEdicionRegistro) request.getAttribute("dataRegistro");
-                        	DataDetalleRegistro detalleReg = ICU_WS.getDetallesRegistro(dataU.getNickname(), dataRegistro);
-						%>
-						<div class="registro-item">
-							<span>Registrado el: <%= detalleReg.getFecha() %>, como: <%= detalleReg.getNombreTR() %></span>
-							<% if (asistio){ %>
-								<button  id="descargar" class="Btn" onclick="window.location.href='<%= request.getContextPath() %>/ComprobantePDF?edicion=<%= dataEd.getNombre() %>&ciudad=<%= dataEd.getCiudad() %>&fecha=<%= detalleReg.getFecha() %>&evento=<%= request.getParameter("evento") %>'">
-								  <svg class="svgIcon" viewBox="0 0 384 512" height="10px" xmlns="http://www.w3.org/2000/svg">
-								    <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
-								  </svg>
-								  <span class="icon2" height="10px"></span>
-								</button>
-							<% } %>
-							
-						</div>
-						<%
-						} else {
-						%>
-						<div class="registro-item">
-							<span>Registrado (detalles no disponibles)</span>
-						</div>
-						<%
-						}
-						%>
-					</div>
-				</div>
+			    <div class="informacion-TRegistro">
+			        <div class="detalles-TRegistro">
+			            <%
+			            //Pido el controlador (su interfaz)
+			            IControladorUsuarioWS ICU_WS = null;
+			            String usr = fabricaWS.getURLControladorUsuario();
+			            try{
+			                ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr));
+			                ICU_WS = servicio2.getControladorUsuarioWSPort();
+			            }
+			            catch (Exception e) {
+			                e.printStackTrace();
+			            }
+			            
+			            // Verificar que ICU_WS no sea null antes de usarlo
+			            if (ICU_WS != null) {
+			                DataUsuario dataU = (DataUsuario) session.getAttribute("datosUsr");
+			                Boolean registrado = (Boolean) request.getAttribute("registrado");
+			                Boolean asistio = (Boolean) ICU_WS.verificarAsistencia(dataEd.getNombre(), dataU.getNickname());
+			                if (registrado != null && registrado) {
+			                    ParEdicionRegistro dataRegistro = (ParEdicionRegistro) request.getAttribute("dataRegistro");
+			                    DataDetalleRegistro detalleReg = ICU_WS.getDetallesRegistro(dataU.getNickname(), dataRegistro);
+			            %>
+			            <div class="registro-item">
+			                <span>Registrado el: <%= detalleReg.getFecha() %>, como: <%= detalleReg.getNombreTR() %></span>
+			                <% if (asistio){ %>
+			                    <button  id="descargar" class="Btn" onclick="window.location.href='<%= request.getContextPath() %>/ComprobantePDF?edicion=<%= dataEd.getNombre() %>&ciudad=<%= dataEd.getCiudad() %>&fecha=<%= detalleReg.getFecha() %>&evento=<%= request.getParameter("evento") %>'">
+			                      <svg class="svgIcon" viewBox="0 0 384 512" height="10px" xmlns="http://www.w3.org/2000/svg">
+			                        <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+			                      </svg>
+			                      <span class="icon2" height="10px"></span>
+			                    </button>
+			                <% } %>
+			            </div>
+			            <%
+			                } else {
+			            %>
+			            <div class="registro-item">
+			                <span>Registrado (detalles no disponibles)</span>
+			            </div>
+			            <%
+			                }
+			            } else {
+			            %>
+			            <div class="registro-item">
+			                <span>Error al conectar con el servicio</span>
+			            </div>
+			            <%
+			            }
+			            %>
+			        </div>
+			    </div>
 			</div>
-
+			
 			<%
 			} else if ("organizador".equals(session.getAttribute("tipoUsr"))
 					&& Boolean.TRUE.equals(request.getAttribute("organizaEdicion"))) {

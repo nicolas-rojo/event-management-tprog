@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,6 +26,8 @@ import java.util.Arrays;
 import com.miseventos.utils.fabricaWS;
 
 import cliente.ws.eventos.*;
+import cliente.ws.instituciones.ControladorInstitucionesWSService;
+import cliente.ws.usuarios.ControladorUsuarioWSService;
 
 @WebServlet("/altaEvento")
 @MultipartConfig
@@ -34,7 +37,14 @@ public class AltaEvento extends HttpServlet {
     
     @Override
     public void init() throws ServletException {  
-    	IEV_WS = fabricaWS.getControladorEventoWS();
+    	String ev = fabricaWS.getURLControladorEvento();
+    	try{
+    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+    		IEV_WS = servicio.getControladorEventoWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
         System.out.println("AltaEventoWS");
     }
 

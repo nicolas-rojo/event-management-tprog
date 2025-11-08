@@ -4,11 +4,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
+import java.net.URL;
 
+import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.instituciones.ControladorInstitucionesWSService;
 import cliente.ws.instituciones.IControladorInstitucionesWS;
 import cliente.ws.instituciones.DataInstitucion;
 import cliente.ws.instituciones.InstitucionRepetidaException_Exception;
+import cliente.ws.usuarios.ControladorUsuarioWSService;
 
 import com.miseventos.utils.fabricaWS;
 
@@ -20,7 +23,15 @@ public class AltaInstitucion extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-    	IInst_WS = fabricaWS.getControladorInstitucionesWS();
+
+    	String ins = fabricaWS.getURLControladorInstituciones();
+    	try{
+            ControladorInstitucionesWSService servicio3 = new ControladorInstitucionesWSService(new URL(ins));
+            IInst_WS = servicio3.getControladorInstitucionesWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
         System.out.println("Alta Institucion");
     }
 

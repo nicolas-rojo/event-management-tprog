@@ -3,6 +3,7 @@ package com.miseventos.controllers;
 //ARREGLADO
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.miseventos.utils.fabricaWS;
 import cliente.ws.eventos.*;
-import cliente.ws.eventos.DataEventoCompleto;
-import cliente.ws.eventos.Estado;
+import cliente.ws.instituciones.ControladorInstitucionesWSService;
+import cliente.ws.usuarios.ControladorUsuarioWSService;
 
 @WebServlet("/consultaEvento")
 public class ConsultaEvento extends HttpServlet {
@@ -23,8 +24,14 @@ public class ConsultaEvento extends HttpServlet {
     
     @Override
     public void init() throws ServletException {  
-        
-    	IEV_WS = fabricaWS.getControladorEventoWS();
+    	String ev = fabricaWS.getURLControladorEvento();
+    	try{
+    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+    		IEV_WS = servicio.getControladorEventoWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
         System.out.println("ConsultaEventoWS");
     }
 

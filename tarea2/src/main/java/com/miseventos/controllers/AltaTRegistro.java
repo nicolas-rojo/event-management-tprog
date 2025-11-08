@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.annotation.MultipartConfig;
 
 import java.io.IOException;
+import java.net.URL;
+
 import com.miseventos.utils.fabricaWS;
 
 import cliente.ws.eventos.ControladorEventoWSService;
@@ -17,6 +19,7 @@ import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.eventos.DataTRegistro;
 
 import cliente.ws.eventos.TipoDeRegistroRepetidoException_Exception;
+import cliente.ws.instituciones.ControladorInstitucionesWSService;
 
 
 @WebServlet("/altaTReg")
@@ -27,7 +30,14 @@ public class AltaTRegistro extends HttpServlet {
 	
 	@Override
 	public void init() throws ServletException {  
-		IEV_WS = fabricaWS.getControladorEventoWS();
+		String ev = fabricaWS.getURLControladorEvento();
+    	try{
+    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+    		IEV_WS = servicio.getControladorEventoWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

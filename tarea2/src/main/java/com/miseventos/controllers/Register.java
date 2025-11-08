@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 
 import javax.imageio.ImageIO;
@@ -21,6 +22,7 @@ import com.miseventos.utils.*;
 
 import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.instituciones.ControladorInstitucionesWSService;
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.IControladorUsuarioWS;
 import cliente.ws.usuarios.DataUsuario;
@@ -38,7 +40,18 @@ public class Register extends HttpServlet {
 	
 	@Override
     public void init() throws ServletException {  
-		ICU_WS = fabricaWS.getControladorUsuarioWS();
+		String ev = fabricaWS.getURLControladorEvento();
+    	String usr = fabricaWS.getURLControladorUsuario();
+
+    	try{
+    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+    		IEV_WS = servicio.getControladorEventoWSPort();
+        	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr));
+            ICU_WS = servicio2.getControladorUsuarioWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
     	System.out.println("RegisterWS");
     }
 

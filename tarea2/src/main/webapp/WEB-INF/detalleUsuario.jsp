@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-
+<%@ page import="java.net.URL" %>
+<%@ page import="java.io.IOException" %>
 <%@ page import="cliente.ws.usuarios.DataUsuario" %>
 <%@ page import="cliente.ws.usuarios.DataAsistente" %>
 <%@ page import="cliente.ws.usuarios.DataOrganizador" %>
@@ -98,8 +99,15 @@
 					<%
 					} else {
 						if (usr != null) {
-							IControladorUsuarioWS ICU_WS;
-							ICU_WS = fabricaWS.getControladorUsuarioWS();
+							IControladorUsuarioWS ICU_WS = null;
+					    	String usr9 = fabricaWS.getURLControladorUsuario();
+					    	try{
+					        	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr9));
+					            ICU_WS = servicio2.getControladorUsuarioWSPort();
+					    	}
+					    	catch (Exception e) {
+					    		e.printStackTrace();
+					    	}
 							boolean esSeguidor = ICU_WS.esSeguidor(usuario.getEmail(), loggedMail);
 							if (esSeguidor) {
 							%>
@@ -181,11 +189,20 @@
                             %>
                                     <div class="lista-items">
                                     <%
-                                    IControladorUsuarioWS ICU_WS;
-                                    ICU_WS = fabricaWS.getControladorUsuarioWS();
+                                    IControladorUsuarioWS ICU_WS = null;
+                                    IControladorEventoWS IEV_WS = null;
                                     
-                                    IControladorEventoWS IEV_WS;
-                                    IEV_WS = fabricaWS.getControladorEventoWS();
+                                    String ev = fabricaWS.getURLControladorEvento();
+                                	String usr5 = fabricaWS.getURLControladorUsuario();
+                                	try{
+                                		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+                                		IEV_WS = servicio.getControladorEventoWSPort();
+                                    	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr5));
+                                        ICU_WS = servicio2.getControladorUsuarioWSPort();
+                                	}
+                                	catch (Exception e) {
+                                		e.printStackTrace();
+                                	}
                                         for (ParEdicionRegistro registro : registros) {
                                         	DataDetalleRegistro DataReg = ICU_WS.getDetallesRegistro(usuario.getNickname(), registro);
                                     %>
@@ -228,89 +245,102 @@
                         </div>
                     </div>
             <%
-                } else if ("Organizador".equals(tipo)) {
-                    DataEdicionWeb[] ediciones = (DataEdicionWeb[]) request.getAttribute("ediciones");
-            %>
-                    <!-- Sección de eventos organizados -->
-                    <div class="seccion-eventos">
-                        <h2 class="seccion-titulo">Ediciones de Eventos Organizadas</h2>
-                        <div class="contenedor-secundario">
-                            <%
-	                            IControladorEventoWS IEV_WS;
-                            	IEV_WS = fabricaWS.getControladorEventoWS();
-                                if (ediciones != null && ediciones.length > 0) {
-                            %>
-                                    <div class="lista-items">
+    } else if ("Organizador".equals(tipo)) {
+        DataEdicionWeb[] ediciones = (DataEdicionWeb[]) request.getAttribute("ediciones");
+%>
+        <!-- Sección de eventos organizados -->
+        <div class="seccion-eventos">
+            <h2 class="seccion-titulo">Ediciones de Eventos Organizadas</h2>
+            <div class="contenedor-secundario">
+                <%
+                    // MOVER LA INICIALIZACIÓN AQUÍ, ANTES DEL IF
+                    IControladorEventoWS IEV_WS = null;
+                    String ev = fabricaWS.getURLControladorEvento();
+                    try{
+                        ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+                        IEV_WS = servicio.getControladorEventoWSPort();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    
+                    if (ediciones != null && ediciones.length > 0 && IEV_WS != null) {
+                %>
+                        <div class="lista-items">
+                        <%
+                            for (DataEdicionWeb edicion : ediciones) {
+                                String evento = IEV_WS.eventoTieneEdicion(edicion.getNombre());
+                                if(edicion.getEstado() == cliente.ws.eventos.Estado.CONFIRMADO){
+                        %>
+                            <div class="item">
+                                <div class="info-evento">
+                                    <span class="nombre-evento">
+                                        ✅ <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= java.net.URLEncoder.encode(evento, "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(edicion.getNombre(),"UTF-8") %>"
+                                        class = "nombre-evento-link">
+                                        <%= edicion.getNombre() %> (<%= edicion.getSigla() %>) </a>
+                                    </span>
+                                    <span class="detalle-evento">
+                                        Estado: Confirmada - <%= edicion.getCiudad() %>, <%= edicion.getPais() %>
+                                    </span>
+                                    <span class="fecha-evento">
+                                        Fecha: <%= edicion.getFechaIni() %> - <%= edicion.getFechaFin() %> | Ingresada: <%= edicion.getFechaAlta() %>
+                                    </span>
                                     <%
-                                        for (DataEdicionWeb edicion : ediciones) {
-                                        	String evento = IEV_WS.eventoTieneEdicion(edicion.getNombre());
-                                        	if(edicion.getEstado() == cliente.ws.eventos.Estado.CONFIRMADO){
+                                    if(usuario.getEmail().equals(loggedMail)){
+                                        String edicionEncoded = java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8");
+                                        String nombreEvento = IEV_WS.eventoTieneEdicion(edicion.getNombre());
+                                        String eventoEncoded = java.net.URLEncoder.encode(nombreEvento, "UTF-8");
                                     %>
-                                        <div class="item">
-                                            <div class="info-evento">
-                                                <span class="nombre-evento">
-                                                    ✅ <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= java.net.URLEncoder.encode(evento, "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(edicion.getNombre(),"UTF-8") %>"
-                                                    class = "nombre-evento-link">
-                                                    <%= edicion.getNombre() %> (<%= edicion.getSigla() %>) </a>
-                                                </span>
-                                                <span class="detalle-evento">
-                                                    Estado: Confirmada - <%= edicion.getCiudad() %>, <%= edicion.getPais() %>
-                                                </span>
-                                                <span class="fecha-evento">
-                                                    Fecha: <%= edicion.getFechaIni() %> - <%= edicion.getFechaFin() %> | Ingresada: <%= edicion.getFechaAlta() %>
-                                                </span>
-                                                <%
-                                                if(usuario.getEmail().equals(loggedMail)){
-                                                	String edicionEncoded = java.net.URLEncoder.encode(edicion.getNombre(), "UTF-8");
-													String nombreEvento = IEV_WS.eventoTieneEdicion(edicion.getNombre());
-													String eventoEncoded = java.net.URLEncoder.encode(nombreEvento, "UTF-8");
-                                                %>
-				                                    <div class="botones-evento">
-					                                    <a href="${pageContext.request.contextPath}/altaTReg?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="boton-evento boton-tipo-registro">Nuevo Tipo Registro</a>
-														<a href="<%= request.getContextPath() %>/AltaPatrocinio?evento=<%= java.net.URLEncoder.encode(evento, "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(edicion.getNombre(),"UTF-8") %>" class="boton-evento boton-patrocinio">Nuevo Patrocinio</a>														
-					                                </div>
-                    							<%} %>
-                                            </div>
+                                        <div class="botones-evento">
+                                            <a href="${pageContext.request.contextPath}/altaTReg?evento=<%= eventoEncoded %>&edicion=<%= edicionEncoded %>" class="boton-evento boton-tipo-registro">Nuevo Tipo Registro</a>
+                                            <a href="<%= request.getContextPath() %>/AltaPatrocinio?evento=<%= java.net.URLEncoder.encode(evento, "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(edicion.getNombre(),"UTF-8") %>" class="boton-evento boton-patrocinio">Nuevo Patrocinio</a>														
                                         </div>
-                                    <%
-                                        	 }else{
-                                        		 if(usuario.getEmail().equals(loggedMail)){
-                                    %>
-                                    	<div class="item">
-                                            <div class="info-evento">
-                                                <span class="nombre-evento">
-                                                    ❌ <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= java.net.URLEncoder.encode(evento, "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(edicion.getNombre(),"UTF-8") %>"
-                                                    class = "nombre-evento-link">
-                                                    <%= edicion.getNombre() %> (<%= edicion.getSigla() %>) </a>
-                                                </span>
-                                                <span class="detalle-evento">
-                                                    Estado: <%= edicion.getEstado()%> edicion - <%= edicion.getCiudad() %>, <%= edicion.getPais() %>
-                                                </span>
-                                                <span class="fecha-evento">
-                                                    Fecha: <%= edicion.getFechaIni() %> - <%= edicion.getFechaFin() %> | Ingresada: <%= edicion.getFechaAlta() %>
-                                                </span>
-                                            </div>
-                                        </div>  
-                                    <%
-                                        		 }
-                                        	}
-                                        }
-                                    %>
-                                    </div>
-                            <%
-                                } else {
-                            %>
-                                    <p style="text-align: center; color: #666; padding: 20px;">
-                                        No hay ediciones asociadas a este organizador.
-                                    </p>
-                            <%
+                                    <%} %>
+                                </div>
+                            </div>
+                        <%
+                                 }else{
+                                     if(usuario.getEmail().equals(loggedMail)){
+                        %>
+                            <div class="item">
+                                <div class="info-evento">
+                                    <span class="nombre-evento">
+                                        ❌ <a href="<%= request.getContextPath() %>/consultaEdicion?evento=<%= java.net.URLEncoder.encode(evento, "UTF-8") %>&edicion=<%= java.net.URLEncoder.encode(edicion.getNombre(),"UTF-8") %>"
+                                        class = "nombre-evento-link">
+                                        <%= edicion.getNombre() %> (<%= edicion.getSigla() %>) </a>
+                                    </span>
+                                    <span class="detalle-evento">
+                                        Estado: <%= edicion.getEstado()%> edicion - <%= edicion.getCiudad() %>, <%= edicion.getPais() %>
+                                    </span>
+                                    <span class="fecha-evento">
+                                        Fecha: <%= edicion.getFechaIni() %> - <%= edicion.getFechaFin() %> | Ingresada: <%= edicion.getFechaAlta() %>
+                                    </span>
+                                </div>
+                            </div>  
+                        <%
+                                     }
                                 }
-                            %>
+                            }
+                        %>
                         </div>
-                    </div>
-            <%
-                }
-            %>
+                <%
+                    } else {
+                %>
+                        <p style="text-align: center; color: #666; padding: 20px;">
+                            <% if (IEV_WS == null) { %>
+                                Error al conectar con el servicio de eventos.
+                            <% } else { %>
+                                No hay ediciones asociadas a este organizador.
+                            <% } %>
+                        </p>
+                <%
+                    }
+                %>
+            </div>
+        </div>
+<%
+    }
+%>
             
             <%
                 }
@@ -331,8 +361,16 @@
 	            %>
 	                <p class="modal-vacio">No hay seguidores aún</p>
 	            <% } else {
-	            	IControladorUsuarioWS ICU_WS;
-	            	ICU_WS = fabricaWS.getControladorUsuarioWS();
+	            	IControladorUsuarioWS ICU_WS = null;
+	            	String usr2 = fabricaWS.getURLControladorUsuario();
+	            	try{
+	                	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr2));
+	                    ICU_WS = servicio2.getControladorUsuarioWSPort();
+	            	}
+	            	catch (Exception e) {
+	            		e.printStackTrace();
+	            	}
+	            	
 	            	String nickNorm;
 	                for (String nickname : seguidores) {
 	                	String tipoSeg = ICU_WS.getTipoUsuario(nickname);
@@ -375,8 +413,16 @@
 	            %>
 	                <p class="modal-vacio">No hay seguidos aún</p>
 	            <% } else {
-	            	IControladorUsuarioWS ICU_WS;
-	            	ICU_WS = fabricaWS.getControladorUsuarioWS();
+	            	IControladorUsuarioWS ICU_WS = null;
+	            	String usr3 = fabricaWS.getURLControladorUsuario();
+	            	try{
+	                	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr3));
+	                    ICU_WS = servicio2.getControladorUsuarioWSPort();
+	            	}
+	            	catch (Exception e) {
+	            		e.printStackTrace();
+	            	}
+	            	
 	            	String nickNorm;
 	                for (String nickname : seguidos) {
 	                	String tipoSeg = ICU_WS.getTipoUsuario(nickname);

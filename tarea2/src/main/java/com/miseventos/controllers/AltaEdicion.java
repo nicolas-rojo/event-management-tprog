@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
@@ -24,12 +25,14 @@ import com.miseventos.utils.nombreUtils;
 
 import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.DataUsuario;
 import cliente.ws.eventos.DataEdicion;
 import cliente.ws.eventos.EdicionRepetidaExcepcion;
 import cliente.ws.eventos.EdicionRepetidaExcepcion_Exception;
 import cliente.ws.eventos.LinkInvalidoExcepcion;
 import cliente.ws.eventos.LinkInvalidoExcepcion_Exception;
+import cliente.ws.instituciones.ControladorInstitucionesWSService;
 
 @MultipartConfig
 @WebServlet("/AltaEdicion")
@@ -39,7 +42,14 @@ public class AltaEdicion extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		IEV_WS = fabricaWS.getControladorEventoWS();
+		String ev = fabricaWS.getURLControladorEvento();
+    	try{
+    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+    		IEV_WS = servicio.getControladorEventoWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
 		System.out.println("AltaEdicionWS");
 	}
 

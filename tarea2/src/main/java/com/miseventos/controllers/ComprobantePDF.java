@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.net.URL;
 
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -19,6 +20,7 @@ import com.miseventos.utils.fabricaWS;
 
 import cliente.ws.eventos.ControladorEventoWSService;
 import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.instituciones.ControladorInstitucionesWSService;
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.DataUsuario;
 import cliente.ws.usuarios.IControladorUsuarioWS;
@@ -37,7 +39,14 @@ public class ComprobantePDF extends HttpServlet {
 	
 	@Override
 	public void init() throws ServletException {
-		ICU_WS = fabricaWS.getControladorUsuarioWS();
+    	String usr = fabricaWS.getURLControladorUsuario();
+    	try{
+        	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr));
+            ICU_WS = servicio2.getControladorUsuarioWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
 	}
 	
 	

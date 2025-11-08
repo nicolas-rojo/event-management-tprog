@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,7 @@ import cliente.ws.eventos.DataEventoCompletoArray;
 import cliente.ws.eventos.Estado;
 import cliente.ws.eventos.EventoNoExisteExcepcion;
 import cliente.ws.eventos.IControladorEventoWS;
+import cliente.ws.instituciones.ControladorInstitucionesWSService;
 import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.usuarios.IControladorUsuarioWS;
 import cliente.ws.eventos.EventoNoExisteExcepcion_Exception;
@@ -36,8 +38,17 @@ public class Buscar extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-    	IEV_WS = fabricaWS.getControladorEventoWS();
-    	ICU_WS = fabricaWS.getControladorUsuarioWS();
+    	String ev = fabricaWS.getURLControladorEvento();
+    	String usr = fabricaWS.getURLControladorUsuario();
+    	try{
+    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+    		IEV_WS = servicio.getControladorEventoWSPort();
+        	ControladorUsuarioWSService servicio2 = new ControladorUsuarioWSService(new URL(usr));
+            ICU_WS = servicio2.getControladorUsuarioWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
         System.out.println("ConsultaEventoWS");
     }
 

@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ import cliente.ws.instituciones.ControladorInstitucionesWSService;
 import cliente.ws.instituciones.IControladorInstitucionesWS;
 import cliente.ws.instituciones.DataInstitucion;
 import cliente.ws.instituciones.Nivel;
+import cliente.ws.usuarios.ControladorUsuarioWSService;
 import cliente.ws.eventos.*;
 import cliente.ws.instituciones.*;
 
@@ -32,8 +34,17 @@ public class AltaPatrocinio extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-    	IEV_WS = fabricaWS.getControladorEventoWS();
-    	IInst_WS = fabricaWS.getControladorInstitucionesWS();
+    	String ev = fabricaWS.getURLControladorEvento();
+    	String ins = fabricaWS.getURLControladorInstituciones();
+    	try{
+    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+    		IEV_WS = servicio.getControladorEventoWSPort();
+            ControladorInstitucionesWSService servicio3 = new ControladorInstitucionesWSService(new URL(ins));
+            IInst_WS = servicio3.getControladorInstitucionesWSPort();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
         System.out.println("AltaPatrocinioWS");
     }
 

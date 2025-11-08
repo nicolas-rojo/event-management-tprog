@@ -2,7 +2,8 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.miseventos.utils.nombreUtils"%>
 <%@ page import="com.miseventos.utils.fabricaWS" %>
-
+<%@ page import="java.net.URL" %>
+<%@ page import="java.io.IOException" %>
 <%@ page import="cliente.ws.eventos.ControladorEventoWSService" %>
 <%@ page import="cliente.ws.eventos.IControladorEventoWS" %>
 <%@ page import="cliente.ws.usuarios.ControladorUsuarioWSService" %>
@@ -85,8 +86,15 @@
 			            </a>
     				<%
     				} else if (res instanceof DataEdicion) {
-    					IControladorEventoWS IEV_WS;
-    					IEV_WS = fabricaWS.getControladorEventoWS();
+    					IControladorEventoWS IEV_WS = null;
+    					String ev = fabricaWS.getURLControladorEvento();
+    			    	try{
+    			    		ControladorEventoWSService servicio = new ControladorEventoWSService(new URL(ev));
+    			    		IEV_WS = servicio.getControladorEventoWSPort();
+    			    	}
+    			    	catch (Exception e) {
+    			    		e.printStackTrace();
+    			    	}
 						
     					DataEdicion edicion = (DataEdicion) res;
     					String nomNormal = nombreUtils.normalizarNombre(edicion.getNombre());
