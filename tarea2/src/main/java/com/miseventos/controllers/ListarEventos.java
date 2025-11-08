@@ -42,7 +42,7 @@ public class ListarEventos extends HttpServlet {
             ICU_WS = servicio2.getControladorUsuarioWSPort();
             ControladorInstitucionesWSService servicio3 = new ControladorInstitucionesWSService(new URL(i));
             IInst_WS = servicio3.getControladorInstitucionesWSPort();
-    		ICU_WS.cargarDatos();
+    		//ICU_WS.cargarDatos();
     	}
     	catch (Exception e) {
     		e.printStackTrace();
