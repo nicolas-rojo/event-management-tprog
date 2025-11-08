@@ -282,6 +282,14 @@ public class ControladorUsuario implements IUsuario {
         	ICU.registrarOrganizador(new DataOrganizador("Universidad de la República", "udelar", "contacto@udelar.edu.uy", "25udelar", "Universidad pública de Uruguay.", "https://udelar.edu.uy"));
         	ICU.registrarOrganizador(new DataOrganizador("Ministerio de Educación y Cultura", "mec", "mec@mec.gub.uy", "mec2025ok", "Institución pública promotora de cultura", "https://mec.gub.uy"));
         	
+        	ICU.seguirUsuario("atorres@gmail.com", "srodriguez@outlook.com");
+        	ICU.seguirUsuario("atorres@gmail.com", "contacto@imm.gub.uy");
+        	ICU.seguirUsuario("srodriguez@outlook.com", "contacto@imm.gub.uy");
+        	ICU.seguirUsuario("srodriguez@outlook.com", "atorres@gmail.com");
+        	ICU.seguirUsuario("contacto@udelar.edu.uy", "info@techcorp.com");
+        	ICU.seguirUsuario("contacto@udelar.edu.uy", "mec@mec.gub.uy");
+        	ICU.seguirUsuario("info@techcorp.com", "srodriguez@outlook.com");
+        	
         	IIns.nuevaInstitucion(new DataInstitucion("Facultad de Ingeniería", "Facultad de Ingeniería de la Universidad de la República", "https://www.fing.edu.uy"));
         	IIns.nuevaInstitucion(new DataInstitucion("ORT Uruguay", "Universidad privada enfocada en tecnología y gestiín", "https://ort.edu.uy"));
         	IIns.nuevaInstitucion(new DataInstitucion("Universidad Católica del Uruguay", "Institución de educación superior privada", "https://ucu.edu.uy"));
@@ -299,22 +307,26 @@ public class ControladorUsuario implements IUsuario {
 			IEV.nuevoEvento(new DataEvento("Montevideo Comics", "COMICS", LocalDate.of(2024, 4, 10), "Convención de historietas, cine y cultura geek"), Arrays.asList("Cultura", "Entretenimiento"));
 			IEV.nuevoEvento(new DataEvento("Expointer Uruguay", "EXPOAGRO", LocalDate.of(2024, 12, 12), "Exposición internacional agropecuaria y ganadera"), Arrays.asList("Agro", "Negocios"));
 			IEV.nuevoEvento(new DataEvento("Montevideo Fashion Week", "MFASHION", LocalDate.of(2025, 7, 20), "Pasarela de moda uruguaya e internacional"), Arrays.asList("Cultura", "Moda"));
+			IEV.nuevoEvento(new DataEvento("Global", "GBL", LocalDate.of(2025, 01, 01), "Aventureros en grupo"), Arrays.asList("Cultura"));
+			
+			IEV.eventoFinalizado("Global");
 			
     	} catch (EventoSinCategoriaExcepcion | EventoRepetidoExcepcion e) {
     		e.printStackTrace();
     	}
     	try {
-			IEV.nuevaEdicion(new DataEdicion("Montevideo Rock 2025", "MONROCK25", LocalDate.of(2025, 11, 20), LocalDate.of(2025, 11, 22), LocalDate.of(2025, 3, 12), "Montevideo", "Uruguay", "https://www.youtube.com/watch?v=ykVR20Gc8ME"), "Montevideo Rock", "imm");
-			IEV.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2025", "MARATON25", LocalDate.of(2025, 9, 14), LocalDate.of(2025, 9, 14), LocalDate.of(2025, 2, 5), "Montevideo", "Uruguay", ""), "Maratón de Montevideo", "imm");
-			IEV.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2024", "MARATON24", LocalDate.of(2024, 9, 14), LocalDate.of(2024, 9, 14), LocalDate.of(2024, 4, 21), "Montevideo", "Uruguay", ""), "Maratón de Montevideo", "imm");
+			IEV.nuevaEdicion(new DataEdicion("Montevideo Rock 2025", "MONROCK25", LocalDate.of(2025, 11, 20), LocalDate.of(2025, 11, 22), LocalDate.of(2025, 3, 12), "Montevideo", "Uruguay", "https://www.youtube.com/watch?v=YFbRrUX04tU"), "Montevideo Rock", "imm");
+			IEV.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2025", "MARATON25", LocalDate.of(2025, 9, 14), LocalDate.of(2025, 9, 14), LocalDate.of(2025, 2, 5), "Montevideo", "Uruguay", "https://www.youtube.com/watch?v=Pg7Jw787MgE"), "Maratón de Montevideo", "imm");
+			IEV.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2024", "MARATON24", LocalDate.of(2024, 9, 14), LocalDate.of(2024, 9, 14), LocalDate.of(2024, 4, 21), "Montevideo", "Uruguay", "https://www.youtube.com/watch?v=hxDn4EEMank"), "Maratón de Montevideo", "imm");
 			IEV.nuevaEdicion(new DataEdicion("Maratón de Montevideo 2022", "MARATON22", LocalDate.of(2022, 9, 14), LocalDate.of(2022, 9, 14), LocalDate.of(2022, 5, 21), "Montevideo", "Uruguay", ""), "Maratón de Montevideo", "imm");
-			IEV.nuevaEdicion(new DataEdicion("Montevideo Comics 2024", "COMICS24", LocalDate.of(2024, 7, 18), LocalDate.of(2024, 7, 21), LocalDate.of(2024, 6, 20), "Montevideo", "Uruguay", ""), "Montevideo Comics", "miseventos");
-			IEV.nuevaEdicion(new DataEdicion("Montevideo Comics 2025", "COMICS25", LocalDate.of(2025, 8, 4), LocalDate.of(2025, 8, 6), LocalDate.of(2025, 7, 4), "Montevideo", "Uruguay", ""), "Montevideo Comics", "miseventos");
-			IEV.nuevaEdicion(new DataEdicion("Expointer Uruguay 2025", "EXPOAGRO25", LocalDate.of(2025, 9, 11), LocalDate.of(2025, 9, 17), LocalDate.of(2025, 2, 1), "Durazno", "Uruguay", ""), "Expointer Uruguay", "miseventos");
-			IEV.nuevaEdicion(new DataEdicion("Tecnología Punta del Este 2026", "CONFTECH26", LocalDate.of(2026, 4, 6), LocalDate.of(2026, 4, 10), LocalDate.of(2025, 8, 1), "Punta del Este", "Uruguay", ""), "Conferencia de Tecnología", "udelar");
-			IEV.nuevaEdicion(new DataEdicion("Mobile World Congress 2025", "MWC", LocalDate.of(2025, 12, 12), LocalDate.of(2025, 12, 15), LocalDate.of(2025, 8, 21), "Barcelona", "España", ""), "Conferencia de Tecnología", "techcorp");
+			IEV.nuevaEdicion(new DataEdicion("Montevideo Comics 2024", "COMICS24", LocalDate.of(2024, 7, 18), LocalDate.of(2024, 7, 21), LocalDate.of(2024, 6, 20), "Montevideo", "Uruguay", "https://www.youtube.com/watch?v=4n0itnXxCMg"), "Montevideo Comics", "miseventos");
+			IEV.nuevaEdicion(new DataEdicion("Montevideo Comics 2025", "COMICS25", LocalDate.of(2025, 8, 4), LocalDate.of(2025, 8, 6), LocalDate.of(2025, 7, 4), "Montevideo", "Uruguay", "https://www.youtube.com/watch?v=jRJt4i7G-SY"), "Montevideo Comics", "miseventos");
+			IEV.nuevaEdicion(new DataEdicion("Expointer Uruguay 2025", "EXPOAGRO25", LocalDate.of(2025, 9, 11), LocalDate.of(2025, 9, 17), LocalDate.of(2025, 2, 1), "Durazno", "Uruguay", "https://www.youtube.com/watch?v=NFjb-JujCCY"), "Expointer Uruguay", "miseventos");
+			IEV.nuevaEdicion(new DataEdicion("Tecnología Punta del Este 2026", "CONFTECH26", LocalDate.of(2026, 4, 6), LocalDate.of(2026, 4, 10), LocalDate.of(2025, 8, 1), "Punta del Este", "Uruguay", "https://www.youtube.com/watch?v=IPukuYb9xWw"), "Conferencia de Tecnología", "udelar");
+			IEV.nuevaEdicion(new DataEdicion("Mobile World Congress 2025", "MWC", LocalDate.of(2025, 12, 12), LocalDate.of(2025, 12, 15), LocalDate.of(2025, 8, 21), "Barcelona", "España", "https://www.youtube.com/watch?v=zNVbgEJfgz8"), "Conferencia de Tecnología", "techcorp");
 			IEV.nuevaEdicion(new DataEdicion("Web Summit 2026", "WS26", LocalDate.of(2026, 1, 13), LocalDate.of(2026, 2, 1), LocalDate.of(2025, 6, 4), "Lisboa", "Portugal", ""), "Conferencia de Tecnología", "techcorp");
 			IEV.nuevaEdicion(new DataEdicion("Montevideo Fashion Week 2026", "MFW26", LocalDate.of(2026, 2, 16), LocalDate.of(2026, 2, 20), LocalDate.of(2025, 10, 2), "Nueva York", "Estados Unidos", ""), "Montevideo Fashion Week", "mec");
+			IEV.nuevaEdicion(new DataEdicion("Descubre la Magia de Machu Picchu", "MAPI25", LocalDate.of(2025, 11, 10), LocalDate.of(2025, 11, 30), LocalDate.of(2025, 8, 7), "Cusco", "Perú", "https://www.youtube.com/watch?v=cnMa-Sm9H4k"), "Global", "miseventos");
 			
 			IEV.procesarEdicion("Montevideo Rock", "Montevideo Rock 2025", Estado.Confirmado);
 			IEV.procesarEdicion("Maratón de Montevideo", "Maratón de Montevideo 2025", Estado.Confirmado);
@@ -327,6 +339,7 @@ public class ControladorUsuario implements IUsuario {
 			IEV.procesarEdicion("Conferencia de Tecnología", "Mobile World Congress 2025", Estado.Confirmado);
 			IEV.procesarEdicion("Conferencia de Tecnología", "Web Summit 2026", Estado.Confirmado);
 			IEV.procesarEdicion("Montevideo Fashion Week", "Montevideo Fashion Week 2026", Estado.Ingresada);
+			IEV.procesarEdicion("Global", "Descubre la Magia de Machu Picchu", Estado.Confirmado);
     	} catch (EdicionRepetidaExcepcion | LinkInvalidoExcepcion e) {
 			e.printStackTrace();
 		}
@@ -357,7 +370,9 @@ public class ControladorUsuario implements IUsuario {
 			IEV.nuevoTipoRegistro(new DataTRegistro("General", "Acceso general", 650, 5), "Conferencia de Tecnología", "Web Summit 2026");
 			IEV.nuevoTipoRegistro(new DataTRegistro("Estudiante", "Acceso para estudiantes", 300, 1), "Conferencia de Tecnología", "Web Summit 2026");
 			IEV.nuevoTipoRegistro(new DataTRegistro("Full", "Acceso a todos los eventos de la semana", 450, 50), "Montevideo Fashion Week", "Montevideo Fashion Week 2026");
-			IEV.nuevoTipoRegistro(new DataTRegistro("Visitante", "Acceso parcial a os eventos de la semana", 150, 25), "Montevideo Fashion Week", "Montevideo Fashion Week 2026");
+			IEV.nuevoTipoRegistro(new DataTRegistro("Visitante", "Acceso parcial a los eventos de la semana", 150, 25), "Montevideo Fashion Week", "Montevideo Fashion Week 2026");
+			IEV.nuevoTipoRegistro(new DataTRegistro("plus50", "Viaje para personas con más de 50 años", 250, 10), "Global", "Descubre la Magia de Machu Picchu");
+			IEV.nuevoTipoRegistro(new DataTRegistro("Mayores", "Viaje para personas mayores de 18 años", 300, 20), "Global", "Descubre la Magia de Machu Picchu");
 			
 			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 8, 21), 20000 , Nivel.Oro, "TECHUDELAR", 4), "Facultad de Ingeniería", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "Estudiante");
 			IIns.nuevoPatrocinio(new DataPatrocinio(LocalDate.of(2025, 8, 20), 10000, Nivel.Plata, "TECHANII", 1), "Agencia Nacional de Investigación e Innovación (ANII)", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "General");
@@ -376,8 +391,17 @@ public class ControladorUsuario implements IUsuario {
 			ICU.nuevoRegistro("msilva", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "Estudiante", LocalDate.of(2025, 10, 1));
 			ICU.nuevoRegistro("andrearod", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "General", LocalDate.of(2025, 10, 6));
 			ICU.nuevoRegistro("MariR", "Conferencia de Tecnología", "Tecnología Punta del Este 2026", "General", LocalDate.of(2025, 10, 10));
+
+			ICU.nuevoRegistro("atorres", "Global", "Descubre la Magia de Machu Picchu", "Mayores", LocalDate.of(2025, 11, 7));
+			ICU.nuevoRegistro("msilva", "Global", "Descubre la Magia de Machu Picchu", "Mayores", LocalDate.of(2025, 8, 10));
+			ICU.nuevoRegistro("AnaG", "Global", "Descubre la Magia de Machu Picchu", "plus50", LocalDate.of(2025, 9, 30));
 			
-			
+			ICU.setAsistencia("Montevideo Rock 2025", "sofirod");
+			ICU.setAsistencia("Maratón de Montevideo 2025", "sofirod");
+			ICU.setAsistencia("Maratón de Montevideo 2025", "AnaG");
+			ICU.setAsistencia("Montevideo Comics 2024", "SofiM");
+			ICU.setAsistencia("Descubre la Magia de Machu Picchu", "atorres");
+			ICU.setAsistencia("Descubre la Magia de Machu Picchu", "AnaG");
     	} catch (TipoDeRegistroRepetidoException | NoHayCupoEdicionTRegistro |  AsistenteYaRegistrado | PatrocinioRepetidoException | FechaRegistroInvalidaException e){
     		e.printStackTrace();
     	}
